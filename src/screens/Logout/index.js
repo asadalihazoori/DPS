@@ -1,11 +1,16 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import { SafeAreaView, Text } from 'react-native'
+import React, { useEffect } from 'react'
 
-const Logout = () => {
+const Logout = ({ navigation }) => {
+
+    useEffect(() => {
+        navigation.replace('Login');
+    }, [])
+
     return (
-        <View>
-            <Text>Logout</Text>
-        </View>
+        <SafeAreaView>
+            {/* <Text>Logout</Text> */}
+        </SafeAreaView>
     )
 }
 

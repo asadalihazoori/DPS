@@ -4,16 +4,19 @@ import {
     EmployeePayslip, EmployeeProfile, LeaveStatus,
     LeaveSubmission, AttendanceReport, LoansAdvances,
     ApplyForLoans, MedicalClaims, ApplyForMedicalClaims,
-    Shift, TardinesReport, TaxCertificate, HolidayNews, ChangePassword, Logout
+    Shift, TardinesReport, TaxCertificate, HolidayNews, ChangePassword, Logout, Home
 } from "../screens";
+import CustomDrawerContent from "../components/CustomDrawerContent";
 
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigation = ({ navigation }) => {
 
     return (
-        <Drawer.Navigator >
+        <Drawer.Navigator initialRouteName="Home"
+            drawerContent={(props) => <CustomDrawerContent {...props} />}>
 
+            <Drawer.Screen name="Home" component={Home} options={{ headerShown: false }} />
             <Drawer.Screen name="EmployeeProfile" component={EmployeeProfile} />
             <Drawer.Screen name="EmployeePayslip" component={EmployeePayslip} />
             <Drawer.Screen name="LeaveStatus" component={LeaveStatus} />

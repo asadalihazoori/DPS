@@ -1,12 +1,76 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import { SafeAreaView, ActivityIndicator, View, Alert } from 'react-native'
+import React, { useState } from 'react'
+import PDF from '../../components/PDF';
+import { styles } from './styles';
+import { getTardinessReportApi } from '../../utilities/api/apiController';
+import { useSelector } from 'react-redux';
+import MonthYearPicker from '../../components/MonthPicker';
 
-const TardinesReport = () => {
+const TardinesReport = ({ navigation }) => {
+
+    const uid = useSelector((state) => state.signin.uid);
+
+    const [b64_pdf, setB64_pdf] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [date, setDate] = useState(null);
+
+
+    const fetchData = async (tardinesDate) => {
+        console.log(tardinesDate);
+
+        setDate(tardinesDate)
+
+        setLoading(true);
+
+        try {
+            const body = {
+                "jsonrps": 2.0,
+                "params": {
+                    "employee_id": uid,
+                    "form": `${tardinesDate}-01`,
+                    "to": `${tardinesDate}-30`,
+                }
+            };
+
+            const response = await getTardinessReportApi({ body, navigation });
+            // console.log(response);
+
+            if (response?.data?.result?.response?.b64_pdf) {
+
+                setB64_pdf(response?.data?.result?.response?.b64_pdf)
+                setLoading(false)
+            } else {
+                Alert.alert(response?.data?.error?.message, response?.data?.error?.data?.message)
+
+            }
+
+
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    // useEffect(() => {
+    //     fetchData();
+    // }, [])
+
     return (
-        <View>
-            <Text>TardinesReport</Text>
-        </View>
+        <SafeAreaView style={styles.container}>
+            <MonthYearPicker onDateChange={fetchData} tardines={true} />
+
+
+            <View style={styles.innerContainer}>
+                {loading ?
+                    <ActivityIndicator size={'large'} /> :
+                    b64_pdf &&
+                    <PDF b64_pdf={b64_pdf}
+                        title={`Tardines Report ( ${date} ).pdf`} />
+                }
+            </View>
+
+        </SafeAreaView>
     )
 }
 
 export default TardinesReport
+
