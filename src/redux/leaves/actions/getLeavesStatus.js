@@ -1,13 +1,9 @@
-import { useSelector } from "react-redux";
 import { getLeaveStatusApi } from "../../../utilities/api/apiController";
 import { get_leaves_status } from "../leaves.action";
-// import { getEmployeeProfileApi } from "../../../utilities/api/ApiLists/ProfileApiList";
-// import { get_employee_profile } from "../profile.actions";
+import { Alert } from "react-native";
 
 
 export const getLeavesStatus = ({ uid, navigation }) => {
-
-    // const uid = useSelector((state) => state.signin.uid);
 
     return async (dispatch) => {
 
@@ -24,10 +20,18 @@ export const getLeavesStatus = ({ uid, navigation }) => {
 
             if (response?.data?.result?.status == 200) {
                 dispatch(get_leaves_status(response?.data?.result?.response))
-                // console.log(response?.data?.result?.response)
 
-            } else {
+            }
+            else if (response?.data?.error) {
+                Alert.alert(response?.data?.error?.message, `${response?.data?.error?.data?.message}`);
+            }
 
+            else if (response == 'AxiosError: Request failed with status code 404') {
+                Alert.alert("Session Expired", `Please Login Again`);
+            }
+
+            else {
+                Alert.alert("Internet Connection Failed", `${response}`);
             }
         }
 

@@ -1,8 +1,9 @@
-import { StyleSheet, View, Button, Alert } from 'react-native'
+import { StyleSheet, View, Alert } from 'react-native'
 import React from 'react'
 import Pdf from 'react-native-pdf';
 import RNFS from 'react-native-fs';
 import { PermissionsAndroid, Platform } from 'react-native';
+import Button from './Buttons/Button';
 
 const PDF = ({ b64_pdf, title }) => {
     const downloadPdf = async (b64Pdf) => {
@@ -66,7 +67,12 @@ const PDF = ({ b64_pdf, title }) => {
                 }}
                 style={styles.pdf} />
             {/* <Button title="Download PDF" onPress={downloadPdf} /> */}
-            <Button title="Download PDF" onPress={() => downloadPdf(b64_pdf)} />
+            {/* <Button title="Download PDF" onPress={() => downloadPdf(b64_pdf)} /> */}
+
+            <View style={{ marginHorizontal: 20 }}>
+                <Button title={'Download PDF'} handelSubmit={() => downloadPdf(b64_pdf)} />
+
+            </View>
         </View>
 
     )

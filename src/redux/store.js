@@ -6,17 +6,19 @@ import { persistStore, persistReducer } from "redux-persist";
 import { UserReducer } from './users/user.reducer';
 import { ProfileReducer } from './profile/profile.reducer';
 import { LeavesReducer } from './leaves/leaves.reducer';
+import { BackgroundImageReducer } from './backgrouund/background.reducer';
 
 const allReducers = combineReducers({
     signin: UserReducer,
     employeeProfile: ProfileReducer,
-    leaveStatus: LeavesReducer
+    leaveStatus: LeavesReducer,
+    backgroundImage: BackgroundImageReducer
 })
 
 const persistConfig = {
     key: 'root',
     storage: AsyncStorage,
-    whitelist: ['signin', 'employeeProfile', 'leaveStatus'],
+    whitelist: ['signin', 'employeeProfile', 'leaveStatus', 'backgroundImage'],
     blacklist: [''],
 };
 

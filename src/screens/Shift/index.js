@@ -1,31 +1,43 @@
-import { ActivityIndicator, Alert, Button, SafeAreaView, Text, View } from 'react-native'
 import React, { useState } from 'react'
-import DatePicker from '../../components/DatePicker';
-import Input from '../../components/Input';
+import { ActivityIndicator, Alert, SafeAreaView, ScrollView, View } from 'react-native'
 import { useSelector } from 'react-redux';
 import { createShiftChangeApi } from '../../utilities/api/apiController';
 import RadioSelectionModal from '../../components/RadioSelectionModal';
-import TouchableView from '../../components/TouchableView';
+import inputValidation from '../../utilities/Validations/YupValidate';
+import DatePicker from '../../components/DateTimePicker/DatePicker';
+import TouchableView from '../../components/Buttons/TouchableView';
+import { CreateShiftSchema } from '../../utilities/Validations';
+import Button from '../../components/Buttons/Button';
+import Input from '../../components/InputField';
 
 const Shift = ({ navigation }) => {
 
-    const data = useSelector((state) => state.employeeProfile.data);
-    const name = useSelector((state) => state.employeeProfile.name);
+    const data = useSelector((state) => state?.employeeProfile?.data);
     const [showStartDatePicker, setShowStartDatePicker] = useState(false);
     const [showEndDatePicker, setShowEndDatePicker] = useState(false);
+    const [modalVisible, setModalVisible] = useState(false);
     const [loading, setLoading] = useState(false);
 
-    // console.log(employee_id);
-    const [modalVisible, setModalVisible] = useState(false);
-
     const [inputs, setInputs] = useState({
-        name: name,
-        currentShift: data.shift.name,
+        name: data.name,
+        currentShift: data?.shift?.name,
         selectedShift: null,
         startDate: null,
         endDate: null,
         reason: null,
+        errors: null
     });
+
+    const handleInputChange = (field, value) => {
+        setInputs({
+            ...inputs,
+            [field]: value,
+            errors: {
+                ...inputs.errors,
+                [field]: false
+            }
+        })
+    }
 
     const handleDateChange = (selectedDate, field) => {
 
@@ -37,31 +49,26 @@ const Shift = ({ navigation }) => {
         } else if (field === 'endDate') {
             setShowEndDatePicker(false);
         }
-        setInputs({
-            ...inputs,
-            [field]: formattedDate
-            // selectedDate.toDateString(),
-        });
+
+        handleInputChange(field, formattedDate);
     };
 
-    const handleInputChange = (field, value) => {
-        setInputs({
-            ...inputs,
-            [field]: value,
-        })
+    const validate = async () => {
+
+        const result = await inputValidation(CreateShiftSchema, inputs)
+
+        if (result.isValidate) {
+            handleSubmit();
+
+        } else {
+            setInputs(prev => ({
+                ...prev,
+                errors: result?.err
+            }))
+        }
+
     }
 
-
-    const handleSelectShift = (selectedShift) => {
-        setInputs({
-            ...inputs,
-            ['selectedShift']: selectedShift,
-        })
-    }
-
-    const handleModalVisible = () => {
-        setModalVisible(true)
-    }
 
     const handleSubmit = async () => {
         setLoading(true);
@@ -72,27 +79,30 @@ const Shift = ({ navigation }) => {
                 "params": {
                     "employee_id": data.employee_id,
 
-                    "requested_shift": 1,
+                    "requested_shift": inputs?.selectedShift?.id,
                     "current_shift": inputs?.selectedShift?.id,
+
                     "from_date": inputs.startDate,
                     "to_date": inputs.endDate,
                     "reason": inputs.reason,
-                    "name": name
+                    "name": data.name
                 }
             }
 
             const response = await createShiftChangeApi({ body, navigation });
-            console.log(response.data);
+
+            setLoading(false);
+
             if (response?.data?.result?.response) {
-                // setB64_pdf(response?.data?.result?.response?.b64_pdf);
-                console.log(response?.data?.result?.response);
-
-                setLoading(false);
                 Alert.alert("Confirmation", "Shift Requested Successfully")
-            } else {
-                Alert.alert(response.data.error.message, response.data.error.data.message)
-                setLoading(false);
+            }
 
+            else if (response == 'AxiosError: Request failed with status code 404') {
+                Alert.alert("Session Expired", `Please Login Again`);
+            }
+
+            else {
+                Alert.alert("Internet Connection Failed", `${response}`);
             }
 
         } catch (error) {
@@ -103,68 +113,72 @@ const Shift = ({ navigation }) => {
 
     return (
         <SafeAreaView style={{ padding: 20, backgroundColor: 'white', flex: 1 }}>
+            <ScrollView showsVerticalScrollIndicator={false}>
 
-            <View style={{ marginBottom: 20 }}>
-                <Input
-                    marginTop={24}
-                    placeholder={'Name'}
-                    // icon={icons.lock}
-                    // password={true}
-                    editable={false}
+                <View style={{ marginBottom: 20 }}>
+                    <Input
+                        marginTop={16}
+                        editable={false}
+                        value={inputs.name}
+                    />
 
-                    value={inputs.name}
-                    onChangeText={(text) => handleInputChange('name', text)} />
+                    <Input
+                        marginTop={16}
+                        editable={false}
+                        value={inputs.currentShift}
+                    />
 
-                <Input
-                    marginTop={24}
-                    // placeholder={'c'}
-                    editable={false}
-                    value={inputs.currentShift}
-                // onChangeText={(text) => handleInputChange('holidayType', text)}
+
+                    <TouchableView
+                        header={'Select Shift'}
+                        text={inputs?.selectedShift?.name}
+                        handleModal={() => setModalVisible(true)}
+                        error={inputs?.errors?.selectedShift}
+                    />
+
+                    <DatePicker
+                        date={new Date()}
+                        placeholder={'Start Date'}
+                        value={inputs.startDate}
+                        showDatePicker={showStartDatePicker}
+                        setShowDatePicker={setShowStartDatePicker}
+                        onChange={(selectedDate) => handleDateChange(selectedDate, 'startDate')}
+                        error={inputs?.errors?.startDate}
+                    />
+
+                    <DatePicker
+                        date={new Date()}
+                        placeholder={'End Date'}
+                        value={inputs.endDate}
+                        showDatePicker={showEndDatePicker}
+                        setShowDatePicker={setShowEndDatePicker}
+                        onChange={(selectedDate) => handleDateChange(selectedDate, 'endDate')}
+                        error={inputs?.errors?.endDate}
+                    />
+
+                    <Input
+                        marginTop={16}
+                        placeholder={'Reason'}
+                        value={inputs.reason}
+                        onChangeText={(text) => handleInputChange('reason', text)}
+                        error={inputs?.errors?.reason}
+                    />
+                </View >
+
+                <Button handelSubmit={validate} title='Submit' />
+
+                {loading &&
+                    <ActivityIndicator size={'large'} />}
+
+                <RadioSelectionModal
+                    modalVisible={modalVisible}
+                    setModalVisible={setModalVisible}
+                    data={data?.shifts}
+                    header={'Select Shift'}
+                    onChangeSelection={(selectedShift) => handleInputChange('selectedShift', selectedShift)}
                 />
-                {/* <Input
-                    marginTop={24}
-                    value={inputs.selectedShift}
-                // onChangeText={(text) => handleInputChange('holidayType', text)}
-                /> */}
 
-                <TouchableView header={'Select Shift'}  text={inputs?.selectedShift?.name} handleModal={handleModalVisible} />
-
-                <DatePicker
-                    dob={new Date()}
-                    value={inputs.startDate}
-                    onChange={(event, selectedDate) => handleDateChange(selectedDate, 'startDate')}
-                    showDatePicker={showStartDatePicker}
-                    setShowDatePicker={setShowStartDatePicker}
-                    placeholder={'Start Date'}
-                />
-                <DatePicker
-                    dob={new Date()}
-                    value={inputs.endDate}
-                    onChange={(event, selectedDate) => handleDateChange(selectedDate, 'endDate')}
-                    showDatePicker={showEndDatePicker}
-                    setShowDatePicker={setShowEndDatePicker}
-                    placeholder={'End Date'}
-                />
-
-                <Input
-                    marginTop={24}
-                    placeholder={'Reason'}
-
-                    value={inputs.reason}
-
-                    onChangeText={(text) => handleInputChange('reason', text)} />
-            </View >
-
-            <Button onPress={handleSubmit} title='Submit' />
-
-            {loading &&
-                <ActivityIndicator size={'large'} />}
-
-            <RadioSelectionModal modalVisible={modalVisible} setModalVisible={setModalVisible}
-                loanTypes={data.shifts}
-                header={'Select Shift'}
-                onSelectLoanType={handleSelectShift} />
+            </ScrollView>
         </SafeAreaView>
     )
 }

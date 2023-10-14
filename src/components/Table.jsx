@@ -1,9 +1,12 @@
 import { StyleSheet, Text, View, ActivityIndicator, TouchableOpacity } from 'react-native'
 import React from 'react'
 
-const Table = ({ header, data, attendance, leaves, leaves_availed, leaves_type, loans, claims, holiday, loading, navigation }) => {
+const Table = ({ header, data, attendance, leaves, leaves_availed, leaves_type, loans, claims, holiday, loading, experience, qualification, navigation }) => {
 
     const renderItems = () => {
+
+        data = holiday ? data?.slice().reverse() : data;
+
         return data?.map((item, index) => {
             switch (true) {
                 case leaves:
@@ -30,7 +33,7 @@ const Table = ({ header, data, attendance, leaves, leaves_availed, leaves_type, 
 
                 case leaves_availed:
 
-                    if (item.leaves_type === leaves_type){
+                    if (item.leaves_type === leaves_type) {
 
                         return (
                             <View style={styles.row} key={index}>
@@ -42,7 +45,7 @@ const Table = ({ header, data, attendance, leaves, leaves_availed, leaves_type, 
                         );
                     }
 
-                    return ;
+                    return;
 
 
                 case loans:
@@ -88,6 +91,28 @@ const Table = ({ header, data, attendance, leaves, leaves_availed, leaves_type, 
                         </View>
                     );
 
+                case experience:
+                    const style = [styles.cell, { width: 110 }];
+                    return (
+                        <View style={styles.row} key={index}>
+                            <Text style={style}>{item?.company}</Text>
+                            <Text style={style}>{item?.designation}</Text>
+                            <Text style={style}>{item?.total}</Text>
+                        </View>
+                    )
+
+                case qualification:
+                    const style1 = [styles.cell, { width: 110 }];
+                    return (
+                        <View style={styles.row} key={index}>
+                            <Text style={style1}>{item?.qualification}</Text>
+                            <Text style={style1}>{item?.institue}</Text>
+                            <Text style={style1}>{item?.passing_year}</Text>
+                        </View>
+                    )
+
+
+
                 //     default:
                 //         return null; // Handle the default case if needed
             }
@@ -102,7 +127,7 @@ const Table = ({ header, data, attendance, leaves, leaves_availed, leaves_type, 
             <View style={styles.row}>
 
                 {header?.map((item, index) => (
-                    <Text key={index} style={[styles.header]}>
+                    <Text key={index} style={[styles.header, { width: (experience || qualification) ? 110 : 77 }]}>
                         {item}
                     </Text>
                 ))}
@@ -111,10 +136,21 @@ const Table = ({ header, data, attendance, leaves, leaves_availed, leaves_type, 
 
             <>
                 {loading ?
-                    <ActivityIndicator size={'large'} /> :
+                    <ActivityIndicator size={'large'} style={{ marginTop: 50 }} /> :
                     <>
                         {renderItems()}
                     </>
+                }
+
+                {loading ? <></> :
+                    data.length > 0 ?
+                        <>
+                            {renderItems()}
+                        </>
+                        :
+                        <View style={styles.nullContainer}>
+                            <Text style={styles.nullText}>No Record Found !</Text>
+                        </View>
                 }
             </>
         </View>
@@ -141,6 +177,7 @@ const styles = StyleSheet.create({
         alignContent: 'center',
         alignItems: 'center',
         justifyContent: 'center',
+        // width: 100,
         width: 77,
 
         paddingHorizontal: 4,
@@ -173,6 +210,7 @@ const styles = StyleSheet.create({
 
     cell: {
         fontSize: 14,
+        // width: 100,
         width: 77,
         color: "#000000",
         alignContent: 'center',
@@ -193,6 +231,21 @@ const styles = StyleSheet.create({
 
     text: {
         fontSize: 16,
+        color: 'black',
+        fontWeight: 'bold',
+        alignSelf: 'center'
+    },
+
+
+    nullContainer: {
+        marginTop: 50,
+        alignContent: 'center',
+        textAlign: 'center',
+
+    },
+
+    nullText: {
+        fontSize: 18,
         color: 'black',
         fontWeight: 'bold',
         alignSelf: 'center'

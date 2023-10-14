@@ -5,6 +5,15 @@ const ApiStatus = async (error, navigation) => {
 
     console.log(error, navigation);
     // let errorCode = error?.response?.status;
+    // console.log("errorCode", error?.response?.data?.error?.code);
+
+    if (error?.response?.data?.error?.code == 404) {
+        console.log('move');
+        // navigation.navigate('Login')
+
+
+
+    }
 
     // if (errorCode >= 400 && errorCode <= 499) {
 

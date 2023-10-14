@@ -4,7 +4,8 @@ import {
     EmployeePayslip, EmployeeProfile, LeaveStatus,
     LeaveSubmission, AttendanceReport, LoansAdvances,
     ApplyForLoans, MedicalClaims, ApplyForMedicalClaims,
-    Shift, TardinesReport, TaxCertificate, HolidayNews, ChangePassword, Logout, Home
+    Shift, TardinesReport, TaxCertificate, HolidayNews, ChangePassword,
+    Logout, Home, AttendanceRequest, Attendance, Leaves, Loans, MedicalClaim, Reports,
 } from "../screens";
 import CustomDrawerContent from "../components/CustomDrawerContent";
 
@@ -16,12 +17,15 @@ const DrawerNavigation = ({ navigation }) => {
         <Drawer.Navigator initialRouteName="Home"
             drawerContent={(props) => <CustomDrawerContent {...props} />}>
 
-            <Drawer.Screen name="Home" component={Home} options={{ headerShown: false }} />
+            <Drawer.Screen name="Home" component={Home}
+            //  options={{ headerShown: false }}
+            />
             <Drawer.Screen name="EmployeeProfile" component={EmployeeProfile} />
             <Drawer.Screen name="EmployeePayslip" component={EmployeePayslip} />
             <Drawer.Screen name="LeaveStatus" component={LeaveStatus} />
             <Drawer.Screen name="LeaveSubmission" component={LeaveSubmission} />
             <Drawer.Screen name="AttendanceReport" component={AttendanceReport} />
+            <Drawer.Screen name="AttendanceRequest" component={AttendanceRequest} />
             <Drawer.Screen name="LoansAdvances" component={LoansAdvances} />
             <Drawer.Screen name="ApplyForLoans" component={ApplyForLoans} />
             <Drawer.Screen name="MedicalClaims" component={MedicalClaims} />
@@ -32,6 +36,16 @@ const DrawerNavigation = ({ navigation }) => {
             <Drawer.Screen name="HolidayNews" component={HolidayNews} />
             <Drawer.Screen name="ChangePassword" component={ChangePassword} />
             <Drawer.Screen name="Logout" component={Logout} />
+
+            <Drawer.Screen name="Attendance" component={Attendance} />
+            <Drawer.Screen name="Leaves" component={Leaves} />
+            <Drawer.Screen name="Loans" component={Loans} />
+            <Drawer.Screen name="MedicalClaim" component={MedicalClaim} />
+            <Drawer.Screen name="Reports" component={Reports} />
+
+            {/* <Drawer.Screen name="Experiences" component={Experiences} />
+            <Drawer.Screen name="Qualifications" component={Qualifications} /> */}
+
         </Drawer.Navigator>
     );
 }

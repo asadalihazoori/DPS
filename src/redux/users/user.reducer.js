@@ -3,7 +3,7 @@ import { LOGIN_USER } from "./user.types";
 
 const initialState = {
     uid: null,
-    data: null
+    // data: null
 }
 
 export const UserReducer = (state = initialState, action) => {
@@ -13,7 +13,7 @@ export const UserReducer = (state = initialState, action) => {
             return {
                 ...state,
                 uid: action.payload.uid,
-                data: action.payload,
+                // data: action.payload,
             }
 
         default:
