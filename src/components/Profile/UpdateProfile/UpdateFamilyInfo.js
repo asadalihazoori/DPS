@@ -6,6 +6,8 @@ import { ProfileContext } from '../../../context/ProfileContext';
 import TouchableView from '../../Buttons/TouchableView';
 import RadioSelectionModal from '../../RadioSelectionModal';
 import Icons from 'react-native-vector-icons/FontAwesome6';
+import AddChildModal from '../../AddChildModal';
+import AddspouseModal from '../../AddSpouseModal';
 
 const UpdateFamilyInfo = ({ navigation }) => {
 
@@ -14,8 +16,10 @@ const UpdateFamilyInfo = ({ navigation }) => {
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedField, setSelectedField] = useState('');
 
+    const [childModalVisible, setChildModalVisible] = useState(false);
+    const [spouseModalVisible, setSpouseModalVisible] = useState(false);
+
     const handleInputChange = (field, value) => {
-        console.log(profileFields);
         setProfileFields({
             ...profileFields,
             [field]: value,
@@ -55,13 +59,13 @@ const UpdateFamilyInfo = ({ navigation }) => {
 
                     <View style={styles.innerView}>
 
-                        <InputField
+                        {/* <InputField
                             marginTop={16}
                             label={'Father Name'}
                             // placeholder={'Name'}
                             value={profileFields.father_name ? profileFields.father_name : profileData?.father_name}
-                            onChangeText={(text) => handleInputChange('name', text)}
-                        />
+                            onChangeText={(text) => handleInputChange('father_name', text)}
+                        /> */}
 
 
                         <TouchableView
@@ -73,12 +77,12 @@ const UpdateFamilyInfo = ({ navigation }) => {
 
                         <View style={{ marginTop: 12 }}>
 
-                            <InputField
+                            {/* <InputField
                                 marginTop={16}
                                 label={'Mother Name'}
-                                value={profileFields.father_name ? profileFields.father_name : profileData?.mother_name}
-                                onChangeText={(text) => handleInputChange('name', text)}
-                            />
+                                value={profileFields.mother_name ? profileFields.mother_name : profileData?.mother_name}
+                                onChangeText={(text) => handleInputChange('mother_name', text)}
+                            /> */}
 
                             <TouchableView
                                 label={'Mother Status'}
@@ -96,7 +100,7 @@ const UpdateFamilyInfo = ({ navigation }) => {
 
                         <View style={[styles.headerView, { flexDirection: 'row' }]}>
                             <Text style={styles.headerText}>Spouse Info</Text>
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={() => setSpouseModalVisible(true)}>
 
                                 <Icons name="plus"
                                     size={20}
@@ -106,7 +110,7 @@ const UpdateFamilyInfo = ({ navigation }) => {
 
                         </View>
 
-                        {profileData?.spouse_info?.map((spouse, index) => (
+                        {/* {profileData?.spouse_info?.map((spouse, index) => (
 
 
                             <InputField
@@ -116,7 +120,47 @@ const UpdateFamilyInfo = ({ navigation }) => {
                                 value={profileFields.spouse_name ? profileFields.spouse_name : spouse.spouse_name}
                                 onChangeText={(text) => handleInputChange('spouse_name', text)}
                             />
+                        ))} */}
+
+
+
+                        {profileFields?.spouse_tree_id?.map((spouse, index) => (
+                            <View style={{ marginLeft: 8, marginTop: 12 }} key={index}>
+
+                                <View style={styles.rowView}>
+                                    <Text style={styles.heading}>Spouse Name: </Text>
+                                    <Text style={styles.title}>{spouse[2].spouse_name}</Text>
+                                </View>
+
+                                {/* <View style={styles.rowView}>
+                                    <Text style={styles.heading}>Relation Name: </Text>
+                                    <Text style={styles.title}>{spouse[2].status.name}</Text>
+                                </View> */}
+
+                                <View style={styles.rowView}>
+                                    <Text style={styles.heading}>Spouse Contact No.: </Text>
+                                    <Text style={styles.title}>{spouse[2].s_contact}</Text>
+                                </View>
+
+                                <View style={styles.rowView}>
+                                    <Text style={styles.heading}>B.Form/CNIC no. </Text>
+                                    <Text style={styles.title}>{spouse[2].s_cninc}</Text>
+                                </View>
+
+                                <View style={styles.rowView}>
+                                    <Text style={styles.heading}>DOB: </Text>
+                                    <Text style={styles.title}>{spouse[2].s_dob}</Text>
+                                </View>
+
+                                <View>
+                                    <Text>------------------------------------------------------------------------</Text>
+                                </View>
+
+                            </View>
+
                         ))}
+
+
 
                     </View>
 
@@ -126,7 +170,7 @@ const UpdateFamilyInfo = ({ navigation }) => {
                         <View style={[styles.headerView, { flexDirection: 'row' }]}>
                             <Text style={styles.headerText}>Child Info</Text>
 
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={() => setChildModalVisible(true)}>
 
                                 <Icons name="plus"
                                     size={20}
@@ -135,7 +179,7 @@ const UpdateFamilyInfo = ({ navigation }) => {
                             </TouchableOpacity>
                         </View>
 
-                        {profileData?.child_info?.map((child, index) => (
+                        {/* {profileData?.child_info?.map((child, index) => (
 
                             <InputField
                                 marginTop={16}
@@ -144,7 +188,46 @@ const UpdateFamilyInfo = ({ navigation }) => {
                                 value={profileFields.child_info ? profileFields.child_info[index].child_name : child.child_name}
                                 onChangeText={(text) => handleInputChange('child_info', text)}
                             />
-                        ))} 
+                        ))} */}
+
+
+                        {profileFields?.family_tree_id?.map((child, index) => (
+                            <View style={{ marginLeft: 8, marginTop: 12 }} key={index}>
+
+                                <View style={styles.rowView}>
+                                    <Text style={styles.heading}>Child Name: </Text>
+                                    <Text style={styles.title}>{child[2].child_name}</Text>
+                                </View>
+
+                                <View style={styles.rowView}>
+                                    <Text style={styles.heading}>Relation Name: </Text>
+                                    <Text style={styles.title}>{child[2].status.name}</Text>
+                                </View>
+
+                                <View style={styles.rowView}>
+                                    <Text style={styles.heading}>Mother Name: </Text>
+                                    <Text style={styles.title}>{child[2].mother_name}</Text>
+                                </View>
+
+                                <View style={styles.rowView}>
+                                    <Text style={styles.heading}>B.Form/CNIC no. </Text>
+                                    <Text style={styles.title}>{child[2].child_id}</Text>
+                                </View>
+
+                                <View style={styles.rowView}>
+                                    <Text style={styles.heading}>DOB: </Text>
+                                    <Text style={styles.title}>{child[2].dob}</Text>
+                                </View>
+
+                                <View>
+                                    <Text>------------------------------------------------------------------------</Text>
+                                </View>
+
+                            </View>
+
+                        ))}
+
+
 
                     </View>
                 </View>
@@ -152,11 +235,29 @@ const UpdateFamilyInfo = ({ navigation }) => {
                 <RadioSelectionModal
                     modalVisible={modalVisible}
                     setModalVisible={setModalVisible}
-                    loanTypes={[{ id: 1, name: 'Alive', }, { id: 2, name: 'Deceased' }]}
+                    data={[{ id: 1, name: 'Alive', value: 'alive' }, { id: 2, name: 'Deceased', value: 'dead' }]}
                     header={'Select Status'}
-                    onSelectLoanType={handleSelectStatus}
+                    onChangeSelection={handleSelectStatus}
                 />
             </ScrollView>
+
+            <AddChildModal
+                modalVisible={childModalVisible}
+                setModalVisible={setChildModalVisible}
+                header={'Add Child'}
+            // data={familyInfo}
+            // onChangeSelection={(person) => handleInputChange('claimFor', person)}
+            />
+
+            <AddspouseModal
+                modalVisible={spouseModalVisible}
+                setModalVisible={setSpouseModalVisible}
+                header={'Add Spouse'}
+            // data={familyInfo}
+            // onChangeSelection={(person) => handleInputChange('claimFor', person)}
+            />
+
+
         </SafeAreaView>
     )
 }
@@ -194,6 +295,42 @@ const styles = StyleSheet.create({
         marginTop: 20,
         // borderWidth: 1
     },
+
+    label: {
+        color: 'black',
+        // marginBottom: -10,
+        fontSize: 16,
+        // marginLeft: 6,
+        fontWeight: '600',
+        marginTop: 15,
+
+    },
+
+
+    rowView: {
+        flexDirection: 'row',
+        marginBottom: 6,
+        // borderWidth: 1,
+        // flex:1
+    },
+
+    heading: {
+        color: 'black',
+        fontSize: 16,
+        fontWeight: '600',
+    },
+
+    textView: {
+        flex: 1
+    },
+
+    title: {
+        color: 'black',
+        fontSize: 14,
+        fontWeight: '400',
+
+    }
+
 
 
 });

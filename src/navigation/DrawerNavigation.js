@@ -5,7 +5,7 @@ import {
     LeaveSubmission, AttendanceReport, LoansAdvances,
     ApplyForLoans, MedicalClaims, ApplyForMedicalClaims,
     Shift, TardinesReport, TaxCertificate, HolidayNews, ChangePassword,
-    Logout, Home, AttendanceRequest, Attendance, Leaves, Loans, MedicalClaim, Reports,
+    Home, AttendanceRequest, Attendance, Leaves, Loans, MedicalClaim, Reports,
 } from "../screens";
 import CustomDrawerContent from "../components/CustomDrawerContent";
 
@@ -35,16 +35,12 @@ const DrawerNavigation = ({ navigation }) => {
             <Drawer.Screen name="TaxCertificate" component={TaxCertificate} />
             <Drawer.Screen name="HolidayNews" component={HolidayNews} />
             <Drawer.Screen name="ChangePassword" component={ChangePassword} />
-            <Drawer.Screen name="Logout" component={Logout} />
 
             <Drawer.Screen name="Attendance" component={Attendance} />
             <Drawer.Screen name="Leaves" component={Leaves} />
             <Drawer.Screen name="Loans" component={Loans} />
             <Drawer.Screen name="MedicalClaim" component={MedicalClaim} />
             <Drawer.Screen name="Reports" component={Reports} />
-
-            {/* <Drawer.Screen name="Experiences" component={Experiences} />
-            <Drawer.Screen name="Qualifications" component={Qualifications} /> */}
 
         </Drawer.Navigator>
     );

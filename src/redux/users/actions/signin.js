@@ -21,20 +21,21 @@ export const siginin = ({ navigation, inputs, setLoading }) => {
             }
 
             const response = await LoginApi({ body, navigation });
-            console.log(response?.data?.result);
-            // console.log(response);
 
             if (response?.data?.result?.uid) {
 
                 const uid = response?.data?.result?.uid;
-                dispatch(login_user(response?.data?.result));
+                dispatch(login_user(response?.data?.result))
                 dispatch(getEmployeeProfile({
                     uid,
                     navigation
-                })).then(() =>
+                }))
+                    .then(() => {
 
-                    navigation.replace('DrawerNavigation')
-                )
+                        setLoading(false)
+                    }
+                    )
+                    // navigation.replace('DrawerNavigation')
             }
 
             else if (response?.data?.result?.uid == false) {

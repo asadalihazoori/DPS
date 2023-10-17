@@ -13,7 +13,7 @@ import Leave_Details from "./Leaves/Leave_Details"
 import LeaveStatus from "./Leaves/Leave_Status"
 import LeaveSubmission from "./Leaves/Leave_Submission"
 import LoansAdvances from "./Loans/Loans_Advances"
-import Logout from "./AuthScreens/Logout"
+// import Logout from "./AuthScreens/Logout"
 import MedicalClaims from "./MedicalClaims/Medical_Claims"
 import Attendance from "./Menus/Attendance/index.js"
 import Leaves from "./Menus/Leaves"
@@ -30,6 +30,6 @@ export {
     Home, EmployeePayslip, EmployeeProfile, LeaveStatus,
     LeaveSubmission, AttendanceReport, LoansAdvances, ApplyForLoans,
     MedicalClaims, ApplyForMedicalClaims, Shift, TardinesReport, TaxCertificate,
-    HolidayNews, ChangePassword, Logout, Leave_Details, AttendanceRequest, Attendance,
+    HolidayNews, ChangePassword, Leave_Details, AttendanceRequest, Attendance,
     Leaves, Loans, Reports, MedicalClaim, UpdateProfile,
 }

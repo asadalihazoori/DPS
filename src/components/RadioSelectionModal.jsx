@@ -1,11 +1,5 @@
 import { StyleSheet, Text, View, Modal, ScrollView } from 'react-native'
 import React, { useState } from 'react'
-// import { useSelector } from 'react-redux'
-// import { SvgXml } from 'react-native-svg'
-// import { icons } from '../assets/icons/icons'
-// import { colors } from '../theme/colors'
-// import { fontStyle } from '../theme/fonstStyle'
-// import LoaderAnimation from './LoaderAnimation'
 import { RadioButton } from 'react-native-paper';
 import Button from './Buttons/Button';
 
@@ -24,8 +18,6 @@ const RadioSelectionModal = ({ modalVisible, setModalVisible, header, data, onCh
         }
         setModalVisible(false);
     };
-
-
 
 
     return (

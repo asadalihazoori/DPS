@@ -16,7 +16,6 @@ const Table = ({ header, data, attendance, leaves, leaves_availed, leaves_type, 
                             key={index}
                             onPress={() => {
                                 navigation.navigate('LeaveDetails', { leaves_type: item?.leaves_type });
-                                // console.log(item?.leaves_type);
                             }}
                         >
 

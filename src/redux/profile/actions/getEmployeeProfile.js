@@ -18,7 +18,7 @@ export const getEmployeeProfile = ({ uid, navigation }) => {
             }
 
             const response = await getEmployeeProfileApi({ body, navigation });
-            console.log(response.data);
+            // console.log(response.data);
 
             if (response?.data?.result?.status == 200) {
 
@@ -71,6 +71,7 @@ export const getEmployeeProfile = ({ uid, navigation }) => {
                 }
 
                 dispatch(get_employee_profile(profieData, family_info))
+                navigation.replace('DrawerNavigation')
 
             }
             else if (response?.data?.error) {

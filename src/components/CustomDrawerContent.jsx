@@ -7,6 +7,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { Avatar, Drawer } from 'react-native-paper'
 import { useDispatch, useSelector } from 'react-redux'
 import { getBackgroundImage } from '../redux/backgrouund/actions/getBackgroundImage';
+import { siginOut } from '../redux/users/actions/signOut';
 
 const CustomDrawerContent = (props) => {
 
@@ -22,6 +23,7 @@ const CustomDrawerContent = (props) => {
 
 
     const profileData = useSelector((state) => state.employeeProfile.data);
+    const uid = useSelector((state) => state.signin.uid);
     return (
         <SafeAreaView style={styles.container}>
             <DrawerContentScrollView  {...props} showsVerticalScrollIndicator={false}>
@@ -204,7 +206,8 @@ const CustomDrawerContent = (props) => {
                     )}
                     label={() => <Text style={{ color: 'black' }}> Logout</Text>}
                     onPress={() => {
-                        props.navigation.navigate('Logout');
+                        const navigation = props.navigation;
+                        siginOut({ uid, navigation })
                     }}
                 />
             </Drawer.Section>

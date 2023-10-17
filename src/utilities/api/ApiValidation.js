@@ -1,17 +1,19 @@
 // import Toast from 'react-native-simple-toast';
 
+import store from "../../redux/store";
+import { siginOut } from "../../redux/users/actions/signOut";
 
 const ApiStatus = async (error, navigation) => {
+
 
     console.log(error, navigation);
     // let errorCode = error?.response?.status;
     // console.log("errorCode", error?.response?.data?.error?.code);
 
     if (error?.response?.data?.error?.code == 404) {
-        console.log('move');
-        // navigation.navigate('Login')
 
-
+        const uid = store.getState().signin.uid;
+        siginOut({ uid, navigation })
 
     }
 

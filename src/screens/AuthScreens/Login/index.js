@@ -35,7 +35,6 @@ const Login = ({ navigation }) => {
 
         const result = await inputValidation(LoginSchema, inputs)
 
-        console.log(result); 
         if (result.isValidate) {
             handleSubmit();
 

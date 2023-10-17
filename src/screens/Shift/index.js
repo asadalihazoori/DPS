@@ -97,6 +97,10 @@ const Shift = ({ navigation }) => {
                 Alert.alert("Confirmation", "Shift Requested Successfully")
             }
 
+            else if (response?.data?.error) {
+                Alert.alert(response?.data?.error?.message, `${response?.data?.error?.data?.message}`);
+            }
+
             else if (response == 'AxiosError: Request failed with status code 404') {
                 Alert.alert("Session Expired", `Please Login Again`);
             }

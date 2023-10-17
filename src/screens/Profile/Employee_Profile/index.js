@@ -10,6 +10,7 @@ import Qualifications from '../../../components/Profile/ProfileView/Qualificatio
 import Experiences from '../../../components/Profile/ProfileView/Experiences';
 import FamilyInfo from '../../../components/Profile/ProfileView/FamilyInfo.js';
 import PersonalInfo from '../../../components/Profile/ProfileView/PersonalInfo';
+import { ProfileProvider } from '../../../context/ProfileContext';
 
 const EmployeeProfile = ({ navigation }) => {
 
@@ -65,40 +66,44 @@ const EmployeeProfile = ({ navigation }) => {
 
 
     return (
-        <SafeAreaView style={styles.container}>
-            {/* <ScrollView showsVerticalScrollIndicator={false}> */}
+        // <ProfileProvider navigation={navigation}>
 
-            <View style={styles.profileView}>
+            <SafeAreaView style={styles.container}>
+                {/* <ScrollView showsVerticalScrollIndicator={false}> */}
 
-                <View style={styles.image}>
-                    <Avatar.Image
-                        source={{ uri: `data:image/jpeg;base64,${profileData?.image}` }}
-                        size={100}
-                    />
-                    <Text style={styles.title}>{profileData?.name}</Text>
-                    <Text style={styles.caption}>{profileData?.job_title}</Text>
-                    {/* <Image source={{ uri: `data:image/png;base64,${profileData?.image}` }} height={100} width={100} /> */}
+                <View style={styles.profileView}>
+
+                    <View style={styles.image}>
+                        <Avatar.Image
+                            source={{ uri: `data:image/jpeg;base64,${profileData?.image}` }}
+                            size={100}
+                        />
+                        <Text style={styles.title}>{profileData?.name}</Text>
+                        <Text style={styles.caption}>{profileData?.job_title}</Text>
+                        {/* <Image source={{ uri: `data:image/png;base64,${profileData?.image}` }} height={100} width={100} /> */}
+                    </View>
                 </View>
-            </View>
 
-            <View style={styles.iconView}>
-                <TouchableOpacity onPress={() => navigation.navigate('UpdateProfile')} >
-                    <Icon name='circle-edit-outline' size={30} style={{ color: "black" }} />
-                </TouchableOpacity>
-            </View>
+                <View style={styles.iconView}>
+                    <TouchableOpacity onPress={() => navigation.navigate('UpdateProfile')} >
+                        <Icon name='circle-edit-outline' size={30} style={{ color: "black" }} />
+                    </TouchableOpacity>
+                </View>
 
-            <View style={styles.mainView}>
+                <View style={styles.mainView}>
 
-                <TabView
-                    navigationState={{ index, routes }}
-                    renderScene={(e) => RenderScene(e, navigation)}
-                    onIndexChange={setIndex}
-                    renderTabBar={renderTabBar}
-                />
+                    <TabView
+                        navigationState={{ index, routes }}
+                        renderScene={(e) => RenderScene(e, navigation)}
+                        onIndexChange={setIndex}
+                        renderTabBar={renderTabBar}
+                    />
 
-            </View>
+                </View>
 
-        </SafeAreaView>
+            </SafeAreaView>
+
+        // </ProfileProvider>
     )
 }
 

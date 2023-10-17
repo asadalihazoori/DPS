@@ -75,7 +75,7 @@ const UpdatePersonalInfo = ({ navigation }) => {
                     </View>
 
                     <View>
-                        <InputField
+                        {/* <InputField
                             marginTop={16}
                             label={'Name'}
                             // placeholder={'Name'}
@@ -91,7 +91,7 @@ const UpdatePersonalInfo = ({ navigation }) => {
                             value={profileFields.cnic ? profileFields.cnic : profileData?.cnic}
                             // error={errors.reason}
                             // onFocus={() => handleError(null, 'reason')}
-                            onChangeText={(text) => handleInputChange('cnic', text)} />
+                            onChangeText={(text) => handleInputChange('cnic', text)} /> */}
 
 
                         <InputField

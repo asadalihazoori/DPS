@@ -19,7 +19,7 @@ const persistConfig = {
     key: 'root',
     storage: AsyncStorage,
     whitelist: ['signin', 'employeeProfile', 'leaveStatus', 'backgroundImage'],
-    blacklist: [''],
+    blacklist: ['leaveStatus'],
 };
 
 const persistedReducer = persistReducer(persistConfig, allReducers);
