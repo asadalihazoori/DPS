@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import { launchImageLibrary, launchCamera } from 'react-native-image-picker';
 import Button from './Buttons/Button';
+import { COLORS } from '../theme/colors';
 // import Button from './Button';
 
 const ImagePicker = ({ modalVisible, setModalVisible, onImageSelected }) => {
@@ -114,8 +115,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   modalContent: {
-    // backgroundColor: 'white',
-    backgroundColor: '#F3F3F3',
+    backgroundColor: COLORS.backgroundModal,
     borderTopLeftRadius: 26,
     borderTopRightRadius: 26,
     padding: 20,

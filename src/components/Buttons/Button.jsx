@@ -1,5 +1,6 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
+import { COLORS } from '../../theme/colors'
 
 const Button = ({ title, handelSubmit, height }) => {
     return (
@@ -16,7 +17,7 @@ export default Button
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#5d50ec',
+        backgroundColor: COLORS.primaryPurple,
         height: 50,
         borderRadius: 10,
         alignItems: 'center',
@@ -27,7 +28,7 @@ const styles = StyleSheet.create({
     },
     text: {
         // padding:15 ,
-        color: 'white',
+        color: COLORS.white,
         fontWeight: '700',
         fontSize: 18,
     }

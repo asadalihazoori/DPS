@@ -1,9 +1,10 @@
 import { StyleSheet } from "react-native";
+import { COLORS } from "../../../theme/colors";
 
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'white',
+        backgroundColor: COLORS.white,
         justifyContent: 'center',
         // borderWidth: 1,
         alignItems: 'center'
@@ -19,8 +20,8 @@ export const styles = StyleSheet.create({
 
     taskView: {
         // borderWidth: 1,
-        backgroundColor: '#dbddda', //'#c6c9c6',
-        borderColor: 'green',
+        backgroundColor: COLORS.lightGrey, //'#c6c9c6',
+        // borderColor: 'green',
         borderRadius: 12,
         height: 120,
         width: 210,
@@ -32,7 +33,7 @@ export const styles = StyleSheet.create({
     },
 
     text: {
-        color: 'black',
+        color: COLORS.black,
         fontWeight: '500',
         fontSize: 14,
 

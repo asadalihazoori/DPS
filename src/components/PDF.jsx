@@ -4,6 +4,7 @@ import Pdf from 'react-native-pdf';
 import RNFS from 'react-native-fs';
 import { PermissionsAndroid, Platform } from 'react-native';
 import Button from './Buttons/Button';
+import { COLORS } from '../theme/colors';
 
 const PDF = ({ b64_pdf, title }) => {
     const downloadPdf = async (b64Pdf) => {
@@ -87,12 +88,12 @@ const styles = StyleSheet.create({
         // justifyContent: 'flex-start',
         // alignItems: 'center',
         // marginTop: 25,
-        backgroundColor: 'white',
+        backgroundColor: COLORS.white,
     },
     pdf: {
         flex: 1,
         width: '100%',
         height: '100%',
-        backgroundColor: 'white'
+        backgroundColor: COLORS.white
     }
 })

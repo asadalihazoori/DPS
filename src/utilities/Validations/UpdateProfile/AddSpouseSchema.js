@@ -2,8 +2,7 @@ import * as yup from 'yup';
 
 export const AddSpouseSchema = yup.object().shape({
 
-    spouse_name: yup
-        .string().trim().required("Name is required"),
+    spouse_name: yup.string().trim().required("Name is required"),
     s_dob: yup.string().trim().required('DOB is required'),
     s_cnic: yup.string().trim().required('B.Form is required'),
     s_contact: yup.string()

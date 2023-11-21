@@ -9,6 +9,7 @@ import { LeavesRequestSchema } from '../../../utilities/Validations';
 import Button from '../../../components/Buttons/Button';
 import Input from '../../../components/InputField';
 import { useSelector } from 'react-redux';
+import { styles } from './styles';
 
 const LeaveSubmission = ({ navigation }) => {
 
@@ -116,7 +117,7 @@ const LeaveSubmission = ({ navigation }) => {
 
 
     return (
-        <SafeAreaView style={{ padding: 20, backgroundColor: 'white', flex: 1 }}>
+        <View style={styles.container}>
 
             <View style={{ marginBottom: 20 }}>
 
@@ -174,7 +175,7 @@ const LeaveSubmission = ({ navigation }) => {
                 onChangeSelection={(leaveType) => handleInputChange('holidayType', leaveType)}
             />
 
-        </SafeAreaView>
+        </View>
     )
 }
 

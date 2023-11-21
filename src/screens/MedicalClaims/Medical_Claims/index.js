@@ -60,7 +60,7 @@ const MedicalClaims = ({ navigation }) => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <ScrollView >
+            <ScrollView showsHorizontalScrollIndicator={false}>
 
                 <Table header={headerData} data={data} claims={true} loading={loading} />
 

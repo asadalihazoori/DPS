@@ -8,6 +8,7 @@ import UpdateFamilyInfo from './UpdateFamilyInfo';
 import UpdateQualifications from './UpdateQualifications';
 import UpdateExperiences from './UpdateExperiences';
 import { ProfileContext } from '../../../context/ProfileContext';
+import UpdatePersonalDocs from './UpdatePersonalDocs';
 
 const WrapperUpdateProfile = ({ navigation }) => {
 
@@ -20,7 +21,8 @@ const WrapperUpdateProfile = ({ navigation }) => {
         { key: 'first', title: "Info" },
         { key: 'second', title: "Family" },
         { key: 'third', title: "Qualif." },
-        { key: 'fourth', title: "Exper." }
+        { key: 'fourth', title: "Exper." },
+        { key: 'fifth', title: "Docs." }
     ]);
 
     const goToNextTab = () => {
@@ -37,6 +39,7 @@ const WrapperUpdateProfile = ({ navigation }) => {
             activeColor="#000"
             inactiveColor="#7A7578"
             getLabelText={({ route }) => route.title}
+            labelStyle={{ fontSize: 11, fontWeight: '700' }}
         />
     );
 
@@ -51,6 +54,8 @@ const WrapperUpdateProfile = ({ navigation }) => {
                 return <UpdateQualifications />;
             case 'fourth':
                 return <UpdateExperiences />;
+            case 'fifth':
+                return <UpdatePersonalDocs />;
         }
     };
 
@@ -68,7 +73,7 @@ const WrapperUpdateProfile = ({ navigation }) => {
             <View style={{ paddingHorizontal: 20 }}>
                 {loading &&
                     <ActivityIndicator size={'small'} />}
-                <Button title={(index != 3) ? "Continue" : "Submit"} handelSubmit={(index != 3) ? goToNextTab : () => handelSubmit(setLoading)} />
+                <Button title={(index != 4) ? "Continue" : "Submit"} handelSubmit={(index != 4) ? goToNextTab : () => handelSubmit(setLoading)} />
             </View>
 
         </View>
@@ -129,7 +134,7 @@ const styles = StyleSheet.create({
     TabViewCreateIndicator: {
         // backgroundColor: Theme.colors.blackcolor,
         backgroundColor: 'black',
-        width: '22%',
+        width: '16%',
         marginHorizontal: 10,
         // borderWidth: 1,
     },

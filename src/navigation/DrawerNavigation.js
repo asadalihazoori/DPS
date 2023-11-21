@@ -5,22 +5,31 @@ import {
     LeaveSubmission, AttendanceReport, LoansAdvances,
     ApplyForLoans, MedicalClaims, ApplyForMedicalClaims,
     Shift, TardinesReport, TaxCertificate, HolidayNews, ChangePassword,
-    Home, AttendanceRequest, Attendance, Leaves, Loans, MedicalClaim, Reports,
+    AttendanceRequest, Attendance, Leaves, Loans, MedicalClaim, Reports, Dashboard, Profile, PayslipDetails, Punch,
 } from "../screens";
 import CustomDrawerContent from "../components/CustomDrawerContent";
+import CustomDrawer1 from "../components/CustomDrawer1";
+import BottomTab from "./BottomTab";
 
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigation = ({ navigation }) => {
 
     return (
-        <Drawer.Navigator initialRouteName="Home"
-            drawerContent={(props) => <CustomDrawerContent {...props} />}>
+        <Drawer.Navigator initialRouteName="Leaves"
+            screenOptions={{
+                headerShown: false
+            }}
+            // drawerContent={(props) => <CustomDrawerContent {...props} />}>
+            drawerContent={(props) => <CustomDrawer1 {...props} />}>
 
-            <Drawer.Screen name="Home" component={Home}
-            //  options={{ headerShown: false }}
-            />
+            <Drawer.Screen name="BottomTab" component={BottomTab} />
+
+            <Drawer.Screen name="Home" component={Dashboard} />
             <Drawer.Screen name="EmployeeProfile" component={EmployeeProfile} />
+            <Drawer.Screen name="Profile" component={Profile} />
+            {/* <Drawer.Screen name="Punch" component={Punch} /> */}
+
             <Drawer.Screen name="EmployeePayslip" component={EmployeePayslip} />
             <Drawer.Screen name="LeaveStatus" component={LeaveStatus} />
             <Drawer.Screen name="LeaveSubmission" component={LeaveSubmission} />

@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
-// import { colors } from '../theme/colors'
+import { COLORS } from '../theme/colors';
 // import { SvgXml } from 'react-native-svg';
 // import { fontStyle } from '../theme/fonstStyle';
 // import { icons } from '../assets/icons/icons';
@@ -33,8 +33,8 @@ const InputField = ({
             }
             <View style={[styles.container, {
                 marginTop: marginTop,
-                borderColor: error ? 'red' : isFocused ? '#5d50ec' : 'black',
-                backgroundColor: isFocused ? 'white' : 'white'
+                borderColor: error ? COLORS.red : isFocused ? COLORS.primaryPurple : COLORS.black,
+                backgroundColor: isFocused ? COLORS.white : COLORS.white
             }]}>
                 <View style={styles.innerView}>
                     {/* {icon &&
@@ -50,10 +50,11 @@ const InputField = ({
                     </View>} */}
 
 
+
                     <TextInput
 
                         placeholder={placeholder}
-                        placeholderTextColor={'grey'}
+                        placeholderTextColor={COLORS.grey}
                         keyboardType={keyboardType}
                         autoCorrect={false}
                         onFocus={() => {
@@ -87,7 +88,7 @@ const InputField = ({
                 </View>
             </View>
             {error && (
-                <Text style={{ marginTop: 5, marginLeft: 4, color: 'red', fontSize: 12 }}>
+                <Text style={{ marginTop: 5, marginLeft: 4, color: COLORS.red, fontSize: 12 }}>
                     {error}
                 </Text>
             )}
@@ -114,7 +115,7 @@ const styles = StyleSheet.create({
     },
 
     label: {
-        color: 'black',
+        color: COLORS.black,
         marginBottom: -10,
         marginLeft: 3,
         fontWeight: '600',

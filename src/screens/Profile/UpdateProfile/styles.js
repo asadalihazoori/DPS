@@ -1,10 +1,11 @@
 import { StyleSheet } from 'react-native'
+import { COLORS } from '../../../theme/colors';
 
 export const styles = StyleSheet.create({
 
     container: {
         flex: 1,
-        backgroundColor: 'white',
+        backgroundColor: COLORS.white,
         // borderWidth: 1,
         paddingHorizontal: 20,
         paddingTop: 5,
@@ -15,7 +16,7 @@ export const styles = StyleSheet.create({
     innerView: {
 
         // borderWidth: 2,
-        backgroundColor: 'white',
+        backgroundColor: COLORS.white,
         // paddingVertical: 70,
         borderColor: 'black',
         flex: 1,
@@ -28,12 +29,12 @@ export const styles = StyleSheet.create({
         shadowRadius: 3.84,
         elevation: 5,
         borderRadius: 10,
-        
+
 
     },
 
     TabViewCreateContainer: {
-        backgroundColor: 'white',
+        backgroundColor: COLORS.white,
         width: '100%',
         height: 60,
         justifyContent: 'center',
@@ -49,7 +50,7 @@ export const styles = StyleSheet.create({
     },
     TabViewCreateIndicator: {
         // backgroundColor: Theme.colors.blackcolor,
-        backgroundColor: 'black',
+        backgroundColor: COLORS.black,
         width: '22%',
         marginHorizontal: 10,
         // borderWidth: 1,

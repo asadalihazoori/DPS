@@ -2,12 +2,12 @@ import { View, Text, SafeAreaView, Image, TouchableOpacity, StyleSheet, } from '
 import React, { useContext, useState } from 'react'
 import Button from '../../Buttons/Button'
 import { useSelector } from 'react-redux'
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { ProfileContext } from '../../../context/ProfileContext';
 import ImagePicker from '../../ImagePicker'
 import InputField from '../../InputField';
 import { SvgXml } from 'react-native-svg';
 import { Icons } from '../../../assets/SvgIcons/Icons';
+import { COLORS } from '../../../theme/colors';
 
 const UpdatePersonalInfo = ({ navigation }) => {
 
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         // borderWidth: 1,
-        borderColor: 'green',
+        // borderColor: 'green',
         // backgroundColor: 'white',
         paddingHorizontal: 20,
         // paddingVertical: 5,
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
 
     profileIconView: {
         // borderWidth: 1,
-        borderColor: 'red',
+        borderColor: COLORS.red,
         alignItems: 'center',
         marginTop: 10,
     },

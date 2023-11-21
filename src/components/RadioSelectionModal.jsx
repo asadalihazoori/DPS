@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, Modal, ScrollView } from 'react-native'
 import React, { useState } from 'react'
 import { RadioButton } from 'react-native-paper';
 import Button from './Buttons/Button';
+import { COLORS } from '../theme/colors';
 
 const RadioSelectionModal = ({ modalVisible, setModalVisible, header, data, onChangeSelection }) => {
 
@@ -83,7 +84,7 @@ const styles = StyleSheet.create({
         // paddingTop: 40,
         padding: 20,
         // flex: 1,
-        backgroundColor: 'white',
+        backgroundColor: COLORS.white,
         borderRadius: 13,
         width: '85%',
 
@@ -101,14 +102,14 @@ const styles = StyleSheet.create({
 
     header: {
         fontWeight: '700',
-        color: 'black',
+        color: COLORS.black,
         fontSize: 16,
         marginBottom: 8,
 
     },
 
     text: {
-        color: 'black',
+        color: COLORS.black,
 
     },
 

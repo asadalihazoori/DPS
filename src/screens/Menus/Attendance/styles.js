@@ -1,41 +1,42 @@
 import { StyleSheet } from "react-native";
+import { COLORS } from "../../../theme/colors";
 
 export const styles = StyleSheet.create({
     container: {
+        marginHorizontal: 16,
+        // borderWidth: 1,
         flex: 1,
-        backgroundColor: 'white',
-        justifyContent: 'center',
-        // borderWidth: 1,
-        alignItems: 'center'
-        // position: 'absolute'
     },
 
-    innerView: {
-
-        // justifyContent: 'center'
-        // borderWidth: 1,
-        // flex: 1
+    tabBar: {
+        borderColor: 'red',
+        flexDirection: 'row',
+        marginVertical: 24,
     },
 
-    taskView: {
+    iconView: {
         // borderWidth: 1,
-        backgroundColor: '#dbddda', //'#c6c9c6',
-        borderColor: 'green',
-        borderRadius: 12,
-        height: 120,
-        width: 210,
-        // flex:1
-        marginTop: 10,
-        marginRight: 10,
-        justifyContent: 'center',
-        alignItems: 'center'
+        justifyContent: 'center'
     },
 
-    text: {
-        color: 'black',
-        fontWeight: '500',
-        fontSize: 14,
+    TabViewCreateContainer: {
+        backgroundColor: COLORS.background1,
+        // borderWidth: 1,
 
+        elevation: 0,
+        flex: 1,
+
+    },
+
+    TabViewIndicator: {
+        backgroundColor: COLORS.green,
+        borderRadius: 16,
+        // width: 50,
+    },
+
+    bodyView: {
+        borderWidth: 1,
+        flex: 1
     }
 
 

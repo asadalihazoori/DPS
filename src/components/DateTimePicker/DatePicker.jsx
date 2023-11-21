@@ -4,18 +4,19 @@ import React, { useState } from 'react'
 // import { colors } from '../theme/colors'
 // import { icons } from '../assets/icons/icons'
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { COLORS } from '../../theme/colors';
 // import { SvgXml } from 'react-native-svg'
 
 
 const DatePicker = ({ value, date, label, placeholder, onChange, showDatePicker, setShowDatePicker, error }) => {
 
 
-    let borderColor = 'black';
+    let borderColor = COLORS.black;
 
     if (error) {
-        borderColor = 'red';
+        borderColor = COLORS.red;
     } else if (value) {
-        borderColor = 'black';
+        borderColor = COLORS.black;
     }
 
 
@@ -34,14 +35,12 @@ const DatePicker = ({ value, date, label, placeholder, onChange, showDatePicker,
                 <Text style={styles.label}>{label}</Text>
             }
 
-            <View style={[styles.dobView, {
-                // borderColor: borderColor
-            }]}>
+            <View style={[styles.dobView, {}]}>
                 <TouchableOpacity onPress={() => setShowDatePicker(true)} style={[styles.touchableView, {
                     borderColor: borderColor
                 }]}>
 
-                    <Text style={[{ color: 'black' }]}>{value ? value : placeholder}</Text>
+                    <Text style={[{ color: COLORS.black }]}>{value ? value : placeholder}</Text>
                     {/* <SvgXml xml={value ? icons.calender.black : icons.calender.grey} style={{ alignSelf: 'flex-end' }} /> */}
                 </TouchableOpacity>
 
@@ -59,7 +58,7 @@ const DatePicker = ({ value, date, label, placeholder, onChange, showDatePicker,
                 )}
 
                 {error && (
-                    <Text style={{ marginTop: 5, marginLeft: 4, color: 'red', fontSize: 12 }}>
+                    <Text style={{ marginTop: 5, marginLeft: 4, color: COLORS.red, fontSize: 12 }}>
                         {error}
                     </Text>
                 )}
@@ -80,14 +79,14 @@ const styles = StyleSheet.create({
         // padding: 15,
         // width: 380,
         // height: 70,
-        backgroundColor: 'white',
+        backgroundColor: COLORS.white,
         // borderWidth: 1,
         // borderRadius: 10,
 
     },
-    
+
     label: {
-        color: 'black',
+        color: COLORS.black,
         marginBottom: -10,
         marginLeft: 3,
         fontWeight: '600',

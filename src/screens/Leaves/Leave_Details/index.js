@@ -1,4 +1,4 @@
-import { SafeAreaView, ScrollView } from 'react-native'
+import { SafeAreaView, ScrollView, View } from 'react-native'
 import React from 'react'
 import Table from '../../../components/Table'
 import { styles } from './styles';
@@ -15,7 +15,9 @@ const Leave_Details = ({ route }) => {
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView>
-                <Header title={leaves_type} />
+                <View style={{ paddingHorizontal: 10 }} >
+                    <Header title={leaves_type} />
+                </View>
                 <Table header={headerData} data={leaves_availed} leaves_availed={true} leaves_type={leaves_type} />
             </ScrollView>
         </SafeAreaView>

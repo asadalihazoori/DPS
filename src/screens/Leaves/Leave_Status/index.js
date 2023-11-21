@@ -1,14 +1,16 @@
-import { SafeAreaView, ScrollView, Text } from 'react-native'
+import { SafeAreaView, ScrollView, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { getLeaveStatusApi } from '../../../utilities/api/apiController';
 import { useDispatch, useSelector } from 'react-redux';
 import Table from '../../../components/Table';
-import { styles } from './styles';
 import { getLeavesStatus } from '../../../redux/leaves/actions/getLeavesStatus';
+import { styles } from './styles';
+import LeaveTable from '../../../components/LeaveTable';
 
 const LeaveStatus = ({ navigation }) => {
 
-    const tableHeader = ["Type", "Allocated", "Availed", "Remaining"]
+    // const tableHeader = ["Type", "Allocated", "Availed", "Remaining"]
+    const tableHeader = ["Leave", "Credits", "Taken", "Available"]
 
     // const [data, setData] = useState([]);
     const leaves = useSelector((state) => state.leaveStatus.leaves);
@@ -70,16 +72,16 @@ const LeaveStatus = ({ navigation }) => {
     }, [])
 
     return (
-        <SafeAreaView style={styles.container} >
-            <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={styles.container}>
 
-                <Table header={tableHeader}
-                    data={leaves}
-                    // data={data} //data
-                    leaves={true} loading={loading} navigation={navigation} />
+            <Text style={styles.leaveText}>Total Leaves Available : 38 Days</Text>
 
-            </ScrollView>
-        </SafeAreaView>
+            {loading ? <></> :
+
+                <LeaveTable header={tableHeader} navigation={navigation} data={leaves} loading={false} />
+
+            }
+        </View>
     )
 }
 

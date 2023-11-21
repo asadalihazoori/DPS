@@ -9,6 +9,7 @@ import TouchableView from '../../components/Buttons/TouchableView';
 import { CreateShiftSchema } from '../../utilities/Validations';
 import Button from '../../components/Buttons/Button';
 import Input from '../../components/InputField';
+import { styles } from './styles';
 
 const Shift = ({ navigation }) => {
 
@@ -116,7 +117,7 @@ const Shift = ({ navigation }) => {
 
 
     return (
-        <SafeAreaView style={{ padding: 20, backgroundColor: 'white', flex: 1 }}>
+        <SafeAreaView style={styles.container}>
             <ScrollView showsVerticalScrollIndicator={false}>
 
                 <View style={{ marginBottom: 20 }}>

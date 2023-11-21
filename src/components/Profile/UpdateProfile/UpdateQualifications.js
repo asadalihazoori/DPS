@@ -1,8 +1,9 @@
 import { View, Text, SafeAreaView, StyleSheet, ScrollView, TouchableOpacity } from 'react-native'
 import React, { useContext, useState } from 'react'
 import Icons from 'react-native-vector-icons/FontAwesome6';
-import AddQualifModal from '../../AddQualifModal';
 import { ProfileContext } from '../../../context/ProfileContext';
+import AddQualifModal from './Modals/AddQualifModal';
+import { COLORS } from '../../../theme/colors';
 
 const UpdateQualifs = () => {
 
@@ -20,7 +21,7 @@ const UpdateQualifs = () => {
 
                             <Icons name="plus"
                                 size={20}
-                                style={{ color: "white" }}
+                                style={{ color: COLORS.white }}
                             />
                         </TouchableOpacity>
 
@@ -72,14 +73,14 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         // borderWidth: 1,
-        borderColor: 'green',
-        backgroundColor: 'white',
+        // borderColor: 'green',
+        backgroundColor: COLORS.white,
         paddingHorizontal: 20,
 
     },
 
     headerView: {
-        backgroundColor: 'grey',
+        backgroundColor: COLORS.grey,
         padding: 10,
         borderRadius: 10,
         paddingHorizontal: 16,
@@ -87,7 +88,7 @@ const styles = StyleSheet.create({
     },
 
     headerText: {
-        color: 'white',
+        color: COLORS.white,
         fontWeight: '700',
         fontSize: 16,
         flex: 1,
@@ -107,7 +108,7 @@ const styles = StyleSheet.create({
     },
 
     heading: {
-        color: 'black',
+        color: COLORS.black,
         fontSize: 16,
         fontWeight: '600',
     },
@@ -117,7 +118,7 @@ const styles = StyleSheet.create({
     },
 
     title: {
-        color: 'black',
+        color: COLORS.black,
         fontSize: 14,
         fontWeight: '400',
 

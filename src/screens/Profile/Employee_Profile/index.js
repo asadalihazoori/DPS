@@ -11,9 +11,14 @@ import Experiences from '../../../components/Profile/ProfileView/Experiences';
 import FamilyInfo from '../../../components/Profile/ProfileView/FamilyInfo.js';
 import PersonalInfo from '../../../components/Profile/ProfileView/PersonalInfo';
 import { ProfileProvider } from '../../../context/ProfileContext';
+import { COLORS } from '../../../theme/colors';
+import Theme from '../../../theme/theme';
+import GeneralHeader from '../../../components/Headers/GeneralHeader';
+import { FontStyle } from '../../../theme/FontStyle';
 
-const EmployeeProfile = ({ navigation }) => {
+const EmployeeProfile = ({ navigation, route }) => {
 
+    const initalRoute = route.params?.route;
     const profileData = useSelector((state) => state.employeeProfile.data);
     const uid = useSelector((state) => state.signin.uid);
     // const [loading, setLoading] = useState(true);
@@ -30,23 +35,26 @@ const EmployeeProfile = ({ navigation }) => {
     // }, [])
 
 
-    const [index, setIndex] = React.useState(0);
+    const [index, setIndex] = React.useState(initalRoute);
 
     const [routes] = React.useState([
-        { key: 'first', title: "Info" },
-        { key: 'second', title: "Family" },
-        { key: 'third', title: "Qual." },
-        { key: 'fourth', title: "Exper." }
+        { key: 'first', title: "Personal Info" },
+        { key: 'second', title: "Family Info" },
+        { key: 'third', title: "Qualification" },
+        { key: 'fourth', title: "Experience" }
     ]);
 
     const renderTabBar = propss => (
         <TabBar
             {...propss}
-            indicatorStyle={styles.TabViewCreateIndicator}
+            indicatorStyle={styles.TabViewIndicator}
             style={styles.TabViewCreateContainer}
-            activeColor="#000"
-            inactiveColor="#7A7578"
-            getLabelText={({ route }) => route.title}
+            renderLabel={({ route, focused }) => (
+                <View style={{ width: 72, alignItems: 'center' }}>
+                    <Text style={[FontStyle.Regular12, { fontWeight: '500', color: focused ? COLORS.darkBlack : COLORS.grey3 }]}>{route.title}</Text>
+                </View>
+            )}
+
         />
     );
 
@@ -66,44 +74,24 @@ const EmployeeProfile = ({ navigation }) => {
 
 
     return (
-        // <ProfileProvider navigation={navigation}>
 
-            <SafeAreaView style={styles.container}>
-                {/* <ScrollView showsVerticalScrollIndicator={false}> */}
+        <SafeAreaView style={Theme.SafeArea}>
+            <GeneralHeader title={'Employee Profile'} navigation={navigation} />
 
-                <View style={styles.profileView}>
+            <View style={styles.container}>
 
-                    <View style={styles.image}>
-                        <Avatar.Image
-                            source={{ uri: `data:image/jpeg;base64,${profileData?.image}` }}
-                            size={100}
-                        />
-                        <Text style={styles.title}>{profileData?.name}</Text>
-                        <Text style={styles.caption}>{profileData?.job_title}</Text>
-                        {/* <Image source={{ uri: `data:image/png;base64,${profileData?.image}` }} height={100} width={100} /> */}
-                    </View>
-                </View>
+                <TabView
+                    navigationState={{ index, routes }}
+                    renderScene={(e) => RenderScene(e, navigation)}
+                    onIndexChange={setIndex}
+                    renderTabBar={renderTabBar}
+                />
 
-                <View style={styles.iconView}>
-                    <TouchableOpacity onPress={() => navigation.navigate('UpdateProfile')} >
-                        <Icon name='circle-edit-outline' size={30} style={{ color: "black" }} />
-                    </TouchableOpacity>
-                </View>
 
-                <View style={styles.mainView}>
+            </View>
 
-                    <TabView
-                        navigationState={{ index, routes }}
-                        renderScene={(e) => RenderScene(e, navigation)}
-                        onIndexChange={setIndex}
-                        renderTabBar={renderTabBar}
-                    />
+        </SafeAreaView>
 
-                </View>
-
-            </SafeAreaView>
-
-        // </ProfileProvider>
     )
 }
 

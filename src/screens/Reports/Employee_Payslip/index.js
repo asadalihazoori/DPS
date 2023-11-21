@@ -1,10 +1,16 @@
-import { Alert, SafeAreaView, ActivityIndicator, View, Text } from 'react-native'
+import { Alert, SafeAreaView, ActivityIndicator, View, Text, ScrollView, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import { getEmployeePayslipApi } from '../../../utilities/api/ApiList/PayslipApiList'
 import { styles } from './styles';
 import PDF from '../../../components/PDF';
 import { useSelector } from 'react-redux';
 import MonthYearPicker from '../../../components/DateTimePicker/MonthPicker';
+import Theme from '../../../theme/theme';
+import GeneralHeader from '../../../components/Headers/GeneralHeader';
+import PayslipCard from '../../../components/Cards/PayslipCard';
+import { FontStyle } from '../../../theme/FontStyle';
+import { SvgXml } from 'react-native-svg';
+import { Icons } from '../../../assets/SvgIcons/Icons';
 
 const EmployeePayslip = ({ navigation }) => {
 
@@ -66,20 +72,45 @@ const EmployeePayslip = ({ navigation }) => {
 
     return (
 
-        <SafeAreaView style={styles.container}>
-            <MonthYearPicker onDateChange={fetchData} />
+        <SafeAreaView style={Theme.SafeArea}>
+            <GeneralHeader title={'Payslip'} navigation={navigation} />
+
+            <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
 
 
-            <View style={styles.innerContainer}>
-                {loading ?
-                    <ActivityIndicator size={'large'} /> :
-                    b64_pdf &&
-                    <PDF b64_pdf={b64_pdf}
-                        title={`Payslip ( ${date} ).pdf`}
+                <View style={styles.detailsView}>
 
-                    />
-                }
-            </View>
+                    <View style={styles.detailTextView}>
+                        <Text style={styles.detailstext}>Welcome to my payslip details </Text>
+                    </View>
+
+                    <TouchableOpacity style={styles.iconView}
+                        activeOpacity={0.5}
+                        onPress={() => navigation.navigate('PayslipDetails')}
+
+                    >
+
+                        <SvgXml xml={Icons.rightArrow1} />
+
+                    </TouchableOpacity>
+
+                </View>
+
+                <View>
+                    <PayslipCard />
+                    <PayslipCard />
+                    <PayslipCard />
+                    <PayslipCard />
+                    <PayslipCard />
+                    <PayslipCard />
+                    <PayslipCard />
+
+                </View>
+
+
+
+
+            </ScrollView>
 
         </SafeAreaView>
     )

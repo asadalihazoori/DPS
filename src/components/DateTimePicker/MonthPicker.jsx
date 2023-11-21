@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useMemo } from 'react';
 import { View, SafeAreaView, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import MonthPicker from 'react-native-month-year-picker';
+import { COLORS } from '../../theme/colors';
 
 const MonthYearPicker = ({ onDateChange, tardines, tax }) => {
   const [date, setDate] = useState(new Date());
@@ -76,19 +77,17 @@ const styles = StyleSheet.create({
     marginVertical: 16,
     alignContent: 'center',
     alignItems: 'center',
-    // borderWidth: 1,
-    // borderColor: 'red'
   },
 
   button: {
     padding: 18,
-    backgroundColor: 'grey',
+    backgroundColor: COLORS.grey,
     width: 120,
     borderRadius: 10,
     alignItems: 'center',
   },
   text: {
-    color: 'white',
+    color: COLORS.white,
     fontWeight: 'bold',
     fontSize: 16
   },

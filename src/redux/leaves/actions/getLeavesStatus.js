@@ -17,8 +17,9 @@ export const getLeavesStatus = ({ uid, navigation }) => {
             }
 
             const response = await getLeaveStatusApi({ body, navigation });
+            // console.log("API Called")
+            // console.log(response?.data?.result?.response)
 
-            
 
             if (response?.data?.result?.status == 200) {
                 dispatch(get_leaves_status(response?.data?.result?.response))

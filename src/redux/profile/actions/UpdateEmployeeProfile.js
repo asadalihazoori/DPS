@@ -87,7 +87,7 @@ export const UpdateEmployeeProfile = ({ employeeID, profileFields, navigation, s
                         //         "child_age": 2
                         //     }]
                         // ],
-                        "employee_expert_id": profileFields?.employee_expert_id
+                        "employee_expert_id": profileFields?.employee_expert_id,
                         // "employee_expert_id": [
                         //     [0, 0, {
                         //         "company": "company",
@@ -139,6 +139,7 @@ export const UpdateEmployeeProfile = ({ employeeID, profileFields, navigation, s
                         //         "attachment": false
                         //     }]
                         // ],
+                        "personal_doc": profileFields?.personal_doc,
                         // "personal_doc": [
                         //     [0, 0, {
                         //         "name": "name",

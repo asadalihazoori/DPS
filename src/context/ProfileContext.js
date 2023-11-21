@@ -29,6 +29,7 @@ const ProfileProvider = ({ children, navigation }) => {
         family_tree_id: [],
         employee_qualify_id: [],
         employee_expert_id: [],
+        personal_doc: [],
 
         errors: null
     });

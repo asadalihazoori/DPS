@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, ActivityIndicator, TouchableOpacity } from 'react-native'
 import React from 'react'
+import { COLORS } from '../theme/colors';
 
 const Table = ({ header, data, attendance, leaves, leaves_availed, leaves_type, loans, claims, holiday, loading, experience, qualification, navigation }) => {
 
@@ -136,12 +137,6 @@ const Table = ({ header, data, attendance, leaves, leaves_availed, leaves_type, 
             <>
                 {loading ?
                     <ActivityIndicator size={'large'} style={{ marginTop: 50 }} /> :
-                    <>
-                        {renderItems()}
-                    </>
-                }
-
-                {loading ? <></> :
                     data.length > 0 ?
                         <>
                             {renderItems()}
@@ -151,6 +146,17 @@ const Table = ({ header, data, attendance, leaves, leaves_availed, leaves_type, 
                             <Text style={styles.nullText}>No Record Found !</Text>
                         </View>
                 }
+
+                {/* {loading ? <></> :
+                    data.length > 0 ?
+                        <>
+                            {renderItems()}
+                        </>
+                        :
+                        <View style={styles.nullContainer}>
+                            <Text style={styles.nullText}>No Record Found !</Text>
+                        </View>
+                } */}
             </>
         </View>
     )
@@ -162,7 +168,7 @@ const styles = StyleSheet.create({
 
     container: {
         // flex: 1,
-        backgroundColor: '#ffffff',
+        backgroundColor: COLORS.white,
         // borderWidth: 1,
 
     },
@@ -170,7 +176,7 @@ const styles = StyleSheet.create({
     header: {
         // marginLeft: 10,
 
-        backgroundColor: 'grey',
+        backgroundColor: COLORS.grey,
         // flexDirection: 'row',
         // borderWidth: 1,
         alignContent: 'center',
@@ -184,18 +190,17 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         borderTopLeftRadius: 10,
         borderTopRightRadius: 10,
-        color: "#FFFFFF"
+        color: COLORS.white
     },
 
     headerText: {
         fontWeight: 'bold',
         fontSize: 26,
-        color: 'red'
+        color: COLORS.red
     },
 
     row: {
         // borderWidth: 1,
-        // borderColor: 'red',
         flexDirection: 'row',
         // columnGap: 30,
         justifyContent: 'space-between',
@@ -203,7 +208,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 12,
         paddingVertical: 15,
         borderBottomWidth: 1,
-        borderBottomColor: '#DDDDDD',
+        borderBottomColor: COLORS.lightGrey,
 
     },
 
@@ -211,14 +216,14 @@ const styles = StyleSheet.create({
         fontSize: 14,
         // width: 100,
         width: 77,
-        color: "#000000",
+        color: COLORS.black,
         alignContent: 'center',
         alignItems: 'center',
         // borderWidth: 1,
         // alignItems: 'center',
         // alignContent: 'flex-end',
         textAlign: 'center',
-        borderColor: 'green'
+        // borderColor: 'green'
     },
 
     nullContainer: {

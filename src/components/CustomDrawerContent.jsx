@@ -8,6 +8,7 @@ import { Avatar, Drawer } from 'react-native-paper'
 import { useDispatch, useSelector } from 'react-redux'
 import { getBackgroundImage } from '../redux/backgrouund/actions/getBackgroundImage';
 import { siginOut } from '../redux/users/actions/signOut';
+import { COLORS } from '../theme/colors';
 
 const CustomDrawerContent = (props) => {
 
@@ -29,22 +30,22 @@ const CustomDrawerContent = (props) => {
             <DrawerContentScrollView  {...props} showsVerticalScrollIndicator={false}>
 
                 <View style={styles.drawerContent}>
-                    <View style={{}}>
+                    <View >
 
-                        <View style={{ width: '100%', backgroundColor: '#b0caed', height: 200, }}>
+                        <View style={{ width: '100%', height: 200, }}>
 
                             {backgroundImage ?
                                 // <Image source={{ uri: `data:image/jpeg;base64,${backgroundImage}` }} height={200} />
                                 <Image source={{ uri: backgroundImage }} height={200} />
 
                                 :
-                                <Image source={require('../assets/background.jpg')} />
+                                <Image source={require('../assets/DrawerBackground.jpg')} />
                             }
 
                         </View>
                         <View style={styles.iconView}>
                             <TouchableOpacity onPress={launchLibrary}>
-                                <Icon name='circle-edit-outline' size={30} style={{ color: "black" }} />
+                                <Icon name='circle-edit-outline' size={30} style={{ color: COLORS.black }} />
                             </TouchableOpacity>
                         </View>
                         <View style={styles.userInfoSection}>
@@ -60,131 +61,130 @@ const CustomDrawerContent = (props) => {
 
                     <Drawer.Section style={styles.drawerSection}>
                         <DrawerItem
-                            icon={({ color, size }) => (
+                            icon={({ size }) => (
                                 <Icon name="home"
-                                    // color={color}
                                     size={size}
-                                    style={{ color: "black" }}
+                                    style={styles.iconColor}
                                 />
                             )}
-                            label={() => <Text style={{ color: 'black' }}>Home</Text>}
+                            label={() => <Text style={styles.labelColor}>Home</Text>}
                             onPress={() => {
                                 props.navigation.navigate('Home');
                             }}
                         />
                         <DrawerItem
-                            icon={({ color, size }) => (
+                            icon={({ size }) => (
                                 <Icon name="account-circle"
-                                    // color={color}
+
                                     size={size}
-                                    style={{ color: "black" }}
+                                    style={styles.iconColor}
                                 />
                             )}
-                            label={() => <Text style={{ color: 'black' }}>Profile</Text>}
+                            label={() => <Text style={styles.labelColor}>Profile</Text>}
                             onPress={() => {
                                 props.navigation.navigate('EmployeeProfile');
                             }}
                         />
                         <DrawerItem
-                            icon={({ color, size }) => (
+                            icon={({ size }) => (
                                 <MaterialIcons name="notifications-active"
-                                    // color={color}
+
                                     size={size}
-                                    style={{ color: "black" }}
+                                    style={styles.iconColor}
                                 />
                             )}
-                            label={() => <Text style={{ color: 'black' }}>Holiday News</Text>}
+                            label={() => <Text style={styles.labelColor}>Holiday News</Text>}
                             onPress={() => {
                                 props.navigation.navigate('HolidayNews');
                             }}
                         />
                         <DrawerItem
-                            icon={({ color, size }) => (
+                            icon={({ size }) => (
                                 <Icon name="account-check"
-                                    // color={color}
+
                                     size={size}
-                                    style={{ color: "black" }}
+                                    style={styles.iconColor}
                                 />
                             )}
-                            label={() => <Text style={{ color: 'black' }}>Attendance</Text>}
+                            label={() => <Text style={styles.labelColor}>Attendance</Text>}
                             onPress={() => {
                                 props.navigation.navigate('Attendance');
                             }}
                         />
                         <DrawerItem
-                            icon={({ color, size }) => (
+                            icon={({ size }) => (
                                 <Icon name="exit-run"
-                                    // color={color}
+
                                     size={size}
-                                    style={{ color: "black" }}
+                                    style={styles.iconColor}
                                 />
                             )}
-                            label={() => <Text style={{ color: 'black' }}>Leaves</Text>}
+                            label={() => <Text style={styles.labelColor}>Leaves</Text>}
                             onPress={() => {
                                 props.navigation.navigate('Leaves');
                             }}
                         />
                         <DrawerItem
-                            icon={({ color, size }) => (
+                            icon={({ size }) => (
                                 <Icon name="hand-extended"
-                                    // color={color}
+
                                     size={size}
-                                    style={{ color: "black" }}
+                                    style={styles.iconColor}
                                 />
                             )}
-                            label={() => <Text style={{ color: 'black' }}>Loans</Text>}
+                            label={() => <Text style={styles.labelColor}>Loans</Text>}
                             onPress={() => {
                                 props.navigation.navigate('Loans');
                             }}
                         />
                         <DrawerItem
-                            icon={({ color, size }) => (
+                            icon={({ size }) => (
                                 <Icon name="medical-bag"
-                                    // color={color}
+
                                     size={size}
-                                    style={{ color: "black" }}
+                                    style={styles.iconColor}
                                 />
                             )}
-                            label={() => <Text style={{ color: 'black' }}>MedicalClaims</Text>}
+                            label={() => <Text style={styles.labelColor}>MedicalClaims</Text>}
                             onPress={() => {
                                 props.navigation.navigate('MedicalClaim');
                             }}
                         />
                         <DrawerItem
-                            icon={({ color, size }) => (
+                            icon={({ size }) => (
                                 <Icon name="file-eye"
-                                    // color={color}
+
                                     size={size}
-                                    style={{ color: "black" }}
+                                    style={styles.iconColor}
                                 />
                             )}
-                            label={() => <Text style={{ color: 'black' }}>Reports</Text>}
+                            label={() => <Text style={styles.labelColor}>Reports</Text>}
                             onPress={() => {
                                 props.navigation.navigate('Reports');
                             }}
                         />
                         <DrawerItem
-                            icon={({ color, size }) => (
+                            icon={({ size }) => (
                                 <FontAwesome name="exchange"
-                                    // color={color}
+
                                     size={size}
-                                    style={{ color: "black" }}
+                                    style={styles.iconColor}
                                 />
                             )}
-                            label={() => <Text style={{ color: 'black' }}>Shifts</Text>}
+                            label={() => <Text style={styles.labelColor}>Shifts</Text>}
                             onPress={() => {
                                 props.navigation.navigate('Shift');
                             }}
                         />
                         <DrawerItem
-                            icon={({ color, size }) => (
+                            icon={({ size }) => (
                                 <MaterialIcons name="password"
-                                    // color={color}
+
                                     size={size}
-                                    style={{ color: "black" }}
+                                    style={styles.iconColor}
                                 />
                             )}
-                            label={() => <Text style={{ color: 'black' }}>Change Password</Text>}
+                            label={() => <Text style={styles.labelColor}>Change Password</Text>}
                             onPress={() => {
                                 props.navigation.navigate('ChangePassword');
                             }}
@@ -197,14 +197,14 @@ const CustomDrawerContent = (props) => {
             </DrawerContentScrollView>
             <Drawer.Section style={styles.bottomDrawerSection}>
                 <DrawerItem
-                    icon={({ color, size }) => (
+                    icon={({ size }) => (
                         <Icon name="logout"
-                            // color={color}
+
                             size={size}
-                            style={{ color: "black" }}
+                            style={styles.iconColor}
                         />
                     )}
-                    label={() => <Text style={{ color: 'black' }}> Logout</Text>}
+                    label={() => <Text style={styles.labelColor}> Logout</Text>}
                     onPress={() => {
                         const navigation = props.navigation;
                         siginOut({ uid, navigation })
@@ -221,23 +221,16 @@ const styles = StyleSheet.create({
 
     container: {
         flex: 1,
-        // borderWidth: 1,
     },
 
     drawerContent: {
-        // borderWidth: 1,
-        borderColor: 'green'
     },
 
     userInfoSection: {
-        // borderWidth: 1,
-        borderColor: 'red',
         marginLeft: 14,
 
         position: 'absolute',
-        bottom: 10, // Position it at the bottom
-        // right: 0, 
-        // position: 'absolute'
+        bottom: 10,
     },
 
     iconView: {
@@ -248,23 +241,27 @@ const styles = StyleSheet.create({
 
     },
 
+    iconColor: {
+        color: COLORS.black
+    },
+
+    labelColor: {
+        color: COLORS.black
+    },
+
     title: {
         fontSize: 14,
         marginTop: 6,
         fontWeight: 'bold',
-        // borderWidth: 1,
-        color: 'black',
-        // flex:1
+        color: COLORS.black,
     },
     caption: {
         marginTop: 2,
         fontSize: 13,
-        // lineHeight: 10,
-        // borderWidth: 1
     },
 
     bottomDrawerSection: {
-        borderTopColor: '#f4f4f4',
+        borderTopColor: COLORS.lightGrey,
         borderTopWidth: 1,
     },
 })

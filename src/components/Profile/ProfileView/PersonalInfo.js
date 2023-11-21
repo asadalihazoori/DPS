@@ -1,16 +1,71 @@
 import React from 'react'
 import { SafeAreaView, ScrollView, Text, View, StyleSheet } from 'react-native'
 import { useSelector } from 'react-redux'
+import { COLORS } from '../../../theme/colors';
+import ProfileTextInput from '../../Inputs/ProfileTextInput';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { FontStyle } from '../../../theme/FontStyle';
 
 const PersonalInfo = () => {
 
     const profileData = useSelector((state) => state.employeeProfile.data);
 
     return (
-        <SafeAreaView style={styles.container} >
+        <View style={styles.container} >
             <ScrollView showsVerticalScrollIndicator={false}>
 
-                <View style={styles.infoView}>
+                <View style={{ flexDirection: 'row', justifyContent: 'flex-end', marginTop: 12, marginBottom: 24 }}>
+                    <TouchableOpacity
+                        activeOpacity={0.5}
+                        style={{ backgroundColor: '#9E9EA0', paddingHorizontal: 12, paddingVertical: 6, borderRadius: 16 }}>
+                        <Text style={[FontStyle.Regular14, { color: COLORS.white }]}>Edit</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        activeOpacity={0.5}
+                        style={{ backgroundColor: '#3BCA78', paddingHorizontal: 12, paddingVertical: 6, borderRadius: 16, marginLeft: 12 }}>
+                        <Text style={[FontStyle.Regular14, { color: COLORS.white }]}>Save</Text>
+                    </TouchableOpacity>
+                </View>
+
+
+                <ProfileTextInput
+                    label={'Name'}
+                    value={profileData?.name}
+                    editable={false}
+                />
+
+                <ProfileTextInput
+                    label={'CNIC'}
+                    value={profileData?.cnic}
+                    editable={false}
+                />
+                <ProfileTextInput
+                    label={'Shift'}
+                    value={profileData?.shift?.name}
+                    editable={false}
+                />
+                <ProfileTextInput
+                    label={'Address'}
+                    value={profileData?.address}
+                    editable={false}
+                />
+                <ProfileTextInput
+                    label={'Remaining Medical Claims'}
+                    value={`${profileData?.remaining_medical_claim}`}
+                    editable={false}
+                />
+                <ProfileTextInput
+                    label={'Job Status'}
+                    value={profileData?.job_status ? 'Currently Employed' : 'Not Employed'}
+                    editable={false}
+                />
+                <ProfileTextInput
+                    label={'Remaining Leaves'}
+                    value={`${profileData?.leave_remaining}`}
+                    editable={false}
+                />
+
+                {/* <View style={styles.infoView}>
 
                     <View style={styles.section}>
 
@@ -60,10 +115,10 @@ const PersonalInfo = () => {
                         </View>
                     </View>
 
-                </View>
+                </View> */}
 
             </ScrollView>
-        </SafeAreaView>
+        </View>
     )
 }
 
@@ -73,13 +128,13 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         // borderWidth: 1,
-        backgroundColor: 'white',
-        padding: 20,
+        // backgroundColor: COLORS.white,
+        // padding: 20,
 
     },
 
     headerView: {
-        backgroundColor: 'grey',
+        backgroundColor: COLORS.grey,
         padding: 10,
         borderRadius: 10,
         paddingHorizontal: 16,
@@ -87,7 +142,7 @@ const styles = StyleSheet.create({
     },
 
     headerText: {
-        color: 'white',
+        color: COLORS.white,
         fontWeight: '700',
         fontSize: 16
     },
@@ -113,7 +168,7 @@ const styles = StyleSheet.create({
     },
 
     heading: {
-        color: 'black',
+        color: COLORS.black,
         fontSize: 16,
         fontWeight: '600',
     },
@@ -123,7 +178,7 @@ const styles = StyleSheet.create({
     },
 
     title: {
-        color: 'black',
+        color: COLORS.black,
         fontSize: 14,
         fontWeight: '400',
 

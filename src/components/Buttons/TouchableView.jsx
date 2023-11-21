@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import React from 'react'
+import { COLORS } from '../../theme/colors'
 
 const TouchableView = ({ text, header, handleModal, label, error }) => {
     return (
@@ -12,12 +13,12 @@ const TouchableView = ({ text, header, handleModal, label, error }) => {
 
                 <TouchableOpacity style={[styles.touchableView,
                 {
-                    borderColor: error ? 'red' : 'black'
+                    borderColor: error ? COLORS.red : COLORS.black
                 }]} onPress={handleModal}>
                     <Text style={styles.text}>{text ? text : header}</Text>
                 </TouchableOpacity>
                 {error && (
-                    <Text style={{ marginTop: 5, marginLeft: 4, color: 'red', fontSize: 12 }}>
+                    <Text style={{ marginTop: 5, marginLeft: 4, color: COLORS.red, fontSize: 12 }}>
                         {error}
                     </Text>
                 )}
@@ -49,11 +50,11 @@ const styles = StyleSheet.create({
     },
 
     text: {
-        color: 'black',
+        color: COLORS.black,
     },
 
     label: {
-        color: 'black',
+        color: COLORS.black,
         marginBottom: -10,
         marginLeft: 3,
         fontWeight: '600',
