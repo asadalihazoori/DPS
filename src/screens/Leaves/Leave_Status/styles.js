@@ -5,10 +5,8 @@ import { FontStyle } from '../../../theme/FontStyle';
 export const styles = StyleSheet.create({
     container: {
         // borderWidth: 1,
-        padding: 20,
+        padding: 16,
         flex: 1,
-
-        // flex:1,
     },
 
     leaveText: {

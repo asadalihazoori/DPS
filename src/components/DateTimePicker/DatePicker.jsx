@@ -1,14 +1,15 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
-// import { fontStyle } from '../theme/fonstStyle'
-// import { colors } from '../theme/colors'
-// import { icons } from '../assets/icons/icons'
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { COLORS } from '../../theme/colors';
+import { FontStyle } from '../../theme/FontStyle';
+import Theme from '../../theme/theme';
+import { SvgXml } from 'react-native-svg';
+import { Icons } from '../../assets/SvgIcons/Icons';
 // import { SvgXml } from 'react-native-svg'
 
 
-const DatePicker = ({ value, date, label, placeholder, onChange, showDatePicker, setShowDatePicker, error }) => {
+const DatePicker = ({ value, date, label, placeholder, onChange, showDatePicker, setShowDatePicker, error, marginBottom }) => {
 
 
     let borderColor = COLORS.black;
@@ -30,40 +31,34 @@ const DatePicker = ({ value, date, label, placeholder, onChange, showDatePicker,
     }
 
     return (
-        <View>
-            {label &&
-                <Text style={styles.label}>{label}</Text>
-            }
 
-            <View style={[styles.dobView, {}]}>
-                <TouchableOpacity onPress={() => setShowDatePicker(true)} style={[styles.touchableView, {
-                    borderColor: borderColor
-                }]}>
-
-                    <Text style={[{ color: COLORS.black }]}>{value ? value : placeholder}</Text>
-                    {/* <SvgXml xml={value ? icons.calender.black : icons.calender.grey} style={{ alignSelf: 'flex-end' }} /> */}
-                </TouchableOpacity>
-
-                {showDatePicker && (
-                    <DateTimePicker
-                        value={date}
-                        mode='date'
-                        // is24Hour={true}
-                        display="default"
-                        // onChange={handleDateChange}
-                        // onChange={onChange}
-                        onChange={OnChangeDate}
-
-                    />
-                )}
-
-                {error && (
-                    <Text style={{ marginTop: 5, marginLeft: 4, color: COLORS.red, fontSize: 12 }}>
-                        {error}
-                    </Text>
-                )}
-
+        <View
+            style={[styles.container, { marginBottom: marginBottom ? marginBottom : 12 }]}>
+            <View>
+                <Text style={[FontStyle.Regular14, { color: COLORS.darkBlack }]}>{label}</Text>
             </View>
+
+            <TouchableOpacity onPress={() => setShowDatePicker(true)} style={[styles.inputView, {
+                backgroundColor: COLORS.white,
+                borderColor: error ? COLORS.red : "#BEBEBE"
+            }]}>
+
+                <Text style={[FontStyle.Regular12_400, { color: COLORS.grey3, flex: 1 }]}>{value ? value : placeholder}</Text>
+                <SvgXml xml={Icons.calender} style={{ marginRight: 4, alignSelf: 'center' }} />
+            </TouchableOpacity>
+
+            {showDatePicker && (
+                <DateTimePicker
+                    value={date}
+                    mode='date'
+                    // is24Hour={true}
+                    display="default"
+                    // onChange={handleDateChange}
+                    // onChange={onChange}
+                    onChange={OnChangeDate}
+
+                />
+            )}
         </View>
 
     )
@@ -72,34 +67,20 @@ const DatePicker = ({ value, date, label, placeholder, onChange, showDatePicker,
 export default DatePicker
 
 const styles = StyleSheet.create({
-    dobView: {
-        marginTop: 16,
-        // borderWidth: 10,
-        // borderRadius: 16,
-        // padding: 15,
-        // width: 380,
-        // height: 70,
-        backgroundColor: COLORS.white,
+
+
+    container: {
+        marginHorizontal: 4,
         // borderWidth: 1,
-        // borderRadius: 10,
-
     },
 
-    label: {
-        color: COLORS.black,
-        marginBottom: -10,
-        marginLeft: 3,
-        fontWeight: '600',
-        marginTop: 15,
+    inputView: {
+        ...Theme.Shadow,
+        marginTop: 8,
+        paddingHorizontal: 8,
+        paddingVertical: 14,
+        flexDirection: 'row'
+        // borderWidth: 1,
 
-    },
-
-    touchableView: {
-        borderWidth: 1,
-        borderRadius: 10,
-        height: 50,
-        padding: 15,
-        // flexDirection: 'row',
-        justifyContent: 'space-between'
     }
 })

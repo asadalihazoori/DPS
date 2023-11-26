@@ -12,14 +12,20 @@ export const styles = StyleSheet.create({
     },
 
     mapView: {
-        width: '100%',
-        height: '70%',
-        // height: 549,
+        // width: '100%',
+        // height: '70%',
         // borderWidth: 1,
-        overflow: 'hidden', // Add this line to hide overflow content
+        // flex: 1,
+        borderRadius: 8,
+        padding: 8,
+        // overflow: 'hidden',
+        marginTop: 16,
+        backgroundColor: COLORS.white
+
+        // height: 549,
         // borderRadius: 12,
-        borderBottomLeftRadius: 16,
-        borderBottomRightRadius: 16,
+        // borderBottomLeftRadius: 16,
+        // borderBottomRightRadius: 16,
     },
 
     locationView: {

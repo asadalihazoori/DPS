@@ -8,40 +8,34 @@ export const styles = StyleSheet.create({
     },
 
     textView: {
-        marginTop: 16, 
+        marginTop: 16,
         // borderWidth: 1
     },
 
     featureView: {
-        marginTop: 24,
-        // marginHorizontal: 16,
-        paddingVertical: 12,
-        paddingHorizontal: 8,
+        marginTop: 16,
         // borderWidth: 1,
         borderColor: 'green',
 
+        paddingVertical: 8,
+        paddingHorizontal: 4,
     },
 
     row: {
         flexDirection: 'row',
-        marginBottom: 12,
+        marginBottom: 16,
         // borderWidth: 1,
-        justifyContent: 'space-evenly'
-
-        // paddingHorizontal: 8,
+        justifyContent: 'space-between'
     },
 
 
     container: {
         flex: 1,
         backgroundColor: COLORS.white,
-        // borderWidth: 1,
-        // position: 'absolute'
+        // borderWidth: 1,K'
     },
     imageView: {
         width: '100%',
-        // height: 290,
-        // maxHeight: 330,
         backgroundColor: COLORS.grey
     },
 
@@ -53,26 +47,19 @@ export const styles = StyleSheet.create({
 
     functionView: {
         // borderWidth: 1,
-        // borderColor: 'green',
-        // borderRadius: 16,
         height: 170,
         marginVertical: 20,
     },
 
     innerView: {
 
-        // borderWidth: 1,
-        // flex: 1
     },
 
     taskView: {
         // borderWidth: 1,
         backgroundColor: COLORS.grey, //'#c6c9c6',
-        // borderColor: 'green',
         borderRadius: 12,
-        // height: 200,
         width: 210,
-        // flex:1
         marginTop: 10,
         marginRight: 10,
         justifyContent: 'center',

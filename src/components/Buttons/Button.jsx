@@ -17,7 +17,7 @@ export default Button
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: COLORS.primaryPurple,
+        backgroundColor: COLORS.primaryColor,
         height: 50,
         borderRadius: 10,
         alignItems: 'center',

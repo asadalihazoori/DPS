@@ -1,23 +1,21 @@
 import React, { useState } from 'react'
-import { ActivityIndicator, Alert, SafeAreaView, View } from 'react-native'
-import RadioSelectionModal from '../../../components/RadioSelectionModal';
+import { ActivityIndicator, Alert, View, ScrollView } from 'react-native'
 import inputValidation from '../../../utilities/Validations/YupValidate';
 import DatePicker from '../../../components/DateTimePicker/DatePicker';
 import TouchableView from '../../../components/Buttons/TouchableView';
 import { createLeaveApi } from '../../../utilities/api/apiController';
 import { LeavesRequestSchema } from '../../../utilities/Validations';
 import Button from '../../../components/Buttons/Button';
-import Input from '../../../components/InputField';
 import { useSelector } from 'react-redux';
 import { styles } from './styles';
+import ProfileTextInput from '../../../components/Inputs/ProfileTextInput';
 
 const LeaveSubmission = ({ navigation }) => {
 
     const { holidayStatus, employeeID, name } = useSelector((state) => state.employeeProfile);
+    const [loading, setLoading] = useState(false);
     const [showStartDatePicker, setShowStartDatePicker] = useState(false);
     const [showEndDatePicker, setShowEndDatePicker] = useState(false);
-    const [modalVisible, setModalVisible] = useState(false);
-    const [loading, setLoading] = useState(false);
 
     const [inputs, setInputs] = useState({
         name: name,
@@ -117,65 +115,67 @@ const LeaveSubmission = ({ navigation }) => {
 
 
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
 
-            <View style={{ marginBottom: 20 }}>
+            <TouchableView
+                label={'Leave Type'}
+                header={'Select Leave Type'}
+                text={inputs?.holidayType}
+                error={inputs?.errors?.holidayType}
+                data={holidayStatus}
+                onChange={(selectedType) => handleInputChange('holidayType', selectedType)}
+            />
 
-                <Input
-                    marginTop={12}
-                    editable={false}
-                    value={inputs.name}
-                />
+            <DatePicker
+                date={new Date()}
+                value={inputs.startDate}
+                label={'Date'}
+                onChange={(selectedDate) => handleDateChange(selectedDate, 'startDate')}
+                showDatePicker={showStartDatePicker}
+                setShowDatePicker={setShowStartDatePicker}
+                placeholder={'Start Date'}
+                error={inputs?.errors?.startDate}
+            />
 
-                <TouchableView
-                    header={'Select Leave Type'}
-                    text={inputs?.holidayType?.name}
-                    handleModal={() => setModalVisible(true)}
-                    error={inputs?.errors?.holidayType}
-                />
+            <DatePicker
+                date={new Date()}
+                label={'Date'}
+                value={inputs.endDate}
+                onChange={(selectedDate) => handleDateChange(selectedDate, 'endDate')}
+                showDatePicker={showEndDatePicker}
+                setShowDatePicker={setShowEndDatePicker}
+                placeholder={'End Date'}
+                error={inputs?.errors?.endDate}
+            />
 
-                <DatePicker
-                    date={new Date()}
-                    value={inputs.startDate}
-                    onChange={(selectedDate) => handleDateChange(selectedDate, 'startDate')}
-                    showDatePicker={showStartDatePicker}
-                    setShowDatePicker={setShowStartDatePicker}
-                    placeholder={'Start Date'}
-                    error={inputs?.errors?.startDate}
-                />
+            <ProfileTextInput
+                label={'Requesting days'}
+                editable={false}
+                value={'Alison'}
+            />
 
-                <DatePicker
-                    date={new Date()}
-                    value={inputs.endDate}
-                    onChange={(selectedDate) => handleDateChange(selectedDate, 'endDate')}
-                    showDatePicker={showEndDatePicker}
-                    setShowDatePicker={setShowEndDatePicker}
-                    placeholder={'End Date'}
-                    error={inputs?.errors?.endDate}
-                />
+            <ProfileTextInput
+                label={'Returning to work'}
+                value={'Alison'}
+                editable={false}
+            />
 
-                <Input
-                    marginTop={16}
-                    placeholder={'Reason'}
-                    value={inputs.reason}
-                    error={inputs?.errors?.reason}
-                    onChangeText={(text) => handleInputChange('reason', text)} />
-            </View >
+            <ProfileTextInput
+                label={'Comments'}
+                placeholder={'Reason'}
+                value={inputs.reason}
+                error={inputs?.errors?.reason}
+                multiline={true}
+                height={75}
+                onChangeText={(text) => handleInputChange('reason', text)}
+            />
 
             <Button title={'Submit'} handelSubmit={validate} />
 
             {loading &&
                 <ActivityIndicator size={'large'} />}
 
-            <RadioSelectionModal
-                modalVisible={modalVisible}
-                setModalVisible={setModalVisible}
-                header={'Holiday Type'}
-                data={holidayStatus}
-                onChangeSelection={(leaveType) => handleInputChange('holidayType', leaveType)}
-            />
-
-        </View>
+        </ScrollView>
     )
 }
 

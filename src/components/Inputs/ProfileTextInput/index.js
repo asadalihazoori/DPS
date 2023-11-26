@@ -2,26 +2,45 @@ import { StyleSheet, Text, TextInput, View } from 'react-native'
 import React from 'react'
 import { FontStyle } from '../../../theme/FontStyle'
 import { COLORS } from '../../../theme/colors'
+import Theme from '../../../theme/theme'
 
 const ProfileTextInput = ({
     label,
+    placeholder,
     value,
-    editable,
+    onChangeText,
+    error,
+    editable = true,
+    keyboardType,
     marginBottom,
+    height,
+    multiline,
 }) => {
 
     return (
-        <View
-            style={[styles.container, { marginBottom: marginBottom ? marginBottom : 12 }]}>
+        <View style={[styles.container, { marginBottom: marginBottom ? marginBottom : 12 }]}>
             <View>
                 <Text style={[FontStyle.Regular14, { color: COLORS.darkBlack }]}>{label}</Text>
             </View>
 
-            <View style={styles.inputView}>
+            <View style={[styles.inputView, {
+                backgroundColor: !editable ? COLORS.backgroundInput : COLORS.white,
+                borderColor: error ? COLORS.red : "#BEBEBE",
+                height: height && height,
+            }]}>
                 <TextInput
+                    placeholder={placeholder}
                     value={value}
+                    numberOfLines={multiline && 5}
+                    multiline={multiline && true}
                     editable={editable}
-                    style={[FontStyle.Regular12_400, { color: COLORS.grey3 }]}
+                    keyboardType={keyboardType}
+                    onChangeText={onChangeText}
+                    style={[FontStyle.Regular12_400, {
+                        color: COLORS.darkBlack,
+                    }]}
+                    placeholderTextColor={{ color: COLORS.grey3 }}
+                    cursorColor={COLORS.blue}
                 />
             </View>
         </View>
@@ -33,15 +52,14 @@ export default ProfileTextInput
 const styles = StyleSheet.create({
     container: {
         // borderWidth: 1,
+        marginHorizontal: 4,
     },
 
     inputView: {
+        ...Theme.Shadow,
         marginTop: 8,
         borderRadius: 8,
-        backgroundColor: COLORS.backgroundInput,
         paddingHorizontal: 8,
         // borderWidth: 1,
-        borderColor: 'red'
-
     }
 })

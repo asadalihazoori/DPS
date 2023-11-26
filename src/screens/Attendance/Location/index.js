@@ -7,65 +7,49 @@ import { SvgXml } from 'react-native-svg'
 import { Icons } from '../../../assets/SvgIcons/Icons'
 import { FontStyle } from '../../../theme/FontStyle'
 import { COLORS } from '../../../theme/colors'
+import AttendanceCardNew from '../AttendanceCardNew'
 
-const Location = () => {
+const Location = ({ navigation }) => {
     return (
-        <SafeAreaView style={Theme.SafeArea}>
+        <View style={{ flex: 1, paddingHorizontal: 16, }}>
+
+            <View>
+                <Text style={[FontStyle.Regular12, { color: COLORS.grey5, fontWeight: '500' }]}>23 November 2023</Text>
+            </View>
+
 
             <View style={styles.mapView}>
 
-                <MapView
-                    style={{ flex: 1 }}
-                    initialRegion={{
-                        latitude: 37.78825,
-                        longitude: -122.4324,
-                        latitudeDelta: 0.0922,
-                        longitudeDelta: 0.0421,
-                    }}
-                />
+                <View style={{
+                    width: '100%',
+                    height: 200,
+                    // height: '70%',
+                    overflow: 'hidden',
+                    // borderWidth: 1,
+                    borderRadius: 8,
+                }}>
+
+
+                    <MapView
+                        style={{ flex: 1 }}
+                        initialRegion={{
+                            latitude: 37.78825,
+                            longitude: -122.4324,
+                            latitudeDelta: 0.0922,
+                            longitudeDelta: 0.0421,
+                        }}
+                    />
+                </View>
+                <Text style={[FontStyle.Regular12, { color: COLORS.black, fontWeight: '500', marginTop: 12 }]}>Just Vehicles Solutions</Text>
+                <Text style={[FontStyle.Regular12, { color: COLORS.grey5, marginTop: 8 }]}>Walton Road, Lahore</Text>
             </View>
 
-            <View style={styles.container}>
-                <View style={styles.locationView}>
+            <View style={{ marginBottom: 24, flex: 1, justifyContent: 'flex-end' }}>
 
-                    <SvgXml xml={Icons.location} />
-                    <View style={styles.locationText}>
-                        <Text style={[FontStyle.Regular14, { fontWeight: '400', color: COLORS.grey4 }]}>1076 Block A DHA Lahore</Text>
-                    </View>
-
-                </View>
-
-
-                <View style={styles.itemRow}>
-
-                    <View>
-
-                        <Text style={styles.punchText}>Punch-In</Text>
-                        <Text style={styles.timeText}>8:30 AM</Text>
-                    </View>
-
-                    <View>
-                        <Text style={styles.punchText}>Punch-Out</Text>
-                        <Text style={styles.timeText}>9:30 PM</Text>
-                    </View>
-
-                </View>
-                <View style={{ justifyContent: 'flex-end', flex: 1 }}>
-
-                    <View style={styles.buttonView}>
-                        <View style={{ justifyContent: 'center', flex: 1 }}>
-
-                            <Text style={styles.text}>Swipe Left to Punch Out</Text>
-                        </View>
-
-                        <View style={styles.iconView}>
-                            <SvgXml xml={Icons.punchArrow} />
-                        </View>
-
-                    </View>
-                </View>
+                <AttendanceCardNew date={false} color={true} />
             </View>
-        </SafeAreaView>
+
+        </View>
     )
 }
 

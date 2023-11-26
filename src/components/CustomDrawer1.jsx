@@ -1,5 +1,5 @@
 import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -30,26 +30,94 @@ const CustomDrawer1 = (props) => {
 
     const profileData = useSelector((state) => state.employeeProfile.data);
     const uid = useSelector((state) => state.signin.uid);
+    const [selectedScreen, selectScreen] = useState();
+    const Menus = {
+        attendace: [
+            {
+                id: 1,
+                name: "Attendance",
+                navigate: "Attendance"
+            },
+            {
+                id: 2,
+                name: "History",
+                navigate: "Attendance"
+            },
+            {
+                id: 3,
+                name: "Location",
+                navigate: "Attendance"
+            },
+        ],
+        leaves: [
+            {
+                id: 4,
+                name: "Apply Leave",
+                navigate: "Leaves"
+            },
+            {
+                id: 5,
+                name: "Leave Balance",
+                navigate: "Leaves"
+            },
+        ],
+        loans: [
+            {
+                id: 6,
+                name: "Apply",
+                navigate: "Loans"
+            },
+            {
+                id: 7,
+                name: "Approved",
+                navigate: "Loans"
+            },
+            {
+                id: 8,
+                name: "Report",
+                navigate: "Loans"
+            },
+        ],
+        medicalClaims: [
+            {
+                id: 9,
+                name: "Apply For Medical Claims",
+                navigate: "Loans"
+            },
+            {
+                id: 10,
+                name: "Claim Status",
+                navigate: "Loans"
+            },
+
+        ],
+
+    }
+
+    console.log("drawer", selectedScreen)
 
     return (
-        <SafeAreaView style={Theme.SafeArea}>
-            <DrawerContentScrollView  {...props} showsVerticalScrollIndicator={false}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
+            <DrawerContentScrollView  {...props} showsVerticalScrollIndicator={false} style={{
+
+            }}>
 
                 <View style={styles.drawerContent}>
 
 
-                    <View style={{ marginTop: 70, marginBottom: 24, alignItems: 'center' }}>
-                        <View>
+                    <View style={{ marginVertical: 24, }}>
+                        <View style={{ alignItems: 'flex-start' }}>
 
-                            {/* <View style={{}}>
-                                <View style={{ width: 100, height: 100, borderRadius: 100, backgroundColor: COLORS.lightGrey }}></View>
-                            </View> */}
-                            <Avatar.Image
-                                source={{ uri: `data:image/jpeg;base64,${profileData?.image}` }}
-                                size={90}
-                            />
-                            <View style={{ position: 'absolute', bottom: 0, right: 0 }}>
-                                <SvgXml xml={DrawerIcons.camera} />
+                            <View style={{}}>
+
+
+                                <Avatar.Image
+                                    source={{ uri: `data:image/jpeg;base64,${profileData?.image}` }}
+                                    size={90}
+                                />
+                                <View style={{ position: 'absolute', bottom: 0, right: 0 }}>
+                                    <SvgXml xml={DrawerIcons.camera} />
+                                </View>
                             </View>
                         </View>
 
@@ -78,38 +146,61 @@ const CustomDrawer1 = (props) => {
 
                         <CustomDrawerItem
                             title={'Attendance'}
-                            navigate={() => props.navigation.navigate('Home')}
+                            navigate={(screen) => props.navigation.navigate(screen)}
                             icon={DrawerIcons.attendance}
+                            extandable={true}
+                            data={Menus.attendace}
+                            onSelect={selectScreen}
+                            selectedScreen={selectedScreen}
                         />
 
                         <CustomDrawerItem
                             title={'Leaves'}
-                            navigate={() => props.navigation.navigate('Home')}
+                            navigate={(screen) => props.navigation.navigate(screen)}
                             icon={DrawerIcons.leaves}
+                            extandable={true}
+                            data={Menus.leaves}
+                            onSelect={selectScreen}
+                            selectedScreen={selectedScreen}
                         />
 
                         <CustomDrawerItem
                             title={'Loans/Advances'}
-                            navigate={() => props.navigation.navigate('Home')}
+                            navigate={(screen) => props.navigation.navigate(screen)}
                             icon={DrawerIcons.loans}
+                            extandable={true}
+                            data={Menus.loans}
+                            onSelect={selectScreen}
+                            selectedScreen={selectedScreen}
+
                         />
 
                         <CustomDrawerItem
                             title={'Medical claims'}
-                            navigate={() => props.navigation.navigate('Home')}
+                            navigate={(screen) => props.navigation.navigate(screen)}
                             icon={DrawerIcons.medical}
+                            extandable={true}
+                            data={Menus.medicalClaims}
+                            onSelect={selectScreen}
+                            selectedScreen={selectedScreen}
                         />
 
                         <CustomDrawerItem
                             title={'Reports'}
-                            navigate={() => props.navigation.navigate('Home')}
-                            icon={DrawerIcons.reports}
+                            navigate={() => props.navigation.navigate('Reports')}
+                            icon={DrawerIcons.leaves}
                         />
 
                         <CustomDrawerItem
                             title={'Shifts'}
-                            navigate={() => props.navigation.navigate('Home')}
+                            navigate={() => props.navigation.navigate('Shifts')}
                             icon={DrawerIcons.shifts}
+                        />
+
+                        <CustomDrawerItem
+                            title={'Payslip'}
+                            navigate={() => props.navigation.navigate('EmployeePayslip')}
+                            icon={DrawerIcons.payslip}
                         />
 
                         <CustomDrawerItem
@@ -124,22 +215,29 @@ const CustomDrawer1 = (props) => {
                             icon={DrawerIcons.timeSheet}
                         />
 
-                        <CustomDrawerItem
-                            title={'Logout'}
-                            // navigate={() => props.navigation.navigate('Home')}
+                    </View>
 
-                            navigate={() => {
-                                const navigation = props.navigation;
-                                siginOut({ uid, navigation })
-                            }}
-                            icon={DrawerIcons.logout}
-                            style={{ color: COLORS.logout, fontWeight: '700' }}
-                            marginTop={74}
-                        />
+                </View>
+            </DrawerContentScrollView>
 
 
+            <View style={styles.bottomDrawerSection}>
 
-                        {/* 
+                <CustomDrawerItem
+                    title={'Logout'}
+                    navigate={() => {
+                        const navigation = props.navigation;
+                        siginOut({ uid, navigation })
+                    }}
+                    icon={DrawerIcons.logout}
+                    style={{ color: COLORS.logout, fontWeight: '700', }}
+                // marginTop={107}
+                />
+            </View>
+
+
+
+            {/* 
                         <DrawerItem
                             icon={() => <SvgXml xml={DrawerIcons.dashboard} />}
                             label={() => <Text style={[FontStyle.Regular14_500]}>Dashboard</Text>}
@@ -199,7 +297,7 @@ const CustomDrawer1 = (props) => {
                             onPress={() => props.navigation.navigate('EmployeeProfile')}
                         /> */}
 
-                        {/* 
+            {/* 
                         <DrawerItem
                             icon={({ size }) => (
                                 <MaterialIcons name="notifications-active"
@@ -305,11 +403,11 @@ const CustomDrawer1 = (props) => {
                             }}
                         /> */}
 
-
+            {/* 
                     </View>
 
                 </View>
-            </DrawerContentScrollView>
+            </DrawerContentScrollView> */}
             {/* <Drawer.Section style={styles.bottomDrawerSection}>
                 <DrawerItem
                     icon={({ size }) => (
@@ -339,11 +437,15 @@ const styles = StyleSheet.create({
     },
 
     drawerContent: {
+        flex: 1,
+        marginHorizontal: 16,
+        // borderWidth:1,
     },
 
     drawerSection: {
-        marginLeft: 20,
-        marginTop: 24,
+        flex: 1,
+        // borderWidth: 1,
+
     },
 
     userInfoSection: {
@@ -381,7 +483,6 @@ const styles = StyleSheet.create({
     },
 
     bottomDrawerSection: {
-        borderTopColor: COLORS.lightGrey,
-        borderTopWidth: 1,
+        marginHorizontal: 16,
     },
 })

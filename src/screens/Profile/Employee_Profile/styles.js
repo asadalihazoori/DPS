@@ -4,11 +4,12 @@ import { COLORS } from '../../../theme/colors';
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingHorizontal: 16,
+        // paddingHorizontal: 16,
     },
 
     TabViewCreateContainer: {
-        backgroundColor: COLORS.background1,
+        marginHorizontal: 16,
+        backgroundColor: 'transparent',
         // borderWidth: 1,
         // paddingVertical: 12,
         marginTop: 12,
@@ -16,7 +17,7 @@ export const styles = StyleSheet.create({
 
     },
     TabViewIndicator: {
-        backgroundColor: COLORS.green,
+        backgroundColor: COLORS.blue,
         borderRadius: 16,
         // marginLeft: 2,
         // width: '24%',

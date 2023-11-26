@@ -19,25 +19,33 @@ import Leaves from "./Menus/Leaves"
 import Loans from "./Menus/Loans"
 import MedicalClaim from "./Menus/MedicalClaims"
 import Reports from "./Menus/Reports"
-import Shift from "./Shift"
 import TardinesReport from "./Reports/Tardines_Report"
 import TaxCertificate from "./Reports/Tax_Certificate"
 import UpdateProfile from "./Profile/UpdateProfile"
-import Onbording1 from "./Onbording/Onbording1/Onbording1"
-import Onbording2 from "./Onbording/Onbording2/Onbording2"
 import Dashboard from "./Dashboard"
 import Profile from "./Profile/Profile"
 import PayslipDetails from "./Reports/PayslipDetails.js"
 import Punch from "./Attendance/Punch"
 import LeaveRequets from "./Leaves/LeaveRequests"
 import Location from "./Attendance/Location"
+import Onbording1 from "./Onbording/Onbording1"
+import Onbording2 from "./Onbording/Onbording2"
+import Shifts from "./Menus/Shifts"
+import ApplyShift from "./Shifts/ApplyShift"
+import ShiftDetails from "./Shifts/ShiftDetails"
 
 
 export {
     Dashboard, EmployeePayslip, EmployeeProfile, LeaveStatus,
     LeaveSubmission, AttendanceReport, LoansAdvances, ApplyForLoans,
-    MedicalClaims, ApplyForMedicalClaims, Shift, TardinesReport, TaxCertificate,
+    MedicalClaims, ApplyForMedicalClaims, TardinesReport, TaxCertificate,
     HolidayNews, ChangePassword, Leave_Details, AttendanceRequest, Attendance,
-    Leaves, Loans, Reports, MedicalClaim, UpdateProfile, Onbording1, Onbording2, Profile,
-    PayslipDetails, Punch, LeaveRequets, Location
+    Leaves, Loans, Reports, MedicalClaim, UpdateProfile, Profile,
+    PayslipDetails, Punch, LeaveRequets, Location,
+    Onbording1,
+    Onbording2,
+    Shifts, 
+    ApplyShift
+
+
 }

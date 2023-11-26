@@ -3,8 +3,8 @@ import { COLORS } from '../../../theme/colors';
 
 export const styles = StyleSheet.create({
     container: {
-        backgroundColor: COLORS.white,
-        flex: 1
+        flex: 1,
+        marginHorizontal: 16,
     }
 
 });

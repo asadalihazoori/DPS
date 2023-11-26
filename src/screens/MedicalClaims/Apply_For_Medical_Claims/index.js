@@ -10,6 +10,7 @@ import ImagePicker from '../../../components/ImagePicker'
 import Button from '../../../components/Buttons/Button'
 import Input from '../../../components/InputField'
 import { styles } from './styles'
+import ProfileTextInput from '../../../components/Inputs/ProfileTextInput'
 
 const ApplyForMedicalClaims = ({ navigation }) => {
 
@@ -170,109 +171,124 @@ const ApplyForMedicalClaims = ({ navigation }) => {
     }, [])
 
     return (
-        <SafeAreaView style={styles.container}>
-            <ScrollView showsVerticalScrollIndicator={false}>
+        <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
 
-                <View style={{ marginBottom: 20 }} >
+            <ProfileTextInput
+                label={'Remaining Balance'}
+                editable={false}
+                value={inputs.remainingMedicalClaim}
+            />
 
-                    <Input
-                        marginTop={24}
-                        editable={false}
-                        value={inputs.remainingMedicalClaim}
-                    />
+            <TouchableView
+                label={'Claim For'}
+                header={'Select'}
+                text={inputs?.claimFor}
+                // text={inputs?.claimFor?.name ? `${inputs?.claimFor?.name} - ${inputs?.claimFor?.relation}` : null}
+                error={inputs?.errors?.claimFor}
+                data={familyInfo}
+                onChange={(selectedType) => handleInputChange('claimFor', selectedType)}
+            />
 
-                    <TouchableView
-                        header={'Claim For'}
-                        text={inputs?.claimFor?.name ? `${inputs?.claimFor?.name} - ${inputs?.claimFor?.relation}` : null}
-                        handleModal={() => setModalVisible1(true)}
-                        error={inputs?.errors?.claimFor}
-                    />
+            <TouchableView
+                label={'Disease Type'}
+                header={'Select'}
+                text={inputs?.disease}
+                handleModal={() => setModalVisible(true)}
+                error={inputs?.errors?.disease}
+                data={diseasesList}
+                onChange={(selectedType) => handleInputChange('disease', selectedType)}
+            />
 
-                    <TouchableView
-                        header={'Select Disease'}
-                        text={inputs?.disease?.name}
-                        handleModal={() => setModalVisible(true)}
-                        error={inputs?.errors?.disease}
-                    />
+            <ProfileTextInput
+                label={'Claim Amount'}
+                placeholder={'12000'}
+                value={inputs.amount}
+                keyboardType={'number-pad'}
+                onChangeText={(text) => handleInputChange('claimAmount', text)}
+                error={inputs?.errors?.claimAmount}
+            />
 
-                    <Input
-                        marginTop={24}
-                        placeholder={'Claim Amount'}
-                        value={inputs.amount}
-                        keyboardType={'number-pad'}
-                        onChangeText={(text) => handleInputChange('claimAmount', text)}
-                        error={inputs?.errors?.claimAmount}
-                    />
+            <ProfileTextInput
+                label={'Description'}
+                placeholder={'For urgent need in home financials'}
+                value={inputs.description}
+                error={inputs?.errors?.description}
+                onChangeText={(text) => handleInputChange('description', text)}
+            />
 
-                    <Input
+            <ProfileTextInput
+                label={'Appling Date'}
+                editable={false}
+                value={(inputs.date).toDateString()}
+            />
+
+            {/* <Input
                         marginTop={24}
                         editable={false}
                         value={(inputs.date).toDateString()}
                         onChangeText={(text) => handleInputChange('date', text)}
-                    />
+                    /> */}
 
-                    <Input
+            {/* <Input
                         marginTop={24}
                         placeholder={'Description'}
                         value={inputs.description}
                         error={inputs?.errors?.description}
                         onChangeText={(text) => handleInputChange('description', text)}
-                    />
+                    /> */}
 
-                    <ScrollView style={{ marginTop: 20, flexDirection: 'row' }} horizontal={true} >
-                        {imageElements}
-                    </ScrollView>
-
-                    <View style={styles.imagesButtonView}>
-
-                        <TouchableOpacity style={styles.imagesButton} onPress={() => setModalVisible2(true)}>
-                            <Text style={styles.text}>Add Image</Text>
-                        </TouchableOpacity>
-
-                        <TouchableOpacity style={styles.imagesButton} onPress={() =>
-                            // handleInputChange('image', [])
-                            setInputs({
-                                ...inputs,
-                                ['image']: []
-                            })
-                        }
-                        >
-                            <Text style={styles.text}>Clear</Text>
-                        </TouchableOpacity>
-                    </View>
-
-
-                </View>
-                <Button title={'Submit'} handelSubmit={validate} />
-
-                {loading &&
-                    <ActivityIndicator size={'large'} />}
-
-                <RadioSelectionModal
-                    modalVisible={modalVisible}
-                    setModalVisible={setModalVisible}
-                    header={'Select Disease'}
-                    data={diseasesList}
-                    onChangeSelection={(selectedDisease) => handleInputChange('disease', selectedDisease)}
-                />
-
-                <RadioSelectionModal
-                    modalVisible={modalVisible1}
-                    setModalVisible={setModalVisible1}
-                    header={'Claim For'}
-                    data={familyInfo}
-                    onChangeSelection={(person) => handleInputChange('claimFor', person)}
-                />
-
-                <ImagePicker
-                    modalVisible={modalVisible2}
-                    setModalVisible={setModalVisible2}
-                    onImageSelected={handleImageSelected}
-                />
-
+            <ScrollView style={{ marginTop: 20, flexDirection: 'row' }} horizontal={true} >
+                {imageElements}
             </ScrollView>
 
-        </SafeAreaView >
+            <View style={styles.imagesButtonView}>
+
+                <TouchableOpacity style={styles.imagesButton} onPress={() => setModalVisible2(true)}>
+                    <Text style={styles.text}>Add Image</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={styles.imagesButton} onPress={() =>
+                    // handleInputChange('image', [])
+                    setInputs({
+                        ...inputs,
+                        ['image']: []
+                    })
+                }
+                >
+                    <Text style={styles.text}>Clear</Text>
+                </TouchableOpacity>
+            </View>
+
+
+            <Button title={'Submit'} handelSubmit={validate} />
+
+            {loading &&
+                <ActivityIndicator size={'large'} />}
+
+            <RadioSelectionModal
+                modalVisible={modalVisible}
+                setModalVisible={setModalVisible}
+                header={'Select Disease'}
+                data={diseasesList}
+                onChangeSelection={(selectedDisease) => handleInputChange('disease', selectedDisease)}
+            />
+
+            <RadioSelectionModal
+                modalVisible={modalVisible1}
+                setModalVisible={setModalVisible1}
+                header={'Claim For'}
+                data={familyInfo}
+                onChangeSelection={(person) => handleInputChange('claimFor', person)}
+            />
+
+            <ImagePicker
+                modalVisible={modalVisible2}
+                setModalVisible={setModalVisible2}
+                onImageSelected={handleImageSelected}
+            />
+
+        </ScrollView>
+
     )
 }
 

@@ -6,122 +6,77 @@ import { styles } from './styles'
 import { COLORS } from '../../../theme/colors'
 import { SvgXml } from 'react-native-svg'
 import { Icons } from '../../../assets/SvgIcons/Icons'
+import { NextButton } from '../../../components/Inputs'
+import AttendanceCardNew from '../AttendanceCardNew'
 
 const Punch = ({ navigation }) => {
 
-    const Item = () => (
-        <View style={styles.itemRow}>
-
-            <View style={{}}>
-
-                <Text style={styles.punchText}>Punch-In</Text>
-                <Text style={styles.timeText}>8:30 AM</Text>
-            </View>
-
-            <View style={{}}>
-                <Text style={styles.punchText}>Punch-Out</Text>
-                <Text style={styles.timeText}>9:30 PM</Text>
-            </View>
-
-        </View>
-    )
-
 
     return (
-        <SafeAreaView style={Theme.SafeArea}>
-            <GeneralHeader title={'My Attendance'} navigation={navigation} />
 
-            <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+        <View style={styles.container}>
+            {/* <ScrollView style={styles.container} showsVerticalScrollIndicator={false}> */}
 
-                <View style={{ flexDirection: 'row' }}>
-                    <View style={{ flex: 1, paddingVertical: 8 }}>
-                        <Text style={styles.welcomeText}>Welcome To</Text>
-                        <Text style={styles.nameText}>Jhon Doe</Text>
+
+            <View style={{ marginBottom: 16 }}>
+                <Text style={styles.dateText}>26 November 2023</Text>
+            </View>
+
+            <View style={[styles.cardView, { flexDirection: 'row', paddingVertical: 20, paddingHorizontal: 8, justifyContent: 'space-around' }]}>
+
+                <View style={{ marginLeft: 0 }}>
+                    {/* <SvgXml xml={Icons.attendanceCircle} /> */}
+
+
+                    <View style={{ borderWidth: 4, borderRadius: 45, height: 90, width: 90, justifyContent: 'center', alignItems: 'center', borderColor: '#B2BBBB' }}>
+                        <Text style={styles.percentageText}>68%</Text>
+                        <Text style={styles.percentageText}>Completed</Text>
 
                     </View>
-                    <View style={styles.weekView}>
-
-                        <Text style={styles.weekText}>Last Week</Text>
-                        <View style={{ marginLeft: 8 }}>
-                            <SvgXml xml={Icons.dropDown} />
-
-                        </View>
-
-                    </View>
-
                 </View>
+                <View style={{ justifyContent: "space-between" }}>
+                    <View style={{}}>
 
-                <View style={{ marginVertical: 24, flexDirection: 'row', }}>
-                    <Text style={[styles.dateText, { color: COLORS.orange }]}>20</Text>
-                    <Text style={[styles.dateText, { color: COLORS.darkBlack }]}> October,2023</Text>
-                </View>
-
-                <View style={[styles.cardView, { flexDirection: 'row', paddingVertical: 16 }]}>
-
-                    <View style={{ flex: 1, marginLeft: 28, }}>
-                        {/* <SvgXml xml={Icons.attendanceCircle} /> */}
-
-
-                        <View style={{ borderWidth: 4, borderRadius: 100, height: 85, width: 85, justifyContent: 'center', alignItems: 'center', borderColor: '#B2BBBB' }}>
-                            <Text style={styles.percentageText}>68%</Text>
-                            <Text style={styles.percentageText}>Completed</Text>
-
-                        </View>
-                    </View>
-                    <View style={{ flex: 1 }}>
                         <View style={{ flexDirection: 'row' }}>
-                            <View style={{ marginTop: 4 }}>
-
+                            <View style={{ justifyContent: 'center' }}>
                                 <SvgXml xml={Icons.greyDot} />
                             </View>
-                            <View style={{ marginLeft: 4 }}>
-                                <Text style={[styles.punchText, { textAlign: 'auto' }]}>Hours Completed</Text>
-                                <Text style={[styles.punchText, { color: COLORS.darkBlack, textAlign: 'auto' }]}>6hrs</Text>
-                            </View>
-
+                            <Text style={[styles.punchText, { textAlign: 'auto', marginLeft: 4 }]}>Hours Completed</Text>
                         </View>
 
-                        <View style={{ flexDirection: 'row' }}>
-                            <View style={{ marginTop: 4 }}>
-                                <SvgXml xml={Icons.orangeDot} />
-                            </View>
-                            <View style={{ marginLeft: 4 }}>
-                                <Text style={[styles.punchText, { textAlign: 'auto' }]}>Remaining Hours</Text>
-                                <Text style={[styles.punchText, { color: COLORS.darkBlack, textAlign: 'auto' }]}>3hrs</Text>
-                            </View>
 
+                        <View style={{ marginLeft: 13 }}>
+                            <Text style={[styles.punchText, { color: COLORS.darkBlack, textAlign: 'auto' }]}>6hrs</Text>
                         </View>
 
                     </View>
-                </View>
 
-                <Text style={styles.timeSheetText}>Timesheet</Text>
+                    <View style={{}}>
 
-                <View style={styles.buttonsView}>
+                        <View style={{ flexDirection: 'row' }}>
+                            <View style={{ justifyContent: 'center' }}>
+                                <SvgXml xml={Icons.orangeDot} />
+                            </View>
+                            <Text style={[styles.punchText, { textAlign: 'auto', marginLeft: 4 }]}>Remaining Hours</Text>
+                        </View>
 
-                    <TouchableOpacity
-                        activeOpacity={0.5}
-                        style={styles.button}>
-                        <Text style={styles.buttonText}>Punch-In</Text>
-                    </TouchableOpacity>
+                        <View style={{ marginLeft: 13 }}>
+                            <Text style={[styles.punchText, { color: COLORS.darkBlack, textAlign: 'auto' }]}>3hrs</Text>
+                        </View>
 
-                    <TouchableOpacity
-                        activeOpacity={0.5}
-                        style={[styles.button, { backgroundColor: COLORS.grey4 }]}>
-                        <Text style={[styles.buttonText, { color: COLORS.black }]}>Punch-Out</Text>
-                    </TouchableOpacity>
-                </View>
-
-                <View style={styles.cardView}>
-
-                    <Item />
-                    <Item />
-                    <Item />
+                    </View>
 
                 </View>
+            </View>
 
-            </ScrollView>
-        </SafeAreaView>
+            <AttendanceCardNew date={false} color={true} />
+            <View style={styles.bottomView}>
+
+                <NextButton title={'Punch-Out'} />
+            </View>
+
+            {/* </ScrollView> */}
+        </View>
     )
 }
 

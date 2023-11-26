@@ -2,54 +2,41 @@ import { StyleSheet } from 'react-native'
 import { COLORS } from '../../../theme/colors'
 
 export const styles = StyleSheet.create({
-    frameView: {
-        marginTop: 40,
-        // borderWidth: 1,
-        // borderColor: 'green'
 
-    },
-    buttonView: {
-        // borderWidth: 1,
-        alignItems: 'flex-end',
-        marginRight: 34,
-        marginTop: -395,
-        marginBottom: 359
+    container: {
+        borderWidth: 1,
+        marginHorizontal: 16,
+        flex: 1
     },
 
     skipView: {
-        // borderWidth: 1,
-        padding: 8,
+        marginTop: 48,
+        alignItems: 'flex-end',
     },
 
-    bottomView: {
-        marginTop: 22.26,
-        // borderWidth: 1,
-        flex: 1,
-        paddingHorizontal: 16,
-        paddingVertical: 24,
-        borderTopStartRadius: 16,
-        borderTopEndRadius: 16,
-        backgroundColor: COLORS.lightBlueBck,
-
+    mainView: {
+        alignItems: 'center',
     },
 
-    innerBottomView: {
-        // borderWidth: 1,
-        flex: 1,
-        borderColor: 'red'
-
+    frameView: {
+        marginTop: 44,
+        borderRadius: 145.5,
+        overflow: 'hidden',
     },
 
     textView: {
-        flex: 1,
-        // borderWidth: 1,
-        paddingHorizontal: 16,
-        paddingTop: 14,
-        paddingBottom: 20,
+        marginTop: 48,
+        marginHorizontal: 24,
+        alignItems: 'center',
+        width: 291,
     },
 
-    startedView: {
-        height: 43,
-        // borderWidth: 1
-    }
+    bottomView: {
+        justifyContent: 'flex-end',
+        flex: 1,
+        marginBottom: 24,
+
+    },
+
+
 })

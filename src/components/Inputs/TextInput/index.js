@@ -29,7 +29,8 @@ const TextInputAuth = ({
                     placeholder={placeholder}
                     onChangeText={onChangeText}
                     value={value}
-                    style={styles.textInput} />
+                    style={styles.textInput}
+                    cursorColor={COLORS.blue} />
             </View>
         </View >
     )

@@ -10,14 +10,14 @@ import { Icons } from '../../../assets/SvgIcons/Icons'
 
 const PayslipDetails = ({ navigation }) => {
 
-    const Item = () => (
+    const Item = ({ title, amount }) => (
         <View style={styles.itemRow}>
             <View style={{ flex: 1 }}>
-                <Text style={styles.rowText}>Basic Pay</Text>
+                <Text style={styles.rowText}>{title}</Text>
 
             </View>
             <View style={{ marginLeft: 36, }}>
-                <Text style={styles.rowText}>20,000</Text>
+                <Text style={styles.rowText}>{amount}</Text>
 
             </View>
         </View>
@@ -36,7 +36,7 @@ const PayslipDetails = ({ navigation }) => {
                         <Text style={[FontStyle.Regular14, { color: COLORS.white }]}>Payslip</Text>
 
                         <View style={styles.iconView}>
-                            <SvgXml xml={Icons.download} />
+                            <SvgXml xml={Icons.download1} />
                         </View>
 
                     </TouchableOpacity>
@@ -45,7 +45,7 @@ const PayslipDetails = ({ navigation }) => {
                         activeOpacity={0.5}>
                         <Text style={[FontStyle.Regular14, { color: COLORS.white, }]}>Statement</Text>
                         <View style={styles.iconView}>
-                            <SvgXml xml={Icons.download} />
+                            <SvgXml xml={Icons.download1} />
                         </View>
                     </TouchableOpacity>
                 </View>
@@ -68,9 +68,12 @@ const PayslipDetails = ({ navigation }) => {
 
                     <View style={styles.cardView}>
 
-                        <Item />
-                        <Item />
-                        <Item />
+                        <Item title={"Basic Pay"} amount={'20,000'} />
+                        <Item title={"HRA"} amount={'10,000'} />
+                        <Item title={"Other Allowances"} amount={'10,000'} />
+                        <Item title={"SPL Allowances"} amount={'15,000'} />
+                        <Item title={"Deduction"} amount={'7,000'} />
+                        <Item title={"Total Pay"} amount={'48,000'} />
 
                     </View>
 

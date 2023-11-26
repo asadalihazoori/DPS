@@ -8,7 +8,8 @@ import Theme from '../../theme/theme'
 const DashboardCard = ({
     icon,
     title,
-    onPress
+    onPress,
+    notify,
 }) => {
 
     return (
@@ -19,12 +20,17 @@ const DashboardCard = ({
                 style={[Theme.Shadow, styles.buttonView]}
             >
 
+                <View style={{
+                    width: 12, height: 12,
+                    backgroundColor: notify ? COLORS.notify : 'transparent', borderRadius: 6, marginTop: 8, marginLeft: 8
+                }}></View>
+
                 <View style={styles.iconView}>
                     <SvgXml xml={icon} />
                 </View>
 
-                <View style={{ marginTop: 10, alignItems: 'center' }}>
-                    <Text style={[FontStyle.Regular14, { color: COLORS.darkBlack, fontWeight: '500' }]}>{title}</Text>
+                <View style={{ marginTop: 8, alignItems: 'center', marginBottom: 23 }}>
+                    <Text style={[FontStyle.Regular14, { color: COLORS.primaryColor, fontWeight: '500' }]}>{title}</Text>
                 </View>
             </TouchableOpacity>
         </View>
@@ -35,20 +41,21 @@ export default DashboardCard
 
 const styles = StyleSheet.create({
     conatiner: {
-        marginHorizontal: 0,
-        // marginLeft:14,
-        // borderWidth:1
+        // borderWidth: 1
+
     },
 
     buttonView: {
-        height: 95,
+        // height: 95,
         backgroundColor: COLORS.white,
-        width: 140.892,
-        borderRadius: 10
+        width: 162,
+        borderRadius: 10,
+        borderWidth: 0.4,
+        borderColor: '#C1C1C1'
     },
 
     iconView: {
-        marginTop: 24,
+        marginTop: 3,
         alignItems: 'center'
     }
 })

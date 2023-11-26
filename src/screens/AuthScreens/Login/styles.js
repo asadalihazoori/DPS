@@ -4,40 +4,34 @@ import { COLORS } from '../../../theme/colors';
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginHorizontal: 16
+        marginHorizontal: 16,
+        // borderWidth: 1
     },
 
     headerView: {
-        // margin: 8,
-        marginTop: 24,
-        padding: 8,
+        marginTop: 140,
         // borderWidth: 1
-
     },
 
     headerCaption: {
-        marginTop: 2
-    },
-
-    frameView: {
-        marginVertical: 16,
-        // borderWidth: 1
+        marginTop: 4
     },
 
     mainView: {
         // borderWidth: 1,
+        marginTop: 40,
         flex: 1
     },
 
     forgetView: {
-        paddingVertical: 8,
-        // borderWidth: 1
+        marginTop: 4,
+        paddingVertical: 3,
+        // borderWidth: 1,
+        alignSelf: 'flex-end'
     },
 
     forgetText: {
-        fontWeight: '500',
         letterSpacing: 0.16,
-        lineHeight: 22.4,
     },
 
     header: {
@@ -51,7 +45,12 @@ export const styles = StyleSheet.create({
         borderWidth: 1,
         marginVertical: 15
 
-    }
+    },
+
+    bottomView: {
+        justifyContent: 'flex-end',
+        marginBottom: 24,
+    },
 
 
 

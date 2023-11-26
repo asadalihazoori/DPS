@@ -1,30 +1,35 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { SafeAreaView, ScrollView, Text, View, StyleSheet } from 'react-native'
 import { useSelector } from 'react-redux'
 import { COLORS } from '../../../theme/colors';
 import ProfileTextInput from '../../Inputs/ProfileTextInput';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { FontStyle } from '../../../theme/FontStyle';
+import { Icons } from '../../../assets/SvgIcons/Icons';
+import Theme from '../../../theme/theme';
+import { SvgXml } from 'react-native-svg';
 
 const PersonalInfo = () => {
 
     const profileData = useSelector((state) => state.employeeProfile.data);
+    const [editable, setEditable] = useState(false);
 
     return (
         <View style={styles.container} >
             <ScrollView showsVerticalScrollIndicator={false}>
 
-                <View style={{ flexDirection: 'row', justifyContent: 'flex-end', marginTop: 12, marginBottom: 24 }}>
+                <View style={{ flexDirection: 'row', justifyContent: 'flex-end', marginTop: 12, marginBottom: 24, }}>
                     <TouchableOpacity
+                        onPress={() => setEditable(!editable)}
                         activeOpacity={0.5}
-                        style={{ backgroundColor: '#9E9EA0', paddingHorizontal: 12, paddingVertical: 6, borderRadius: 16 }}>
-                        <Text style={[FontStyle.Regular14, { color: COLORS.white }]}>Edit</Text>
+                        style={[Theme.Shadow, { width: 40, alignItems: 'center', paddingVertical: 5, marginHorizontal: 4 }]}>
+                        <SvgXml xml={Icons.editIcon} />
                     </TouchableOpacity>
                     <TouchableOpacity
                         activeOpacity={0.5}
-                        style={{ backgroundColor: '#3BCA78', paddingHorizontal: 12, paddingVertical: 6, borderRadius: 16, marginLeft: 12 }}>
-                        <Text style={[FontStyle.Regular14, { color: COLORS.white }]}>Save</Text>
+                        style={[Theme.Shadow, { width: 40, alignItems: 'center', paddingVertical: 5, marginHorizontal: 4 }]}>
+                        <SvgXml xml={Icons.download} />
                     </TouchableOpacity>
+
                 </View>
 
 
@@ -47,7 +52,7 @@ const PersonalInfo = () => {
                 <ProfileTextInput
                     label={'Address'}
                     value={profileData?.address}
-                    editable={false}
+                    editable={editable}
                 />
                 <ProfileTextInput
                     label={'Remaining Medical Claims'}
@@ -128,6 +133,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         // borderWidth: 1,
+        marginHorizontal: 16,
         // backgroundColor: COLORS.white,
         // padding: 20,
 

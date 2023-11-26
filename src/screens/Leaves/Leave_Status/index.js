@@ -1,4 +1,4 @@
-import { SafeAreaView, ScrollView, Text, View } from 'react-native'
+import { FlatList, SafeAreaView, ScrollView, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { getLeaveStatusApi } from '../../../utilities/api/apiController';
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,6 +6,9 @@ import Table from '../../../components/Table';
 import { getLeavesStatus } from '../../../redux/leaves/actions/getLeavesStatus';
 import { styles } from './styles';
 import LeaveTable from '../../../components/LeaveTable';
+import { FontStyle } from '../../../theme/FontStyle';
+import { COLORS } from '../../../theme/colors';
+import LeaveBalanceCard from '../../../components/Cards/LeaveBalanceCard';
 
 const LeaveStatus = ({ navigation }) => {
 
@@ -74,13 +77,27 @@ const LeaveStatus = ({ navigation }) => {
     return (
         <View style={styles.container}>
 
-            <Text style={styles.leaveText}>Total Leaves Available : 38 Days</Text>
+            {/* <Text style={styles.leaveText}>Total Leaves Available : 38 Days</Text> */}
 
-            {loading ? <></> :
+            {/* {loading ? <></> :
 
                 <LeaveTable header={tableHeader} navigation={navigation} data={leaves} loading={false} />
 
+            } */}
+
+            {loading ? <></> :
+
+                <FlatList
+                    data={leaves}
+                    numColumns={2}
+                    renderItem={({ item, index }) => (<LeaveBalanceCard item={item} index={index} leavesLength={leaves.length} />)}
+                    keyExtractor={(item, index) => index}
+                />
             }
+
+
+
+
         </View>
     )
 }

@@ -3,7 +3,7 @@ import { COLORS } from "../../../theme/colors";
 
 export const styles = StyleSheet.create({
     container: {
-        marginHorizontal: 16,
+        // marginHorizontal: 16,
         // borderWidth: 1,
         flex: 1,
     },
@@ -11,7 +11,11 @@ export const styles = StyleSheet.create({
     tabBar: {
         borderColor: 'red',
         flexDirection: 'row',
-        marginVertical: 24,
+        marginTop: 12,
+        marginBottom: 24,
+        // borderWidth: 1,
+        marginHorizontal: 20,
+        // borderWidth:1,
     },
 
     iconView: {
@@ -20,7 +24,7 @@ export const styles = StyleSheet.create({
     },
 
     TabViewCreateContainer: {
-        backgroundColor: COLORS.background1,
+        backgroundColor: 'transparent',
         // borderWidth: 1,
 
         elevation: 0,
@@ -29,7 +33,7 @@ export const styles = StyleSheet.create({
     },
 
     TabViewIndicator: {
-        backgroundColor: COLORS.green,
+        backgroundColor: COLORS.blue,
         borderRadius: 16,
         // width: 50,
     },

@@ -11,6 +11,10 @@ import PayslipCard from '../../../components/Cards/PayslipCard';
 import { FontStyle } from '../../../theme/FontStyle';
 import { SvgXml } from 'react-native-svg';
 import { Icons } from '../../../assets/SvgIcons/Icons';
+import { TabBar, TabView } from 'react-native-tab-view';
+import PayslipDetails from '../PayslipDetails.js';
+import { COLORS } from '../../../theme/colors';
+import GeneratePayslip from '../GeneratePayslip';
 
 const EmployeePayslip = ({ navigation }) => {
 
@@ -70,47 +74,102 @@ const EmployeePayslip = ({ navigation }) => {
     };
 
 
+    const [index, setIndex] = React.useState(2);
+
+    const [routes] = React.useState([
+        { key: 'first', title: "Generate Payslip" },
+
+    ]);
+
+    const renderTabBar = propss => (
+        <View style={styles.tabBar}>
+
+            <TabBar
+                {...propss}
+                indicatorStyle={styles.TabViewIndicator}
+                style={styles.TabViewCreateContainer}
+                renderLabel={({ route, focused }) => (
+                    <View style={{  alignItems: 'center' }}>
+                        <Text style={[FontStyle.Regular12, { fontWeight: '500', color: focused ? COLORS.blue : COLORS.grey3, }]}>{route.title}</Text>
+                    </View>
+                )}
+
+
+            />
+
+        </View>
+    );
+
+    const RenderScene = (e, navigation) => {
+
+        switch (e.route.key) {
+            case 'first':
+                return <GeneratePayslip navigation={navigation} />;
+
+
+        }
+    };
+
+
+
     return (
 
+        // <SafeAreaView style={Theme.SafeArea}>
+        //     <GeneralHeader title={'Payslip'} navigation={navigation} />
+
+        //     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+
+
+        //         <View style={styles.detailsView}>
+
+        //             <View style={styles.detailTextView}>
+        //                 <Text style={styles.detailstext}>Welcome to my payslip details </Text>
+        //             </View>
+
+        //             <TouchableOpacity style={styles.iconView}
+        //                 activeOpacity={0.5}
+        //                 onPress={() => navigation.navigate('PayslipDetails')}
+
+        //             >
+
+        //                 <SvgXml xml={Icons.rightArrow1} />
+
+        //             </TouchableOpacity>
+
+        //         </View>
+
+        //         <View>
+        //             <PayslipCard />
+        //             <PayslipCard />
+        //             <PayslipCard />
+        //             <PayslipCard />
+        //             <PayslipCard />
+        //             <PayslipCard />
+        //             <PayslipCard />
+
+        //         </View>
+
+
+
+
+        //     </ScrollView>
+
+        // </SafeAreaView>
+
         <SafeAreaView style={Theme.SafeArea}>
-            <GeneralHeader title={'Payslip'} navigation={navigation} />
+            <GeneralHeader title={'Loans/Advances'} navigation={navigation} />
 
-            <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+            <View style={styles.container}>
 
-
-                <View style={styles.detailsView}>
-
-                    <View style={styles.detailTextView}>
-                        <Text style={styles.detailstext}>Welcome to my payslip details </Text>
-                    </View>
-
-                    <TouchableOpacity style={styles.iconView}
-                        activeOpacity={0.5}
-                        onPress={() => navigation.navigate('PayslipDetails')}
-
-                    >
-
-                        <SvgXml xml={Icons.rightArrow1} />
-
-                    </TouchableOpacity>
-
-                </View>
-
-                <View>
-                    <PayslipCard />
-                    <PayslipCard />
-                    <PayslipCard />
-                    <PayslipCard />
-                    <PayslipCard />
-                    <PayslipCard />
-                    <PayslipCard />
-
-                </View>
+                <TabView
+                    navigationState={{ index, routes }}
+                    renderScene={(e) => RenderScene(e, navigation)}
+                    onIndexChange={setIndex}
+                    renderTabBar={renderTabBar}
+                />
 
 
-
-
-            </ScrollView>
+            </View>
 
         </SafeAreaView>
     )

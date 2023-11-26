@@ -7,8 +7,9 @@ export const styles = StyleSheet.create({
         paddingVertical: 12,
         backgroundColor: COLORS.buttonBack,
         alignItems: 'center',
-        borderRadius: 32,
-        ...Theme.Shadow,
+        borderRadius: 8,
+        // ...Theme.Shadow,
+        elevation: 4,
     },
 
 

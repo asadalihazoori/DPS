@@ -1,9 +1,10 @@
-import { Alert, SafeAreaView, ScrollView, Text } from 'react-native'
+import { Alert, SafeAreaView, ScrollView, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { getLoansApi } from '../../../utilities/api/apiController';
 import { useSelector } from 'react-redux';
 import Table from '../../../components/Table';
 import { styles } from './styles';
+import LoanCard from '../../../components/Cards/LoanCard';
 
 const LoansAdvances = ({ navigation }) => {
 
@@ -53,13 +54,20 @@ const LoansAdvances = ({ navigation }) => {
     }, [])
 
     return (
-        <SafeAreaView style={styles.container} >
+        <View style={styles.container} >
             <ScrollView showsVerticalScrollIndicator={false} >
 
-                <Table header={headerData} data={data} loans={true} loading={loading} />
+                {
+                    data?.map((item, index) => {
+                        return (
+                            <LoanCard key={index} data={item} />
+                        )
+                    })
+                }
+
             </ScrollView>
 
-        </SafeAreaView>
+        </View>
     )
 }
 

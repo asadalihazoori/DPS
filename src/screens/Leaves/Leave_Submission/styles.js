@@ -4,11 +4,9 @@ import { COLORS } from '../../../theme/colors';
 export const styles = StyleSheet.create({
 
     container: {
-
-        // padding: 20,
-        // backgroundColor: COLORS.white,
-        borderWidth: 1,
-        flex: 1
+        paddingHorizontal: 16,
+        flex: 1,
+        // borderWidth: 1,
     },
 
 });

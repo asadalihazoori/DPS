@@ -1,14 +1,14 @@
-import { Alert, SafeAreaView, ScrollView, Text } from 'react-native'
+import { Alert, SafeAreaView, ScrollView, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { getMedicalClaimsApi } from '../../../utilities/api/apiController';
 import { useSelector } from 'react-redux';
 import { TabActions } from '@react-navigation/native';
 import Table from '../../../components/Table';
 import { styles } from './styles';
+import LoanCard from '../../../components/Cards/LoanCard';
+import MedicalClaimCard from '../../../components/Cards/MedicalClaimCard';
 
 const MedicalClaims = ({ navigation }) => {
-
-    const headerData = ['Date', "   For   ", 'Name', "Amount", 'State'];
 
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -59,13 +59,17 @@ const MedicalClaims = ({ navigation }) => {
     }, [])
 
     return (
-        <SafeAreaView style={styles.container}>
-            <ScrollView showsHorizontalScrollIndicator={false}>
+        <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
 
-                <Table header={headerData} data={data} claims={true} loading={loading} />
+            {
+                data?.map((item, index) => {
+                    return (
+                        <MedicalClaimCard key={index} data={item} />
+                    )
+                })
+            }
 
-            </ScrollView>
-        </SafeAreaView>
+        </ScrollView>
     )
 }
 

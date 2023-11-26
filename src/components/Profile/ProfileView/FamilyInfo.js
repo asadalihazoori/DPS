@@ -4,6 +4,9 @@ import { useSelector } from 'react-redux'
 import { COLORS } from '../../../theme/colors';
 import { FontStyle } from '../../../theme/FontStyle';
 import ProfileTextInput from '../../Inputs/ProfileTextInput';
+import Theme from '../../../theme/theme';
+import { SvgXml } from 'react-native-svg';
+import { Icons } from '../../../assets/SvgIcons/Icons';
 
 const FamilyInfo = () => {
 
@@ -13,17 +16,18 @@ const FamilyInfo = () => {
         <View style={styles.container} >
             <ScrollView showsVerticalScrollIndicator={false}>
 
-                <View style={{ flexDirection: 'row', justifyContent: 'flex-end', marginTop: 12, marginBottom: 24 }}>
+                <View style={{ flexDirection: 'row', justifyContent: 'flex-end', marginTop: 12, marginBottom: 24, }}>
                     <TouchableOpacity
                         activeOpacity={0.5}
-                        style={{ backgroundColor: '#9E9EA0', paddingHorizontal: 12, paddingVertical: 6, borderRadius: 16 }}>
-                        <Text style={[FontStyle.Regular14, { color: COLORS.white }]}>Edit</Text>
+                        style={[Theme.Shadow, { width: 40, alignItems: 'center', paddingVertical: 5, marginHorizontal: 4 }]}>
+                        <SvgXml xml={Icons.editIcon} />
                     </TouchableOpacity>
                     <TouchableOpacity
                         activeOpacity={0.5}
-                        style={{ backgroundColor: '#3BCA78', paddingHorizontal: 12, paddingVertical: 6, borderRadius: 16, marginLeft: 12 }}>
-                        <Text style={[FontStyle.Regular14, { color: COLORS.white }]}>Save</Text>
+                        style={[Theme.Shadow, { width: 40, alignItems: 'center', paddingVertical: 5, marginHorizontal: 4 }]}>
+                        <SvgXml xml={Icons.download} />
                     </TouchableOpacity>
+
                 </View>
 
 
@@ -82,6 +86,7 @@ export default FamilyInfo
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        marginHorizontal: 16,
         // borderWidth: 1,
         // backgroundColor: COLORS.white,
         // padding: 20,

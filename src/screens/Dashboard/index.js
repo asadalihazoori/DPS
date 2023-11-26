@@ -1,5 +1,5 @@
 import { View, Text, SafeAreaView, Image, ScrollView, TouchableOpacity, Button } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import { styles } from './styles'
 import Theme from '../../theme/theme'
 import MainHeader from '../../components/Headers/MainHeader'
@@ -9,8 +9,14 @@ import { DashboardIcons } from '../../assets/SvgIcons/DashboardIcons'
 import { FontStyle } from '../../theme/FontStyle'
 import DashboardCard from '../../components/Cards/DashboardCard'
 import { useSelector } from 'react-redux'
+import { Icons } from '../../assets/SvgIcons/Icons'
+import DashboardNotifyCard from '../../components/Cards/DashboardNotifyCard'
 
 const Dashboard = ({ navigation }) => {
+
+    const [recents, setOpenRecent] = useState(false);
+
+
     const name = useSelector((state) => state.employeeProfile.data.name);
     return (
         <SafeAreaView style={Theme.SafeArea}>
@@ -20,7 +26,12 @@ const Dashboard = ({ navigation }) => {
             <ScrollView showsVerticalScrollIndicator={false} style={styles.scrollView}>
 
                 <View style={styles.textView}>
-                    <Text style={FontStyle.Regular16_500}>Hello {name},</Text>
+                    <Text style={[FontStyle.Regular14, { fontWeight: '400', color: COLORS.grey4 }]}>Welcome back,</Text>
+                    <View style={{ flexDirection: 'row', marginTop: 4, }}>
+                        <Text style={[FontStyle.Regular16_500]}>Hello {name}</Text>
+                        <SvgXml xml={Icons.hand} style={{ marginLeft: 4, alignSelf: 'center' }} />
+
+                    </View>
                 </View>
 
                 <View style={styles.featureView}>
@@ -30,13 +41,14 @@ const Dashboard = ({ navigation }) => {
                         <DashboardCard
                             icon={DashboardIcons.Leaves}
                             title={'Leaves Report'}
-                            onPress={() => { }}
+                            onPress={() => navigation.navigate('Leaves')}
+                            notify={true}
                         />
 
                         <DashboardCard
                             icon={DashboardIcons.attendance}
                             title={'Attendance'}
-                            onPress={() => { }}
+                            onPress={() => navigation.navigate('Attendance')}
                         />
 
                     </View>
@@ -46,13 +58,13 @@ const Dashboard = ({ navigation }) => {
                         <DashboardCard
                             icon={DashboardIcons.medical}
                             title={'Medical Claims'}
-                            onPress={() => { }}
+                            onPress={() => navigation.navigate('MedicalClaim')}
                         />
 
                         <DashboardCard
                             icon={DashboardIcons.requests}
                             title={'Requests'}
-                            onPress={() => { }}
+                            onPress={() => navigation.navigate('LeaveRequets')}
                         />
 
                     </View>
@@ -68,7 +80,7 @@ const Dashboard = ({ navigation }) => {
                         <DashboardCard
                             icon={DashboardIcons.payslip}
                             title={'Payslip'}
-                            onPress={() => { }}
+                            onPress={() => navigation.navigate('EmployeePayslip')}
                         />
 
                     </View>
@@ -78,17 +90,45 @@ const Dashboard = ({ navigation }) => {
                         <DashboardCard
                             icon={DashboardIcons.shift}
                             title={'Shift Change'}
-                            onPress={() => { }}
+                            onPress={() => navigation.navigate('Shifts')}
                         />
 
                         <DashboardCard
                             icon={DashboardIcons.notification}
                             title={'Notification'}
                             onPress={() => { }}
+                            notify={true}
                         />
 
                     </View>
 
+
+                </View>
+
+
+                <View style={{ marginTop: 24 }}>
+
+                    <TouchableOpacity style={{
+                        paddingHorizontal: 8, borderRadius: 8,
+                        paddingVertical: 8, backgroundColor: COLORS.background1, flexDirection: 'row'
+                    }}
+                        onPress={() => setOpenRecent(!recents)}
+                        activeOpacity={0.7}>
+
+                        <Text style={[FontStyle.Regular14_500, { flex: 1 }]}>Recents</Text>
+                        <View style={{ justifyContent: 'center', marginLeft: 8 }}>
+                            <SvgXml xml={Icons.downArrow} />
+                        </View>
+                    </TouchableOpacity>
+
+                    {recents &&
+
+                        <View style={{ marginTop: 12 }}>
+                            <DashboardNotifyCard />
+                            <DashboardNotifyCard />
+                            <DashboardNotifyCard />
+
+                        </View>}
 
                 </View>
 

@@ -6,7 +6,6 @@ import Theme from '../../../theme/theme'
 import { TabBar, TabView } from 'react-native-tab-view'
 import { FontStyle } from '../../../theme/FontStyle'
 import { COLORS } from '../../../theme/colors'
-import WeekWiseAttendace from '../../../components/WeekWiseAttendace'
 import LeaveStatus from '../../Leaves/Leave_Status'
 import LeaveSubmission from '../../Leaves/Leave_Submission'
 
@@ -30,7 +29,7 @@ const Leaves = ({ navigation }) => {
                 style={styles.TabViewCreateContainer}
                 renderLabel={({ route, focused }) => (
                     <View style={{ width: 90, alignItems: 'center' }}>
-                        <Text style={[FontStyle.Regular12, { fontWeight: '500', color: focused ? COLORS.darkBlack : COLORS.grey3, }]}>{route.title}</Text>
+                        <Text style={[FontStyle.Regular12, { fontWeight: '500', color: focused ? COLORS.blue : COLORS.grey3, }]}>{route.title}</Text>
                     </View>
                 )}
 

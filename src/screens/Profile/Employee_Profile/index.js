@@ -51,7 +51,7 @@ const EmployeeProfile = ({ navigation, route }) => {
             style={styles.TabViewCreateContainer}
             renderLabel={({ route, focused }) => (
                 <View style={{ width: 72, alignItems: 'center' }}>
-                    <Text style={[FontStyle.Regular12, { fontWeight: '500', color: focused ? COLORS.darkBlack : COLORS.grey3 }]}>{route.title}</Text>
+                    <Text style={[FontStyle.Regular12, { fontWeight: '500', color: focused ? COLORS.blue : COLORS.grey3 }]}>{route.title}</Text>
                 </View>
             )}
 

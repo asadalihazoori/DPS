@@ -10,12 +10,13 @@ const ProfileItem = ({
     title,
     caption,
     onPress,
-    rightIcon
+    rightIcon,
+    container
 }) => {
 
     return (
 
-        <TouchableOpacity style={styles.container}
+        <TouchableOpacity style={[styles.container, container]}
             activeOpacity={0.5}
             onPress={onPress}
         >
@@ -34,7 +35,8 @@ const ProfileItem = ({
 
             {rightIcon &&
                 <View style={styles.rightIconView} >
-                    <SvgXml xml={ProfileIcons.right_Arrow} />
+                    <SvgXml xml={rightIcon} />
+                    {/* <SvgXml xml={ ProfileIcons.right_Arrow} /> */}
                 </View>
             }
 

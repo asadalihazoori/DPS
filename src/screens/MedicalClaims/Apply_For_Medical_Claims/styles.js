@@ -4,8 +4,9 @@ import { COLORS } from '../../../theme/colors';
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: COLORS.white,
-        padding: 20,
+        marginHorizontal: 16,
+        // backgroundColor: COLORS.white,
+        // padding: 20,
     },
 
     imagesButtonView: {

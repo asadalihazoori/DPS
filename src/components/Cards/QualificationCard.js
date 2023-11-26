@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     cardView: {
         // borderWidth: 1,
         paddingVertical: 8,
-        marginHorizontal: 10,
+        marginHorizontal: 4,
         marginBottom: 12,
         borderRadius: 8,
         paddingVertical: 24,

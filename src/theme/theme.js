@@ -6,7 +6,7 @@ const Theme = StyleSheet.create({
 
     SafeArea: {
         flex: 1,
-        backgroundColor: COLORS.background1
+        backgroundColor: COLORS.background
     },
 
     Shadow: {
@@ -18,9 +18,14 @@ const Theme = StyleSheet.create({
         //     height: 4,
         // },
         // shadowOpacity: 1,
-        // shadowRadius: 4,
-        elevation: 4
+
+        backgroundColor: COLORS.white,
+        borderWidth: 0.4,
+        borderRadius: 8,
+        borderColor: '#BEBEBE',
+        elevation: 3.6,
     },
+
 })
 
 

@@ -3,6 +3,7 @@ import React from 'react'
 import { FontStyle } from '../../theme/FontStyle'
 import { SvgXml } from 'react-native-svg'
 import { HeaderIcons } from '../../assets/SvgIcons/HeaderIcons'
+import { COLORS } from '../../theme/colors'
 
 const GeneralHeader = ({
     title,
@@ -24,10 +25,17 @@ const GeneralHeader = ({
                 <Text style={FontStyle.Regular18}>{title}</Text>
             </View>
 
-            <TouchableOpacity style={styles.iconView}
+            {/* <TouchableOpacity style={styles.iconView}
                 activeOpacity={0.5}
                 onPress={() => { navigation.openDrawer() }}>
                 <SvgXml xml={HeaderIcons.burger} />
+            </TouchableOpacity> */}
+
+            <TouchableOpacity style={{ height: 32, width: 32, borderRadius: 16, justifyContent: 'center', backgroundColor: COLORS.blue }}
+                activeOpacity={0.5}
+                onPress={() => { }}>
+                {/* <SvgXml xml={HeaderIcons.bell} /> */}
+                <Text style={[FontStyle.Regular16, { textAlign: 'center', fontWeight: '400', color: COLORS.white }]}>TZ</Text>
             </TouchableOpacity>
 
 
@@ -42,15 +50,15 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         // borderWidth: 1,
         paddingHorizontal: 16,
-        paddingVertical: 12,
-        marginTop:8,
+        marginTop: 16,
     },
 
     textView: {
         // borderWidth: 1,
         flex: 1,
-        marginHorizontal: 24,
-        alignItems: 'center'
+        marginHorizontal: 10,
+        justifyContent: 'center'
+        // alignItems: 'center'
     },
 
     iconView: {

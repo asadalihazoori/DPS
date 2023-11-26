@@ -31,7 +31,7 @@ const BottomTab = () => {
                     tabBarIcon: ({ focused }) => (
 
                         focused ?
-                            <View style={{ backgroundColor: '#4c4c4c', height: 38, width: 38, borderRadius: 100, alignItems: 'center', justifyContent: 'center' }}>
+                            <View style={{ backgroundColor: '#4c4c4c', height: 34, width: 34, borderRadius: 100, alignItems: 'center', justifyContent: 'center' }}>
                                 <SvgXml xml={DrawerIcons.dashboard} />
                             </View>
                             :
@@ -45,7 +45,7 @@ const BottomTab = () => {
                     tabBarIcon: ({ focused }) => (
 
                         focused ?
-                            <View style={{ backgroundColor: '#4c4c4c', height: 38, width: 38, borderRadius: 100, alignItems: 'center', justifyContent: 'center' }}>
+                            <View style={{ backgroundColor: '#4c4c4c', height: 34, width: 34, borderRadius: 100, alignItems: 'center', justifyContent: 'center' }}>
                                 <SvgXml xml={DrawerIcons.personal} />
                             </View>
                             :
@@ -59,7 +59,7 @@ const BottomTab = () => {
                     tabBarIcon: ({ focused }) => (
 
                         focused ?
-                            <View style={{ backgroundColor: '#4c4c4c', height: 38, width: 38, borderRadius: 100, alignItems: 'center', justifyContent: 'center' }}>
+                            <View style={{ backgroundColor: '#4c4c4c', height: 34, width: 34, borderRadius: 100, alignItems: 'center', justifyContent: 'center' }}>
                                 <SvgXml xml={DrawerIcons.attendance} />
                             </View>
                             :
@@ -74,7 +74,7 @@ const BottomTab = () => {
 
 
                         focused ?
-                            <View style={{ backgroundColor: '#4c4c4c', height: 38, width: 38, borderRadius: 100, alignItems: 'center', justifyContent: 'center' }}>
+                            <View style={{ backgroundColor: '#4c4c4c', height: 34, width: 34, borderRadius: 100, alignItems: 'center', justifyContent: 'center' }}>
                                 <SvgXml xml={DrawerIcons.leaves} />
                             </View>
                             :

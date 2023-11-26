@@ -1,5 +1,5 @@
 import { View, Text, SafeAreaView, ScrollView, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import Theme from '../../../theme/theme'
 import GeneralHeader from '../../../components/Headers/GeneralHeader'
 import { styles } from './styles'
@@ -10,12 +10,14 @@ import { DrawerIcons } from '../../../assets/SvgIcons/DrawerIcons'
 import { FontStyle } from '../../../theme/FontStyle'
 import { ProfileIcons } from '../../../assets/SvgIcons/ProfileIcons'
 import { COLORS } from '../../../theme/colors'
-import { buildWorkletsHash } from 'react-native-reanimated/lib/typescript/reanimated2/hook/utils'
 import ProfileItem from '../../../components/Helpers/ProfileItem'
 
 const Profile = ({ navigation }) => {
 
     const profileData = useSelector((state) => state.employeeProfile.data);
+    const [requests, setOpenRequests] = useState(false);
+    const [privacy, setOpenPrivacy] = useState(false);
+
     return (
         <SafeAreaView style={Theme.SafeArea}>
             <GeneralHeader title={'Employee Profile'} navigation={navigation} />
@@ -49,46 +51,104 @@ const Profile = ({ navigation }) => {
                         <ProfileItem
                             icon={ProfileIcons.person}
                             title={'Personal Information'}
-                            caption={'See your information here'}
+                            caption={'Username, email, Parental info. etc.'}
                             onPress={() => navigation.navigate('EmployeeProfile', { route: 0 })}
                         />
 
                         <ProfileItem
                             icon={ProfileIcons.education}
                             title={'Educational Details'}
-                            caption={'See your Details here'}
+                            caption={'Qualification, Certifications, etc.'}
                             onPress={() => navigation.navigate('EmployeeProfile', { route: 2 })}
                         />
 
                         <ProfileItem
                             icon={ProfileIcons.experience}
                             title={'Past Experience Details'}
-                            caption={'See your Details here'}
+                            caption={'Experience,'}
                             onPress={() => navigation.navigate('EmployeeProfile', { route: 3 })}
                         />
 
                         <ProfileItem
                             icon={ProfileIcons.notification}
                             title={'Notifications'}
-                            caption={'See your Details here'}
+                            caption={'See your Notifications & updates here'}
                             onPress={() => { }}
                         />
 
                         <ProfileItem
                             icon={ProfileIcons.requests}
                             title={'Requests'}
-                            caption={'See your All requests here'}
-                            onPress={() => { }}
-                            rightIcon={true}
+                            caption={'User’s requests and status'}
+                            onPress={() => setOpenRequests(!requests)}
+                            rightIcon={requests ? ProfileIcons.downArrow : ProfileIcons.right_Arrow}
+                            container={styles.itemView}
                         />
 
+                        {requests &&
+
+
+                            <View style={styles.dropDowView}>
+                                <TouchableOpacity
+                                    activeOpacity={0.5}
+                                    // onPress={()=> navigation.navigate('')}
+                                    style={styles.dropDown}>
+                                    <Text style={styles.dropDownText}>Apply Leaves</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity
+                                    activeOpacity={0.5}
+                                    // onPress={()=> navigation.navigate('')}
+                                    style={styles.dropDown}>
+                                    <Text style={styles.dropDownText}>Medical claims</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity
+                                    activeOpacity={0.5}
+                                    // onPress={()=> navigation.navigate('')}
+                                    style={styles.dropDown}>
+                                    <Text style={styles.dropDownText}>Change shift</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity
+                                    activeOpacity={0.5}
+                                    // onPress={()=> navigation.navigate('')}
+                                    style={styles.dropDown}>
+                                    <Text style={styles.dropDownText}>Payslip</Text>
+                                </TouchableOpacity>
+
+                            </View>
+                        }
                         <ProfileItem
                             icon={ProfileIcons.privacy}
                             title={'Privacy and Policy'}
-                            caption={'Change your Details here'}
-                            onPress={() => { }}
-                            rightIcon={true}
+                            caption={'Company policies, Users privacy, FAQs'}
+                            onPress={() => setOpenPrivacy(!privacy)}
+                            rightIcon={privacy ? ProfileIcons.downArrow : ProfileIcons.right_Arrow}
+                            container={styles.itemView}
                         />
+
+                        {privacy &&
+
+                            <View style={styles.dropDowView}>
+                                <TouchableOpacity
+                                    activeOpacity={0.5}
+                                    // onPress={()=> navigation.navigate('')}
+                                    style={styles.dropDown}>
+                                    <Text style={styles.dropDownText}>Change Password</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity
+                                    activeOpacity={0.5}
+                                    // onPress={()=> navigation.navigate('')}
+                                    style={styles.dropDown}>
+                                    <Text style={styles.dropDownText}>Use Two-Factor Authentication</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity
+                                    activeOpacity={0.5}
+                                    // onPress={()=> navigation.navigate('')}
+                                    style={styles.dropDown}>
+                                    <Text style={styles.dropDownText}>Save your login info.</Text>
+                                </TouchableOpacity>
+
+                            </View>
+                        }
 
 
                     </View>

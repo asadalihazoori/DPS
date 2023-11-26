@@ -1,17 +1,18 @@
 import React, { useState } from 'react'
 import { ActivityIndicator, Alert, SafeAreaView, ScrollView, View } from 'react-native'
 import { useSelector } from 'react-redux';
-import { createShiftChangeApi } from '../../utilities/api/apiController';
-import RadioSelectionModal from '../../components/RadioSelectionModal';
-import inputValidation from '../../utilities/Validations/YupValidate';
-import DatePicker from '../../components/DateTimePicker/DatePicker';
-import TouchableView from '../../components/Buttons/TouchableView';
-import { CreateShiftSchema } from '../../utilities/Validations';
-import Button from '../../components/Buttons/Button';
-import Input from '../../components/InputField';
+import { createShiftChangeApi } from '../../../utilities/api/apiController';
+import RadioSelectionModal from '../../../components/RadioSelectionModal';
+import inputValidation from '../../../utilities/Validations/YupValidate';
+import DatePicker from '../../../components/DateTimePicker/DatePicker';
+import TouchableView from '../../../components/Buttons/TouchableView';
+import { CreateShiftSchema } from '../../../utilities/Validations';
+import Button from '../../../components/Buttons/Button';
+import Input from '../../../components/InputField';
 import { styles } from './styles';
+import ProfileTextInput from '../../../components/Inputs/ProfileTextInput';
 
-const Shift = ({ navigation }) => {
+const ApplyShift = ({ navigation }) => {
 
     const data = useSelector((state) => state?.employeeProfile?.data);
     const [showStartDatePicker, setShowStartDatePicker] = useState(false);
@@ -120,55 +121,82 @@ const Shift = ({ navigation }) => {
         <SafeAreaView style={styles.container}>
             <ScrollView showsVerticalScrollIndicator={false}>
 
-                <View style={{ marginBottom: 20 }}>
-                    <Input
-                        marginTop={16}
-                        editable={false}
-                        value={inputs.name}
-                    />
 
-                    <Input
-                        marginTop={16}
-                        editable={false}
-                        value={inputs.currentShift}
-                    />
+                <ProfileTextInput
+                    label={'Name'}
+                    value={inputs.name}
+                    editable={false}
+                />
+                <ProfileTextInput
+                    label={'Current Shift'}
+                    value={inputs.currentShift}
+                    editable={false}
+                />
 
 
-                    <TouchableView
-                        header={'Select Shift'}
-                        text={inputs?.selectedShift?.name}
-                        handleModal={() => setModalVisible(true)}
-                        error={inputs?.errors?.selectedShift}
-                    />
+                {/* <Input
+                    marginTop={16}
+                    editable={false}
+                    value={inputs.name}
+                />
 
-                    <DatePicker
-                        date={new Date()}
-                        placeholder={'Start Date'}
-                        value={inputs.startDate}
-                        showDatePicker={showStartDatePicker}
-                        setShowDatePicker={setShowStartDatePicker}
-                        onChange={(selectedDate) => handleDateChange(selectedDate, 'startDate')}
-                        error={inputs?.errors?.startDate}
-                    />
+                <Input
+                    marginTop={16}
+                    editable={false}
+                    value={inputs.currentShift}
+                /> */}
 
-                    <DatePicker
-                        date={new Date()}
-                        placeholder={'End Date'}
-                        value={inputs.endDate}
-                        showDatePicker={showEndDatePicker}
-                        setShowDatePicker={setShowEndDatePicker}
-                        onChange={(selectedDate) => handleDateChange(selectedDate, 'endDate')}
-                        error={inputs?.errors?.endDate}
-                    />
 
-                    <Input
-                        marginTop={16}
-                        placeholder={'Reason'}
-                        value={inputs.reason}
-                        onChangeText={(text) => handleInputChange('reason', text)}
-                        error={inputs?.errors?.reason}
-                    />
-                </View >
+                <TouchableView
+                    label={'Requested Shift'}
+                    header={'Select'}
+                    text={inputs?.selectedShift}
+                    handleModal={() => setModalVisible(true)}
+                    error={inputs?.errors?.selectedShift}
+                    data={data?.shifts}
+                    onChange={(selectedType) => handleInputChange('selectedShift', selectedType)}
+                />
+
+                <DatePicker
+                    label={'From'}
+                    date={new Date()}
+                    placeholder={'Start Date'}
+                    value={inputs.startDate}
+                    showDatePicker={showStartDatePicker}
+                    setShowDatePicker={setShowStartDatePicker}
+                    onChange={(selectedDate) => handleDateChange(selectedDate, 'startDate')}
+                    error={inputs?.errors?.startDate}
+                />
+
+                <DatePicker
+                    label={'To'}
+                    date={new Date()}
+                    placeholder={'End Date'}
+                    value={inputs.endDate}
+                    showDatePicker={showEndDatePicker}
+                    setShowDatePicker={setShowEndDatePicker}
+                    onChange={(selectedDate) => handleDateChange(selectedDate, 'endDate')}
+                    error={inputs?.errors?.endDate}
+                />
+
+                <ProfileTextInput
+                    label={'Reason'}
+                    editable={true}
+                    placeholder={'Enter Reason'}
+                    value={inputs.reason}
+                    error={inputs?.errors?.reason}
+                    multiline={true}
+                    height={75}
+                    onChangeText={(text) => handleInputChange('reason', text)}
+                />
+
+                {/* <Input
+                    marginTop={16}
+                    placeholder={'Reason'}
+                    value={inputs.reason}
+                    onChangeText={(text) => handleInputChange('reason', text)}
+                    error={inputs?.errors?.reason}
+                /> */}
 
                 <Button handelSubmit={validate} title='Submit' />
 
@@ -188,4 +216,4 @@ const Shift = ({ navigation }) => {
     )
 }
 
-export default Shift
+export default ApplyShift
