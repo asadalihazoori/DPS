@@ -67,8 +67,8 @@ const Wrapper = ({ navigation }) => {
             <View style={styles.bottomView}>
                 <NextButton
                     title={'Login'}
-                    // onPress={validate}
-                    onPress={() => { navigation.navigate('DrawerNavigation') }}
+                    onPress={validate}
+                    // onPress={() => { navigation.navigate('DrawerNavigation') }}
                 />
             </View>
 
