@@ -5,34 +5,33 @@ import { EmployeeProfile, LeaveRequets, Leave_Details, Location, Onbording1, Onb
 import DrawerNavigation from './DrawerNavigation';
 import Login from '../screens/AuthScreens/Login';
 import BottomTab from './BottomTab';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
     return (
         <NavigationContainer>
-                <Stack.Navigator initialRouteName='Onbording1' screenOptions={{ headerShown: false }}>
+            <Stack.Navigator initialRouteName='Onbording1' screenOptions={{ headerShown: false }}>
 
-                    <Stack.Screen name='Onbording1' component={Onbording1} />
-                    <Stack.Screen name='Onbording2' component={Onbording2} />
-                    <Stack.Screen name='Login' component={Login} />
-                    <Stack.Screen name='DrawerNavigation' component={DrawerNavigation} />
-                    <Stack.Screen name='BottomTab' component={BottomTab} />
+                <Stack.Screen name='Onbording1' component={Onbording1} />
+                <Stack.Screen name='Onbording2' component={Onbording2} />
+                <Stack.Screen name='Login' component={Login} />
+                <Stack.Screen name='DrawerNavigation' component={DrawerNavigation} />
+                <Stack.Screen name='BottomTab' component={BottomTab} />
 
-                    {/* <Stack.Screen name='EmployeeProfile' component={EmployeeProfile} /> */}
-                    <Stack.Screen name='LeaveDetails' component={Leave_Details} />
-                    <Stack.Screen name='LeaveRequets' component={LeaveRequets} />
-                    <Stack.Screen name='UpdateProfile' component={UpdateProfile} />
+                {/* <Stack.Screen name='EmployeeProfile' component={EmployeeProfile} /> */}
+                <Stack.Screen name='LeaveDetails' component={Leave_Details} />
+                <Stack.Screen name='LeaveRequets' component={LeaveRequets} />
+                <Stack.Screen name='UpdateProfile' component={UpdateProfile} />
 
-                    <Stack.Screen name='PayslipDetails' component={PayslipDetails} />
-                    {/* <Stack.Screen name='Punch' component={Punch} /> */}
-                    {/* <Stack.Screen name='Location' component={Location} /> */}
+                <Stack.Screen name='PayslipDetails' component={PayslipDetails} />
+                {/* <Stack.Screen name='Punch' component={Punch} /> */}
+                {/* <Stack.Screen name='Location' component={Location} /> */}
 
 
-                    {/* <Stack.Screen name='DocumentPicker' component={DocumentPicker} /> */}
+                {/* <Stack.Screen name='DocumentPicker' component={DocumentPicker} /> */}
 
-                </Stack.Navigator>
+            </Stack.Navigator>
         </NavigationContainer>
     )
 }

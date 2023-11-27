@@ -4,7 +4,7 @@ import { styles } from './styles'
 
 const ShiftDetails = () => {
     return (
-        <View >
+        <View style={styles.container}>
             <Text>Pending</Text>
         </View>
     )

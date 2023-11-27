@@ -3,7 +3,6 @@ import { COLORS } from "../../../theme/colors";
 
 export const styles = StyleSheet.create({
     container: {
-        marginHorizontal: 16,
         // borderWidth: 1,
         flex: 1,
     },
@@ -12,7 +11,7 @@ export const styles = StyleSheet.create({
         borderColor: 'red',
         flexDirection: 'row',
         marginVertical: 14,
-        marginHorizontal: 52,
+        marginHorizontal: 16,
         // borderWidth:1,
     },
 

@@ -43,7 +43,7 @@ const DatePicker = ({ value, date, label, placeholder, onChange, showDatePicker,
                 borderColor: error ? COLORS.red : "#BEBEBE"
             }]}>
 
-                <Text style={[FontStyle.Regular12_400, { color: COLORS.grey3, flex: 1 }]}>{value ? value : placeholder}</Text>
+                <Text style={[FontStyle.Regular12_400, { color: value ? COLORS.darkBlack : COLORS.grey3, flex: 1 }]}>{value ? value : placeholder}</Text>
                 <SvgXml xml={Icons.calender} style={{ marginRight: 4, alignSelf: 'center' }} />
             </TouchableOpacity>
 
@@ -78,8 +78,9 @@ const styles = StyleSheet.create({
         ...Theme.Shadow,
         marginTop: 8,
         paddingHorizontal: 8,
-        paddingVertical: 14,
-        flexDirection: 'row'
+        // paddingVertical: 14,
+        height: 45,
+        flexDirection: 'row', alignItems: 'center'
         // borderWidth: 1,
 
     }

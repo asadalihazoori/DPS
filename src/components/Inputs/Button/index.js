@@ -12,7 +12,7 @@ const NextButton = ({
     return (
         <TouchableOpacity
             onPress={onPress}
-            activeOpacity={0.5}
+            activeOpacity={0.9}
             style={[styles.main, { marginTop: marginTop }]}
         >
             <Text style={FontStyle.Regular14}>{title}</Text>

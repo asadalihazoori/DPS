@@ -5,11 +5,12 @@ import Theme from '../../../theme/theme'
 export const styles = StyleSheet.create({
     main: {
         paddingVertical: 12,
-        backgroundColor: COLORS.buttonBack,
         alignItems: 'center',
         borderRadius: 8,
-        // ...Theme.Shadow,
-        elevation: 4,
+        ...Theme.Shadow,
+        backgroundColor: COLORS.buttonBack,
+        borderWidth: 0,
+        // elevation: 4,
     },
 
 

@@ -6,7 +6,9 @@ export const styles = StyleSheet.create({
     container: {
         // padding: 20,
         // backgroundColor: COLORS.white,
-        flex: 1
+        flex: 1,
+        paddingHorizontal: 16,
+
     }
     ,
 });

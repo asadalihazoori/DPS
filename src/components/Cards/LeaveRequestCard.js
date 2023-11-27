@@ -2,6 +2,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { FontStyle } from '../../theme/FontStyle'
 import { COLORS } from '../../theme/colors'
+import Theme from '../../theme/theme'
 
 const LeaveRequestCard = ({ data }) => {
 
@@ -81,19 +82,21 @@ export default LeaveRequestCard
 
 const styles = StyleSheet.create({
     container: {
-        borderRadius: 8,
-        borderBottomWidth: 1,
-        borderBottomColor: '#B2BBBB',
-        backgroundColor: '#FFF',
+        // borderRadius: 8,
+        // borderBottomWidth: 1,
+        // borderBottomColor: '#B2BBBB',
+        // backgroundColor: '#FFF',
         paddingHorizontal: 12,
         paddingVertical: 16,
         marginBottom: 12,
 
         // flexDirection: 'row',
-        elevation: 4,
+        // elevation: 4,
 
         marginHorizontal: 4,
         marginTop: 2,
+        ...Theme.Shadow,
+        borderWidth: 0,
 
         // borderWidth: 1,
     },

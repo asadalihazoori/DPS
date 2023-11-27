@@ -8,13 +8,22 @@ import { Icons } from '../../../assets/SvgIcons/Icons'
 import { FontStyle } from '../../../theme/FontStyle'
 import { COLORS } from '../../../theme/colors'
 import AttendanceCardNew from '../AttendanceCardNew'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 
 const Location = ({ navigation }) => {
     return (
         <View style={{ flex: 1, paddingHorizontal: 16, }}>
 
-            <View>
-                <Text style={[FontStyle.Regular12, { color: COLORS.grey5, fontWeight: '500' }]}>23 November 2023</Text>
+            <View style={{ flexDirection: 'row' }}>
+                <View style={{ flex: 1, justifyContent: 'center' }}>
+                    <Text style={[FontStyle.Regular12, { color: COLORS.grey5, fontWeight: '500' }]}>23 November 2023</Text>
+                </View>
+                <TouchableOpacity
+                    activeOpacity={0.5}
+                    onPress={() => navigation.navigate('AttendaceChangeRequest')}
+                    style={{ padding: 4, }}>
+                    <SvgXml xml={Icons.rightArrow2} />
+                </TouchableOpacity>
             </View>
 
 

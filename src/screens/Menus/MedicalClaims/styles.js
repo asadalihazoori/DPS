@@ -13,7 +13,7 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         marginTop: 12,
         marginBottom: 24,
-        marginHorizontal: 30,
+        marginHorizontal: 16,
         // borderWidth:1,
     },
 

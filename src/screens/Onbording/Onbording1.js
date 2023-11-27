@@ -23,7 +23,7 @@ const Onbording1 = ({ navigation }) => {
         <View style={styles.skipView}>
           <TouchableButton
             title={'Skip'}
-            onPress={() => { }}
+            onPress={() => { navigation.navigate('Login') }}
             container={styles.skipButton} />
         </View>
 

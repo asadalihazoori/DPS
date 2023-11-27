@@ -2,6 +2,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { FontStyle } from '../../theme/FontStyle'
 import { COLORS } from '../../theme/colors'
+import Theme from '../../theme/theme'
 
 const DashboardNotifyCard = ({ data }) => {
 
@@ -66,13 +67,15 @@ export default DashboardNotifyCard
 
 const styles = StyleSheet.create({
     container: {
-        borderRadius: 8,
+        // borderRadius: 8,
         backgroundColor: '#FFF',
         paddingHorizontal: 8,
         paddingVertical: 8,
         marginBottom: 12,
 
-        elevation: 4,
+        ...Theme.Shadow,
+        borderWidth: 0,
+
 
         marginHorizontal: 4,
         // marginTop: 2,
