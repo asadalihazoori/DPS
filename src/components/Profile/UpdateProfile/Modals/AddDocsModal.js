@@ -8,7 +8,7 @@ import inputValidation from '../../../../utilities/Validations/YupValidate'
 import InputField from '../../../InputField';
 import { ProfileContext } from '../../../../context/ProfileContext'
 import { COLORS } from '../../../../theme/colors';
-import FilePicker from '../../../FilePicker';
+// import FilePicker from '../../../FilePicker';
 
 const AddDocsModal = ({ modalVisible, setModalVisible, header }) => {
 
@@ -156,7 +156,7 @@ const AddDocsModal = ({ modalVisible, setModalVisible, header }) => {
                             // error={inputs?.errors?.dob}
                             />
 
-                            <FilePicker />
+                            {/* <FilePicker /> */}
 
                             {/* <DatePicker
                                 date={new Date()}

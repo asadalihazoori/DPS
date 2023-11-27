@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react'
-import { Attendance, Dashboard, EmployeePayslip, EmployeeProfile, Leaves, Profile } from '../screens';
+import { Attendance, Dashboard, EmployeePayslip, EmployeeProfile, Leaves, Notifications, Profile, Punch } from '../screens';
 import { COLORS } from '../theme/colors';
 import { SvgXml } from 'react-native-svg';
 import { DrawerIcons } from '../assets/SvgIcons/DrawerIcons';
@@ -32,10 +32,10 @@ const BottomTab = () => {
 
                         focused ?
                             <View style={{ backgroundColor: '#4c4c4c', height: 34, width: 34, borderRadius: 100, alignItems: 'center', justifyContent: 'center' }}>
-                                <SvgXml xml={DrawerIcons.dashboard} />
+                                <SvgXml xml={BottomTabIcons.dashboard} />
                             </View>
                             :
-                            <SvgXml xml={DrawerIcons.dashboard} />
+                            <SvgXml xml={BottomTabIcons.dashboard} />
                     ),
                 }}
                 name="Dashboard" component={Dashboard} />
@@ -46,13 +46,13 @@ const BottomTab = () => {
 
                         focused ?
                             <View style={{ backgroundColor: '#4c4c4c', height: 34, width: 34, borderRadius: 100, alignItems: 'center', justifyContent: 'center' }}>
-                                <SvgXml xml={DrawerIcons.personal} />
+                                <SvgXml xml={BottomTabIcons.bell} />
                             </View>
                             :
-                            <SvgXml xml={DrawerIcons.personal} />
+                            <SvgXml xml={BottomTabIcons.bell} />
                     ),
                 }}
-                name="Profile" component={Profile} />
+                name="Notifications" component={Notifications} />
 
             <Tab.Screen
                 options={{
@@ -60,10 +60,10 @@ const BottomTab = () => {
 
                         focused ?
                             <View style={{ backgroundColor: '#4c4c4c', height: 34, width: 34, borderRadius: 100, alignItems: 'center', justifyContent: 'center' }}>
-                                <SvgXml xml={DrawerIcons.attendance} />
+                                <SvgXml xml={BottomTabIcons.attendance} />
                             </View>
                             :
-                            <SvgXml xml={DrawerIcons.attendance} />
+                            <SvgXml xml={BottomTabIcons.attendance} />
                     ),
                 }}
                 name="Attendance" component={Attendance} />
@@ -75,13 +75,15 @@ const BottomTab = () => {
 
                         focused ?
                             <View style={{ backgroundColor: '#4c4c4c', height: 34, width: 34, borderRadius: 100, alignItems: 'center', justifyContent: 'center' }}>
-                                <SvgXml xml={DrawerIcons.leaves} />
+                                <SvgXml xml={BottomTabIcons.exit} />
                             </View>
                             :
-                            <SvgXml xml={DrawerIcons.leaves} />
+                            <SvgXml xml={BottomTabIcons.exit} />
                     ),
                 }}
-                name="EmployeePayslip" component={EmployeePayslip} />
+                name="Exit"
+                component={Punch}
+            />
         </Tab.Navigator>
     )
 }

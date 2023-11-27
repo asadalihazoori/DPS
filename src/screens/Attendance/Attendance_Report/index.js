@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import Table from '../../../components/Table';
 import { getAttendanceApi } from '../../../utilities/api/apiController';
 import { useSelector } from 'react-redux';
-import MonthYearPicker from '../../../components/DateTimePicker/MonthPicker';
 import { styles } from './styles';
 
 const AttendanceReport = ({ navigation }) => {
@@ -63,7 +62,7 @@ const AttendanceReport = ({ navigation }) => {
         <SafeAreaView style={styles.container}>
             <ScrollView >
 
-                <MonthYearPicker onDateChange={fetchData} />
+                {/* <MonthYearPicker onDateChange={fetchData} /> */}
                 <Table header={tableHeader} data={data} attendance={true} loading={loading} />
             </ScrollView>
         </SafeAreaView>
