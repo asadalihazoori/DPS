@@ -4,6 +4,7 @@ import { COLORS } from '../../theme/colors'
 import { FontStyle } from '../../theme/FontStyle'
 import { SvgXml } from 'react-native-svg'
 import { Icons } from '../../assets/SvgIcons/Icons'
+import Theme from '../../theme/theme'
 
 const PayslipCard = () => {
     return (
@@ -34,11 +35,6 @@ export default PayslipCard
 
 const styles = StyleSheet.create({
     container: {
-        borderRadius: 8,
-        backgroundColor: '#FFF',
-        elevation: 4,
-        borderBottomWidth: 1,
-        borderBottomColor: '#B2BBBB',
         paddingHorizontal: 8,
         paddingVertical: 8,
         marginBottom: 12,
@@ -47,7 +43,7 @@ const styles = StyleSheet.create({
 
         marginHorizontal: 4,
         marginTop: 2,
-
+        ...Theme.Shadow,
         // borderWidth: 1,
     },
 

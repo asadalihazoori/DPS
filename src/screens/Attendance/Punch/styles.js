@@ -89,6 +89,7 @@ export const styles = StyleSheet.create({
         ...Theme.Shadow,
         borderWidth: 0,
         marginHorizontal: 4,
+        elevation:3,
         // paddingVertical: 8,
         // borderRadius: 8,
         // backgroundColor: '#FFF',

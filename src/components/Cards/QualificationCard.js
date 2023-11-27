@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { FontStyle } from '../../theme/FontStyle'
+import Theme from '../../theme/theme'
 
 const QualificationCard = ({
     item
@@ -36,13 +37,11 @@ const styles = StyleSheet.create({
         marginBottom: 12,
         borderRadius: 8,
         paddingVertical: 24,
-        borderBottomWidth: 1,
-        borderBottomColor: '#B2BBBB',
         backgroundColor: '#FFF',
 
         // paddingHorizontal: 10,
         flexDirection: 'row',
-        elevation: 4,
+        ...Theme.Shadow
 
     },
 

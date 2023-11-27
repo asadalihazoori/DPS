@@ -26,7 +26,7 @@ const ProfileTextInput = ({
             <View style={[styles.inputView, {
                 backgroundColor: !editable ? COLORS.backgroundInput : COLORS.white,
                 borderColor: error ? COLORS.red : "#BEBEBE",
-                height: height && height,
+                height: height ? height : 45,
             }]}>
                 <TextInput
                     placeholder={placeholder}
@@ -38,6 +38,11 @@ const ProfileTextInput = ({
                     onChangeText={onChangeText}
                     style={[FontStyle.Regular12_400, {
                         color: COLORS.darkBlack,
+                        flex: 1,
+                        // borderWidth: 1,
+                     
+                        padding: 0,
+                        margin: 0,
                     }]}
                     placeholderTextColor={{ color: COLORS.grey3 }}
                     cursorColor={COLORS.blue}
@@ -59,7 +64,7 @@ const styles = StyleSheet.create({
         ...Theme.Shadow,
         marginTop: 8,
         borderRadius: 8,
-        paddingHorizontal: 8,
+        paddingHorizontal: 10,
         // borderWidth: 1,
     }
 })

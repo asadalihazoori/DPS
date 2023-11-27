@@ -5,7 +5,7 @@ import {
     LeaveSubmission, AttendanceReport, LoansAdvances,
     ApplyForLoans, MedicalClaims, ApplyForMedicalClaims,
     TardinesReport, TaxCertificate, HolidayNews, ChangePassword,
-    AttendanceRequest, Attendance, Leaves, Loans, MedicalClaim, Reports, Dashboard, Profile, PayslipDetails, Punch, Shifts, LeaveRequets,
+    AttendanceRequest, Attendance, Leaves, Loans, MedicalClaim, Reports, Dashboard, Profile, PayslipDetails, Punch, Shifts, LeaveRequets, AttendaceChangeRequest,
 } from "../screens";
 import CustomDrawerContent from "../components/CustomDrawerContent";
 import CustomDrawer1 from "../components/CustomDrawer1";
@@ -48,6 +48,8 @@ const DrawerNavigation = ({ navigation }) => {
             <Drawer.Screen name="TaxCertificate" component={TaxCertificate} />
             <Drawer.Screen name="HolidayNews" component={HolidayNews} />
             <Drawer.Screen name="ChangePassword" component={ChangePassword} />
+            <Drawer.Screen name="AttendaceChangeRequest" component={AttendaceChangeRequest} />
+
 
             <Drawer.Screen name="Profile" component={Profile} />
             <Drawer.Screen name="Attendance" component={Attendance} />

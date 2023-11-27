@@ -10,6 +10,28 @@ const MedicalClaimCard = ({
     data
 }) => {
 
+    let color = ''
+
+
+    switch (data?.state) {
+        case 'draft':
+            color = COLORS.yellow
+            break;
+
+        case 'cancel':
+            color = COLORS.red1
+            break;
+
+        case 'validate':
+            color = COLORS.green
+
+            break;
+
+        default:
+            color = 'grey'
+            break;
+    }
+
     const TextView = ({ title, value }) => (
         <View style={{ flex: 1 }}>
             <Text style={[FontStyle.Regular14_500, { color: COLORS.darkBlack, letterSpacing: 0.2 }]}>{title}</Text>
@@ -71,7 +93,7 @@ const MedicalClaimCard = ({
                         </View>
                     </View>
 
-                    <View style={[styles.statusView, { backgroundColor: 'red' }]}>
+                    <View style={[styles.statusView, { backgroundColor: color }]}>
                         <Text style={styles.statusText}>{data?.state}</Text>
                     </View>
 
@@ -90,10 +112,10 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         // borderWidth:1
         borderRadius: 8,
+        ...Theme.Shadow,
         borderWidth: 0,
         marginHorizontal: 4,
         marginTop: 2,
-        elevation: 1,
         backgroundColor: COLORS.white
     },
 
@@ -136,13 +158,14 @@ const styles = StyleSheet.create({
     },
 
     statusView: {
-        backgroundColor: COLORS.red1,
+        // backgroundColor: COLORS.red1,
         borderRadius: 8,
         width: 88,
         height: 32,
         alignItems: 'center',
         justifyContent: 'center',
-        elevation: 4,
+        ...Theme.Shadow,
+        borderWidth: 0,
         alignSelf: 'flex-end',
         marginTop: 16,
         // borderWidth: 1

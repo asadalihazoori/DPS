@@ -3,6 +3,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { FontStyle } from '../../../theme/FontStyle'
 import QualificationCard from '../../Cards/QualificationCard'
+import Theme from '../../../theme/theme'
 
 const Qualifications = () => {
 
@@ -83,14 +84,16 @@ export const styles = StyleSheet.create({
         paddingVertical: 8,
         marginHorizontal: 10,
         marginBottom: 12,
-        borderRadius: 8,
+        // borderRadius: 8,
         paddingVertical: 24,
-        borderBottomWidth: 1,
-        borderBottomColor: '#B2BBBB',
-        backgroundColor: '#FFF',
+        // borderBottomWidth: 1,
+        // borderBottomColor: '#B2BBBB',
+        // backgroundColor: '#FFF',
         flexDirection: 'row',
-        elevation: 4,
+        // elevation: 4,
 
+        ...Theme.Shadow,
+        borderWidth: 0,
     },
 
 });

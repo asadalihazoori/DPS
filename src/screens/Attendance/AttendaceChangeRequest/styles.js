@@ -1,9 +1,10 @@
-import { StyleSheet } from "react-native";
-import { COLORS } from "../../../theme/colors";
+import { StyleSheet } from 'react-native'
+import { COLORS } from '../../../theme/colors';
+import { FontStyle } from '../../../theme/FontStyle';
+
 
 export const styles = StyleSheet.create({
     container: {
-        // marginHorizontal: 16,
         // borderWidth: 1,
         flex: 1,
     },
@@ -15,6 +16,7 @@ export const styles = StyleSheet.create({
         marginBottom: 24,
         // borderWidth: 1,
         marginHorizontal: 16,
+        // borderWidth:1,
     },
 
     iconView: {
@@ -25,6 +27,7 @@ export const styles = StyleSheet.create({
     TabViewCreateContainer: {
         backgroundColor: 'transparent',
         // borderWidth: 1,
+
         elevation: 0,
         flex: 1,
 

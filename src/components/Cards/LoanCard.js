@@ -10,6 +10,28 @@ const LoanCard = ({
     data
 }) => {
 
+    let color = ''
+
+
+    switch (data?.state) {
+        case 'Adjusted':
+            color = COLORS.yellow
+            break;
+
+        case 'cancelled':
+            color = COLORS.notify
+            break;
+
+        case 'Validated':
+            color = COLORS.green
+
+            break;
+
+        default:
+            color = 'grey'
+            break;
+    }
+
     const TextView = ({ title, value }) => (
         <View style={{ flex: 1 }}>
             <Text style={[FontStyle.Regular14_500, { color: COLORS.darkBlack, letterSpacing: 0.2 }]}>{title}</Text>
@@ -55,7 +77,7 @@ const LoanCard = ({
 
 
                     </View>
-                    <View style={[styles.statusView, { backgroundColor: 'red', marginTop: 16 }]}>
+                    <View style={[styles.statusView, { backgroundColor: color, marginTop: 16 }]}>
                         <Text style={styles.statusText}>{data?.state}</Text>
                     </View>
 
@@ -73,8 +95,8 @@ const styles = StyleSheet.create({
     outerContainer: {
         ...Theme.Shadow,
         marginBottom: 10,
-        borderRadius: 8,
-        borderWidth: 0,
+        // borderRadius: 8,
+        // borderWidth: 0,
         marginHorizontal: 4,
         marginTop: 2,
         borderWidth: 0,
@@ -121,13 +143,15 @@ const styles = StyleSheet.create({
     },
 
     statusView: {
-        backgroundColor: COLORS.red1,
         borderRadius: 8,
         width: 88,
         height: 32,
         alignItems: 'center',
         justifyContent: 'center',
-        elevation: 4,
+        ...Theme.Shadow,
+        borderWidth: 0,
+
+        backgroundColor: COLORS.red1,
         alignSelf: 'flex-end',
         // borderWidth: 1
 

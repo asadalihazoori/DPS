@@ -34,22 +34,26 @@ import Shifts from "./Menus/Shifts"
 import ApplyShift from "./Shifts/ApplyShift"
 import ShiftDetails from "./Shifts/ShiftDetails"
 import Notifications from "./Notifications"
+import AttendaceChangeRequest from "./Attendance/AttendaceChangeRequest"
+// import AttendaceChangeRequest from "./Attendance/AttendaceChangeRequest"
 
 
 export {
-    Dashboard, EmployeePayslip, EmployeeProfile, LeaveStatus,
-    LeaveSubmission, AttendanceReport, LoansAdvances, ApplyForLoans,
-    MedicalClaims, ApplyForMedicalClaims, TardinesReport, TaxCertificate,
-    HolidayNews, ChangePassword, Leave_Details,
-    //  AttendanceRequest,
-      Attendance,
-    Leaves, Loans, Reports, MedicalClaim, UpdateProfile, Profile,
-    PayslipDetails, Punch, LeaveRequets, Location,
-    Onbording1,
-    Onbording2,
-    Shifts,
-    ApplyShift,
-    Notifications
-
+  Dashboard, EmployeePayslip, EmployeeProfile, LeaveStatus,
+  LeaveSubmission, AttendanceReport, LoansAdvances, ApplyForLoans,
+  MedicalClaims, ApplyForMedicalClaims, TardinesReport, TaxCertificate,
+  HolidayNews, ChangePassword, Leave_Details,
+  //  AttendanceRequest,
+  Attendance,
+  Leaves, Loans, Reports, MedicalClaim, UpdateProfile, Profile,
+  PayslipDetails, Punch, LeaveRequets, Location,
+  Onbording1,
+  Onbording2,
+  Shifts,
+  ApplyShift,
+  Notifications,
+  // AttendaceChangeRequest
+  // AttendaceChangeRequest
+  AttendaceChangeRequest
 
 }

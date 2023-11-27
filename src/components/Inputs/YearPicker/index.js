@@ -56,7 +56,7 @@ const YearPicker = ({
                 /> */}
 
             <DropDownPicker
-                
+
                 open={open}
                 placeholderStyle={[FontStyle.Regular12_400, { color: COLORS.grey3 }]}
                 value={value}
@@ -113,7 +113,8 @@ export default YearPicker
 const styles = StyleSheet.create({
     container: {
         // borderWidth: 1,
-        marginHorizontal: 0,
+        marginHorizontal: 4,
+
     },
 
     inputView: {

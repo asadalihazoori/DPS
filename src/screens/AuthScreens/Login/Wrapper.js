@@ -3,9 +3,9 @@ import React, { useContext } from 'react'
 import { styles } from './styles';
 import { FontStyle } from '../../../theme/FontStyle';
 import { NextButton, TextInputAuth } from '../../../components/Inputs';
-import Spinner from 'react-native-loading-spinner-overlay';
 import { COLORS } from '../../../theme/colors';
 import { AuthContext } from '../../../context/AuthContext';
+import Loader from '../../../components/Loader';
 
 const Wrapper = ({ navigation }) => {
 
@@ -68,14 +68,16 @@ const Wrapper = ({ navigation }) => {
                 <NextButton
                     title={'Login'}
                     onPress={validate}
-                    // onPress={() => { navigation.navigate('DrawerNavigation') }}
+                // onPress={() => { navigation.navigate('DrawerNavigation') }}
                 />
             </View>
 
-            <Spinner
+            <Loader loading={loading} />
+
+            {/* <Spinner
                 visible={loading}
                 color={COLORS.primaryColor}
-            />
+            /> */}
             {/* <Input
                     marginTop={24}
                     value={inputs.username}
