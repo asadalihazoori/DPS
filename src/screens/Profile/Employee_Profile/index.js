@@ -18,7 +18,7 @@ import { FontStyle } from '../../../theme/FontStyle';
 
 const EmployeeProfile = ({ navigation, route }) => {
 
-    const initalRoute = route.params?.route;
+    const initalRoute = route.params;
     const profileData = useSelector((state) => state.employeeProfile.data);
     const uid = useSelector((state) => state.signin.uid);
     // const [loading, setLoading] = useState(true);
@@ -35,7 +35,7 @@ const EmployeeProfile = ({ navigation, route }) => {
     // }, [])
 
 
-    const [index, setIndex] = React.useState(initalRoute);
+    const [index, setIndex] = React.useState(0);
 
     const [routes] = React.useState([
         { key: 'first', title: "Personal Info" },
@@ -57,6 +57,14 @@ const EmployeeProfile = ({ navigation, route }) => {
 
         />
     );
+
+    // const { route } = route.params;
+    useEffect(() => {
+        if (initalRoute !== undefined) {
+            // Set the index based on the route parameter
+            setIndex(initalRoute.route);
+        }
+    }, [initalRoute]);
 
     const RenderScene = (e, navigation) => {
 

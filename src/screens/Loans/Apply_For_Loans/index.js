@@ -45,7 +45,7 @@ const ApplyForLoans = ({ navigation }) => {
         const result = await inputValidation(LoanRequestSchema, inputs)
 
         if (result.isValidate) {
-            handleSubmit();
+            // handleSubmit();
 
         } else {
             setInputs(prev => ({

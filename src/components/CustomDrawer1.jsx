@@ -82,19 +82,19 @@ const CustomDrawer1 = (props) => {
             {
                 id: 9,
                 name: "Apply For Medical Claims",
-                navigate: "Loans"
+                navigate: "MedicalClaim"
             },
             {
                 id: 10,
                 name: "Claim Status",
-                navigate: "Loans"
+                navigate: "MedicalClaim"
             },
 
         ],
 
     }
 
-    console.log("drawer", selectedScreen)
+    // console.log("drawer", selectedScreen)
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
@@ -187,7 +187,7 @@ const CustomDrawer1 = (props) => {
 
                         <CustomDrawerItem
                             title={'Reports'}
-                            navigate={() => props.navigation.navigate('Reports')}
+                            navigate={() => props.navigation.navigate('Home')}
                             icon={DrawerIcons.leaves}
                         />
 

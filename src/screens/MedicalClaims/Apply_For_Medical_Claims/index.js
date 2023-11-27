@@ -105,7 +105,7 @@ const ApplyForMedicalClaims = ({ navigation }) => {
         const result = await inputValidation(MedicalClaimRequestSchema, inputs)
 
         if (result.isValidate) {
-            handleSubmit();
+            // handleSubmit();
 
         } else {
             setInputs(prev => ({

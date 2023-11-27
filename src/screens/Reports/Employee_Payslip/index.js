@@ -2,9 +2,8 @@ import { Alert, SafeAreaView, ActivityIndicator, View, Text, ScrollView, Touchab
 import React, { useState } from 'react'
 import { getEmployeePayslipApi } from '../../../utilities/api/ApiList/PayslipApiList'
 import { styles } from './styles';
-import PDF from '../../../components/PDF';
+// import PDF from '../../../components/PDF';
 import { useSelector } from 'react-redux';
-import MonthYearPicker from '../../../components/DateTimePicker/MonthPicker';
 import Theme from '../../../theme/theme';
 import GeneralHeader from '../../../components/Headers/GeneralHeader';
 import PayslipCard from '../../../components/Cards/PayslipCard';
@@ -89,7 +88,7 @@ const EmployeePayslip = ({ navigation }) => {
                 indicatorStyle={styles.TabViewIndicator}
                 style={styles.TabViewCreateContainer}
                 renderLabel={({ route, focused }) => (
-                    <View style={{  alignItems: 'center' }}>
+                    <View style={{ alignItems: 'center' }}>
                         <Text style={[FontStyle.Regular12, { fontWeight: '500', color: focused ? COLORS.blue : COLORS.grey3, }]}>{route.title}</Text>
                     </View>
                 )}
@@ -111,53 +110,9 @@ const EmployeePayslip = ({ navigation }) => {
     };
 
 
-
     return (
-
-        // <SafeAreaView style={Theme.SafeArea}>
-        //     <GeneralHeader title={'Payslip'} navigation={navigation} />
-
-        //     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-
-
-        //         <View style={styles.detailsView}>
-
-        //             <View style={styles.detailTextView}>
-        //                 <Text style={styles.detailstext}>Welcome to my payslip details </Text>
-        //             </View>
-
-        //             <TouchableOpacity style={styles.iconView}
-        //                 activeOpacity={0.5}
-        //                 onPress={() => navigation.navigate('PayslipDetails')}
-
-        //             >
-
-        //                 <SvgXml xml={Icons.rightArrow1} />
-
-        //             </TouchableOpacity>
-
-        //         </View>
-
-        //         <View>
-        //             <PayslipCard />
-        //             <PayslipCard />
-        //             <PayslipCard />
-        //             <PayslipCard />
-        //             <PayslipCard />
-        //             <PayslipCard />
-        //             <PayslipCard />
-
-        //         </View>
-
-
-
-
-        //     </ScrollView>
-
-        // </SafeAreaView>
-
         <SafeAreaView style={Theme.SafeArea}>
-            <GeneralHeader title={'Loans/Advances'} navigation={navigation} />
+            <GeneralHeader title={'Payslip'} navigation={navigation} />
 
             <View style={styles.container}>
 

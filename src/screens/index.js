@@ -5,7 +5,7 @@ import EmployeeProfile from "./Profile/Employee_Profile"
 import ApplyForLoans from "./Loans/Apply_For_Loans"
 import ApplyForMedicalClaims from "./MedicalClaims/Apply_For_Medical_Claims"
 import AttendanceReport from "./Attendance/Attendance_Report"
-import AttendanceRequest from "./Attendance/Attendance_Request"
+// import AttendanceRequest from "./Attendance/Attendance_Request"
 import ChangePassword from "./AuthScreens/Change_Password"
 import HolidayNews from "./Holiday_News"
 import Leave_Details from "./Leaves/Leave_Details"
@@ -33,19 +33,23 @@ import Onbording2 from "./Onbording/Onbording2"
 import Shifts from "./Menus/Shifts"
 import ApplyShift from "./Shifts/ApplyShift"
 import ShiftDetails from "./Shifts/ShiftDetails"
+import Notifications from "./Notifications"
 
 
 export {
     Dashboard, EmployeePayslip, EmployeeProfile, LeaveStatus,
     LeaveSubmission, AttendanceReport, LoansAdvances, ApplyForLoans,
     MedicalClaims, ApplyForMedicalClaims, TardinesReport, TaxCertificate,
-    HolidayNews, ChangePassword, Leave_Details, AttendanceRequest, Attendance,
+    HolidayNews, ChangePassword, Leave_Details,
+    //  AttendanceRequest,
+      Attendance,
     Leaves, Loans, Reports, MedicalClaim, UpdateProfile, Profile,
     PayslipDetails, Punch, LeaveRequets, Location,
     Onbording1,
     Onbording2,
-    Shifts, 
-    ApplyShift
+    Shifts,
+    ApplyShift,
+    Notifications
 
 
 }

@@ -1,10 +1,10 @@
 import { SafeAreaView, ActivityIndicator, View, Alert } from 'react-native'
 import React, { useState } from 'react'
-import PDF from '../../../components/PDF';
+// import PDF from '../../../components/PDF';
 import { styles } from './styles';
 import { getTardinessReportApi } from '../../../utilities/api/apiController';
 import { useSelector } from 'react-redux';
-import MonthYearPicker from '../../../components/DateTimePicker/MonthPicker';
+// import MonthYearPicker from '../../../components/DateTimePicker/MonthPicker';
 
 const TardinesReport = ({ navigation }) => {
 
@@ -65,16 +65,16 @@ const TardinesReport = ({ navigation }) => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <MonthYearPicker onDateChange={fetchData} tardines={true} />
+            {/* <MonthYearPicker onDateChange={fetchData} tardines={true} /> */}
 
 
             <View style={styles.innerContainer}>
-                {loading ?
+                {/* {loading ?
                     <ActivityIndicator size={'large'} /> :
                     b64_pdf &&
                     <PDF b64_pdf={b64_pdf}
                         title={`Tardines Report ( ${date} ).pdf`} />
-                }
+                } */}
             </View>
 
         </SafeAreaView>
