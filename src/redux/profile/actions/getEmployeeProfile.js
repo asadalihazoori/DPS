@@ -1,82 +1,90 @@
-import { useSelector } from "react-redux";
-import { getEmployeeProfileApi } from "../../../utilities/api/ApiList/ProfileApiList";
+import { getEmployeeProfileApi, getEmployeeProfileWagsApi } from "../../../utilities/api/ApiList/ProfileApiList";
 import { get_employee_profile } from "../profile.actions";
 import { Alert } from "react-native";
 
 
-export const getEmployeeProfile = ({ uid, navigation }) => {
+export const getEmployeeProfile = ({ uid, navigation, setLoading }) => {
 
     return async (dispatch) => {
 
         try {
 
             const body = {
-                "jsonrps": 2.0,
                 "params": {
-                    "employee_id": uid
+                    "model": "hr.employee.wags",
+                    "method": "search_read",
+                    "args": [[["user_id", "=", uid]]],
+                    "kwargs": {
+                        "fields": ["id",
+                            "name",
+                            "image_1920",
+                            "category_ids",
+                            "employee_code",
+                            "company_id",
+                            "work_email",
+                            "mobile_phone",
+                            "emergency_name",
+                            "emergency_relation",
+                            "emergency_cell_number",
+                            "passport_id",
+                            "passport_issue_date",
+                            "passport_expiry_date",
+                            "joining_date",
+                            "no_of_years",
+                            "nationality_type",
+                            "country_id",
+                            "visa_no",
+                            "visa_expiry",
+                            "identification_id",
+                            "id_issue_date",
+                            "id_expiry_date",
+                            "bank_name",
+                            "bank_account",
+                            "gender",
+                            "marital",
+                            "birthday",
+                            "place_of_birth",
+                            "department_id",
+                            "job_id",
+                            "company_location",
+                            "manager_id",
+                            "wage"]
+                    }
                 }
             }
 
-            const response = await getEmployeeProfileApi({ body, navigation });
-            // console.log(response.data);
+            const response = await getEmployeeProfileWagsApi({ body, navigation });
+            console.log(response.data);
+            setLoading(false);
 
-            if (response?.data?.result?.status == 200) {
+            if (response?.data?.result) {
 
-                const profieData = response?.data?.result?.response;
+                if (response?.data?.result?.[0]) {
 
-                const family_info = [];
-                family_info.push({
-                    'relation': 'self',
-                    'id': uid,
-                    'name': profieData.name
-                });
 
-                if (profieData.father_live != 'dead') {
-                    family_info.push({
-                        'relation': 'father',
-                        'id': '-1',
-                        'name': profieData.father_name
+                    const profieData = response?.data?.result?.[0];
+                    dispatch(get_employee_profile(profieData))
+                    // navigation.replace('DrawerNavigation')
+                    navigation.reset({
+                        index: 0,
+                        routes: [
+                            {
+                                name: 'DrawerNavigation',
+                                // You can also pass any params to 'DrawerNavigation' here if needed
+                            },
+                        ],
                     });
                 }
-
-                if (profieData.mother_live != 'dead') {
-                    family_info.push({
-                        'relation': 'mother',
-                        'id': '-2',
-                        'name': profieData.mother_name
-                    });
+                else {
+                    Alert.alert("Profile Not Found !", `Profile of this user is null`);
                 }
-
-                var spousData = profieData.spouse_info;
-                for (var item = 0; item < spousData.length; item++) {
-                    family_info.push(
-                        {
-                            'relation': 'spouse',
-                            'id': spousData[item].id,
-                            'name': spousData[item].spouse_name
-                        }
-                    )
-                };
-
-                var childData = profieData.child_info;
-                for (var item = 0; item < childData.length; item++) {
-
-                    family_info.push(
-                        {
-                            'relation': 'children',
-                            'id': childData[item].id,
-                            'name': childData[item].child_name
-                        }
-                    )
-                }
-
-                dispatch(get_employee_profile(profieData, family_info))
-                navigation.replace('DrawerNavigation')
 
             }
+
+
             else if (response?.data?.error) {
-                console.log('response?.data?.error');
-                console.log(response?.data?.error);
+                // console.log('response?.data?.error');
+                // console.log(response?.data?.error);
                 Alert.alert(response?.data?.error?.message, `${response?.data?.error?.data?.message}`);
             }
 
@@ -84,8 +92,11 @@ export const getEmployeeProfile = ({ uid, navigation }) => {
                 Alert.alert("Session Expired", `Please Login Again`);
             }
 
+            else if (response == "AxiosError: Network Error") {
+                Alert.alert("Internet Connection Failed", "Try to connect with Wifi or Mobile Network");
+            }
             else {
-                Alert.alert("Internet Connection Failed", `${response}`);
+                Alert.alert("Error", "Try Again");
 
             }
         }

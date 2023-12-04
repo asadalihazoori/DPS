@@ -18,11 +18,11 @@ const AttendanceHistory = ({ navigation }) => {
 
     return (
         <View style={{ flex: 1, paddingHorizontal: 16, }}>
-            <AttendanceCardNew />
-            <AttendanceCardNew />
-            <AttendanceCardNew />
-            <AttendanceCardNew />
-            <AttendanceCardNew />
+            <AttendanceCardNew punchIn={'8:30 AM'} punchOut={'9:30 PM'} />
+            <AttendanceCardNew punchIn={'8:30 AM'} punchOut={'9:30 PM'}/>
+            <AttendanceCardNew punchIn={'8:30 AM'} punchOut={'9:30 PM'}/>
+            <AttendanceCardNew punchIn={'8:30 AM'} punchOut={'9:30 PM'}/>
+            <AttendanceCardNew punchIn={'8:30 AM'} punchOut={'9:30 PM'}/>
 
         </View>
     )

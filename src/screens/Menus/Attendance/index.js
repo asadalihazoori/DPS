@@ -1,5 +1,5 @@
 import { View, Text, SafeAreaView } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { styles } from './styles'
 import GeneralHeader from '../../../components/Headers/GeneralHeader'
 import Theme from '../../../theme/theme'
@@ -12,6 +12,9 @@ import ApprovedLoans from '../../Loans/ApprovedLoans'
 import Location from '../../Attendance/Location'
 import AttendanceHistory from '../../Attendance/AttendaceHistory'
 import Punch from '../../Attendance/Punch'
+import LocationOld from '../../Attendance/Location/indexOld'
+import { getPermission } from '../../Attendance/Location/AccessLocation'
+import { getPermissionJust } from '../../Attendance/Location/AccessLocation copy'
 
 const Attendance = ({ navigation }) => {
 
@@ -20,8 +23,8 @@ const Attendance = ({ navigation }) => {
 
     const [routes] = React.useState([
         { key: 'first', title: "Attendance" },
-        { key: 'second', title: "History" },
-        { key: 'third', title: "Location" },
+        // { key: 'second', title: "History" },
+        // { key: 'third', title: "Location" },
 
     ]);
 
@@ -48,15 +51,20 @@ const Attendance = ({ navigation }) => {
 
         switch (e.route.key) {
             case 'first':
-                return <Punch />;
+                return <Punch navigation={navigation} />;
             case 'second':
                 return <AttendanceHistory />;
-            case 'third':
-                return <Location navigation={navigation} />;
+            // case 'third':
+            //     return <Location navigation={navigation} />;
+            // return <LocationOld navigation={navigation} />;
 
         }
     };
 
+    useEffect(() => {
+        // getPermission();
+        getPermissionJust();
+    }, [])
 
     return (
         <SafeAreaView style={Theme.SafeArea}>

@@ -3,23 +3,25 @@ import { COLORS } from '../../../theme/colors';
 import { FontStyle } from '../../../theme/FontStyle';
 
 
-export const styles = StyleSheet.create({
+export const stylesOld = StyleSheet.create({
     container: {
-        marginHorizontal: 16,
+        marginHorizontal: 24,
         // marginTop: 24,
         // borderWidth: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
         flex: 1,
     },
 
     mapView: {
         width: '100%',
-        height: '70%',
+        height: '80%',
         // height: 549,
         // borderWidth: 1,
         overflow: 'hidden', // Add this line to hide overflow content
         // borderRadius: 12,
-        borderBottomLeftRadius: 16,
-        borderBottomRightRadius: 16,
+        borderBottomLeftRadius: 24,
+        borderBottomRightRadius: 24,
     },
 
     locationView: {
@@ -85,6 +87,25 @@ export const styles = StyleSheet.create({
         color: COLORS.white,
         // lineHeight: 10
 
-    }
+    },
+
+
+
+
+    button: {
+        backgroundColor: 'lightblue',
+        padding: 20,
+        marginVertical: 10,
+    },
+    leftAction: {
+        backgroundColor: 'tomato',
+        justifyContent: 'center',
+        flex: 1,
+    },
+    actionText: {
+        color: 'white',
+        fontSize: 16,
+        padding: 10,
+    },
 
 })

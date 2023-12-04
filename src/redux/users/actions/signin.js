@@ -28,17 +28,18 @@ export const siginin = ({ navigation, inputs, setLoading }) => {
                 dispatch(login_user(response?.data?.result))
                 dispatch(getEmployeeProfile({
                     uid,
-                    navigation
+                    navigation,
+                    setLoading,
                 }))
-                    .then(() => {
+                // .then(() => {
 
-                        setLoading(false)
-                    }
-                    )
-                    // navigation.replace('DrawerNavigation')
+                //     setLoading(false)
+                // }
+                // )
+                // navigation.replace('DrawerNavigation')
             }
 
-            else if (response?.data?.result?.uid == false) {
+            else if (response?.data?.error?.data?.message == "Access Denied") {
                 Alert.alert("Please Try Again", "Invalid Username and Password");
                 setLoading(false)
             }
@@ -48,9 +49,14 @@ export const siginin = ({ navigation, inputs, setLoading }) => {
                 setLoading(false)
             }
 
+            else if (response == "AxiosError: Network Error") {
+                setLoading(false);
+                Alert.alert("Internet Connection Failed", "Try to connect to Wifi or Mobile Network");
+            }
             else {
-                setLoading(false)
-                Alert.alert("Internet Connection Failed", `${response}`);
+                setLoading(false);
+                Alert.alert("Error", "Try Again");
+
             }
         }
 

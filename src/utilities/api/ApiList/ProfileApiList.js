@@ -9,3 +9,9 @@ export const UpdateEmployeeProfileApi = async ({ body, navigation, params }) => 
     const data = await post_request({ target: "/web/dataset/call_kw/", body: body, navigation: navigation, params: params });
     return data;
 }
+
+
+export const getEmployeeProfileWagsApi = async ({ body, navigation, params }) => {
+    const data = await post_request({ target: "/web/dataset/call_kw/", body: body, navigation: navigation, params: params });
+    return data;
+}

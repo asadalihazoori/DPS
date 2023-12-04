@@ -1,0 +1,1 @@
+export const GET_EMPLOYEE_PROFILE = 'get_employee_profile'

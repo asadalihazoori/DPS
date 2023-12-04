@@ -40,7 +40,7 @@ const BottomTab = () => {
                 }}
                 name="Dashboard" component={Dashboard} />
 
-            <Tab.Screen
+            {/* <Tab.Screen
                 options={{
                     tabBarIcon: ({ focused }) => (
 
@@ -52,7 +52,7 @@ const BottomTab = () => {
                             <SvgXml xml={BottomTabIcons.bell} />
                     ),
                 }}
-                name="Notifications" component={Notifications} />
+                name="Notifications" component={Notifications} /> */}
 
             <Tab.Screen
                 options={{
@@ -75,14 +75,14 @@ const BottomTab = () => {
 
                         focused ?
                             <View style={{ backgroundColor: '#4c4c4c', height: 34, width: 34, borderRadius: 100, alignItems: 'center', justifyContent: 'center' }}>
-                                <SvgXml xml={BottomTabIcons.exit} />
+                                <SvgXml xml={DrawerIcons.payslip} />
                             </View>
                             :
-                            <SvgXml xml={BottomTabIcons.exit} />
+                            <SvgXml xml={DrawerIcons.payslip} />
                     ),
                 }}
-                name="Exit"
-                component={Punch}
+                name="EmployeePayslip"
+                component={EmployeePayslip}
             />
         </Tab.Navigator>
     )

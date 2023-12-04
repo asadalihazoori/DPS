@@ -20,19 +20,28 @@ export const styles = StyleSheet.create({
 
     inputView: {
         marginTop: 4,
-        ...Theme.Shadow
+        ...Theme.Shadow,
+        // flex: 1,
+        paddingHorizontal: 12,
 
     },
 
     textInput: {
+        flex: 1,
+        // borderWidth: 1,
         padding: 0,
         margin: 0,
         height: 45,
-        marginHorizontal: 10,
         ...FontStyle.Regular12_400,
         color: COLORS.darkBlack,
 
-    }
+    },
+
+    iconView: {
+        justifyContent: 'center',
+        marginLeft: 10
+
+    },
 
 
 })

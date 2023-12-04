@@ -7,18 +7,20 @@ import { UserReducer } from './users/user.reducer';
 import { ProfileReducer } from './profile/profile.reducer';
 import { LeavesReducer } from './leaves/leaves.reducer';
 import { BackgroundImageReducer } from './backgrouund/background.reducer';
+import { AttendanceReducer } from './attendance/attendance.reducer';
 
 const allReducers = combineReducers({
     signin: UserReducer,
     employeeProfile: ProfileReducer,
     leaveStatus: LeavesReducer,
-    backgroundImage: BackgroundImageReducer
+    backgroundImage: BackgroundImageReducer,
+    attendance: AttendanceReducer,
 })
 
 const persistConfig = {
     key: 'root',
     storage: AsyncStorage,
-    whitelist: ['signin', 'employeeProfile', 'leaveStatus', 'backgroundImage'],
+    whitelist: ['signin', 'employeeProfile', 'leaveStatus', 'backgroundImage', 'attendance'],
     blacklist: [''],
 };
 

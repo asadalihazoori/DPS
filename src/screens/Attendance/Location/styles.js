@@ -15,13 +15,15 @@ export const styles = StyleSheet.create({
         // width: '100%',
         // height: '70%',
         // borderWidth: 1,
-        // flex: 1,
+        flex: 1,
         borderRadius: 8,
-        padding: 8,
-        // overflow: 'hidden',
+        // padding: 8, //working
         marginTop: 16,
-        backgroundColor: COLORS.white
+        // borderWidth: 1,
+        marginBottom: 24,
+        // backgroundColor: COLORS.white //working
 
+        // overflow: 'hidden',
         // height: 549,
         // borderRadius: 12,
         // borderBottomLeftRadius: 16,

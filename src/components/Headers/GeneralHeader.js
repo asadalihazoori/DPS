@@ -4,11 +4,15 @@ import { FontStyle } from '../../theme/FontStyle'
 import { SvgXml } from 'react-native-svg'
 import { HeaderIcons } from '../../assets/SvgIcons/HeaderIcons'
 import { COLORS } from '../../theme/colors'
+import { useSelector } from 'react-redux'
 
 const GeneralHeader = ({
     title,
     navigation
 }) => {
+
+    // const name = useSelector()
+    const name = useSelector((state) => state.employeeProfile.name);
 
     return (
         <View style={styles.container}>
@@ -33,9 +37,11 @@ const GeneralHeader = ({
 
             <TouchableOpacity style={{ height: 32, width: 32, borderRadius: 16, justifyContent: 'center', backgroundColor: COLORS.blue }}
                 activeOpacity={0.5}
-                onPress={() => { }}>
+                onPress={() => { }}
+                disabled={true}
+            >
                 {/* <SvgXml xml={HeaderIcons.bell} /> */}
-                <Text style={[FontStyle.Regular16, { textAlign: 'center', fontWeight: '400', color: COLORS.white }]}>TZ</Text>
+                <Text style={[FontStyle.Regular16, { textAlign: 'center', fontWeight: '400', color: COLORS.white }]}>{name?.[0]}</Text>
             </TouchableOpacity>
 
 

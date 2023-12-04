@@ -10,7 +10,7 @@ import { FontStyle } from '../theme/FontStyle'
 // import { fontStyle } from '../theme/fonstStyle'
 // import LoaderAnimation from './LoaderAnimation'
 
-const Loader = ({ loading, setLoading }) => {
+const Loader = ({ loading, setLoading, title }) => {
     return (
         <Modal
             animationType='fade'
@@ -48,7 +48,7 @@ const Loader = ({ loading, setLoading }) => {
                 <View style={styles.container1}>
 
                     <ActivityIndicator />
-                    <Text style={styles.text}>Loading ...</Text>
+                    <Text style={styles.text}>{title}</Text>
 
                 </View>
             </View>

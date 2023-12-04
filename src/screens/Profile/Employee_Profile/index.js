@@ -18,12 +18,12 @@ import { FontStyle } from '../../../theme/FontStyle';
 
 const EmployeeProfile = ({ navigation, route }) => {
 
-    const initalRoute = route.params;
+    // const initalRoute = route.params;
     const profileData = useSelector((state) => state.employeeProfile.data);
     const uid = useSelector((state) => state.signin.uid);
     // const [loading, setLoading] = useState(true);
 
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
     // useEffect(() => {
     //     // setLoading(true) 
@@ -39,9 +39,9 @@ const EmployeeProfile = ({ navigation, route }) => {
 
     const [routes] = React.useState([
         { key: 'first', title: "Personal Info" },
-        { key: 'second', title: "Family Info" },
-        { key: 'third', title: "Qualification" },
-        { key: 'fourth', title: "Experience" }
+        // { key: 'second', title: "Family Info" },
+        // { key: 'third', title: "Qualification" },
+        // { key: 'fourth', title: "Experience" }
     ]);
 
     const renderTabBar = propss => (
@@ -58,13 +58,11 @@ const EmployeeProfile = ({ navigation, route }) => {
         />
     );
 
-    // const { route } = route.params;
-    useEffect(() => {
-        if (initalRoute !== undefined) {
-            // Set the index based on the route parameter
-            setIndex(initalRoute.route);
-        }
-    }, [initalRoute]);
+    // useEffect(() => {
+    //     if (initalRoute !== undefined) {
+    //         setIndex(initalRoute.route);
+    //     }
+    // }, [initalRoute]);
 
     const RenderScene = (e, navigation) => {
 
@@ -72,11 +70,11 @@ const EmployeeProfile = ({ navigation, route }) => {
             case 'first':
                 return <PersonalInfo />;
             case 'second':
-                return <FamilyInfo />;
-            case 'third':
-                return <Qualifications />;
-            case 'fourth':
-                return <Experiences />;
+            //     return <FamilyInfo />;
+            // case 'third':
+            //     return <Qualifications />;
+            // case 'fourth':
+            //     return <Experiences />;
         }
     };
 

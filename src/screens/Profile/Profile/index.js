@@ -11,6 +11,7 @@ import { FontStyle } from '../../../theme/FontStyle'
 import { ProfileIcons } from '../../../assets/SvgIcons/ProfileIcons'
 import { COLORS } from '../../../theme/colors'
 import ProfileItem from '../../../components/Helpers/ProfileItem'
+import { Icons } from '../../../assets/SvgIcons/Icons'
 
 const Profile = ({ navigation }) => {
 
@@ -28,20 +29,22 @@ const Profile = ({ navigation }) => {
 
                     <View style={styles.imageView}>
                         <View>
-                            <Avatar.Image
+                            {/* <Avatar.Image
                                 source={{ uri: `data:image/jpeg;base64,${profileData?.image}` }}
                                 size={90}
-                            />
-                            <View style={styles.cameraIconView}>
+                            /> */}
+
+                            <SvgXml xml={Icons.personIcon} />
+                            {/* <View style={styles.cameraIconView}>
                                 <SvgXml xml={DrawerIcons.camera} />
-                            </View>
+                            </View> */}
                         </View>
 
                         <View style={{ marginTop: 12 }}>
                             <Text style={[FontStyle.Regular14, { color: COLORS.darkBlack }]}>{profileData?.name}</Text>
                         </View>
                         <View style={{ marginTop: 4 }}>
-                            <Text style={[FontStyle.Regular12, { color: '#B2BBBB' }]}>{profileData?.job_title}</Text>
+                            <Text style={[FontStyle.Regular12, { color: '#B2BBBB' }]}>{profileData?.job_id[1]}</Text>
                         </View>
 
                     </View>
@@ -51,11 +54,13 @@ const Profile = ({ navigation }) => {
                         <ProfileItem
                             icon={ProfileIcons.person}
                             title={'Personal Information'}
-                            caption={'Username, email, Parental info. etc.'}
-                            onPress={() => navigation.navigate('EmployeeProfile', { route: 0 })}
+                            // caption={'Username, email, Parental info. etc.'}
+                            caption={'Job Details, Email, Peronal Info. etc.'}
+                            onPress={() => navigation.navigate('EmployeeProfile')}
+                        // onPress={() => navigation.navigate('EmployeeProfile', { route: 0 })}
                         />
 
-                        <ProfileItem
+                        {/* <ProfileItem
                             icon={ProfileIcons.education}
                             title={'Educational Details'}
                             caption={'Qualification, Certifications, etc.'}
@@ -148,7 +153,7 @@ const Profile = ({ navigation }) => {
                                 </TouchableOpacity>
 
                             </View>
-                        }
+                        } */}
 
 
                     </View>
