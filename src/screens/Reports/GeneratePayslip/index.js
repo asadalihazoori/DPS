@@ -297,7 +297,7 @@ const GeneratePayslip = ({ navigation }) => {
                 </View>
             </View> */}
 
-            <View style={{ marginTop: 8, alignItems: 'flex-end', marginRight: 4, }}>
+            <View style={{ marginTop: 8, alignItems: 'flex-end', marginRight: 4, zIndex: -1 }}>
                 <Button title={'Generate'}
                     disabled={disabled}
                     handlePress={() => {
@@ -311,16 +311,17 @@ const GeneratePayslip = ({ navigation }) => {
             </View>
 
             {detail &&
-                <View>
-                    <View style={{
-                        backgroundColor: COLORS.white,
-                        borderRadius: 8,
-                        marginTop: 12,
-                        paddingVertical: 12,
-                        paddingHorizontal: 30,
-                    }}>
+                <View style={{ zIndex: -1 }}>
+                    <ScrollView>
+                        <View style={{
+                            backgroundColor: COLORS.white,
+                            borderRadius: 8,
+                            marginTop: 12,
+                            paddingVertical: 12,
+                            paddingHorizontal: 30,
+                        }}>
 
-                        {/* <Item title={'Month/Year'} value={'November, 2023'} />
+                            {/* <Item title={'Month/Year'} value={'November, 2023'} />
                         <Item title={'Gross Salary'} value={'Pkr 50,000/-'} />
                         <Item title={'Basic Salary'} value={'Pkr 35,000/-'} />
                         <Item title={'Other Allowances'} value={'Pkr 10,000/-'} />
@@ -329,11 +330,12 @@ const GeneratePayslip = ({ navigation }) => {
                         <Item title={'Net Salary'} value={'Pkr 43,000/-'} marginBottom={true} /> */}
 
 
-                        {payslipdata?.map((item, index) => (
-                            <Item key={index} title={item.name} value={item.total} />
-                        ))}
+                            {payslipdata?.map((item, index) => (
+                                <Item key={index} title={item.name} value={item.total} />
+                            ))}
 
-                    </View>
+                        </View>
+                    </ScrollView>
                     {/* <View style={{ marginTop: 16, justifyContent: 'flex-end', flexDirection: 'row' }}>
                         <Button title={'Download PDF'}
                             onPress={() => { }} />
