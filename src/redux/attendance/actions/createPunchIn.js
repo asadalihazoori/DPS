@@ -45,6 +45,7 @@ export const createPunchIn = ({ uid, navigation, time, latitude, longitude, date
                 }));
                 setFreeze(false)
                 setTitle(`Punched In at ${time?.time}`);
+                navigation.goBack();
 
             }
             else if (response?.data?.error) {

@@ -6,6 +6,7 @@ import { NextButton, TextInputAuth } from '../../../components/Inputs';
 import { COLORS } from '../../../theme/colors';
 import { AuthContext } from '../../../context/AuthContext';
 import Loader from '../../../components/Loader';
+import { Checkbox } from 'react-native-paper';
 
 const Wrapper = ({ navigation }) => {
 
@@ -14,6 +15,7 @@ const Wrapper = ({ navigation }) => {
         inputs,
         validate,
         handleOnChange,
+        setInputs,
 
     } = useContext(AuthContext);
 
@@ -59,6 +61,31 @@ const Wrapper = ({ navigation }) => {
                     password={true}
                 />
 
+                <View style={{
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    borderColor: COLORS.black,
+                    // borderWidth: 1,
+                    marginTop: 10
+                }}>
+                    <Text style={[FontStyle.Regular14_500, { fontSize: 16, marginRight: 4 }]}>{'keep me Logged In'}</Text>
+
+                    <Checkbox
+                        status={inputs.loggedIn ? 'checked' : 'unchecked'}
+                        onPress={() => {
+                            // setChecked(!checked);
+                            setInputs({
+                                ...inputs,
+                                ['loggedIn']: !inputs.loggedIn,
+                            })
+                        }}
+
+                        color={COLORS.secondaryColor}
+                        uncheckedColor={COLORS.primaryColor}
+                    />
+                </View>
+
                 {/* <TouchableOpacity style={styles.forgetView}>
                     <Text style={[FontStyle.Regular16_500, styles.forgetText]}>Forget Password ?</Text>
                 </TouchableOpacity> */}
@@ -102,7 +129,7 @@ const Wrapper = ({ navigation }) => {
                 } */}
             {/* </ScrollView> */}
             {/* </View> */}
-        </KeyboardAvoidingView>
+        </KeyboardAvoidingView >
     )
 }
 

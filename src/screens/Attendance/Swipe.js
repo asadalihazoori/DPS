@@ -177,7 +177,10 @@ const Swipe = ({ navigation, onSlide, freeze, title }) => {
         onEnd: () => {
             if (X.value > swipeThreshold && swipeEnabled && freeze) {
                 runOnJS(setSwipeEnabled)(false);
-                X.value = withSpring(maxXValue - 10, {}, () => runOnJS(setTime)(true));
+                X.value = withSpring(maxXValue - 10, {}, () => {
+                    runOnJS(setTime)(true)
+                })
+                    ;
                 runOnJS(onSlide)();
             } else if (X.value < swipeThreshold && swipeEnabled && freeze) {
                 X.value = withSpring(10, {}, () => {

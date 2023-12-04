@@ -1,4 +1,4 @@
-import { View, SafeAreaView, Alert } from 'react-native'
+import { View, SafeAreaView, Alert, TouchableOpacity } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Theme from '../../../theme/theme'
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps'
@@ -12,6 +12,9 @@ import { createPunchOut } from '../../../redux/attendance/actions/createPunchOut
 import { getCurrentDateTime } from '../../../utilities/CurrentTime'
 import { checkAttendanceLocationApi } from '../../../utilities/api/apiController'
 import Loader from '../../../components/Loader'
+import { COLORS } from '../../../theme/colors'
+import { SvgXml } from 'react-native-svg'
+import { Icons } from '../../../assets/SvgIcons/Icons'
 
 const LocationOld = ({ navigation, route }) => {
 
@@ -75,7 +78,7 @@ const LocationOld = ({ navigation, route }) => {
                     "args": [
                         [
                             {
-                                "user_id": uid,  //uid
+                                "user_id": 2,  //uid
                                 "latitude": 32, //latitude
                                 "longitude": 72 //longitude
                             }
@@ -139,6 +142,27 @@ const LocationOld = ({ navigation, route }) => {
         <SafeAreaView style={Theme.SafeArea}>
 
             <View style={stylesOld.mapView}>
+
+                {/* <TouchableOpacity
+                    activeOpacity={0.5}
+                    style={{
+                        height: 45,
+                        width: 45,
+                        borderRadius: 22.5,
+                        borderWidth: 1,
+                        backgroundColor: COLORS.white,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        // position: 'absolute'
+                        
+
+                    }}>
+
+                    <SvgXml xml={`<svg xmlns="http://www.w3.org/2000/svg" width="21" height="19" viewBox="0 0 21 19" fill="none">
+<path d="M9.49947 1.64694L1.57867 9.51494L9.44667 17.4357M1.57867 9.51494L19.623 9.57528L1.57867 9.51494Z" stroke="black" stroke-width="2.25556" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>`} />
+
+                </TouchableOpacity> */}
 
                 <MapView
                     style={{ flex: 1 }}

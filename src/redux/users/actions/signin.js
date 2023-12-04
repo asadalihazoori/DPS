@@ -25,7 +25,8 @@ export const siginin = ({ navigation, inputs, setLoading }) => {
             if (response?.data?.result?.uid) {
 
                 const uid = response?.data?.result?.uid;
-                dispatch(login_user(response?.data?.result))
+                // dispatch(login_user(response?.data?.result))
+                dispatch(login_user(response?.data?.result, inputs.loggedIn))
                 dispatch(getEmployeeProfile({
                     uid,
                     navigation,

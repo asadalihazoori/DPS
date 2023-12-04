@@ -47,6 +47,7 @@ const YearPicker = ({
         onChange(selectedValue);
     };
 
+
     return (
         <View
             style={[styles.container, { marginBottom: marginBottom ? marginBottom : 12 }]}>
@@ -90,9 +91,16 @@ const YearPicker = ({
                 // }}
                 setItems={setItems}
                 placeholder={placeholder}
+                // autoScroll={false}
+                // scrollViewProps={false}
 
                 style={[
-                    Theme.Shadow, {
+                    // Theme.Shadow, 
+
+                    {
+                        // elevation: 0,
+                        borderWidth: 1,
+                        borderColor: 'rgba(0, 0, 0, 0.10)',
                         marginTop: 8,
                         color: COLORS.red,
                     }]}
@@ -106,12 +114,15 @@ const YearPicker = ({
                     backgroundColor: COLORS.white,
                     borderWidth: 1,
                     borderColor: 'rgba(0, 0, 0, 0.10)',
-                    borderTopWidth: 0,
                     paddingHorizontal: 8,
+                    // ...Theme.Shadow,
+                    // borderTopWidth: 0,
+
                     // zIndex: 990
                     // position: 'absolute'
 
                 }]}
+
 
                 showTickIcon={false}
 

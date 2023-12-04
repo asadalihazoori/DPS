@@ -1,4 +1,4 @@
-import { View, Text, Alert, TouchableOpacity } from 'react-native'
+import { View, Text, Alert, TouchableOpacity, ScrollView } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import styles from './styles'
 import ProfileTextInput from '../../../components/Inputs/ProfileTextInput'
@@ -55,7 +55,7 @@ const GeneratePayslip = ({ navigation }) => {
                         [
                             ["slip_id.employee_id", "=", employeeID],
                             ["slip_id.date_from", "<=", `${inputs.year}-${inputs.month}-01`],
-                            ["slip_id.date_to", ">=", `${inputs.year}-${inputs.month}-01`]
+                            ["slip_id.date_to", ">=", `${inputs.year}-${inputs.month}-28`]
                         ]
                         // ["slip_id.date_from", "<=", "2023-10-01"],
                         // ["slip_id.date_to", ">=", "2023-10-30"]]
@@ -147,6 +147,7 @@ const GeneratePayslip = ({ navigation }) => {
             disabled={disabled}
             style={[Theme.Shadow, {
                 backgroundColor: !disabled ? COLORS.blue : COLORS.grey4,
+                zIndex: -1,
                 // width: 88, 
                 paddingHorizontal: 16,
                 height: 32, justifyContent: 'center',
@@ -230,6 +231,7 @@ const GeneratePayslip = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
+            {/* <ScrollView style={styles.container} showsHorizontalScrollIndicator={false}> */}
 
             {/* <DropDownPicker
                 open={open}
@@ -250,7 +252,7 @@ const GeneratePayslip = ({ navigation }) => {
                 <Text style={styles.dateText}>{currentDate}</Text>
             </View>
 
-            <View style={{ flexDirection: 'row' }}>
+            <View style={{ flexDirection: 'row', borderWidth: 0, }}>
                 <View style={{ flex: 1 }}>
 
                     <YearPicker label={'Year'} data={year} placeholder={'Select Year'}
@@ -295,7 +297,7 @@ const GeneratePayslip = ({ navigation }) => {
                 </View>
             </View> */}
 
-            <View style={{ marginTop: 8, alignItems: 'flex-end' }}>
+            <View style={{ marginTop: 8, alignItems: 'flex-end', marginRight: 4, }}>
                 <Button title={'Generate'}
                     disabled={disabled}
                     handlePress={() => {
@@ -341,6 +343,7 @@ const GeneratePayslip = ({ navigation }) => {
                 </View>
             }
             <Loader loading={loading} />
+            {/* </ScrollView> */}
         </View>
     )
 }
