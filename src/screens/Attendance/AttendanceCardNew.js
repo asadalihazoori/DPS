@@ -3,7 +3,7 @@ import React from 'react'
 import { FontStyle } from '../../theme/FontStyle'
 import { COLORS } from '../../theme/colors'
 
-const AttendanceCardNew = ({ date = true, color }) => {
+const AttendanceCardNew = ({ date = true, color, punchIn, punchOut }) => {
     return (
         <View style={{ marginTop: 12, }}>
 
@@ -16,12 +16,12 @@ const AttendanceCardNew = ({ date = true, color }) => {
                     <View style={{ flex: 1, padding: 10, borderRightWidth: 0.4, borderColor: COLORS.grey4 }}>
 
                         <Text style={styles.punchText}>Punch-In</Text>
-                        <Text style={styles.timeText}>8:30 AM</Text>
+                        <Text style={styles.timeText}>{punchIn ? punchIn : '----'}</Text>
                     </View>
 
                     <View style={{ flex: 1, padding: 10, }}>
                         <Text style={styles.punchText}>Punch-Out</Text>
-                        <Text style={styles.timeText}>9:30 PM</Text>
+                        <Text style={styles.timeText}>{punchOut ? punchOut : '----'}</Text>
                     </View>
 
                 </View>

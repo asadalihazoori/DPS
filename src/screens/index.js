@@ -35,6 +35,7 @@ import ApplyShift from "./Shifts/ApplyShift"
 import ShiftDetails from "./Shifts/ShiftDetails"
 import Notifications from "./Notifications"
 import AttendaceChangeRequest from "./Attendance/AttendaceChangeRequest"
+import LocationOld from "./Attendance/Location/indexOld"
 // import AttendaceChangeRequest from "./Attendance/AttendaceChangeRequest"
 
 
@@ -54,6 +55,7 @@ export {
   Notifications,
   // AttendaceChangeRequest
   // AttendaceChangeRequest
-  AttendaceChangeRequest
+  AttendaceChangeRequest,
+  LocationOld
 
 }

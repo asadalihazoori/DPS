@@ -14,6 +14,7 @@ import { DrawerIcons } from '../assets/SvgIcons/DrawerIcons';
 import { FontStyle } from '../theme/FontStyle';
 import CustomDrawerItem from './Drawer/DrawerItem';
 import Theme from '../theme/theme';
+import { Icons } from '../assets/SvgIcons/Icons';
 
 const CustomDrawer1 = (props) => {
 
@@ -109,15 +110,18 @@ const CustomDrawer1 = (props) => {
                         <View style={{ alignItems: 'flex-start' }}>
 
                             <View style={{}}>
+                                {profileData?.image_1920 ?
 
-
-                                <Avatar.Image
-                                    source={{ uri: `data:image/jpeg;base64,${profileData?.image}` }}
-                                    size={90}
-                                />
-                                <View style={{ position: 'absolute', bottom: 0, right: 0 }}>
+                                    <Avatar.Image
+                                        source={{ uri: `data:image/jpeg;base64,${profileData?.image_1920}` }}
+                                        size={90}
+                                    />
+                                    :
+                                    <SvgXml xml={Icons.personIcon} />
+                                }
+                                {/* <View style={{ position: 'absolute', bottom: 0, right: 0 }}>
                                     <SvgXml xml={DrawerIcons.camera} />
-                                </View>
+                                </View> */}
                             </View>
                         </View>
 
@@ -125,7 +129,7 @@ const CustomDrawer1 = (props) => {
                             <Text style={[FontStyle.Regular14, { color: '#0D1224' }]}>{profileData?.name}</Text>
                         </View>
                         <View style={{ marginTop: 4 }}>
-                            <Text style={[FontStyle.Regular12, { color: '#B2BBBB' }]}>{profileData?.job_title}</Text>
+                            <Text style={[FontStyle.Regular12, { color: '#B2BBBB' }]}>{profileData?.job_id[1]}</Text>
                         </View>
 
                     </View>
@@ -144,7 +148,7 @@ const CustomDrawer1 = (props) => {
                             icon={DrawerIcons.personal}
                         />
 
-                        <CustomDrawerItem
+                        {/* <CustomDrawerItem
                             title={'Attendance'}
                             navigate={(screen) => props.navigation.navigate(screen)}
                             icon={DrawerIcons.attendance}
@@ -152,9 +156,15 @@ const CustomDrawer1 = (props) => {
                             data={Menus.attendace}
                             onSelect={selectScreen}
                             selectedScreen={selectedScreen}
+                        /> */}
+                        <CustomDrawerItem
+                            title={'Attendance'}
+                            navigate={() => props.navigation.navigate('Attendance')}
+                            icon={DrawerIcons.attendance}
                         />
 
-                        <CustomDrawerItem
+
+                        {/* <CustomDrawerItem
                             title={'Leaves'}
                             navigate={(screen) => props.navigation.navigate(screen)}
                             icon={DrawerIcons.leaves}
@@ -173,9 +183,9 @@ const CustomDrawer1 = (props) => {
                             onSelect={selectScreen}
                             selectedScreen={selectedScreen}
 
-                        />
+                        /> */}
 
-                        <CustomDrawerItem
+                        {/* <CustomDrawerItem
                             title={'Medical claims'}
                             navigate={(screen) => props.navigation.navigate(screen)}
                             icon={DrawerIcons.medical}
@@ -183,11 +193,11 @@ const CustomDrawer1 = (props) => {
                             data={Menus.medicalClaims}
                             onSelect={selectScreen}
                             selectedScreen={selectedScreen}
-                        />
+                        /> */}
 
-                        <CustomDrawerItem
+                        {/* <CustomDrawerItem
                             title={'Reports'}
-                            navigate={() => props.navigation.navigate('Home')}
+                            navigate={() => props.navigation.navigate('Reports')}
                             icon={DrawerIcons.leaves}
                         />
 
@@ -195,7 +205,7 @@ const CustomDrawer1 = (props) => {
                             title={'Shifts'}
                             navigate={() => props.navigation.navigate('Shifts')}
                             icon={DrawerIcons.shifts}
-                        />
+                        /> */}
 
                         <CustomDrawerItem
                             title={'Payslip'}
@@ -203,7 +213,7 @@ const CustomDrawer1 = (props) => {
                             icon={DrawerIcons.payslip}
                         />
 
-                        <CustomDrawerItem
+                        {/* <CustomDrawerItem
                             title={'Overtime Tracking'}
                             navigate={() => props.navigation.navigate('Home')}
                             icon={DrawerIcons.overTime}
@@ -213,7 +223,7 @@ const CustomDrawer1 = (props) => {
                             title={'Timesheet Management'}
                             navigate={() => props.navigation.navigate('Home')}
                             icon={DrawerIcons.timeSheet}
-                        />
+                        /> */}
 
                     </View>
 
@@ -227,7 +237,8 @@ const CustomDrawer1 = (props) => {
                     title={'Logout'}
                     navigate={() => {
                         const navigation = props.navigation;
-                        siginOut({ uid, navigation })
+                        navigation.replace('Login')
+                        // siginOut({ uid, navigation })
                     }}
                     icon={DrawerIcons.logout}
                     style={{ color: COLORS.logout, fontWeight: '700', }}

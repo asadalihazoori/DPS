@@ -14,6 +14,7 @@ import { TabBar, TabView } from 'react-native-tab-view';
 import PayslipDetails from '../PayslipDetails.js';
 import { COLORS } from '../../../theme/colors';
 import GeneratePayslip from '../GeneratePayslip';
+import EmployeePayslipOld from '../Employee_Payslip old';
 
 const EmployeePayslip = ({ navigation }) => {
 
@@ -73,10 +74,11 @@ const EmployeePayslip = ({ navigation }) => {
     };
 
 
-    const [index, setIndex] = React.useState(2);
+    const [index, setIndex] = React.useState(0);
 
     const [routes] = React.useState([
         { key: 'first', title: "Generate Payslip" },
+        // { key: 'second', title: "PDF" },
 
     ]);
 
@@ -104,6 +106,10 @@ const EmployeePayslip = ({ navigation }) => {
         switch (e.route.key) {
             case 'first':
                 return <GeneratePayslip navigation={navigation} />;
+
+            // case 'second':
+            //     return <EmployeePayslipOld navigation={navigation} />;
+
 
 
         }

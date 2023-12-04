@@ -9,25 +9,43 @@ const YearPicker = ({
     label,
     placeholder,
     // value,
-    onChangeText,
+    onChange,
     error,
     editable = true,
     keyboardType,
     marginBottom,
+    data
 }) => {
 
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState(null);
-    const [items, setItems] = useState([
-        { label: '2024', value: '2024' },
-        { label: '2023', value: '2023' },
-        { label: '2022', value: '2022' },
-        { label: '2021', value: '2021' },
-        { label: '2020', value: '2020' },
-        { label: '2019', value: '2019' },
-        { label: '2018', value: '2018' },
-        { label: '2017', value: '2017' },
-    ]);
+    const [items, setItems] = useState(data);
+    // const [items, setItems] = useState([
+    //     { label: '2024', value: '2024' },
+    //     { label: '2023', value: '2023' },
+    //     { label: '2022', value: '2022' },
+    //     { label: '2021', value: '2021' },
+    // { label: '2020', value: '2020' },
+    // { label: '2019', value: '2019' },
+    // { label: '2018', value: '2018' },
+    // { label: '2017', value: '2017' },
+    // ]);
+
+    const handleClick = (value) => {
+        console.log(value)
+
+    }
+
+    const handleValueChange = (newValue) => {
+        setValue(newValue);
+        // Call your custom onChange function here
+        // if (onChange) {
+        // }
+
+        const selectedValue = newValue();
+        // console.log(selectedValue);
+        onChange(selectedValue);
+    };
 
     return (
         <View
@@ -62,9 +80,16 @@ const YearPicker = ({
                 value={value}
                 items={items}
                 setOpen={setOpen}
-                setValue={setValue}
+                // setValue={setValue}
+                setValue={handleValueChange}
+                // setValue={(value) => {
+                //     console.log(value);
+                //     setValue(value)
+                //     onChange(value)
+
+                // }}
                 setItems={setItems}
-                placeholder={'Select Year'}
+                placeholder={placeholder}
 
                 style={[
                     Theme.Shadow, {

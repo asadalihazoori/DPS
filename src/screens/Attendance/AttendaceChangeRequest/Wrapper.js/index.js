@@ -94,14 +94,14 @@ const ChangeRequestForm = ({ navigation }) => {
                 flexDirection: 'row',
                 gap: 4,
             }}>
-                <View style={{ flex: 1 }}>
+                {/* <View style={{ flex: 1 }}>
                     <YearPicker label={'Month'} />
 
                 </View>
                 <View style={{ flex: 1 }}>
                     <YearPicker label={'Year'} />
 
-                </View>
+                </View> */}
             </View>
             <View style={{
                 flexDirection: 'row',

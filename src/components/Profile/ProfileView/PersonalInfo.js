@@ -17,7 +17,7 @@ const PersonalInfo = () => {
         <View style={styles.container} >
             <ScrollView showsVerticalScrollIndicator={false}>
 
-                <View style={{ flexDirection: 'row', justifyContent: 'flex-end', marginTop: 12, marginBottom: 24, }}>
+                {/* <View style={{ flexDirection: 'row', justifyContent: 'flex-end', marginTop: 12, marginBottom: 24, }}>
                     <TouchableOpacity
                         onPress={() => setEditable(!editable)}
                         activeOpacity={0.5}
@@ -30,45 +30,113 @@ const PersonalInfo = () => {
                         <SvgXml xml={Icons.download} />
                     </TouchableOpacity>
 
+                </View> */}
+                <View style={{ marginTop: 24 }}>
+
+                    <ProfileTextInput
+
+                        label={'Name'}
+                        value={profileData?.name}
+                        editable={false}
+                    />
+
+                    {/* 
+                    <ProfileTextInput
+                        label={'CNIC'}
+                        value={profileData?.cnic}
+                        editable={false}
+                    />
+                    <ProfileTextInput
+                        label={'Shift'}
+                        value={profileData?.shift?.name}
+                        editable={false}
+                    />
+                    <ProfileTextInput
+                        label={'Address'}
+                        value={profileData?.address}
+                        editable={editable}
+                    />
+                    <ProfileTextInput
+                        label={'Remaining Medical Claims'}
+                        value={`${profileData?.remaining_medical_claim}`}
+                        editable={false}
+                    />
+                    <ProfileTextInput
+                        label={'Job Status'}
+                        value={profileData?.job_status ? 'Currently Employed' : 'Not Employed'}
+                        editable={false}
+                    />
+                    <ProfileTextInput
+                        label={'Remaining Leaves'}
+                        value={`${profileData?.leave_remaining}`}
+                        editable={false}
+                    /> */}
+
+                    <ProfileTextInput
+                        label={'ID'}
+                        value={profileData?.identification_id}
+                        editable={false}
+                    />
+
+                    <ProfileTextInput
+                        label={'Company'}
+                        value={`${profileData?.company_id?.[1]}`}
+                        editable={false}
+                    />
+
+                    <ProfileTextInput
+                        label={'Department'}
+                        value={`${profileData?.department_id?.[1]}`}
+                        editable={false}
+                    />
+                    <ProfileTextInput
+                        label={'Manager'}
+                        value={`${profileData?.manager_id?.[1]}`}
+                        editable={false}
+                    />
+                    <ProfileTextInput
+                        label={'Company Location'}
+                        value={`${profileData?.company_location?.[1]}`}
+                        editable={false}
+                    />
+                    <ProfileTextInput
+                        label={'Work Email'}
+                        value={`${profileData?.work_email}`}
+                        editable={false}
+                    />
+                    <ProfileTextInput
+                        label={'Work Mobile'}
+                        value={`${profileData?.mobile_phone}`}
+                        editable={false}
+                    />
+                    <ProfileTextInput
+                        label={'Joining Date'}
+                        value={`${profileData?.joining_date}`}
+                        editable={false}
+                    />
+                    <ProfileTextInput
+                        label={'Service Years'}
+                        value={`${profileData?.no_of_years}`}
+                        editable={false}
+                    />
+                    <ProfileTextInput
+                        label={'Nationality Type'}
+                        value={profileData?.nationality_type == "non_local"  ? 'Non Local': 'Local'}
+                        editable={false}
+                    />
+                    <ProfileTextInput
+                        label={'Nationality'}
+                        value={`${profileData?.country_id[1]}`}
+                        editable={false}
+                    />
+                    <ProfileTextInput
+                        label={'Date of Birth'}
+                        value={`${profileData?.birthday}`}
+                        editable={false}
+                    />
+
+
                 </View>
-
-
-                <ProfileTextInput
-                    label={'Name'}
-                    value={profileData?.name}
-                    editable={false}
-                />
-
-                <ProfileTextInput
-                    label={'CNIC'}
-                    value={profileData?.cnic}
-                    editable={false}
-                />
-                <ProfileTextInput
-                    label={'Shift'}
-                    value={profileData?.shift?.name}
-                    editable={false}
-                />
-                <ProfileTextInput
-                    label={'Address'}
-                    value={profileData?.address}
-                    editable={editable}
-                />
-                <ProfileTextInput
-                    label={'Remaining Medical Claims'}
-                    value={`${profileData?.remaining_medical_claim}`}
-                    editable={false}
-                />
-                <ProfileTextInput
-                    label={'Job Status'}
-                    value={profileData?.job_status ? 'Currently Employed' : 'Not Employed'}
-                    editable={false}
-                />
-                <ProfileTextInput
-                    label={'Remaining Leaves'}
-                    value={`${profileData?.leave_remaining}`}
-                    editable={false}
-                />
 
                 {/* <View style={styles.infoView}>
 

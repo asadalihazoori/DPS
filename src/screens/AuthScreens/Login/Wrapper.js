@@ -42,8 +42,8 @@ const Wrapper = ({ navigation }) => {
             <View style={styles.mainView}>
 
                 <TextInputAuth
-                    label={'Username or Email'}
-                    placeholder={'Email'}
+                    label={'Username'}
+                    placeholder={'Enter username'}
                     value={inputs.username}
                     error={inputs?.errors?.username}
                     onChangeText={(text) => handleOnChange('username', text)}
@@ -51,16 +51,17 @@ const Wrapper = ({ navigation }) => {
 
                 <TextInputAuth
                     label={'Password'}
-                    placeholder={'Password'}
+                    placeholder={'Enter password'}
                     value={inputs.password}
                     marginTop={8}
                     error={inputs?.errors?.password}
                     onChangeText={(text) => handleOnChange('password', text)}
+                    password={true}
                 />
 
-                <TouchableOpacity style={styles.forgetView}>
+                {/* <TouchableOpacity style={styles.forgetView}>
                     <Text style={[FontStyle.Regular16_500, styles.forgetText]}>Forget Password ?</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
 
 
             </View>
@@ -72,7 +73,7 @@ const Wrapper = ({ navigation }) => {
                 />
             </View>
 
-            <Loader loading={loading} />
+            <Loader loading={loading} title={'Signing In...'} />
 
             {/* <Spinner
                 visible={loading}

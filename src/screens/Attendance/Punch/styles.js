@@ -88,8 +88,8 @@ export const styles = StyleSheet.create({
     cardView: {
         ...Theme.Shadow,
         borderWidth: 0,
-        marginHorizontal: 4,
-        elevation:3,
+        // marginHorizontal: 4,
+        elevation: 3,
         // paddingVertical: 8,
         // borderRadius: 8,
         // backgroundColor: '#FFF',

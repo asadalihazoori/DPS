@@ -1,5 +1,5 @@
 import { View, Text, SafeAreaView, Image, ScrollView, TouchableOpacity, Button } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { styles } from './styles'
 import Theme from '../../theme/theme'
 import MainHeader from '../../components/Headers/MainHeader'
@@ -11,13 +11,98 @@ import DashboardCard from '../../components/Cards/DashboardCard'
 import { useSelector } from 'react-redux'
 import { Icons } from '../../assets/SvgIcons/Icons'
 import DashboardNotifyCard from '../../components/Cards/DashboardNotifyCard'
+import moment from 'moment'
 
 const Dashboard = ({ navigation }) => {
 
     const [recents, setOpenRecent] = useState(false);
+    const attendanceData = useSelector((state) => state.attendance);
+    // console.log(attendanceData)
 
 
-    const name = useSelector((state) => state.employeeProfile.data.name);
+    const [utcTime, setUtcTime] = useState('');
+    const [utcDate, setUtcDate] = useState('');
+    const [localTime, setLocalTime] = useState('');
+
+    // useEffect(() => {
+    //     const updateTimes = () => {
+    //         const now = new Date();
+
+    //         // Get UTC time
+    //         const utcTimeString = now.toISOString();
+
+    //         // Get UTC date
+    //         const utcDateString = new Intl.DateTimeFormat('en-GB', {
+    //             year: 'numeric',
+    //             month: 'long',
+    //             day: 'numeric',
+    //         }).format(now);
+
+    //         // Get local time
+    //         const localTimeString = new Intl.DateTimeFormat(undefined, {
+    //             hour: 'numeric',
+    //             minute: 'numeric',
+    //             second: 'numeric',
+    //             timeZoneName: 'short',
+    //         }).format(now);
+
+    //         setUtcTime(utcTimeString);
+    //         setUtcDate(utcDateString);
+    //         setLocalTime(localTimeString);
+    //     };
+
+    //     // Update times every second
+    //     const intervalId = setInterval(updateTimes, 1000);
+
+    //     // Initial update
+    //     updateTimes();
+
+    //     // Clean up the interval on component unmount
+    //     return () => clearInterval(intervalId);
+    // }, []);
+
+
+    // const [utcTime1, setUtcTime1] = useState('');
+    // const [utcDate1, setUtcDate1] = useState('');
+    // const [localTime1, setLocalTime1] = useState('');
+
+    // useEffect(() => {
+    //     const updateTimes = () => {
+    //         const now = moment();
+    //         // console.log(now);
+
+    //         // Get UTC time
+    //         const utcTimeString = now.toISOString();
+    //         const utcDateTime = now.format('YYYY-MM-DD hh:mm:ss');
+
+
+    //         // Get UTC date
+    //         const utcDateString = now.format('YYYY-MM-DD');
+
+    //         // Get local time
+    //         const localTimeString = now.format('hh:mm A');
+
+    //         const utcDateTimeString = now.utc().format('YYYY-MM-DD hh:mm:ss');
+
+
+    //         setUtcTime1(utcDateTimeString);
+    //         setUtcDate1(utcDateString);
+    //         setLocalTime1(localTimeString);
+    //     };
+
+    //     // Update times every second
+    //     const intervalId = setInterval(updateTimes, 1000);
+
+    //     // Initial update
+    //     updateTimes();
+
+    //     // Clean up the interval on component unmount
+    //     return () => clearInterval(intervalId);
+    // }, []);
+
+
+
+    const name = useSelector((state) => state?.employeeProfile?.data?.name);
     return (
         <SafeAreaView style={Theme.SafeArea}>
 
@@ -28,15 +113,51 @@ const Dashboard = ({ navigation }) => {
                 <View style={styles.textView}>
                     <Text style={[FontStyle.Regular14, { fontWeight: '400', color: COLORS.grey4 }]}>Welcome back,</Text>
                     <View style={{ flexDirection: 'row', marginTop: 4, }}>
-                        <Text style={[FontStyle.Regular16_500]}>Hello {name}</Text>
-                        <SvgXml xml={Icons.hand} style={{ marginLeft: 4, alignSelf: 'center' }} />
+                        <View style={{ flex: 1, }}>
+                            <Text style={[FontStyle.Regular16_500]}>Hello {name}</Text>
+                        </View>
+                        {/* <View style={{ flex: 1, justifyContent: 'center' }}>
+                            <SvgXml xml={Icons.hand} style={{ marginHorizontal: 6, alignSelf: 'center' }} />
+                        </View> */}
 
                     </View>
                 </View>
 
                 <View style={styles.featureView}>
-
                     <View style={styles.row}>
+
+
+                        <DashboardCard
+                            icon={DashboardIcons.attendance}
+                            title={'Attendance'}
+                            onPress={() => navigation.navigate('Attendance')}
+                        />
+
+                        <DashboardCard
+                            icon={DashboardIcons.payslip}
+                            title={'Payslip'}
+                            onPress={() => navigation.navigate('EmployeePayslip')}
+                        />
+
+                    </View>
+                    {/*
+                     <View>
+
+                        <Text>UTC Date: {utcDate}</Text>
+                        <Text>UTC Time: {utcTime}</Text>
+                        <Text>Local Time: {localTime}</Text>
+                    </View>
+
+                    <Text>-----------------------</Text>
+                */}
+                    {/* <View>
+
+                        <Text>UTC Date: {utcDate1}</Text>
+                        <Text>UTC Time: {utcTime1}</Text>
+                        <Text>Local Time: {localTime1}</Text>
+                    </View> */}
+
+                    {/* <View style={styles.row}>
 
                         <DashboardCard
                             icon={DashboardIcons.Leaves}
@@ -51,9 +172,9 @@ const Dashboard = ({ navigation }) => {
                             onPress={() => navigation.navigate('Attendance')}
                         />
 
-                    </View>
+                    </View> */}
 
-                    <View style={styles.row}>
+                    {/* <View style={styles.row}>
 
                         <DashboardCard
                             icon={DashboardIcons.medical}
@@ -67,9 +188,9 @@ const Dashboard = ({ navigation }) => {
                             onPress={() => navigation.navigate('LeaveRequets')}
                         />
 
-                    </View>
+                    </View> */}
 
-                    <View style={styles.row}>
+                    {/* <View style={styles.row}>
 
                         <DashboardCard
                             icon={DashboardIcons.timesheet}
@@ -83,9 +204,9 @@ const Dashboard = ({ navigation }) => {
                             onPress={() => navigation.navigate('EmployeePayslip')}
                         />
 
-                    </View>
+                    </View> */}
 
-                    <View style={[styles.row, { marginBottom: 0 }]}>
+                    {/* <View style={[styles.row, { marginBottom: 0 }]}>
 
                         <DashboardCard
                             icon={DashboardIcons.shift}
@@ -100,13 +221,13 @@ const Dashboard = ({ navigation }) => {
                             notify={true}
                         />
 
-                    </View>
+                    </View> */}
 
 
                 </View>
 
 
-                <View style={{ marginTop: 24 }}>
+                {/* <View style={{ marginTop: 24 }}>
 
                     <TouchableOpacity style={{
                         paddingHorizontal: 8, borderRadius: 8,
@@ -130,7 +251,7 @@ const Dashboard = ({ navigation }) => {
 
                         </View>}
 
-                </View>
+                </View> */}
 
 
 
