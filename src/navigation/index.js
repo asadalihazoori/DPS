@@ -5,13 +5,20 @@ import { EmployeeProfile, LeaveRequets, Leave_Details, Location, LocationOld, On
 import DrawerNavigation from './DrawerNavigation';
 import Login from '../screens/AuthScreens/Login';
 import BottomTab from './BottomTab';
+import { useSelector } from 'react-redux';
 
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
+
+    const user = useSelector(state => state.signin)
+    console.log(user);
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName='Onbording1' screenOptions={{ headerShown: false }}>
+            <Stack.Navigator
+                // initialRouteName='Onbording1' 
+                initialRouteName={user.firstLogin ? user.loggedIn ? 'DrawerNavigation' : 'Login' : 'Onbording1'}
+                screenOptions={{ headerShown: false }}>
 
                 <Stack.Screen name='Onbording1' component={Onbording1} />
                 <Stack.Screen name='Onbording2' component={Onbording2} />

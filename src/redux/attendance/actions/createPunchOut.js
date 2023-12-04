@@ -47,6 +47,7 @@ export const createPunchOut = ({ uid, navigation, time, latitude, longitude, dat
                 }))
                 setFreeze(false)
                 setTitle(`Punched Out at ${time?.time}`);
+                navigation.goBack();
                 // setTitle(`Punched Out at ${time?.time.format('h:mm A')}`);
 
             }

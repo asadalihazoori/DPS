@@ -15,17 +15,18 @@ import { FontStyle } from '../theme/FontStyle';
 import CustomDrawerItem from './Drawer/DrawerItem';
 import Theme from '../theme/theme';
 import { Icons } from '../assets/SvgIcons/Icons';
+import { logout_user } from '../redux/users/user.actions';
 
 const CustomDrawer1 = (props) => {
 
     const dispatch = useDispatch();
     const backgroundImage = useSelector((state) => state.backgroundImage.image);
 
-    const launchLibrary = () => {
+    // const launchLibrary = () => {
 
-        dispatch(getBackgroundImage());
+    //     dispatch(getBackgroundImage());
 
-    }
+    // }
 
 
 
@@ -237,6 +238,7 @@ const CustomDrawer1 = (props) => {
                     title={'Logout'}
                     navigate={() => {
                         const navigation = props.navigation;
+                        dispatch(logout_user(false))
                         navigation.replace('Login')
                         // siginOut({ uid, navigation })
                     }}
