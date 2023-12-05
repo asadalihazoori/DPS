@@ -149,6 +149,7 @@ import { StyleSheet } from 'react-native'
 import { COLORS } from '../../theme/colors'
 import { Icons } from '../../assets/SvgIcons/Icons'
 import { FontStyle } from '../../theme/FontStyle'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 
 
@@ -168,6 +169,7 @@ const stylesOld = StyleSheet.create({
 })
 
 import { Dimensions } from 'react-native';
+import Theme from '../../theme/theme';
 
 
 const Swipe = ({ navigation, onSlide, freeze, title }) => {
@@ -222,6 +224,8 @@ const Swipe = ({ navigation, onSlide, freeze, title }) => {
     return (
         <View
             style={{
+                ...Theme.Shadow,
+                borderWidth: 0,
                 width: '100%',
                 height: 50,
                 borderRadius: 10,
@@ -233,9 +237,9 @@ const Swipe = ({ navigation, onSlide, freeze, title }) => {
                 <Animated.View
                     style={[
                         {
-                            width: 40,
-                            height: 40,
-                            backgroundColor: COLORS.background1,
+                            width: 50,
+                            height: 50,
+                            // backgroundColor: COLORS.background1,
                             borderRadius: 10,
                             position: 'absolute',
                             justifyContent: 'center',
@@ -244,7 +248,14 @@ const Swipe = ({ navigation, onSlide, freeze, title }) => {
                         },
                         AnimatedStyle,
                     ]}>
-                    <SvgXml xml={Icons.punchArrow} width={26} height={26} />
+                    <Icon
+                        // onPress={() => setHidePassword(!hidePassword)}
+                        name={'chevron-triple-left'}
+                        style={{
+                            color: COLORS.white, fontSize: 50,
+                        }}
+                    />
+                    {/* <SvgXml xml={Icons.punchArrow} width={26} height={26} /> */}
                 </Animated.View>
             </PanGestureHandler>
 
@@ -252,7 +263,7 @@ const Swipe = ({ navigation, onSlide, freeze, title }) => {
                 <Animated.Text style={[stylesOld.text, { marginRight: 0, }]}>{title}</Animated.Text>
             </View>)
                 :
-                (<Animated.Text style={[AnimatedTextStyle, stylesOld.text]}>
+                (<Animated.Text style={[AnimatedTextStyle, stylesOld.text,{color:'white'}]}>
                     {'Swipe Left to Punch Out'}
                 </Animated.Text>)
             }

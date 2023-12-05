@@ -168,16 +168,18 @@ const LocationOld = ({ navigation, route }) => {
                     style={{ flex: 1 }}
 
                     initialRegion={{
-                        latitude: latitude,
-                        longitude: longitude,
+                        latitude: 24.7136,
+                        longitude: 46.6753,
+                        // latitude: latitude,
+                        // longitude: longitude,
                         latitudeDelta: 0.01,
                         longitudeDelta: 0.01
 
                     }}
 
                     region={{
-                        latitude: latitude,
-                        longitude: longitude,
+                        latitude: latitude ? latitude : 24.7136,
+                        longitude: longitude ? longitude : 46.6753,
                         latitudeDelta: 0.01,
                         longitudeDelta: 0.01
 

@@ -49,7 +49,8 @@ export const styles = StyleSheet.create({
 
     bottomView: {
         justifyContent: 'flex-end',
-        marginBottom: 24,
+        paddingBottom: 24,
+        backgroundColor: COLORS.background  
         // borderWidth: 1,
     },
 

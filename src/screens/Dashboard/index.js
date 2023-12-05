@@ -1,5 +1,5 @@
 import { View, Text, SafeAreaView, Image, ScrollView, TouchableOpacity, Button } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { styles } from './styles'
 import Theme from '../../theme/theme'
 import MainHeader from '../../components/Headers/MainHeader'
@@ -12,6 +12,7 @@ import { useSelector } from 'react-redux'
 import { Icons } from '../../assets/SvgIcons/Icons'
 import DashboardNotifyCard from '../../components/Cards/DashboardNotifyCard'
 import moment from 'moment'
+
 
 const Dashboard = ({ navigation }) => {
 
@@ -102,6 +103,8 @@ const Dashboard = ({ navigation }) => {
 
 
 
+
+
     const name = useSelector((state) => state?.employeeProfile?.data?.name);
     return (
         <SafeAreaView style={Theme.SafeArea}>
@@ -140,6 +143,8 @@ const Dashboard = ({ navigation }) => {
                         />
 
                     </View>
+
+                    
                     {/*
                      <View>
 
@@ -395,6 +400,12 @@ const Dashboard = ({ navigation }) => {
                 
             </View> */}
                 {/* </View> */}
+                {/* <View style={{ borderWidth: 1 }}>
+
+                    <SvgXml xml={`<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 100 125" style="enable-background:new 0 0 100 100;" xml:space="preserve"><style type="text/css">
+	.st0{fill:none;}
+    </style><rect y="0" class="st0" width="100" height="100"/><g><g><polygon points="17.4,48.2 27.2,48.2 49.6,29.1 72.7,48.2 82.6,48.2 82.6,48.1 49.6,20.8   "/></g></g><g><g><polygon points="17.4,63.7 27.2,63.7 49.6,44.6 72.7,63.7 82.6,63.7 82.6,63.6 49.6,36.3   "/></g></g><g><g><polygon points="17.4,79.2 27.2,79.2 49.6,60.1 72.7,79.2 82.6,79.2 82.6,79.1 49.6,51.8   "/></g></g></svg>`} />
+                </View> */}
 
             </ScrollView>
         </SafeAreaView >

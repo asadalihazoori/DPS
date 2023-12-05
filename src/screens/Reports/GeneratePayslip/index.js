@@ -14,12 +14,15 @@ import { getCurrentDate } from '../../../utilities/CurretDate'
 import inputValidation from '../../../utilities/Validations/YupValidate'
 import { PayslipScema } from '../../../utilities/Validations'
 import Loader from '../../../components/Loader'
+import { GetPaySlipAPI } from '../../../utilities/GetPaySlipAPI'
+import { SvgXml } from 'react-native-svg'
 
 const GeneratePayslip = ({ navigation }) => {
 
     const { employeeID } = useSelector((state) => state.employeeProfile);
+    const { uid } = useSelector((state) => state.signin);
 
-    console.log(employeeID);
+    // console.log(employeeID);
 
     const [payslipdata, setpayslipData] = useState(null);
     const [detail, setOpenDetail] = useState(false);
@@ -130,8 +133,9 @@ const GeneratePayslip = ({ navigation }) => {
     }
 
 
+
     const Item = ({ title, value, marginBottom }) => (
-        <View style={{ flexDirection: 'row', marginBottom: marginBottom ? 0 : 12, }}>
+        <View style={{ flexDirection: 'row', marginVertical: 6 }}>
             <View style={{ flex: 1 }}>
                 <Text style={[FontStyle.Regular12_400, { color: COLORS.grey5 }]}>{title}</Text>
             </View>
@@ -147,7 +151,7 @@ const GeneratePayslip = ({ navigation }) => {
             disabled={disabled}
             style={[Theme.Shadow, {
                 backgroundColor: !disabled ? COLORS.blue : COLORS.grey4,
-                zIndex: -1,
+                // zIndex: -1,
                 // width: 88, 
                 paddingHorizontal: 16,
                 height: 32, justifyContent: 'center',
@@ -228,6 +232,8 @@ const GeneratePayslip = ({ navigation }) => {
         { value: '2021', label: '2021' },
     ];
 
+    // setLoading(false);
+
 
     return (
         <View style={styles.container}>
@@ -265,7 +271,6 @@ const GeneratePayslip = ({ navigation }) => {
                         onChange={(selectedMonth) => handleInputChange('month', selectedMonth)} />
                 </View>
             </View>
-
 
             {/* <View style={{ flexDirection: 'row' }}>
 
@@ -311,17 +316,17 @@ const GeneratePayslip = ({ navigation }) => {
             </View>
 
             {detail &&
-                <View style={{ zIndex: -1 }}>
-                    <ScrollView>
-                        <View style={{
-                            backgroundColor: COLORS.white,
-                            borderRadius: 8,
-                            marginTop: 12,
-                            paddingVertical: 12,
-                            paddingHorizontal: 30,
-                        }}>
+                // <View style={{ zIndex: -1 }}>
+                <ScrollView style={{ zIndex: -1, marginTop: 12 }} showsVerticalScrollIndicator={false}>
+                    <View style={{
+                        backgroundColor: COLORS.white,
+                        borderRadius: 8,
+                        marginTop: 12,
+                        // paddingVertical: 12,
+                        paddingHorizontal: 30, paddingVertical: 8,
+                    }}>
 
-                            {/* <Item title={'Month/Year'} value={'November, 2023'} />
+                        {/* <Item title={'Month/Year'} value={'November, 2023'} />
                         <Item title={'Gross Salary'} value={'Pkr 50,000/-'} />
                         <Item title={'Basic Salary'} value={'Pkr 35,000/-'} />
                         <Item title={'Other Allowances'} value={'Pkr 10,000/-'} />
@@ -330,22 +335,35 @@ const GeneratePayslip = ({ navigation }) => {
                         <Item title={'Net Salary'} value={'Pkr 43,000/-'} marginBottom={true} /> */}
 
 
-                            {payslipdata?.map((item, index) => (
-                                <Item key={index} title={item.name} value={item.total} />
-                            ))}
+                        {payslipdata?.map((item, index) => (
+                            <Item key={index} title={item.name} value={item.total} />
+                        ))}
 
-                        </View>
-                    </ScrollView>
-                    {/* <View style={{ marginTop: 16, justifyContent: 'flex-end', flexDirection: 'row' }}>
+                    </View>
+                    <View style={{
+                        marginVertical: 16, alignItems: 'flex-end'
+
+                        // justifyContent: 'flex-end', flexDirection: 'row' 
+                    }}>
                         <Button title={'Download PDF'}
-                            onPress={() => { }} />
-                        <Button title={'Print'}
-                            onPress={() => { }} />
-                    </View> */}
-                </View>
+                            handlePress={() => {
+                                setLoading(true);
+                                GetPaySlipAPI(uid, `${inputs.year}-${inputs.month}-01`, setLoading, navigation);
+                            }}
+                        // handlePress={() => {
+                        //     setLoading(true);
+                        //     // getpaySlip()
+                        //     GetPaySlipAPI();
+                        //     // setOpenDetail(!detail)
+                        // }}
+                        />
+                        {/* <Button title={'Print'}
+                            onPress={() => { }} /> */}
+                    </View>
+                </ScrollView>
+                // </View>
             }
-            <Loader loading={loading} />
-            {/* </ScrollView> */}
+            <Loader loading={loading} title={'Loading...'} />
         </View>
     )
 }

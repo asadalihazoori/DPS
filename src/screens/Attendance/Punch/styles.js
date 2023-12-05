@@ -148,8 +148,9 @@ export const styles = StyleSheet.create({
         color: COLORS.darkBlack,
         // lineHeight: 16,
         // letterSpacing: 0,
-        alignSelf: 'center',
+        // alignSelf: 'center',
     },
+
 
     bottomView: {
         justifyContent: 'flex-end',

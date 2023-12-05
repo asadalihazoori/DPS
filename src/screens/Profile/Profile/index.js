@@ -29,12 +29,22 @@ const Profile = ({ navigation }) => {
 
                     <View style={styles.imageView}>
                         <View>
+
+                            {profileData?.image_1920 ?
+
+                                <Avatar.Image
+                                    source={{ uri: `data:image/jpeg;base64,${profileData?.image_1920}` }}
+                                    size={90}
+                                />
+                                :
+                                <SvgXml xml={Icons.personIcon} />
+                            }
                             {/* <Avatar.Image
                                 source={{ uri: `data:image/jpeg;base64,${profileData?.image}` }}
                                 size={90}
                             /> */}
 
-                            <SvgXml xml={Icons.personIcon} />
+                            {/* <SvgXml xml={Icons.personIcon} /> */}
                             {/* <View style={styles.cameraIconView}>
                                 <SvgXml xml={DrawerIcons.camera} />
                             </View> */}

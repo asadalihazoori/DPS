@@ -15,6 +15,7 @@ import SplashScreen from "react-native-splash-screen";
 import { useDispatch, useSelector } from "react-redux";
 import moment from 'moment';
 import { RESET_ATTENDANCE } from "../redux/attendance/attendance.types";
+import { getPermissionJust } from "../screens/Attendance/Location/AccessLocation copy";
 
 const Drawer = createDrawerNavigator();
 
@@ -22,6 +23,7 @@ const DrawerNavigation = ({ navigation }) => {
 
     useEffect(() => {
         SplashScreen.hide();
+        getPermissionJust();
     }, []);
 
     const dispatch = useDispatch();

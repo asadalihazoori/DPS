@@ -55,7 +55,11 @@ export function getCoordinates() {
       (error) => {
         reject(error);
       },
-      { enableHighAccuracy: true, timeout: 20000, maximumAge: 3000 }
+      { enableHighAccuracy: true, timeout: 30000, maximumAge: 3000 }
     );
-  })
+  }).catch((error) => {
+    // Handle the promise rejection here
+    getPermissionJust();
+    console.log("Error getting coordinates:", error);
+  });
 }

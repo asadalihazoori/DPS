@@ -1,7 +1,8 @@
-import { View, Text, SafeAreaView } from 'react-native'
+import { View, Text, SafeAreaView, Image } from 'react-native'
 import React, { useState } from 'react'
 import MapView from 'react-native-maps'
 import { SvgXml } from 'react-native-svg'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { PanGestureHandler } from 'react-native-gesture-handler';
 import Animated, { Extrapolate, interpolate, runOnJS, useAnimatedGestureHandler, useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
 // const Swipe = ({ navigation, onSlide, time }) => {
@@ -141,18 +142,19 @@ const stylesOld = StyleSheet.create({
         flex: 1,
     },
 
-   
+
 
     text: {
         ...FontStyle.Regular14,
         color: COLORS.white,
     },
 
-    
+
 
 })
 
 import { Dimensions } from 'react-native';
+import Theme from '../../theme/theme';
 
 
 const Swipe = ({ navigation, onSlide, freeze, title }) => {
@@ -210,6 +212,8 @@ const Swipe = ({ navigation, onSlide, freeze, title }) => {
     return (
         <View
             style={{
+                ...Theme.Shadow,
+                borderWidth:0,
                 width: '100%',
                 height: 50,
                 borderRadius: 10,
@@ -221,18 +225,32 @@ const Swipe = ({ navigation, onSlide, freeze, title }) => {
                 <Animated.View
                     style={[
                         {
-                            width: 40,
-                            height: 40,
-                            backgroundColor: COLORS.background1,
+                            width: 50,
+                            height: 50,
+                            // backgroundColor: COLORS.background1,
                             borderRadius: 10,
+                            // borderWidth: 1,
                             position: 'absolute',
                             justifyContent: 'center',
                             alignItems: 'center',
                             left: 0,
+                            // ...Theme.Shadow,
+                            // backgroundColor: 'transparent'
+
                         },
                         AnimatedStyle,
                     ]}>
-                    <SvgXml xml={Icons.punchArrow} width={26} height={26} style={{ transform: [{ scaleX: -1 }] }} />
+
+
+                    <Icon
+                        // onPress={() => setHidePassword(!hidePassword)}
+                        name={'chevron-triple-right'}
+                        style={{
+                            color: COLORS.white, fontSize: 50,
+                        }}
+                    />
+                    {/* <Image source={require('../../assets/up-arrow32.png')} height={16} width={16} /> */}
+                    {/* <SvgXml xml={Icons.punchArrow} width={26} height={26} style={{ transform: [{ scaleX: -1 }] }} /> */}
                 </Animated.View>
             </PanGestureHandler>
 

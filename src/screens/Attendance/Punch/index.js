@@ -11,19 +11,24 @@ import { getCurrentDate } from '../../../utilities/CurretDate'
 import { getCoordinates } from '../Location/AccessLocation copy'
 import { useSelector } from 'react-redux'
 import moment from 'moment';
-import ProgressCircle from 'react-native-progress-circle'
+// import ProgressCircle from 'react-native-progress-circle'
 import Loader from '../../../components/Loader'
+import CircularProgress from 'react-native-circular-progress-indicator';
 
+const Punch = ({ navigation, route }) => {
 
-const Punch = ({ navigation }) => {
+    // const initalRoute = route.params;
 
     const [lat, setLatitude] = useState(0);
     const [long, setLongitude] = useState(0);
-    // const [loading, setLoading] = useState(false);
     const [currentDate, setCurrentDate] = useState('');
+
+    const [hours, sethours] = useState(0);
+    const [minutes, setminutes] = useState(0);
 
 
     const attendanceData = useSelector((state) => state.attendance);
+    // console.log(attendanceData);
     const punchStatus = attendanceData?.punchInStatus ? 'Punch-Out' : 'Punch-In'
 
     useEffect(() => {
@@ -36,24 +41,70 @@ const Punch = ({ navigation }) => {
 
             })
 
+        calculateWorkedTime();
+
         // getPermissionJust();
 
     }, [])
 
-    const [currentTime, setCurrentTime] = useState(moment());
+    // const [currentTime, setCurrentTime] = useState(moment());
 
     useEffect(() => {
         if (attendanceData.punchInStatus && !attendanceData.todayAttendance) {
             const intervalId = setInterval(() => {
-                setCurrentTime(moment());
-            }, 50000);
 
+                calculateWorkedTime();
+
+
+
+
+
+                //     if (attendanceData.todayAttendance) {
+                //         const punchInTime = moment(attendanceData.punchInTime);
+                //         const punchOutTime = moment(attendanceData.punchOutTime);
+                //         const duration = moment.duration(punchOutTime.diff(punchInTime));
+                //         const hours = Math.floor(duration.asHours());
+                //         const minutes = Math.floor(duration.asMinutes()) % 60;
+
+                //         // return { hours, minutes };
+
+                //         sethours(hours);
+                //         setminutes(minutes);
+                //     }
+                //     else if (attendanceData.punchInStatus) {
+                //         const punchInTime = moment(attendanceData.punchInTime);
+                //         const duration = moment.duration(moment().diff(punchInTime));
+                //         const hours = Math.floor(duration.asHours());
+                //         const minutes = Math.floor(duration.asMinutes()) % 60;
+
+                //         sethours(hours);
+                //         setminutes(minutes);
+                //     }
+                //     else {
+
+                //         sethours(0);
+                //         setminutes(0);
+                //     }
+
+
+
+
+
+
+
+            }, 55000);
             return () => clearInterval(intervalId);
         }
-    }, [attendanceData.punchInStatus]);
+        else {
+            calculateWorkedTime();
+        }
+    }, [minutes, attendanceData.punchInStatus, attendanceData.punchOutStatus]);
+    // }, [attendanceData.punchInStatus]); 
 
 
     const calculateWorkedTime = () => {
+        // console.log("cal")
+
         if (attendanceData.todayAttendance) {
             const punchInTime = moment(attendanceData.punchInTime);
             const punchOutTime = moment(attendanceData.punchOutTime);
@@ -61,7 +112,10 @@ const Punch = ({ navigation }) => {
             const hours = Math.floor(duration.asHours());
             const minutes = Math.floor(duration.asMinutes()) % 60;
 
-            return { hours, minutes };
+            // return { hours, minutes };
+
+            sethours(hours);
+            setminutes(minutes);
         }
         else if (attendanceData.punchInStatus) {
             const punchInTime = moment(attendanceData.punchInTime);
@@ -69,15 +123,43 @@ const Punch = ({ navigation }) => {
             const hours = Math.floor(duration.asHours());
             const minutes = Math.floor(duration.asMinutes()) % 60;
 
-            return { hours, minutes };
+            sethours(hours);
+            setminutes(minutes);
         }
         else {
 
-            return { hours: 0, minutes: 0 };
+            sethours(0);
+            setminutes(0);
         }
-    };
 
-    const { hours, minutes } = calculateWorkedTime();
+    }
+
+
+    // const calculateWorkedTime = () => {
+    //     if (attendanceData.todayAttendance) {
+    //         const punchInTime = moment(attendanceData.punchInTime);
+    //         const punchOutTime = moment(attendanceData.punchOutTime);
+    //         const duration = moment.duration(punchOutTime.diff(punchInTime));
+    //         const hours = Math.floor(duration.asHours());
+    //         const minutes = Math.floor(duration.asMinutes()) % 60;
+
+    //         return { hours, minutes };
+    //     }
+    //     else if (attendanceData.punchInStatus) {
+    //         const punchInTime = moment(attendanceData.punchInTime);
+    //         const duration = moment.duration(moment().diff(punchInTime));
+    //         const hours = Math.floor(duration.asHours());
+    //         const minutes = Math.floor(duration.asMinutes()) % 60;
+
+    //         return { hours, minutes };
+    //     }
+    //     else {
+
+    //         return { hours: 0, minutes: 0 };
+    //     }
+    // };
+
+    // const { hours, minutes } = calculateWorkedTime();
     const totalMinutesWorked = (hours * 60) + minutes;
     const totalMinutesInDay = 8 * 60;
     const percentageWorked = Math.floor((totalMinutesWorked / totalMinutesInDay) * 100);
@@ -104,7 +186,7 @@ const Punch = ({ navigation }) => {
 
                     </View> */}
 
-                    <ProgressCircle
+                    {/* <ProgressCircle
                         percent={percentageWorked > 100 ? 100 : percentageWorked}
                         radius={45}
                         borderWidth={4}
@@ -114,7 +196,31 @@ const Punch = ({ navigation }) => {
                     >
                         <Text style={styles.percentageText}>{percentageWorked > 100 ? 100 : percentageWorked}%</Text>
                         <Text style={styles.percentageText}>Completed</Text>
-                    </ProgressCircle>
+                    </ProgressCircle> */}
+
+
+                    <CircularProgress
+                        // value={140}
+                        value={percentageWorked > 100 ? 100 : percentageWorked}
+                        radius={45}
+                        progressValueColor={'black'}
+                        maxValue={100}
+                        title={'Completed'}
+                        titleStyle={[styles.percentageText, { marginTop: 0 }]}
+                        activeStrokeWidth={4}
+                        inActiveStrokeWidth={4}
+                        valueSuffix={'%'}
+                        activeStrokeColor='#FF824C'
+                        inActiveStrokeColor='#B2BBBB'
+
+                        progressValueStyle={styles.percentageText}
+                        valueSuffixStyle={[styles.percentageText, { marginTop: 0, marginLeft: 0 }]}
+                    // subtitleStyle={{borderWidth:1}}
+                    // valuePrefixStyle={{borderWidth:1}}
+                    />
+
+
+
 
                 </View>
                 <View style={{ justifyContent: "space-between" }}>

@@ -7,6 +7,7 @@ import { COLORS } from '../../../theme/colors';
 import { AuthContext } from '../../../context/AuthContext';
 import Loader from '../../../components/Loader';
 import { Checkbox } from 'react-native-paper';
+import CustomCheckBox from '../../../components/CheckBox';
 
 const Wrapper = ({ navigation }) => {
 
@@ -61,29 +62,15 @@ const Wrapper = ({ navigation }) => {
                     password={true}
                 />
 
-                <View style={{
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    borderColor: COLORS.black,
-                    // borderWidth: 1,
-                    marginTop: 10
-                }}>
-                    <Text style={[FontStyle.Regular14_500, { fontSize: 16, marginRight: 4 }]}>{'keep me Logged In'}</Text>
-
-                    <Checkbox
-                        status={inputs.loggedIn ? 'checked' : 'unchecked'}
+                <View>
+                    <CustomCheckBox
+                        status={inputs.loggedIn}
                         onPress={() => {
-                            // setChecked(!checked);
                             setInputs({
                                 ...inputs,
                                 ['loggedIn']: !inputs.loggedIn,
                             })
-                        }}
-
-                        color={COLORS.secondaryColor}
-                        uncheckedColor={COLORS.primaryColor}
-                    />
+                        }} />
                 </View>
 
                 {/* <TouchableOpacity style={styles.forgetView}>
