@@ -27,73 +27,41 @@ export const downloadPdf = async (b64Pdf, title, setLoading) => {
 
 
 
-        //     const granted = await PermissionsAndroid.request(
-        //         PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
-        //         {
-        //             title: 'Storage Permission',
-        //             message: 'App needs access to your storage to save files.',
-        //             buttonNeutral: 'Ask Me Later',
-        //             buttonNegative: 'Cancel',
-        //             buttonPositive: 'OK',
-        //         },
-        //     );
-        //     setLoading(false)
 
-        //     if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        //         console.log(granted);
-        //         console.log('Storage permission granted');
-        //         // Now you can perform your file operations
-        //     } else {
-        //         console.log('Storage permission denied');
-        //         // Handle the case where the user denied the permission
-        //     }
-        // } catch (err) {
-        //     console.warn(err);
-        // }
+        if (Platform.OS === 'android') {
 
+            PermissionsAndroid.request(
+                PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+                {
+                    title: 'Storage Permission',
+                    message: 'App needs access to storage to download the PDF.',
+                    buttonNeutral: 'Ask Me Later',
+                    buttonNegative: 'Cancel',
+                    buttonPositive: 'OK',
+                }
+            )
+                .then(async (granted) => {
+                    console.log(granted);
+                    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
 
+                        const pdfDir = `${RNFS.ExternalStorageDirectoryPath}/Download`;
+                        await RNFS.mkdir(pdfDir, { NSURLIsExcludedFromBackupKey: true });
 
+                        const pdfFilePath = `${pdfDir}/${title}`;
 
+                        await RNFS.writeFile(pdfFilePath, b64Pdf, 'base64');
 
-
+                        console.log('PDF Downloaded', `PDF saved to: ${pdfFilePath}`);
+                        setLoading(false);
+                        Alert.alert(`PDF Downloaded`, `PDF saved to: ${pdfFilePath}`);
 
 
-
-
-        // if (Platform.OS === 'android') {
-
-        //     PermissionsAndroid.request(
-        //         PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
-        //         {
-        //             title: 'Storage Permission',
-        //             message: 'App needs access to storage to download the PDF.',
-        //             buttonNeutral: 'Ask Me Later',
-        //             buttonNegative: 'Cancel',
-        //             buttonPositive: 'OK',
-        //         }
-        //     )
-        //         .then(async (granted) => {
-        //             console.log(granted);
-        //             if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-
-        //                 const pdfDir = `${RNFS.ExternalStorageDirectoryPath}/Download`;
-        //                 await RNFS.mkdir(pdfDir, { NSURLIsExcludedFromBackupKey: true });
-
-        //                 const pdfFilePath = `${pdfDir}/${title}`;
-
-        //                 await RNFS.writeFile(pdfFilePath, b64Pdf, 'base64');
-
-        //                 console.log('PDF Downloaded', `PDF saved to: ${pdfFilePath}`);
-        //                 setLoading(false);
-        //                 Alert.alert(`PDF Downloaded`, `PDF saved to: ${pdfFilePath}`);
-
-
-        //             } else {
-        //                 setLoading(false);
-        //                 Alert.alert('Storage Permission denied', 'Enable Permission to Write in Storage');
-        //             }
-        //         });
-        // }
+                    } else {
+                        setLoading(false);
+                        Alert.alert('Storage Permission denied', 'Enable Permission to Write in Storage');
+                    }
+                });
+        }
 
 
 
@@ -104,16 +72,16 @@ export const downloadPdf = async (b64Pdf, title, setLoading) => {
 
 
 
-        const pdfDir = `${RNFS.ExternalStorageDirectoryPath}/Download`;
-        await RNFS.mkdir(pdfDir, { NSURLIsExcludedFromBackupKey: true });
+        // const pdfDir = `${RNFS.ExternalStorageDirectoryPath}/Download`;
+        // await RNFS.mkdir(pdfDir, { NSURLIsExcludedFromBackupKey: true });
 
-        const pdfFilePath = `${pdfDir}/${title}`;
+        // const pdfFilePath = `${pdfDir}/${title}`;
 
-        await RNFS.writeFile(pdfFilePath, b64Pdf, 'base64');
+        // await RNFS.writeFile(pdfFilePath, b64Pdf, 'base64');
 
-        console.log('PDF Downloaded', `PDF saved to: ${pdfFilePath}`);
-        setLoading(false);
-        Alert.alert(`PDF Downloaded`, `PDF saved to: ${pdfFilePath}`);
+        // console.log('PDF Downloaded', `PDF saved to: ${pdfFilePath}`);
+        // setLoading(false);
+        // Alert.alert(`PDF Downloaded`, `PDF saved to: ${pdfFilePath}`);
 
 
 
