@@ -37,7 +37,7 @@ const TextInputAuth = ({
                 <TextInput
                     placeholder={placeholder}
                     onChangeText={onChangeText}
-                    placeholderTextColor={{ color: COLORS.grey3 }}
+                    placeholderTextColor={COLORS.grey3 }
                     value={value}
                     style={styles.textInput}
                     autoCapitalize='none'

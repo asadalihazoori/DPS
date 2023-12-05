@@ -15,6 +15,14 @@ const styles = StyleSheet.create({
         // lineHeight: 18,
 
     },
+
+
+    detailsView: {
+        backgroundColor: COLORS.white,
+        borderRadius: 8,
+        marginTop: 12,
+        paddingHorizontal: 30, paddingVertical: 8,
+    }
 })
 
 export default styles

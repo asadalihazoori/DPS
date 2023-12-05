@@ -13,10 +13,9 @@ export const GetPaySlipAPI = async (uid, dateStr, setLoading, navigation) => {
             "jsonrps": 2.0,
             "params": {
                 "employee_id": uid,
-                "date": dateStr
+                "date": `${dateStr}-01`
             }
         };
-
         const response = await getEmployeePayslipApi({ body, navigation });
         console.log(response?.data?.result);
 
@@ -24,7 +23,7 @@ export const GetPaySlipAPI = async (uid, dateStr, setLoading, navigation) => {
             // setLoading(false)
             // console.log(response?.data?.result?.response?.b64_pdf)
             const base64 = response?.data?.result?.response?.b64_pdf;
-            downloadPdf(base64, `Payslip ( ${dateStr} ).pdf`, setLoading)
+            downloadPdf(base64, `Wags Payslip ( ${dateStr} ).pdf`, setLoading)
         }
 
         else if (response?.data?.result?.status == 400) {

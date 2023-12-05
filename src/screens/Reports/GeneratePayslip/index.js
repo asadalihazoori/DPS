@@ -311,54 +311,26 @@ const GeneratePayslip = ({ navigation }) => {
                         // setOpenDetail(!detail)
                     }} />
 
-                {/* onPress={() => setOpenDetail(!detail)} /> */}
-
             </View>
 
             {detail &&
-                // <View style={{ zIndex: -1 }}>
-                <ScrollView style={{ zIndex: -1, marginTop: 12 }} showsVerticalScrollIndicator={false}>
-                    <View style={{
-                        backgroundColor: COLORS.white,
-                        borderRadius: 8,
-                        marginTop: 12,
-                        // paddingVertical: 12,
-                        paddingHorizontal: 30, paddingVertical: 8,
-                    }}>
-
-                        {/* <Item title={'Month/Year'} value={'November, 2023'} />
-                        <Item title={'Gross Salary'} value={'Pkr 50,000/-'} />
-                        <Item title={'Basic Salary'} value={'Pkr 35,000/-'} />
-                        <Item title={'Other Allowances'} value={'Pkr 10,000/-'} />
-                        <Item title={'PF Deduction'} value={'Pkr 5,000/-'} />
-                        <Item title={'Tax'} value={'2%'} />
-                        <Item title={'Net Salary'} value={'Pkr 43,000/-'} marginBottom={true} /> */}
-
+                // <View style={{}}>
+                <ScrollView style={{ marginTop: 12, zIndex: -1 }} showsVerticalScrollIndicator={false}>
+                    <View style={styles.detailsView}>
 
                         {payslipdata?.map((item, index) => (
                             <Item key={index} title={item.name} value={item.total} />
                         ))}
 
-                    </View>
-                    <View style={{
-                        marginVertical: 16, alignItems: 'flex-end'
 
-                        // justifyContent: 'flex-end', flexDirection: 'row' 
-                    }}>
+                    </View>
+                    <View style={{ marginVertical: 16, alignItems: 'flex-end' }}>
                         <Button title={'Download PDF'}
                             handlePress={() => {
                                 setLoading(true);
-                                GetPaySlipAPI(uid, `${inputs.year}-${inputs.month}-01`, setLoading, navigation);
+                                GetPaySlipAPI(uid, `${inputs.year}-${inputs.month}`, setLoading, navigation);
                             }}
-                        // handlePress={() => {
-                        //     setLoading(true);
-                        //     // getpaySlip()
-                        //     GetPaySlipAPI();
-                        //     // setOpenDetail(!detail)
-                        // }}
                         />
-                        {/* <Button title={'Print'}
-                            onPress={() => { }} /> */}
                     </View>
                 </ScrollView>
                 // </View>
