@@ -1,5 +1,5 @@
 import RNFS from 'react-native-fs';
-import { Alert } from 'react-native';
+import { Alert, Platform } from 'react-native';
 
 export const downloadPdf = async (b64Pdf, title, setLoading) => {
     try {
@@ -29,7 +29,7 @@ async function moveFileToDownloads(title, sourceFilePath, setLoading) {
     try {
 
 
-        const downloadsDir = RNFS.DownloadDirectoryPath;
+        const downloadsDir = Platform.OS == 'android' ? RNFS.DownloadDirectoryPath : RNFS.DocumentDirectoryPath;
         const timestamp = new Date().getTime().toString().substring(8, 12);
 
         const destinationFilePath = `${downloadsDir}/${title}_${timestamp}.pdf`;
