@@ -24,6 +24,12 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSApplicationCategoryType</key>
 	<string>NSAllowsArbitraryLoads</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Allow Gallery access to Upload Profile Image</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Allow location To Punch your attendance</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Allow location To Punch your attendance</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -31,8 +37,6 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Satoshi-Black.otf</string>
