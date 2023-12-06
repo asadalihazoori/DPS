@@ -6,15 +6,11 @@ import Theme from '../../../theme/theme'
 import { TabBar, TabView } from 'react-native-tab-view'
 import { FontStyle } from '../../../theme/FontStyle'
 import { COLORS } from '../../../theme/colors'
-import ApplyForLoans from '../../Loans/Apply_For_Loans'
-import LoansAdvances from '../../Loans/Loans_Advances'
-import ApprovedLoans from '../../Loans/ApprovedLoans'
 import Location from '../../Attendance/Location'
 import AttendanceHistory from '../../Attendance/AttendaceHistory'
 import Punch from '../../Attendance/Punch'
 import LocationOld from '../../Attendance/Location/indexOld'
-import { getPermission } from '../../Attendance/Location/AccessLocation'
-import { getPermissionJust } from '../../Attendance/Location/AccessLocation copy'
+import { getPermissionJust } from '../../Attendance/Location/AccessLocation'
 
 const Attendance = ({ navigation }) => {
 

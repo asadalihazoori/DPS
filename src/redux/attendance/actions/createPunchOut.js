@@ -1,14 +1,11 @@
 import { punchAttendanceApi } from "../../../utilities/api/apiController";
 import { Alert } from "react-native";
 import { punch_out } from "../attendance.action";
-import moment from "moment";
 
 
 export const createPunchOut = ({ uid, navigation, time, latitude, longitude, date, setTitle, setFreeze, employeeID }) => {
 
     return async (dispatch) => {
-
-        // console.log(moment(time.date).utc().format(), "WEEEEE")
 
         try {
 
@@ -25,8 +22,7 @@ export const createPunchOut = ({ uid, navigation, time, latitude, longitude, dat
                                 "date": time.date,
                                 "checkout": time.dateTime,
                                 "employee_id": employeeID,
-                                // "checkin": time.dateTime
-
+                                // "attendance_status": "Checkout"
 
                             }
                         ]

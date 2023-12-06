@@ -70,7 +70,6 @@ export const getEmployeeProfile = ({ uid, navigation, setLoading }) => {
                         routes: [
                             {
                                 name: 'DrawerNavigation',
-                                // You can also pass any params to 'DrawerNavigation' here if needed
                             },
                         ],
                     });
@@ -83,8 +82,6 @@ export const getEmployeeProfile = ({ uid, navigation, setLoading }) => {
 
 
             else if (response?.data?.error) {
-                // console.log('response?.data?.error');
-                // console.log(response?.data?.error);
                 Alert.alert(response?.data?.error?.message, `${response?.data?.error?.data?.message}`);
             }
 

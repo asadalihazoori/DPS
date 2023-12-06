@@ -5,10 +5,11 @@ const initialState = {
     data: null,
     employeeID: null,
     name: null,
-    shifts: null,
-    holidayStatus: null,
-    loanTypeList: null,
-    familyInfo: null,
+
+    // shifts: null,
+    // holidayStatus: null,
+    // loanTypeList: null,
+    // familyInfo: null,
 
 }
 
@@ -20,9 +21,9 @@ export const ProfileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 data: action.payload.data,
+                employeeID: action.payload.data.id,
                 name: action.payload.data.name,
                 // shifts: action.payload.data.shifts,
-                employeeID: action.payload.data.id,
                 // loanTypeList: action.payload.data.loan_type_list,
                 // holidayStatus: action.payload.data.holiday_status,
                 // familyInfo: action.payload.familyInfo

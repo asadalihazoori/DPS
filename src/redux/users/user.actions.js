@@ -4,7 +4,6 @@ import { LOGIN_USER, LOGOUT_USER } from "./user.types";
 export function login_user(data, loggedIn) {
     return {
         type: LOGIN_USER,
-        // payload: data
         payload: {
             data: data,
             loggedIn: loggedIn

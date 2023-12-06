@@ -1,34 +1,48 @@
 import { View, Text, Alert, TouchableOpacity, ScrollView } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import styles from './styles'
-import ProfileTextInput from '../../../components/Inputs/ProfileTextInput'
-import DatePicker from '../../../components/DateTimePicker/DatePicker'
 import Theme from '../../../theme/theme'
 import { COLORS } from '../../../theme/colors'
 import { FontStyle } from '../../../theme/FontStyle'
-import DropDownPicker from 'react-native-dropdown-picker'
 import YearPicker from '../../../components/Inputs/YearPicker'
 import { useSelector } from 'react-redux'
-import { getEmployeePayslipApi, getEmployeePayslipApiWags } from '../../../utilities/api/apiController'
+import { getEmployeePayslipApiWags } from '../../../utilities/api/apiController'
 import { getCurrentDate } from '../../../utilities/CurretDate'
 import inputValidation from '../../../utilities/Validations/YupValidate'
 import { PayslipScema } from '../../../utilities/Validations'
 import Loader from '../../../components/Loader'
 import { GetPaySlipAPI } from '../../../utilities/GetPaySlipAPI'
-import { SvgXml } from 'react-native-svg'
 
 const GeneratePayslip = ({ navigation }) => {
 
+    const month = [
+        { value: '1', label: 'January' },
+        { value: '2', label: 'February' },
+        { value: '3', label: 'March' },
+        { value: '4', label: 'April' },
+        { value: '5', label: 'May' },
+        { value: '6', label: 'June' },
+        { value: '7', label: 'July' },
+        { value: '8', label: 'August' },
+        { value: '9', label: 'September' },
+        { value: '10', label: 'October' },
+        { value: '11', label: 'November' },
+        { value: '12', label: 'December' },
+    ];
+
+    const year = [
+        { value: '2023', label: '2023' },
+        { value: '2022', label: '2022' },
+    ];
+
+
     const { employeeID } = useSelector((state) => state.employeeProfile);
     const { uid } = useSelector((state) => state.signin);
-
-    // console.log(employeeID);
-
     const [payslipdata, setpayslipData] = useState(null);
+    const [loading, setLoading] = useState(false);
     const [detail, setOpenDetail] = useState(false);
     const [disabled, setDisabled] = useState(true);
-    const [showStartDatePicker, setShowStartDatePicker] = useState(false);
-    const [showEndDatePicker, setShowEndDatePicker] = useState(false);
+    const [currentDate, setCurrentDate] = useState('');
 
     const [inputs, setInputs] = useState({
         year: null,
@@ -36,14 +50,6 @@ const GeneratePayslip = ({ navigation }) => {
         startDate: null,
         endDate: null,
     });
-
-
-    const [currentDate, setCurrentDate] = useState('');
-    useEffect(() => {
-        setCurrentDate(getCurrentDate());
-
-    }, [])
-
 
 
     const getpaySlip = async () => {
@@ -60,8 +66,6 @@ const GeneratePayslip = ({ navigation }) => {
                             ["slip_id.date_from", "<=", `${inputs.year}-${inputs.month}-01`],
                             ["slip_id.date_to", ">=", `${inputs.year}-${inputs.month}-28`]
                         ]
-                        // ["slip_id.date_from", "<=", "2023-10-01"],
-                        // ["slip_id.date_to", ">=", "2023-10-30"]]
                     ],
                     "kwargs": {
                         "fields": ["employee_id", "name", "code", "total", "category_id"]
@@ -119,7 +123,6 @@ const GeneratePayslip = ({ navigation }) => {
         const result = await inputValidation(PayslipScema, inputs)
 
         if (result.isValidate) {
-            // handleSubmit();'
             setDisabled(false);
 
 
@@ -133,8 +136,33 @@ const GeneratePayslip = ({ navigation }) => {
     }
 
 
+    const handleInputChange = async (field, value) => {
+        setInputs({
+            ...inputs,
+            [field]: value,
+            errors: {
+                ...inputs.errors,
+                [field]: false
+            }
+        })
 
-    const Item = ({ title, value, marginBottom }) => (
+    }
+
+    useEffect(() => {
+
+        if (inputs.year !== null && inputs.month !== null) {
+            validate();
+        }
+    }, [inputs]);
+
+
+    useEffect(() => {
+        setCurrentDate(getCurrentDate());
+
+    }, [])
+
+
+    const Item = ({ title, value }) => (
         <View style={{ flexDirection: 'row', marginVertical: 6 }}>
             <View style={{ flex: 1 }}>
                 <Text style={[FontStyle.Regular12_400, { color: COLORS.grey5 }]}>{title}</Text>
@@ -151,8 +179,6 @@ const GeneratePayslip = ({ navigation }) => {
             disabled={disabled}
             style={[Theme.Shadow, {
                 backgroundColor: !disabled ? COLORS.blue : COLORS.grey4,
-                // zIndex: -1,
-                // width: 88, 
                 paddingHorizontal: 16,
                 height: 32, justifyContent: 'center',
                 alignItems: 'center', borderWidth: 0,
@@ -163,96 +189,8 @@ const GeneratePayslip = ({ navigation }) => {
         </TouchableOpacity>
     )
 
-
-
-    const [loading, setLoading] = useState(false);
-
-    const handleInputChange = async (field, value) => {
-        setInputs({
-            ...inputs,
-            [field]: value,
-            errors: {
-                ...inputs.errors,
-                [field]: false
-            }
-        })
-
-        // setInputs(prev => ({
-        //     ...prev,
-        //     [field]: value,
-        //     errors: {
-        //         ...prev.errors,
-        //         [field]: false
-        //     }
-        // }), validate);
-        // await validate();
-    }
-
-    useEffect(() => {
-
-        if (inputs.year !== null && inputs.month !== null) {
-            validate();
-        }
-        // validate();
-    }, [inputs]);
-
-
-    const handleDateChange = (selectedDate, field) => {
-
-        const dateObject = new Date(selectedDate);
-        const formattedDate = dateObject.toISOString().split('T')[0];
-
-        if (field === 'startDate') {
-            setShowStartDatePicker(false);
-        } else if (field === 'endDate') {
-            setShowEndDatePicker(false);
-        }
-
-        handleInputChange(field, formattedDate);
-
-    };
-    const month = [
-        { value: '1', label: 'January' },
-        { value: '2', label: 'February' },
-        { value: '3', label: 'March' },
-        { value: '4', label: 'April' },
-        { value: '5', label: 'May' },
-        { value: '6', label: 'June' },
-        { value: '7', label: 'July' },
-        { value: '8', label: 'August' },
-        { value: '9', label: 'September' },
-        { value: '10', label: 'October' },
-        { value: '11', label: 'November' },
-        { value: '12', label: 'December' },
-    ];
-
-    const year = [
-        { value: '2023', label: '2023' },
-        { value: '2022', label: '2022' },
-        { value: '2021', label: '2021' },
-    ];
-
-    // setLoading(false);
-
-
     return (
         <View style={styles.container}>
-            {/* <ScrollView style={styles.container} showsHorizontalScrollIndicator={false}> */}
-
-            {/* <DropDownPicker
-                open={open}
-                value={value}
-                items={items}
-                setOpen={setOpen}
-                setValue={setValue}
-                setItems={setItems}
-                placeholder={'Choose a fruit.'}
-                style={[
-                    Theme.Shadow, {
-
-                    }]}
-                labelStyle={{}}
-            /> */}
 
             <View style={{ marginBottom: 16 }}>
                 <Text style={styles.dateText}>{currentDate}</Text>
@@ -272,58 +210,28 @@ const GeneratePayslip = ({ navigation }) => {
                 </View>
             </View>
 
-            {/* <View style={{ flexDirection: 'row' }}>
-
-                <View style={{ flex: 1 }}>
-
-                    <DatePicker
-                        date={new Date()}
-                        label={'From'}
-                        placeholder={'23 November'}
-                        value={inputs.startDate}
-                        onChange={(selectedDate) => handleDateChange(selectedDate, 'startDate')}
-                        showDatePicker={showStartDatePicker}
-                        setShowDatePicker={setShowStartDatePicker}
-                        error={inputs?.errors?.startDate}
-                    />
-                </View>
-                <View style={{ flex: 1, marginLeft: 4 }}>
-
-                    <DatePicker
-                        date={new Date()}
-                        label={'To'}
-                        value={inputs.endDate}
-                        onChange={(selectedDate) => handleDateChange(selectedDate, 'endDate')}
-                        showDatePicker={showEndDatePicker}
-                        setShowDatePicker={setShowEndDatePicker}
-                        placeholder={'27 October'}
-                        error={inputs?.errors?.endDate}
-                    />
-                </View>
-            </View> */}
-
             <View style={{ marginTop: 8, alignItems: 'flex-end', marginRight: 4, zIndex: -1 }}>
                 <Button title={'Generate'}
                     disabled={disabled}
                     handlePress={() => {
                         setLoading(true);
                         getpaySlip()
-                        // setOpenDetail(!detail)
                     }} />
 
             </View>
 
             {detail &&
-                // <View style={{}}>
-                <ScrollView style={{ marginTop: 12, zIndex: -1 }} showsVerticalScrollIndicator={false}>
-                    <View style={styles.detailsView}>
+                <View style={{ zIndex: -1, flex: 1 }}>
+                    <ScrollView style={{ marginTop: 12, }} showsVerticalScrollIndicator={false}>
+                        <View style={styles.detailsView}>
 
-                        {payslipdata?.map((item, index) => (
-                            <Item key={index} title={item.name} value={item.total} />
-                        ))}
+                            {payslipdata?.map((item, index) => (
+                                <Item key={index} title={item.name} value={item.total} />
+                            ))}
 
 
-                    </View>
+                        </View>
+                    </ScrollView>
                     <View style={{ marginVertical: 16, alignItems: 'flex-end' }}>
                         <Button title={'Download PDF'}
                             handlePress={() => {
@@ -332,8 +240,7 @@ const GeneratePayslip = ({ navigation }) => {
                             }}
                         />
                     </View>
-                </ScrollView>
-                // </View>
+                </View>
             }
             <Loader loading={loading} title={'Loading...'} />
         </View>

@@ -4,10 +4,6 @@ import { downloadPdf } from "./DownloadPdf";
 
 export const GetPaySlipAPI = async (uid, dateStr, setLoading, navigation) => {
 
-    // setDate(dateStr);
-    // setLoading(true);
-    // console.log(uid, dateStr, setLoading)
-
     try {
         const body = {
             "jsonrps": 2.0,
@@ -20,10 +16,8 @@ export const GetPaySlipAPI = async (uid, dateStr, setLoading, navigation) => {
         console.log(response?.data?.result);
 
         if (response?.data?.result?.response?.b64_pdf) {
-            // setLoading(false)
-            // console.log(response?.data?.result?.response?.b64_pdf)
             const base64 = response?.data?.result?.response?.b64_pdf;
-            downloadPdf(base64, `Wags Payslip ( ${dateStr} ).pdf`, setLoading)
+            downloadPdf(base64, `Tracking Payslip (${dateStr})`, setLoading)
         }
 
         else if (response?.data?.result?.status == 400) {

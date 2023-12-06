@@ -4,7 +4,7 @@ import Theme from '../../../theme/theme'
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps'
 import { stylesOld } from './stylesOld'
 import Swipe from '../Swipe'
-import { getCoordinates } from './AccessLocation copy'
+import { getCoordinates } from './AccessLocation'
 import { useDispatch, useSelector } from 'react-redux'
 import { createPunchIn } from '../../../redux/attendance/actions/createPunchIn'
 import SwipeReverse from '../SwipeReverse'
@@ -12,9 +12,7 @@ import { createPunchOut } from '../../../redux/attendance/actions/createPunchOut
 import { getCurrentDateTime } from '../../../utilities/CurrentTime'
 import { checkAttendanceLocationApi } from '../../../utilities/api/apiController'
 import Loader from '../../../components/Loader'
-import { COLORS } from '../../../theme/colors'
 import { SvgXml } from 'react-native-svg'
-import { Icons } from '../../../assets/SvgIcons/Icons'
 
 const LocationOld = ({ navigation, route }) => {
 
@@ -122,7 +120,7 @@ const LocationOld = ({ navigation, route }) => {
 
         catch (error) {
             Alert.alert(error);
-            // setLoading(false);
+            setLoading(false);
         }
     }
 
@@ -150,19 +148,20 @@ const LocationOld = ({ navigation, route }) => {
                         width: 45,
                         borderRadius: 22.5,
                         borderWidth: 1,
-                        backgroundColor: COLORS.white,
+                        backgroundColor: "red",
                         alignItems: 'center',
                         justifyContent: 'center',
-                        // position: 'absolute'
-                        
+                        // position: 'relative'
+
 
                     }}>
 
                     <SvgXml xml={`<svg xmlns="http://www.w3.org/2000/svg" width="21" height="19" viewBox="0 0 21 19" fill="none">
-<path d="M9.49947 1.64694L1.57867 9.51494L9.44667 17.4357M1.57867 9.51494L19.623 9.57528L1.57867 9.51494Z" stroke="black" stroke-width="2.25556" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>`} />
+                            <path d="M9.49947 1.64694L1.57867 9.51494L9.44667 17.4357M1.57867 9.51494L19.623 9.57528L1.57867 9.51494Z" stroke="black" stroke-width="2.25556" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>`} />
 
                 </TouchableOpacity> */}
+
 
                 <MapView
                     style={{ flex: 1 }}
@@ -170,8 +169,6 @@ const LocationOld = ({ navigation, route }) => {
                     initialRegion={{
                         latitude: 24.7136,
                         longitude: 46.6753,
-                        // latitude: latitude,
-                        // longitude: longitude,
                         latitudeDelta: 0.01,
                         longitudeDelta: 0.01
 
@@ -185,7 +182,7 @@ const LocationOld = ({ navigation, route }) => {
 
                     }}
 
-                    showsUserLocation={true}
+                    // showsUserLocation={true}
                     zoomControlEnabled={true}
                     provider={PROVIDER_GOOGLE}
                 >

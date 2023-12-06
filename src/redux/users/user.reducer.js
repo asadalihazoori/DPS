@@ -11,11 +11,6 @@ const initialState = {
 export const UserReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOGIN_USER:
-            console.log(action);
-            // return {
-            //     ...state,
-            //     uid: action.payload.uid,
-            // }
 
             return {
                 ...state,
@@ -25,7 +20,6 @@ export const UserReducer = (state = initialState, action) => {
             }
 
         case LOGOUT_USER:
-            console.log("reducer logout", action.payload)
             return {
                 ...state,
                 loggedIn: action.payload

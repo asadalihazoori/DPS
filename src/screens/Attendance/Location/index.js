@@ -13,7 +13,7 @@ import SwipeReverse from '../SwipeReverse'
 // import Geolocation from '@react-native-community/geolocation';
 // import GeneralHeader from '../../../components/Headers/GeneralHeader'
 import { getPermission } from './AccessLocation'
-import { getCoordinates } from './AccessLocation copy'
+import { getCoordinates } from './AccessLocation'
 import { useDispatch, useSelector } from 'react-redux'
 
 const Location = ({ navigation }) => {

@@ -3,10 +3,9 @@ import { Alert } from "react-native";
 import { punch_in } from "../attendance.action";
 
 
-export const createPunchIn = ({ uid, navigation, time, latitude, longitude, date, setTitle, setFreeze, employeeID }) => {
+export const createPunchIn = ({ uid, navigation, time, latitude, longitude, setTitle, setFreeze, employeeID }) => {
 
     return async (dispatch) => {
-        console.log(time)
 
         try {
 
@@ -22,8 +21,8 @@ export const createPunchIn = ({ uid, navigation, time, latitude, longitude, date
                                 "latitude": latitude,
                                 "longitude": longitude,
                                 "date": time.date,
-                                // "checkout": time.dateTime,
-                                "checkin": time.dateTime
+                                "checkin": time.dateTime,
+                                // "attendance_status": "checkin"
 
                             }
                         ]
@@ -41,7 +40,6 @@ export const createPunchIn = ({ uid, navigation, time, latitude, longitude, date
                     punchInStatus: true,
                     punchInTime: time.timeString,
                     punchInformTime: time?.time
-                    // punchInformTime: `${time?.time?.format('h:mm A')}`
                 }));
                 setFreeze(false)
                 setTitle(`Punched In at ${time?.time}`);
