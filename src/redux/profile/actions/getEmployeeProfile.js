@@ -66,10 +66,9 @@ export const getEmployeeProfile = ({ uid, navigation, setLoading }) => {
                     dispatch(get_employee_profile(profieData))
 
                     if (setLoading) {
-
-                        // navigation.replace('DrawerNavigation')
+                        setLoading(false)
                         navigation.reset({
-                            index: 0, 
+                            index: 0,
                             routes: [
                                 {
                                     name: 'DrawerNavigation',

@@ -32,20 +32,19 @@ export const siginin = ({ navigation, inputs, setLoading }) => {
                     navigation,
                     setLoading,
                 }))
-                    .then(() => {
+                // .then(() => {
 
-                        setLoading(false)
-                        // navigation.reset({
-                        //     index: 0,
-                        //     routes: [
-                        //         {
-                        //             name: 'DrawerNavigation',
-                        //         },
-                        //     ],
-                        // });
-                    }
-                    )
-                // navigation.replace('DrawerNavigation')
+                //     setLoading(false)
+                // navigation.reset({
+                //     index: 0,
+                //     routes: [
+                //         {
+                //             name: 'DrawerNavigation',
+                //         },
+                //     ],
+                // });
+                // }
+                // )
             }
 
             else if (response?.data?.error?.data?.message == "Access Denied") {
