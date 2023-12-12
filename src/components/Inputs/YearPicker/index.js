@@ -76,6 +76,8 @@ const YearPicker = ({
 
             <DropDownPicker
 
+
+
                 open={open}
                 placeholderStyle={[FontStyle.Regular12_400, { color: COLORS.grey3 }]}
                 value={value}

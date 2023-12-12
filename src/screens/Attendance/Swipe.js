@@ -12,12 +12,11 @@ import Theme from '../../theme/theme';
 const Swipe = ({ onSlide, freeze, title }) => {
 
     const screenWidth = Dimensions.get('window').width;
-    const maxXValue = (screenWidth - 58) * 0.9;
+    const maxXValue = (screenWidth - 58) * 0.86;
     const swipeThreshold = maxXValue * 0.5;
     const InterpolateXInput = [0, swipeThreshold];
 
     const [swipeEnabled, setSwipeEnabled] = useState(true);
-    const [showTime, setTime] = useState(false);
     const X = useSharedValue(10);
 
 
@@ -30,18 +29,17 @@ const Swipe = ({ onSlide, freeze, title }) => {
         onEnd: () => {
             if (X.value > swipeThreshold && swipeEnabled && freeze) {
                 runOnJS(setSwipeEnabled)(false);
-                X.value = withSpring(maxXValue - 10, {}, () => {
-                    runOnJS(setTime)(true)
-                })
-                    ;
+                X.value = withSpring(maxXValue - 5, { mass: 1 }, () => { });
                 runOnJS(onSlide)();
             } else if (X.value < swipeThreshold && swipeEnabled && freeze) {
-                X.value = withSpring(10, {}, () => {
+                X.value = withSpring(10, { mass: 0.5 }, () => {
                     runOnJS(setSwipeEnabled)(true);
                 });
             }
         },
     });
+
+
 
     const AnimatedStyle = useAnimatedStyle(() => {
         return { transform: [{ translateX: X.value }] };
@@ -95,7 +93,8 @@ export default Swipe;
 const stylesOld = StyleSheet.create({
     container: {
         ...Theme.Shadow,
-        borderWidth: 0,
+        borderWidth: 0, // must
+        // borderColor: 'black',
         width: '100%',
         height: 50,
         borderRadius: 10,
@@ -112,6 +111,7 @@ const stylesOld = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         left: 0,
+        // backgroundColor: 'red'
     },
 
     text: {

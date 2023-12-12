@@ -11,6 +11,7 @@ import Button from '../../../components/Buttons/Button'
 import Input from '../../../components/InputField'
 import { styles } from './styles'
 import ProfileTextInput from '../../../components/Inputs/ProfileTextInput'
+import { NextButton } from '../../../components/Inputs'
 
 const ApplyForMedicalClaims = ({ navigation }) => {
 
@@ -53,7 +54,7 @@ const ApplyForMedicalClaims = ({ navigation }) => {
     };
 
     const imageElements = inputs.image.map((imageUri, index) => (
-        <View style={{ marginRight: 15 }}>
+        <View style={{ marginRight: 15 }} key={index}>
 
             <Image
                 key={index}
@@ -166,70 +167,73 @@ const ApplyForMedicalClaims = ({ navigation }) => {
         }
     };
 
-    useEffect(() => {
-        getDiseaseList();
-    }, [])
+    // useEffect(() => {
+    //     getDiseaseList();
+    // }, [])
 
     return (
-        <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
+        <ScrollView showsVerticalScrollIndicator={false} style={styles.container}
+            contentContainerStyle={{ justifyContent: 'space-between', flexGrow: 1 }}>
 
-            <ProfileTextInput
-                label={'Remaining Balance'}
-                editable={false}
-                value={inputs.remainingMedicalClaim}
-            />
+            <View>
 
-            <TouchableView
-                label={'Claim For'}
-                header={'Select'}
-                text={inputs?.claimFor}
-                // text={inputs?.claimFor?.name ? `${inputs?.claimFor?.name} - ${inputs?.claimFor?.relation}` : null}
-                error={inputs?.errors?.claimFor}
-                data={familyInfo}
-                onChange={(selectedType) => handleInputChange('claimFor', selectedType)}
-            />
+                <ProfileTextInput
+                    label={'Remaining Balance'}
+                    editable={false}
+                    value={inputs.remainingMedicalClaim}
+                />
 
-            <TouchableView
-                label={'Disease Type'}
-                header={'Select'}
-                text={inputs?.disease}
-                handleModal={() => setModalVisible(true)}
-                error={inputs?.errors?.disease}
-                data={diseasesList}
-                onChange={(selectedType) => handleInputChange('disease', selectedType)}
-            />
+                <TouchableView
+                    label={'Claim For'}
+                    header={'Select'}
+                    text={inputs?.claimFor}
+                    // text={inputs?.claimFor?.name ? `${inputs?.claimFor?.name} - ${inputs?.claimFor?.relation}` : null}
+                    error={inputs?.errors?.claimFor}
+                    data={familyInfo}
+                    onChange={(selectedType) => handleInputChange('claimFor', selectedType)}
+                />
 
-            <ProfileTextInput
-                label={'Claim Amount'}
-                placeholder={'12000'}
-                value={inputs.amount}
-                keyboardType={'number-pad'}
-                onChangeText={(text) => handleInputChange('claimAmount', text)}
-                error={inputs?.errors?.claimAmount}
-            />
+                <TouchableView
+                    label={'Disease Type'}
+                    header={'Select'}
+                    text={inputs?.disease}
+                    handleModal={() => setModalVisible(true)}
+                    error={inputs?.errors?.disease}
+                    data={diseasesList}
+                    onChange={(selectedType) => handleInputChange('disease', selectedType)}
+                />
 
-            <ProfileTextInput
-                label={'Description'}
-                placeholder={'For urgent need in home financials'}
-                value={inputs.description}
-                error={inputs?.errors?.description}
-                onChangeText={(text) => handleInputChange('description', text)}
-            />
+                <ProfileTextInput
+                    label={'Claim Amount'}
+                    placeholder={'12000'}
+                    value={inputs.amount}
+                    keyboardType={'number-pad'}
+                    onChangeText={(text) => handleInputChange('claimAmount', text)}
+                    error={inputs?.errors?.claimAmount}
+                />
 
-            <ProfileTextInput
-                label={'Appling Date'}
-                editable={false}
-                value={(inputs.date).toDateString()}
-            />
+                <ProfileTextInput
+                    label={'Description'}
+                    placeholder={'For urgent need in home financials'}
+                    value={inputs.description}
+                    error={inputs?.errors?.description}
+                    onChangeText={(text) => handleInputChange('description', text)}
+                />
 
-            {/* <Input
+                <ProfileTextInput
+                    label={'Appling Date'}
+                    editable={false}
+                    value={(inputs.date).toDateString()}
+                />
+
+                {/* <Input
                         marginTop={24}
                         editable={false}
                         value={(inputs.date).toDateString()}
                         onChangeText={(text) => handleInputChange('date', text)}
                     /> */}
 
-            {/* <Input
+                {/* <Input
                         marginTop={24}
                         placeholder={'Description'}
                         value={inputs.description}
@@ -237,33 +241,41 @@ const ApplyForMedicalClaims = ({ navigation }) => {
                         onChangeText={(text) => handleInputChange('description', text)}
                     /> */}
 
-            <ScrollView style={{ marginTop: 20, flexDirection: 'row' }} horizontal={true} >
-                {imageElements}
-            </ScrollView>
+                <ScrollView style={{ marginTop: 20, flexDirection: 'row' }} horizontal={true} >
+                    {imageElements}
+                </ScrollView>
 
-            <View style={styles.imagesButtonView}>
+                <View style={styles.imagesButtonView}>
 
-                <TouchableOpacity style={styles.imagesButton} onPress={() => setModalVisible2(true)}>
-                    <Text style={styles.text}>Add Image</Text>
-                </TouchableOpacity>
+                    <TouchableOpacity style={styles.imagesButton} onPress={() => setModalVisible2(true)}>
+                        <Text style={styles.text}>Add Image</Text>
+                    </TouchableOpacity>
 
-                <TouchableOpacity style={styles.imagesButton} onPress={() =>
-                    // handleInputChange('image', [])
-                    setInputs({
-                        ...inputs,
-                        ['image']: []
-                    })
-                }
-                >
-                    <Text style={styles.text}>Clear</Text>
-                </TouchableOpacity>
+                    <TouchableOpacity style={styles.imagesButton} onPress={() =>
+                        // handleInputChange('image', [])
+                        setInputs({
+                            ...inputs,
+                            ['image']: []
+                        })
+                    }
+                    >
+                        <Text style={styles.text}>Clear</Text>
+                    </TouchableOpacity>
+                </View>
+
+            </View>
+
+            <View style={styles.bottomView}>
+                <NextButton title={'Submit'} onPress={validate} />
             </View>
 
 
-            <Button title={'Submit'} handelSubmit={validate} />
+            {/* <Button title={'Submit'} handelSubmit={validate} /> */}
 
-            {loading &&
-                <ActivityIndicator size={'large'} />}
+            {
+                loading &&
+                <ActivityIndicator size={'large'} />
+            }
 
             <RadioSelectionModal
                 modalVisible={modalVisible}
@@ -287,7 +299,7 @@ const ApplyForMedicalClaims = ({ navigation }) => {
                 onImageSelected={handleImageSelected}
             />
 
-        </ScrollView>
+        </ScrollView >
 
     )
 }

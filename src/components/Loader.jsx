@@ -17,7 +17,7 @@ const Loader = ({ loading, setLoading, title }) => {
             transparent={true}
             visible={loading}
             onRequestClose={() => {
-                setLoading(false);
+                setLoading && setLoading(false);
             }}
 
         // presentationStyle='overFullScreen'
@@ -47,7 +47,7 @@ const Loader = ({ loading, setLoading, title }) => {
 
                 <View style={styles.container1}>
 
-                    <ActivityIndicator />
+                    <ActivityIndicator color={COLORS.primaryColor} />
                     <Text style={styles.text}>{title}</Text>
 
                 </View>

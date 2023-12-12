@@ -1,12 +1,9 @@
-import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import { Avatar, Drawer, MD3TypescaleKey } from 'react-native-paper'
+import { Avatar, Drawer, } from 'react-native-paper'
 import { useDispatch, useSelector } from 'react-redux'
-import { getBackgroundImage } from '../redux/backgrouund/actions/getBackgroundImage';
 import { siginOut } from '../redux/users/actions/signOut';
 import { COLORS } from '../theme/colors';
 import { SvgXml } from 'react-native-svg';
@@ -20,16 +17,6 @@ import { logout_user } from '../redux/users/user.actions';
 const CustomDrawer1 = (props) => {
 
     const dispatch = useDispatch();
-    const backgroundImage = useSelector((state) => state.backgroundImage.image);
-
-    // const launchLibrary = () => {
-
-    //     dispatch(getBackgroundImage());
-
-    // }
-
-
-
     const profileData = useSelector((state) => state.employeeProfile.data);
     const uid = useSelector((state) => state.signin.uid);
     const [selectedScreen, selectScreen] = useState();
@@ -96,7 +83,6 @@ const CustomDrawer1 = (props) => {
 
     }
 
-    // console.log("drawer", selectedScreen)
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
@@ -115,23 +101,31 @@ const CustomDrawer1 = (props) => {
 
                                     <Avatar.Image
                                         source={{ uri: `data:image/jpeg;base64,${profileData?.image_1920}` }}
-                                        size={90}
+                                        size={60}
+                                        style={[Theme.ImageShadow]}
                                     />
                                     :
-                                    <SvgXml xml={Icons.personIcon} />
+                                    <View style={[Theme.ImageShadow, { backgroundColor: '#efeff2', height: 60, width: 60, borderRadius: 30, alignItems: 'center', justifyContent: 'center' }]}>
+                                        <Icon name="account" size={40} color="#a9adc1" />
+                                    </View>
+                                    // {/* // <SvgXml xml={Icons.personIcon} style={Theme.ImageShadow} /> */}
                                 }
                                 {/* <View style={{ position: 'absolute', bottom: 0, right: 0 }}>
                                     <SvgXml xml={DrawerIcons.camera} />
                                 </View> */}
                             </View>
+
                         </View>
 
                         <View style={{ marginTop: 12 }}>
                             <Text style={[FontStyle.Regular14, { color: '#0D1224' }]}>{profileData?.name}</Text>
                         </View>
-                        <View style={{ marginTop: 4 }}>
-                            <Text style={[FontStyle.Regular12, { color: '#B2BBBB' }]}>{profileData?.job_id[1]}</Text>
-                        </View>
+
+                        {profileData?.job_id[1] &&
+                            <View style={{ marginTop: 4 }}>
+                                <Text style={[FontStyle.Regular12, { color: '#B2BBBB' }]}>{profileData?.job_id[1]}</Text>
+                            </View>
+                        }
 
                     </View>
 
@@ -173,9 +167,10 @@ const CustomDrawer1 = (props) => {
                             data={Menus.leaves}
                             onSelect={selectScreen}
                             selectedScreen={selectedScreen}
-                        />
+                        /> */}
 
-                        <CustomDrawerItem
+
+                        {/* <CustomDrawerItem
                             title={'Loans/Advances'}
                             navigate={(screen) => props.navigation.navigate(screen)}
                             icon={DrawerIcons.loans}
@@ -185,6 +180,7 @@ const CustomDrawer1 = (props) => {
                             selectedScreen={selectedScreen}
 
                         /> */}
+
 
                         {/* <CustomDrawerItem
                             title={'Medical claims'}
@@ -250,193 +246,6 @@ const CustomDrawer1 = (props) => {
 
 
 
-            {/* 
-                        <DrawerItem
-                            icon={() => <SvgXml xml={DrawerIcons.dashboard} />}
-                            label={() => <Text style={[FontStyle.Regular14_500]}>Dashboard</Text>}
-                            onPress={() => props.navigation.navigate('Home')}
-                        />
-
-                        <DrawerItem
-                            icon={() => <SvgXml xml={DrawerIcons.personal} />}
-                            label={() => <Text style={[FontStyle.Regular14_500]}>Personal Information</Text>}
-                            onPress={() => props.navigation.navigate('EmployeeProfile')}
-                        />
-                        <DrawerItem
-                            icon={() => <SvgXml xml={DrawerIcons.attendance} />}
-                            label={() => <Text style={[FontStyle.Regular14_500,]}>Attendance</Text>}
-                            onPress={() => props.navigation.navigate('EmployeeProfile')}
-                        />
-                        <DrawerItem
-                            icon={() => <SvgXml xml={DrawerIcons.leaves} />}
-                            label={() => <Text style={[FontStyle.Regular14_500]}>Leaves</Text>}
-                            onPress={() => props.navigation.navigate('EmployeeProfile')}
-                        />
-
-                        <DrawerItem
-                            icon={() => <SvgXml xml={DrawerIcons.personal} />}
-                            label={() => <Text style={FontStyle.Regular14_500}>Loans/Advances</Text>}
-                            onPress={() => props.navigation.navigate('EmployeeProfile')}
-                        />
-                        <DrawerItem
-                            icon={() => <SvgXml xml={DrawerIcons.medical} />}
-                            label={() => <Text style={FontStyle.Regular14_500}>Medical claims</Text>}
-                            onPress={() => props.navigation.navigate('EmployeeProfile')}
-                        />
-                        <DrawerItem
-                            icon={() => <SvgXml xml={DrawerIcons.reports} />}
-                            label={() => <Text style={FontStyle.Regular14_500}>Reports</Text>}
-                            onPress={() => props.navigation.navigate('EmployeeProfile')}
-                        />
-                        <DrawerItem
-                            icon={() => <SvgXml xml={DrawerIcons.shifts} />}
-                            label={() => <Text style={FontStyle.Regular14_500}>Shifts</Text>}
-                            onPress={() => props.navigation.navigate('EmployeeProfile')}
-                        />
-                        <DrawerItem
-                            icon={() => <SvgXml xml={DrawerIcons.overTime} />}
-                            label={() => <Text style={FontStyle.Regular14_500}>Overtime Tracking</Text>}
-                            onPress={() => props.navigation.navigate('EmployeeProfile')}
-                        />
-                        <DrawerItem
-                            icon={() => <SvgXml xml={DrawerIcons.timeSheet} />}
-                            label={() => <Text style={FontStyle.Regular14_500}>Timesheet Management</Text>}
-                            onPress={() => props.navigation.navigate('EmployeeProfile')}
-                        />
-                        <DrawerItem
-                            style={{ marginTop: 86 }}
-                            icon={() => <SvgXml xml={DrawerIcons.logout} />}
-                            label={() => <Text style={[FontStyle.Regular14_500, { color: COLORS.logout, fontWeight: '700' }]}>Logout</Text>}
-                            onPress={() => props.navigation.navigate('EmployeeProfile')}
-                        /> */}
-
-            {/* 
-                        <DrawerItem
-                            icon={({ size }) => (
-                                <MaterialIcons name="notifications-active"
-
-                                    size={size}
-                                    style={styles.iconColor}
-                                />
-                            )}
-                            label={() => <Text style={styles.labelColor}>Holiday News</Text>}
-                            onPress={() => {
-                                props.navigation.navigate('HolidayNews');
-                            }}
-                        />
-                        <DrawerItem
-                            icon={({ size }) => (
-                                <Icon name="account-check"
-
-                                    size={size}
-                                    style={styles.iconColor}
-                                />
-                            )}
-                            label={() => <Text style={styles.labelColor}>Attendance</Text>}
-                            onPress={() => {
-                                props.navigation.navigate('Attendance');
-                            }}
-                        />
-                        <DrawerItem
-                            icon={({ size }) => (
-                                <Icon name="exit-run"
-
-                                    size={size}
-                                    style={styles.iconColor}
-                                />
-                            )}
-                            label={() => <Text style={styles.labelColor}>Leaves</Text>}
-                            onPress={() => {
-                                props.navigation.navigate('Leaves');
-                            }}
-                        />
-                        <DrawerItem
-                            icon={({ size }) => (
-                                <Icon name="hand-extended"
-
-                                    size={size}
-                                    style={styles.iconColor}
-                                />
-                            )}
-                            label={() => <Text style={styles.labelColor}>Loans</Text>}
-                            onPress={() => {
-                                props.navigation.navigate('Loans');
-                            }}
-                        />
-                        <DrawerItem
-                            icon={({ size }) => (
-                                <Icon name="medical-bag"
-
-                                    size={size}
-                                    style={styles.iconColor}
-                                />
-                            )}
-                            label={() => <Text style={styles.labelColor}>MedicalClaims</Text>}
-                            onPress={() => {
-                                props.navigation.navigate('MedicalClaim');
-                            }}
-                        />
-                        <DrawerItem
-                            icon={({ size }) => (
-                                <Icon name="file-eye"
-
-                                    size={size}
-                                    style={styles.iconColor}
-                                />
-                            )}
-                            label={() => <Text style={styles.labelColor}>Reports</Text>}
-                            onPress={() => {
-                                props.navigation.navigate('Reports');
-                            }}
-                        />
-                        <DrawerItem
-                            icon={({ size }) => (
-                                <FontAwesome name="exchange"
-
-                                    size={size}
-                                    style={styles.iconColor}
-                                />
-                            )}
-                            label={() => <Text style={styles.labelColor}>Shifts</Text>}
-                            onPress={() => {
-                                props.navigation.navigate('Shift');
-                            }}
-                        />
-                        <DrawerItem
-                            icon={({ size }) => (
-                                <MaterialIcons name="password"
-
-                                    size={size}
-                                    style={styles.iconColor}
-                                />
-                            )}
-                            label={() => <Text style={styles.labelColor}>Change Password</Text>}
-                            onPress={() => {
-                                props.navigation.navigate('ChangePassword');
-                            }}
-                        /> */}
-
-            {/* 
-                    </View>
-
-                </View>
-            </DrawerContentScrollView> */}
-            {/* <Drawer.Section style={styles.bottomDrawerSection}>
-                <DrawerItem
-                    icon={({ size }) => (
-                        <Icon name="logout"
-
-                            size={size}
-                            style={styles.iconColor}
-                        />
-                    )}
-                    label={() => <Text style={styles.labelColor}> Logout</Text>}
-                    onPress={() => {
-                        const navigation = props.navigation;
-                        siginOut({ uid, navigation })
-                    }}
-                />
-            </Drawer.Section> */}
         </SafeAreaView>
     )
 }

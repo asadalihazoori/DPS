@@ -48,7 +48,7 @@ const LoanCard = ({
         }]}>
 
             <TouchableOpacity style={styles.container}
-                activeOpacity={0.9}
+                activeOpacity={0.95}
                 onPress={() => setOPenDetail(!detail)}>
                 <View style={styles.headerView}>
                     <Text style={styles.headerText}>{data?.type}</Text>

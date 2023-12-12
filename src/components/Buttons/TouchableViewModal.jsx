@@ -4,7 +4,7 @@ import { COLORS } from '../../theme/colors'
 import { FontStyle } from '../../theme/FontStyle'
 import Theme from '../../theme/theme'
 
-const TouchableView = ({ text, header, handleModal, label, error, marginBottom }) => {
+const TouchableViewModal = ({ text, header, handleModal, label, error, marginBottom }) => {
     return (
         // <View>
 
@@ -47,7 +47,7 @@ const TouchableView = ({ text, header, handleModal, label, error, marginBottom }
     )
 }
 
-export default TouchableView
+export default TouchableViewModal
 
 const styles = StyleSheet.create({
     container: {

@@ -17,93 +17,8 @@ import moment from 'moment'
 const Dashboard = ({ navigation }) => {
 
     const [recents, setOpenRecent] = useState(false);
-    const attendanceData = useSelector((state) => state.attendance);
+    // const attendanceData = useSelector((state) => state.attendance);
     // console.log(attendanceData)
-
-
-    const [utcTime, setUtcTime] = useState('');
-    const [utcDate, setUtcDate] = useState('');
-    const [localTime, setLocalTime] = useState('');
-
-    // useEffect(() => {
-    //     const updateTimes = () => {
-    //         const now = new Date();
-
-    //         // Get UTC time
-    //         const utcTimeString = now.toISOString();
-
-    //         // Get UTC date
-    //         const utcDateString = new Intl.DateTimeFormat('en-GB', {
-    //             year: 'numeric',
-    //             month: 'long',
-    //             day: 'numeric',
-    //         }).format(now);
-
-    //         // Get local time
-    //         const localTimeString = new Intl.DateTimeFormat(undefined, {
-    //             hour: 'numeric',
-    //             minute: 'numeric',
-    //             second: 'numeric',
-    //             timeZoneName: 'short',
-    //         }).format(now);
-
-    //         setUtcTime(utcTimeString);
-    //         setUtcDate(utcDateString);
-    //         setLocalTime(localTimeString);
-    //     };
-
-    //     // Update times every second
-    //     const intervalId = setInterval(updateTimes, 1000);
-
-    //     // Initial update
-    //     updateTimes();
-
-    //     // Clean up the interval on component unmount
-    //     return () => clearInterval(intervalId);
-    // }, []);
-
-
-    // const [utcTime1, setUtcTime1] = useState('');
-    // const [utcDate1, setUtcDate1] = useState('');
-    // const [localTime1, setLocalTime1] = useState('');
-
-    // useEffect(() => {
-    //     const updateTimes = () => {
-    //         const now = moment();
-    //         // console.log(now);
-
-    //         // Get UTC time
-    //         const utcTimeString = now.toISOString();
-    //         const utcDateTime = now.format('YYYY-MM-DD hh:mm:ss');
-
-
-    //         // Get UTC date
-    //         const utcDateString = now.format('YYYY-MM-DD');
-
-    //         // Get local time
-    //         const localTimeString = now.format('hh:mm A');
-
-    //         const utcDateTimeString = now.utc().format('YYYY-MM-DD hh:mm:ss');
-
-
-    //         setUtcTime1(utcDateTimeString);
-    //         setUtcDate1(utcDateString);
-    //         setLocalTime1(localTimeString);
-    //     };
-
-    //     // Update times every second
-    //     const intervalId = setInterval(updateTimes, 1000);
-
-    //     // Initial update
-    //     updateTimes();
-
-    //     // Clean up the interval on component unmount
-    //     return () => clearInterval(intervalId);
-    // }, []);
-
-
-
-
 
     const name = useSelector((state) => state?.employeeProfile?.data?.name);
     return (
@@ -145,22 +60,6 @@ const Dashboard = ({ navigation }) => {
                     </View>
 
                     
-                    {/*
-                     <View>
-
-                        <Text>UTC Date: {utcDate}</Text>
-                        <Text>UTC Time: {utcTime}</Text>
-                        <Text>Local Time: {localTime}</Text>
-                    </View>
-
-                    <Text>-----------------------</Text>
-                */}
-                    {/* <View>
-
-                        <Text>UTC Date: {utcDate1}</Text>
-                        <Text>UTC Time: {utcTime1}</Text>
-                        <Text>Local Time: {localTime1}</Text>
-                    </View> */}
 
                     {/* <View style={styles.row}>
 

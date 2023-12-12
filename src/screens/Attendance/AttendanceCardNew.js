@@ -5,9 +5,11 @@ import { COLORS } from '../../theme/colors'
 
 const AttendanceCardNew = ({
     date = true,
-    color, punchIn, punchOut }) => {
+    color,
+    punchIn,
+    punchOut }) => {
     return (
-        <View style={{ marginTop: 12, }}>
+        <View style={{ marginBottom: 10, }}>
 
             {date &&
                 <Text style={[styles.timeText, { textAlign: 'auto' }]}>24 May</Text>

@@ -13,7 +13,8 @@ export const styles = StyleSheet.create({
         fontWeight: '400',
         paddingHorizontal: 1,
         lineHeight: 20,
-        letterSpacing: 0.16
+        letterSpacing: 0.16,
+        marginLeft: 2
     },
 
 
@@ -23,6 +24,7 @@ export const styles = StyleSheet.create({
         ...Theme.Shadow,
         // flex: 1,
         paddingHorizontal: 12,
+        marginHorizontal: 2,
 
     },
 
@@ -39,7 +41,7 @@ export const styles = StyleSheet.create({
 
     iconView: {
         justifyContent: 'center',
-        marginLeft: 10
+        marginLeft: 8
 
     },
 

@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, TouchableOpacity, KeyboardAvoidingView } from 'react-native'
+import { View, Text, ScrollView, TouchableOpacity, KeyboardAvoidingView, Image } from 'react-native'
 import React, { useContext } from 'react'
 import { styles } from './styles';
 import { FontStyle } from '../../../theme/FontStyle';
@@ -6,8 +6,8 @@ import { NextButton, TextInputAuth } from '../../../components/Inputs';
 import { COLORS } from '../../../theme/colors';
 import { AuthContext } from '../../../context/AuthContext';
 import Loader from '../../../components/Loader';
-import { Checkbox } from 'react-native-paper';
 import CustomCheckBox from '../../../components/CheckBox';
+import { Icons } from '../../../assets/SvgIcons/Icons';
 
 const Wrapper = ({ navigation }) => {
 
@@ -22,15 +22,22 @@ const Wrapper = ({ navigation }) => {
 
     return (
 
-        <KeyboardAvoidingView
-            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-            style={styles.container}
-        >
-            {/* <View style={styles.container}> */}
+        // <KeyboardAvoidingView
+        //     behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        //     style={styles.container}
+        // >
 
-            {/* <ScrollView showsVerticalScrollIndicator={false} > */}
+        //     <View style={styles.container}>
+        <ScrollView showsVerticalScrollIndicator={false} style={styles.container}
+            contentContainerStyle={{ justifyContent: 'space-between', flexGrow: 1 }} >
 
-            <View style={styles.headerView}>
+
+            <View style={{ alignItems: 'center', marginTop: 50 }}>
+                <Image source={require('../../../assets/logo.png')} />
+                <Text style={[FontStyle.Regular24, { marginTop: 4 }]}>Human Resource</Text>
+            </View>
+
+            {/* <View style={styles.headerView}>
 
                 <View>
                     <Text style={FontStyle.Regular24}>Login</Text>
@@ -40,7 +47,7 @@ const Wrapper = ({ navigation }) => {
                     <Text style={[FontStyle.Regular12, { color: COLORS.grey1 }]}>Please login with your email and password to continue</Text>
                 </View>
 
-            </View>
+            </View> */}
 
             <View style={styles.mainView}>
 
@@ -50,6 +57,7 @@ const Wrapper = ({ navigation }) => {
                     value={inputs.username}
                     error={inputs?.errors?.username}
                     onChangeText={(text) => handleOnChange('username', text)}
+                    icon={Icons.email}
                 />
 
                 <TextInputAuth
@@ -60,6 +68,7 @@ const Wrapper = ({ navigation }) => {
                     error={inputs?.errors?.password}
                     onChangeText={(text) => handleOnChange('password', text)}
                     password={true}
+                    icon={Icons.password}
                 />
 
                 <View>
@@ -89,34 +98,9 @@ const Wrapper = ({ navigation }) => {
 
             <Loader loading={loading} title={'Signing In...'} />
 
-            {/* <Spinner
-                visible={loading}
-                color={COLORS.primaryColor}
-            /> */}
-            {/* <Input
-                    marginTop={24}
-                    value={inputs.username}
-                    error={inputs?.errors?.username}
-                    placeholder={'Enter Username'}
-                    onChangeText={(text) => handleOnChange('username', text)}
-                    />
-                    
-                    <Input
-                    marginTop={24}
-                    value={inputs.password}
-                    placeholder={'Enter Password'}
-                    error={inputs?.errors?.password}
-                    onChangeText={(text) => handleOnChange('password', text)}
-                    />
-                    
-                    <Button title={'Login'} handelSubmit={LoginSubmit} />
-                    
-                    {loading &&
-                    <ActivityIndicator size={'large'} />
-                } */}
-            {/* </ScrollView> */}
             {/* </View> */}
-        </KeyboardAvoidingView >
+            {/* </KeyboardAvoidingView > */}
+        </ScrollView>
     )
 }
 

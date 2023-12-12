@@ -19,7 +19,7 @@ const CustomCheckBox = ({
             // borderWidth: 1,
             marginTop: 10
         }}>
-            <Text style={[FontStyle.Regular14_500, { fontSize: 16, marginRight: 12, }]}>{'keep me Logged In'}</Text>
+            <Text style={[FontStyle.Regular14_500, { fontSize: 16, marginRight: 12, }]}>{'Keep me logged in'}</Text>
 
             <TouchableOpacity style={{
                 borderWidth: 2,

@@ -27,7 +27,12 @@ export const styles = StyleSheet.create({
         color: COLORS.white,
         fontWeight: 'bold',
         fontSize: 14
-    }
+    },
+    bottomView: {
+        marginVertical: 24,
+        marginHorizontal: 4,
+    },
+
 
 
 });

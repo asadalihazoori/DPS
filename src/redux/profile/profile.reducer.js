@@ -5,6 +5,8 @@ const initialState = {
     data: null,
     employeeID: null,
     name: null,
+    employeeCode: null,
+    department: null,
 
     // shifts: null,
     // holidayStatus: null,
@@ -23,6 +25,8 @@ export const ProfileReducer = (state = initialState, action) => {
                 data: action.payload.data,
                 employeeID: action.payload.data.id,
                 name: action.payload.data.name,
+                department: action.payload.data.department_id,
+                employeeCode: action.payload.data.employee_code,
                 // shifts: action.payload.data.shifts,
                 // loanTypeList: action.payload.data.loan_type_list,
                 // holidayStatus: action.payload.data.holiday_status,

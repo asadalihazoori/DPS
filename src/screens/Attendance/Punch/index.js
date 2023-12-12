@@ -1,4 +1,4 @@
-import { View, Text, } from 'react-native'
+import { View, Text, ScrollView, } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { styles } from './styles'
 import { COLORS } from '../../../theme/colors'
@@ -9,7 +9,7 @@ import AttendanceCardNew from '../AttendanceCardNew'
 import { getCurrentDate } from '../../../utilities/CurretDate'
 import { getCoordinates } from '../Location/AccessLocation'
 import { useSelector } from 'react-redux'
-import moment from 'moment';
+import moment, { min } from 'moment';
 import CircularProgress from 'react-native-circular-progress-indicator';
 
 const Punch = ({ navigation, route }) => {
@@ -18,13 +18,19 @@ const Punch = ({ navigation, route }) => {
 
     const [lat, setLatitude] = useState(0);
     const [long, setLongitude] = useState(0);
+    const [percentageWorked, setpercentageWorked] = useState(0);
     const [currentDate, setCurrentDate] = useState('');
     const [hours, sethours] = useState(0);
     const [minutes, setminutes] = useState(0);
 
 
-    const attendanceData = useSelector((state) => state.attendance);
-    const punchStatus = attendanceData?.punchInStatus ? 'Punch-Out' : 'Punch-In'
+    const data = useSelector((state) => state.attendance);
+    const { punchStatus, attendanceRecords } = useSelector((state) => state.attendance);
+    // const attendanceData = useSelector((state) => state.attendance.attendanceRecords[0]);
+    // console.log("punchStatus", attendanceRecords)
+    // const punchStatus = attendanceData?.punchInStatus ? 'Punch-Out' : 'Punch-In'
+
+    console.log("punch", data)
 
     useEffect(() => {
         setCurrentDate(getCurrentDate());
@@ -36,55 +42,88 @@ const Punch = ({ navigation, route }) => {
 
             })
 
-        calculateWorkedTime();
+        // const { rightHours, rightMinutes } = calculateWorkedTime();
+        calculateTotalTime();
 
     }, [])
+    // }, [punchStatus])
 
     useEffect(() => {
-        if (attendanceData.punchInStatus && !attendanceData.todayAttendance) {
+
+        if (punchStatus == "Punch-Out") {
             const intervalId = setInterval(() => {
-                calculateWorkedTime();
-            }, 55000);
+                // const { rightHours, rightMinutes } = calculateWorkedTime();
+                calculateTotalTime();
+            }, 60000);
             return () => clearInterval(intervalId);
+
         }
         else {
-            calculateWorkedTime();
+            calculateTotalTime();
         }
-    }, [minutes, attendanceData.punchInStatus, attendanceData.punchOutStatus]);
+
+        // }, []);
+    }, [minutes, punchStatus]);
 
 
     const calculateWorkedTime = () => {
 
-        if (attendanceData.todayAttendance) {
-            const punchInTime = moment(attendanceData.punchInTime);
-            const punchOutTime = moment(attendanceData.punchOutTime);
-            const duration = moment.duration(punchOutTime.diff(punchInTime));
-            const hours = Math.floor(duration.asHours());
-            const minutes = Math.floor(duration.asMinutes()) % 60;
+        const lastItem = attendanceRecords.length - 1;
+        const { punchInTime } = attendanceRecords[lastItem]
 
-            sethours(hours);
-            setminutes(minutes);
-        }
-        else if (attendanceData.punchInStatus) {
-            const punchInTime = moment(attendanceData.punchInTime);
-            const duration = moment.duration(moment().diff(punchInTime));
-            const hours = Math.floor(duration.asHours());
-            const minutes = Math.floor(duration.asMinutes()) % 60;
+        const punchInMoment = moment(punchInTime);
+        const duration = moment.duration(moment().diff(punchInMoment));
+        const hours = Math.floor(duration.asHours());
+        const minutes = Math.floor(duration.asMinutes()) % 60;
 
-            sethours(hours);
-            setminutes(minutes);
-        }
-        else {
+        // sethours(hours);
+        // setminutes(minutes);
 
-            sethours(0);
-            setminutes(0);
-        }
+        // console.log("continue", hours, minutes)
+
+        return { rightHours: hours, rightMinutes: minutes }
 
     }
 
-    const totalMinutesWorked = (hours * 60) + minutes;
-    const totalMinutesInDay = 8 * 60;
-    const percentageWorked = Math.floor((totalMinutesWorked / totalMinutesInDay) * 100);
+
+    const calculateTotalTime = (rightHours, rightMinutes) => {
+        // console.log("adad")
+        let totalDuration = { hours: 0, minutes: 0 };
+
+        attendanceRecords.forEach((record, index) => {
+
+            if (record.punchOutStatus) {
+                totalDuration.hours += record.duration.hours;
+                totalDuration.minutes += record.duration.minutes;
+            }
+            else {
+                const { rightHours, rightMinutes } = calculateWorkedTime();
+                totalDuration.hours += rightHours;
+                totalDuration.minutes += rightMinutes;
+
+            }
+
+        });
+
+        // totalDuration.hours += rightHours
+        // totalDuration.minutes += rightMinutes
+
+        totalDuration.hours += Math.floor(totalDuration.minutes / 60);
+        totalDuration.minutes %= 60;
+
+        sethours(totalDuration.hours);
+        setminutes(totalDuration.minutes)
+
+        const totalMinutesWorked = (totalDuration.hours * 60) + totalDuration.minutes;
+        const totalMinutesInDay = 8 * 60;
+        const percetage = Math.floor((totalMinutesWorked / totalMinutesInDay) * 100);
+        setpercentageWorked(percetage);
+
+        // console.log(percetage, "perc");
+        console.log("Total Duration:", totalDuration);
+    }
+
+    // calculateTotalTime(); 
 
 
     return (
@@ -161,19 +200,32 @@ const Punch = ({ navigation, route }) => {
                 </View>
             </View>
 
-            <AttendanceCardNew
-                date={false}
-                color={true}
-                punchIn={attendanceData?.punchInformTime}
-                punchOut={attendanceData?.punchOutformTime}
-            />
+            <ScrollView showsVerticalScrollIndicator={false} style={{
+                flex: 1,
+                marginVertical: 12,
+                // borderWidth: 1
+            }}>
+
+                {attendanceRecords.slice().reverse().map((record, index) =>
+                    <AttendanceCardNew
+                        key={index}
+                        date={false}
+                        color={index === 0 ? true : false}
+                        punchIn={record?.punchInformTime}
+                        punchOut={record?.punchOutformTime}
+
+                    />)
+
+                }
+
+            </ScrollView>
 
             <View style={[styles.bottomView]}>
-                {!attendanceData.todayAttendance &&
+                {/* {!attendanceData.todayAttendance && */}
 
-                    <NextButton title={punchStatus}
-                        onPress={() => navigation.navigate('LocationOld', { punchStatus: punchStatus, lat: lat, long: long })} />
-                }
+                <NextButton title={punchStatus}
+                    onPress={() => navigation.navigate('LocationOld', { punchStatus: punchStatus, lat: lat, long: long })} />
+                {/* } */}
             </View>
 
         </View >

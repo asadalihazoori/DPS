@@ -32,11 +32,19 @@ export const siginin = ({ navigation, inputs, setLoading }) => {
                     navigation,
                     setLoading,
                 }))
-                // .then(() => {
+                    .then(() => {
 
-                //     setLoading(false)
-                // }
-                // )
+                        setLoading(false)
+                        // navigation.reset({
+                        //     index: 0,
+                        //     routes: [
+                        //         {
+                        //             name: 'DrawerNavigation',
+                        //         },
+                        //     ],
+                        // });
+                    }
+                    )
                 // navigation.replace('DrawerNavigation')
             }
 

@@ -2,14 +2,28 @@ import { Alert, SafeAreaView, ScrollView, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { getLoansApi } from '../../../utilities/api/apiController';
 import { useSelector } from 'react-redux';
-import Table from '../../../components/Table';
 import { styles } from './styles';
 import LoanCard from '../../../components/Cards/LoanCard';
 
 const LoansAdvances = ({ navigation }) => {
 
-    const headerData = ['Date', 'Type', 'Amount', 'Remaining', 'State'];
-    const [data, setData] = useState([]);
+
+    const dummyData = [{
+        "amount": "10000",
+        "type": "Personal Loan",
+        "date": "2022-03-13",
+        "remaining": "15000",
+        "state": "Approved",
+    },
+    {
+        "amount": "10000",
+        "type": "Personal Loan",
+        "date": "2022-03-13",
+        "remaining": "15000",
+        "state": "Approved",
+    }];
+
+    const [data, setData] = useState(dummyData); //[]
     const [loading, setLoading] = useState(true);
 
     const uid = useSelector((state) => state.signin.uid);
@@ -50,7 +64,7 @@ const LoansAdvances = ({ navigation }) => {
         }
     };
     useEffect(() => {
-        fetchData();
+        // fetchData();
     }, [])
 
     return (

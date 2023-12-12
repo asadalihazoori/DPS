@@ -3,7 +3,7 @@ import { Alert } from "react-native";
 import { punch_out } from "../attendance.action";
 
 
-export const createPunchOut = ({ uid, navigation, time, latitude, longitude, date, setTitle, setFreeze, employeeID }) => {
+export const createPunchOut = ({ uid, navigation, time, latitude, longitude, setTitle, setFreeze, employeeID, employeeCode, department, }) => {
 
     return async (dispatch) => {
 
@@ -22,6 +22,10 @@ export const createPunchOut = ({ uid, navigation, time, latitude, longitude, dat
                                 "date": time.date,
                                 "checkout": time.dateTime,
                                 "employee_id": employeeID,
+                                "machine_id": employeeCode,
+                                "department_id": department?.[0],
+                                "server_date": time.dateTime,
+                                "date_wags": time.dateTime,
                                 // "attendance_status": "Checkout"
 
                             }
@@ -44,28 +48,41 @@ export const createPunchOut = ({ uid, navigation, time, latitude, longitude, dat
                 setFreeze(false)
                 setTitle(`Punched Out at ${time?.time}`);
                 navigation.goBack();
-                // setTitle(`Punched Out at ${time?.time.format('h:mm A')}`);
 
             }
-            else if (response?.data?.error) {
-                Alert.alert(response?.data?.error?.message, `${response?.data?.error?.data?.message}`);
-            }
 
-            else if (response == 'AxiosError: Request failed with status code 404') {
-                Alert.alert("Session Expired", `Please Login Again`);
-            }
-
-            else if (response == "AxiosError: Network Error") {
-                Alert.alert("Internet Connection Failed", "Try to connect with Wifi or Mobile Network");
-            }
             else {
-                Alert.alert("Error", "Try Again");
+                dispatch(punch_out({
+                    punchOutStatus: true,
+                    punchOutTime: time.timeString,
+                    punchOutformTime: time?.time,
+                    apiBody: body,
+                    asyncPunch: true,
+                }))
+                setFreeze(false)
+                // setTitle(`Punched Out at ${time?.time}`);
+                navigation.goBack();
 
+                if (response?.data?.error) {
+                    // Alert.alert(response?.data?.error?.message, `${response?.data?.error?.data?.message}`);
+                }
+
+                else if (response == 'AxiosError: Request failed with status code 404') {
+                    // Alert.alert("Session Expired", `Please Login Again`);
+                }
+
+                else if (response == "AxiosError: Network Error") {
+                    // Alert.alert("Internet Connection Failed", "Try to connect with Wifi or Mobile Network");
+                }
+                else {
+                    // Alert.alert("Error", "Try Again");
+
+                }
             }
         }
 
         catch (error) {
-            console.log(error, "error")
+            console.error(error, "error")
         }
 
     }

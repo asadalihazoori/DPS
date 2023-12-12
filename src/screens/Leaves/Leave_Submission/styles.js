@@ -4,9 +4,14 @@ import { COLORS } from '../../../theme/colors';
 export const styles = StyleSheet.create({
 
     container: {
-        paddingHorizontal: 16,
-        flex: 1,
+        marginHorizontal: 16,
         // borderWidth: 1,
     },
+
+    bottomView: {
+        marginVertical: 24,
+        marginHorizontal: 4,
+    },
+
 
 });

@@ -12,7 +12,7 @@ const Stack = createNativeStackNavigator();
 const Navigation = () => {
 
     const user = useSelector(state => state.signin)
-    console.log(user);
+    // console.log(user);
     return (
         <NavigationContainer>
             <Stack.Navigator

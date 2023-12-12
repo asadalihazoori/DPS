@@ -14,7 +14,7 @@ const AuthProvider = ({ children, navigation }) => {
     const [inputs, setInputs] = useState({
         username: null,
         password: null,
-        loggedIn: false,
+        loggedIn: true,
         errors: null,
     });
 

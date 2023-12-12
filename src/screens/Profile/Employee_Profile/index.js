@@ -25,14 +25,15 @@ const EmployeeProfile = ({ navigation, route }) => {
 
     const dispatch = useDispatch();
 
-    // useEffect(() => {
-    //     // setLoading(true) 
-    //     dispatch(getEmployeeProfile({
-    //         uid,
-    //         navigation
-    //     }))
+    useEffect(() => {
+        // setLoading(true) 
+        dispatch(getEmployeeProfile({
+            uid,
+            navigation
+        }))
 
-    // }, [])
+    }, [])
+
 
 
     const [index, setIndex] = React.useState(0);

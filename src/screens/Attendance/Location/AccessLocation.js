@@ -50,6 +50,7 @@ export function getCoordinates() {
     Geolocation.getCurrentPosition(
       (position) => {
         const { latitude, longitude } = position.coords;
+        console.log(latitude, longitude)
         resolve({ latitude, longitude });
       },
       (error) => {

@@ -54,8 +54,8 @@ export const getEmployeeProfile = ({ uid, navigation, setLoading }) => {
             }
 
             const response = await getEmployeeProfileWagsApi({ body, navigation });
-            console.log(response.data);
-            setLoading(false);
+            // console.log(response.data);
+            // setLoading(false);
 
             if (response?.data?.result) {
 
@@ -64,18 +64,22 @@ export const getEmployeeProfile = ({ uid, navigation, setLoading }) => {
 
                     const profieData = response?.data?.result?.[0];
                     dispatch(get_employee_profile(profieData))
-                    // navigation.replace('DrawerNavigation')
-                    navigation.reset({
-                        index: 0,
-                        routes: [
-                            {
-                                name: 'DrawerNavigation',
-                            },
-                        ],
-                    });
+
+                    if (setLoading) {
+
+                        // navigation.replace('DrawerNavigation')
+                        navigation.reset({
+                            index: 0, 
+                            routes: [
+                                {
+                                    name: 'DrawerNavigation',
+                                },
+                            ],
+                        });
+                    }
                 }
                 else {
-                    Alert.alert("Profile Not Found !", `Profile of this user is null`);
+                    Alert.alert("Profile Not Found !", `Please create profile of this user or link user with an Employee`);
                 }
 
             }

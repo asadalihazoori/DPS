@@ -4,6 +4,8 @@ import { FontStyle } from '../../../theme/FontStyle'
 import { styles } from './styles'
 import { COLORS } from '../../../theme/colors'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { SvgXml } from 'react-native-svg'
+import { Icons } from '../../../assets/SvgIcons/Icons'
 
 const TextInputAuth = ({
     label,
@@ -13,6 +15,7 @@ const TextInputAuth = ({
     marginTop,
     error,
     password,
+    icon,
 }) => {
 
     const [hidePassword, setHidePassword] = useState(password);
@@ -34,10 +37,16 @@ const TextInputAuth = ({
 
             }]}>
 
+                {icon && (
+                    <View style={{ justifyContent: 'center', marginRight: 8 }}>
+                        <SvgXml xml={icon} />
+                    </View>
+                )}
+
                 <TextInput
                     placeholder={placeholder}
                     onChangeText={onChangeText}
-                    placeholderTextColor={COLORS.grey3 }
+                    placeholderTextColor={COLORS.grey3}
                     value={value}
                     style={styles.textInput}
                     autoCapitalize='none'
@@ -53,7 +62,7 @@ const TextInputAuth = ({
                         <Icon
                             onPress={() => setHidePassword(!hidePassword)}
                             name={hidePassword ? 'eye-outline' : 'eye-off-outline'}
-                            style={{ color: COLORS.primaryColor, fontSize: 20 }}
+                            style={{ color: "#587CF3", fontSize: 20 }}
                         />
                     </View>
                 )}

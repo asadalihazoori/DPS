@@ -4,12 +4,12 @@ import { COLORS } from '../../../theme/colors';
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginHorizontal: 16,
+        paddingHorizontal: 16,
         // borderWidth: 1
     },
 
     headerView: {
-        marginTop: 140,
+        // marginTop: 50,
         // borderWidth: 1
     },
 
@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
 
     mainView: {
         // borderWidth: 1,
-        marginTop: 40,
+        marginTop: 50,
         flex: 1
     },
 
@@ -49,8 +49,8 @@ export const styles = StyleSheet.create({
 
     bottomView: {
         justifyContent: 'flex-end',
-        paddingBottom: 24,
-        backgroundColor: COLORS.background  
+        marginVertical: 24,
+        // backgroundColor: COLORS.background,
         // borderWidth: 1,
     },
 

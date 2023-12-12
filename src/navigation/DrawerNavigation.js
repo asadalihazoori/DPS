@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import moment from 'moment';
 import { RESET_ATTENDANCE } from "../redux/attendance/attendance.types";
 import { getPermissionJust } from "../screens/Attendance/Location/AccessLocation";
+import { asyncAttendances } from "../redux/attendance/actions/asyncAttendances";
 
 const Drawer = createDrawerNavigator();
 
@@ -28,6 +29,9 @@ const DrawerNavigation = ({ navigation }) => {
 
     const dispatch = useDispatch();
     const lastUpdatedDate = useSelector((state) => state.attendance.lastUpdatedDate);
+    const asyncPunches = useSelector((state) => state.attendance.asyncPunches);
+    const attendance = useSelector((state) => state.attendance);
+    // console.log(attendance);
 
     useEffect(() => {
         const currentDate = moment().format('YYYY-MM-DD');
@@ -39,16 +43,32 @@ const DrawerNavigation = ({ navigation }) => {
 
     // useEffect(() => {
     //     dispatch({ type: RESET_ATTENDANCE });
-
     // })
 
+    useEffect(() => {
+
+        // console.log("len", asyncPunches.length)
+        // if (asyncPunches.length > 0 ) {
+        // }
+
+
+        asyncPunches?.map((record) => {
+            console.log('called')
+            dispatch(asyncAttendances({
+                body: record,
+                navigation
+            }))
+        })
+
+
+
+    }, [])
 
     return (
-        <Drawer.Navigator initialRouteName="BottomTab"
+        <Drawer.Navigator initialRouteName="BottomTab" //"BottomTab"
             screenOptions={{
                 headerShown: false
             }}
-            // drawerContent={(props) => <CustomDrawerContent {...props} />}>
             drawerContent={(props) => <CustomDrawer1 {...props} />}>
 
 

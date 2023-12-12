@@ -9,11 +9,14 @@ export const stylesOld = StyleSheet.create({
     },
 
     mapView: {
+        marginTop: 16,
         width: '100%',
-        height: '80%',
+        height: '75%',
         overflow: 'hidden',
-        borderBottomLeftRadius: 24,
-        borderBottomRightRadius: 24,
+        borderRadius: 24,
+        // borderWidth: 1,
+        // borderBottomLeftRadius: 24,
+        // borderBottomRightRadius: 24,
     },
 
 })

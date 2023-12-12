@@ -12,15 +12,44 @@ import LeaveBalanceCard from '../../../components/Cards/LeaveBalanceCard';
 
 const LeaveStatus = ({ navigation }) => {
 
-    // const tableHeader = ["Type", "Allocated", "Availed", "Remaining"]
-    const tableHeader = ["Leave", "Credits", "Taken", "Available"]
 
-    // const [data, setData] = useState([]);
-    const leaves = useSelector((state) => state.leaveStatus.leaves);
+    // const leaves = useSelector((state) => state.leaveStatus.leaves);
+    const leaves = [
+        {
+            "leaves_type": "Annual Leaves",
+            "leave_remaining": 14.0,
+            "total_leaves": 14.0,
+            "leave_availed": 0.0
+        },
+        {
+            "leaves_type": "Sick Leaves",
+            "leave_remaining": 12.0,
+            "total_leaves": 12.0,
+            "leave_availed": 0.0
+        },
+        {
+            "leaves_type": "Casual Leaves",
+            "leave_remaining": 10.0,
+            "total_leaves": 10.0,
+            "leave_availed": 0.0
+        },
+        {
+            "leaves_type": "CPL",
+            "leave_remaining": 3.0,
+            "total_leaves": 3.0,
+            "leave_availed": 0.0
+        },
+        {
+            "leaves_type": "CPL (Non-Encashable)",
+            "leave_remaining": 0.0,
+            "total_leaves": 0.0,
+            "leave_availed": 0.0
+        }
+    ];
     const uid = useSelector((state) => state.signin.uid);
     const dispatch = useDispatch();
 
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false); //true
 
     const fetchData = async () => {
 
@@ -34,7 +63,6 @@ const LeaveStatus = ({ navigation }) => {
 
             const response = await getLeaveStatusApi({ body, navigation });
             // console.log(response?.data?.result?.response?.leaves);
-            console.log("leaves");
             setLoading(false);
 
 
@@ -55,35 +83,27 @@ const LeaveStatus = ({ navigation }) => {
         }
     };
 
-    useEffect(() => {
-        // fetchData();
+    // useEffect(() => {
+    //     // fetchData();
 
-        dispatch(getLeavesStatus({
-            uid,
-            navigation
-        }))
-            .then(() => {
-                setLoading(false);
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-                setLoading(false);
-            });
+    //     dispatch(getLeavesStatus({
+    //         uid,
+    //         navigation
+    //     }))
+    //         .then(() => {
+    //             setLoading(false);
+    //         })
+    //         .catch((error) => {
+    //             console.error("Error:", error);
+    //             setLoading(false);
+    //         });
 
 
 
-    }, [])
+    // }, [])
 
     return (
         <View style={styles.container}>
-
-            {/* <Text style={styles.leaveText}>Total Leaves Available : 38 Days</Text> */}
-
-            {/* {loading ? <></> :
-
-                <LeaveTable header={tableHeader} navigation={navigation} data={leaves} loading={false} />
-
-            } */}
 
             {loading ? <></> :
 

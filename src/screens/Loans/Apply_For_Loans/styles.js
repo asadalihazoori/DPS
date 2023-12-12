@@ -6,6 +6,10 @@ export const styles = StyleSheet.create({
         flex: 1,
         // backgroundColor: COLORS.white,
         // padding: 20,
-    }
+    },
+    bottomView: {
+        marginVertical: 24,
+        marginHorizontal: 4,
+    },
 
 });

@@ -72,68 +72,103 @@ const PersonalInfo = () => {
                         editable={false}
                     /> */}
 
-                    <ProfileTextInput
-                        label={'ID'}
-                        value={profileData?.identification_id}
-                        editable={false}
-                    />
 
-                    <ProfileTextInput
-                        label={'Company'}
-                        value={`${profileData?.company_id?.[1]}`}
-                        editable={false}
-                    />
+                    {profileData?.identification_id &&
+                        <ProfileTextInput
+                            label={'ID'}
+                            value={profileData?.identification_id}
+                            editable={false}
+                        />
+                    }
 
-                    <ProfileTextInput
-                        label={'Department'}
-                        value={`${profileData?.department_id?.[1]}`}
-                        editable={false}
-                    />
-                    <ProfileTextInput
-                        label={'Manager'}
-                        value={`${profileData?.manager_id?.[1]}`}
-                        editable={false}
-                    />
-                    <ProfileTextInput
-                        label={'Company Location'}
-                        value={`${profileData?.company_location?.[1]}`}
-                        editable={false}
-                    />
-                    <ProfileTextInput
-                        label={'Work Email'}
-                        value={`${profileData?.work_email}`}
-                        editable={false}
-                    />
-                    <ProfileTextInput
-                        label={'Work Mobile'}
-                        value={`${profileData?.mobile_phone}`}
-                        editable={false}
-                    />
-                    <ProfileTextInput
-                        label={'Joining Date'}
-                        value={`${profileData?.joining_date}`}
-                        editable={false}
-                    />
-                    <ProfileTextInput
-                        label={'Service Years'}
-                        value={`${profileData?.no_of_years}`}
-                        editable={false}
-                    />
-                    <ProfileTextInput
-                        label={'Nationality Type'}
-                        value={profileData?.nationality_type == "non_local"  ? 'Non Local': 'Local'}
-                        editable={false}
-                    />
-                    <ProfileTextInput
-                        label={'Nationality'}
-                        value={`${profileData?.country_id[1]}`}
-                        editable={false}
-                    />
-                    <ProfileTextInput
-                        label={'Date of Birth'}
-                        value={`${profileData?.birthday}`}
-                        editable={false}
-                    />
+                    {profileData?.company_id?.[1] &&
+                        <ProfileTextInput
+                            label={'Company'}
+                            value={`${profileData?.company_id?.[1]}`}
+                            editable={false}
+                        />
+                    }
+
+                    {profileData?.department_id?.[1] &&
+                        <ProfileTextInput
+                            label={'Department'}
+                            value={`${profileData?.department_id?.[1]}`}
+                            editable={false}
+                        />
+                    }
+
+                    {profileData?.manager_id?.[1] &&
+                        <ProfileTextInput
+                            label={'Manager'}
+                            value={`${profileData?.manager_id?.[1]}`}
+                            editable={false}
+                        />
+                    }
+                    {profileData?.company_location?.[1] &&
+
+                        < ProfileTextInput
+                            label={'Company Location'}
+                            value={`${profileData?.company_location?.[1]}`}
+                            editable={false}
+                        />
+                    }
+
+                    {profileData?.work_email &&
+                        <ProfileTextInput
+                            label={'Work Email'}
+                            value={`${profileData?.work_email}`}
+                            editable={false}
+                        />
+                    }
+
+                    {profileData?.mobile_phone &&
+                        <ProfileTextInput
+                            label={'Work Mobile'}
+                            value={`${profileData?.mobile_phone}`}
+                            editable={false}
+                        />
+                    }
+
+                    {profileData?.joining_date &&
+
+                        <ProfileTextInput
+                            label={'Joining Date'}
+                            value={`${profileData?.joining_date}`}
+                            editable={false}
+                        />
+                    }
+
+                    {profileData?.no_of_years &&
+                        <ProfileTextInput
+                            label={'Service Years'}
+                            value={`${profileData?.no_of_years}`}
+                            editable={false}
+                        />
+                    }
+
+                    {profileData?.nationality_type &&
+                        <ProfileTextInput
+                            label={'Nationality Type'}
+                            value={profileData?.nationality_type == "non_local" ? 'Non Local' : 'Local'}
+                            editable={false}
+                        />
+                    }
+
+                    {profileData?.country_id[1] &&
+                        <ProfileTextInput
+                            label={'Nationality'}
+                            value={`${profileData?.country_id[1]}`}
+                            editable={false}
+                        />
+                    }
+
+                    {profileData?.birthday &&
+                        <ProfileTextInput
+                            label={'Date of Birth'}
+                            value={`${profileData?.birthday}`}
+                            editable={false}
+                        />
+                    }
 
 
                 </View>

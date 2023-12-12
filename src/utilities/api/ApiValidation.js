@@ -7,6 +7,7 @@ const ApiStatus = async (error, navigation) => {
 
 
     console.log(error, navigation);
+    console.log("response", error.data);
     // let errorCode = error?.response?.status;
     // console.log("errorCode", error?.response?.data?.error?.code);
 

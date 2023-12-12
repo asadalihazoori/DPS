@@ -10,6 +10,7 @@ import Input from '../../../components/InputField'
 import { useSelector } from 'react-redux'
 import { styles } from './styles'
 import ProfileTextInput from '../../../components/Inputs/ProfileTextInput'
+import { NextButton } from '../../../components/Inputs'
 
 const ApplyForLoans = ({ navigation }) => {
 
@@ -105,9 +106,12 @@ const ApplyForLoans = ({ navigation }) => {
     };
 
     return (
-        <ScrollView showsVerticalScrollIndicator={false} style={{ marginHorizontal: 16, }}>
+        <ScrollView showsVerticalScrollIndicator={false} style={{ marginHorizontal: 16, }}
+            contentContainerStyle={{ justifyContent: 'space-between', flexGrow: 1 }}>
 
-            <ProfileTextInput
+            <View>
+
+                {/* <ProfileTextInput
                 label={'Name'}
                 value={inputs.name}
                 editable={false}
@@ -123,59 +127,60 @@ const ApplyForLoans = ({ navigation }) => {
                 label={'CNIC'}
                 value={inputs.cnic}
                 editable={false}
-            />
+            /> */}
 
-            <TouchableView
-                label={'Select Loan type'}
-                header={'Select'}
-                text={inputs?.type}
-                error={inputs?.errors?.type}
-                data={employee_data?.loan_type_list}
-                onChange={(selectedType) => handleInputChange('type', selectedType)}
-            />
-
-
-            <ProfileTextInput
-                label={'Amount'}
-                placeholder={'Enter Amount'}
-                value={inputs.amount}
-                editable={true}
-                error={inputs?.errors?.amount}
-                keyboardType={'number-pad'}
-                onChangeText={(text) => handleInputChange('amount', text)}
-            />
-
-            <ProfileTextInput
-                label={'Date'}
-                value={inputs.date.toDateString()}
-                editable={false}
-            />
-
-            <ProfileTextInput
-                label={'Reason'}
-                editable={true}
-                placeholder={'Enter Reason'}
-                value={inputs.reason}
-                error={inputs?.errors?.reason}
-                multiline={true}
-                height={75}
-                onChangeText={(text) => handleInputChange('reason', text)}
-            />
+                <TouchableView
+                    label={'Select Loan type'}
+                    header={'Select'}
+                    text={inputs?.type}
+                    error={inputs?.errors?.type}
+                    data={employee_data?.loan_type_list}
+                    onChange={(selectedType) => handleInputChange('type', selectedType)}
+                />
 
 
-            {/* <Input
+                <ProfileTextInput
+                    label={'Amount'}
+                    placeholder={'Enter Amount'}
+                    value={inputs.amount}
+                    editable={true}
+                    error={inputs?.errors?.amount}
+                    keyboardType={'number-pad'}
+                    onChangeText={(text) => handleInputChange('amount', text)}
+                />
+
+                <ProfileTextInput
+                    label={'Date'}
+                    value={inputs.date.toDateString()}
+                    editable={false}
+                />
+
+                <ProfileTextInput
+                    label={'Reason'}
+                    editable={true}
+                    placeholder={'Enter Reason'}
+                    value={inputs.reason}
+                    error={inputs?.errors?.reason}
+                    multiline={true}
+                    height={75}
+                    onChangeText={(text) => handleInputChange('reason', text)}
+                />
+
+
+
+                {/* <Input
                 marginTop={12}
                 editable={false}
                 value={inputs.designation}
             /> */}
 
-            {/* <Input
+                {/* <Input
                 marginTop={12}
                 editable={false}
                 value={inputs.cnic}
             /> */}
 
-            {/* <Input
+                {/* <Input
                 marginTop={12}
                 placeholder={'Amount'}
                 value={inputs.amount}
@@ -185,14 +190,14 @@ const ApplyForLoans = ({ navigation }) => {
             /> */}
 
 
-            {/* <Input
+                {/* <Input
                 marginTop={12}
                 editable={false}
                 value={inputs.date.toDateString()}
                 onChangeText={(text) => handleInputChange('date', text)}
             /> */}
 
-            {/* <Input
+                {/* <Input
                 marginTop={12}
                 placeholder={'Reason'}
                 value={inputs.reason}
@@ -200,7 +205,13 @@ const ApplyForLoans = ({ navigation }) => {
                 onChangeText={(text) => handleInputChange('reason', text)}
             /> */}
 
-            <Button title={'Submit'} handelSubmit={validate} />
+            </View>
+            {/* <Button title={'Submit'} handelSubmit={validate} /> */}
+
+
+            <View style={styles.bottomView}>
+                <NextButton title={'Submit'} onPress={validate} />
+            </View>
 
             {loading &&
                 <ActivityIndicator size={'large'} />}
