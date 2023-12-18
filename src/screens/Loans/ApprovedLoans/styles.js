@@ -4,7 +4,7 @@ const { StyleSheet } = require("react-native");
 export const styles = StyleSheet.create({
     container: {
         marginHorizontal: 16,
-        borderWidth: 1,
+        // borderWidth: 1,
         flex: 1,
     },
 

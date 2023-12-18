@@ -74,7 +74,7 @@ export const FontStyle = StyleSheet.create({
         color: COLORS.primaryColor,
         fontFamily: fonts.regular,
         fontSize: 24,
-        fontWeight: '500',
+        fontWeight: '600',
     },
 
 })

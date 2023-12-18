@@ -1,148 +1,242 @@
-import { View, Text, SafeAreaView, PermissionsAndroid } from 'react-native'
+import { View, SafeAreaView, Alert, TouchableOpacity } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Theme from '../../../theme/theme'
-import { styles } from './styles'
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps'
-import { SvgXml } from 'react-native-svg'
-import { Icons } from '../../../assets/SvgIcons/Icons'
-import { FontStyle } from '../../../theme/FontStyle'
-import { COLORS } from '../../../theme/colors'
-import AttendanceCardNew from '../AttendanceCardNew'
-import { getCurrentDate } from '../../../utilities/CurretDate'
-import SwipeReverse from '../SwipeReverse'
-// import Geolocation from '@react-native-community/geolocation';
-// import GeneralHeader from '../../../components/Headers/GeneralHeader'
-import { getPermission } from './AccessLocation'
+import { styles } from './styles'
 import { getCoordinates } from './AccessLocation'
 import { useDispatch, useSelector } from 'react-redux'
+import { createPunchIn } from '../../../redux/attendance/actions/createPunchIn'
+import { createPunchOut } from '../../../redux/attendance/actions/createPunchOut'
+import { getCurrentDateTime } from '../../../utilities/CurrentTime'
+import { checkAttendanceLocationApi } from '../../../utilities/api/apiController'
+import Loader from '../../../components/Loader'
+import { SvgXml } from 'react-native-svg'
+import GeneralHeader from '../../../components/Headers/GeneralHeader'
+import { COLORS } from '../../../theme/colors'
+import Swipe from '../../../components/Swipe'
+import SwipeReverse from '../../../components/SwipeReverse'
 
-const Location = ({ navigation }) => {
+const LocationOld = ({ navigation, route }) => {
 
-    const [currentDate, setCurrentDate] = useState('');
-    const [latitude, setLatitude] = useState(0);
-    const [longitude, setLongitude] = useState(0);
+    const { punchStatus, lat, long } = route?.params;
+
+    const [latitude, setLatitude] = useState(lat);
+    const [longitude, setLongitude] = useState(long);
+    const [loading, setLoading] = useState(true);// true
+    const [freeze, setFreeze] = useState(false);
+    const [title, setTitle] = useState('Verifying Location...');
+
     const dispatch = useDispatch();
     const uid = useSelector((state) => state.signin.uid);
-    const attendanceData = useSelector((state) => state.attendance);
     const employeeID = useSelector((state) => state.employeeProfile.employeeID);
 
+    const employeeCode = useSelector((state) => state.employeeProfile.employeeCode);
+    const department = useSelector((state) => state.employeeProfile.department);
 
-    const punch = () => {
-        dispatch(getLeavesStatus({
+
+    const punchIn = () => {
+
+        setFreeze(false);
+        setTitle('Punching In...')
+        const result = getCurrentDateTime()
+
+        dispatch(createPunchIn({
+            time: result,
+            latitude,
+            longitude,
             uid,
-            navigation
+            navigation,
+            employeeID,
+            employeeCode,
+            department,
+
+            setTitle,
+            setFreeze
+        }))
+    }
+
+    const punchOut = () => {
+
+        setFreeze(false);
+        setTitle('Punching Out...')
+        const result = getCurrentDateTime()
+
+        dispatch(createPunchOut({
+            time: result,
+            latitude,
+            longitude,
+            uid,
+            navigation,
+            employeeID,
+            employeeCode,
+            department,
+            setTitle,
+            setFreeze
         }))
     }
 
 
+    const checkAttendance = async () => {
+
+        try {
+            const body = {
+                "params": {
+                    "model": "attendance.location.wags",// attendance.location.wags, //pos.location.wags
+                    "method": "check_locations",
+                    "args": [
+                        [
+                            {
+                                "user_id": uid,  //uid
+                                "latitude": latitude, //latitude
+                                "longitude": longitude //longitude
+                            }
+                        ]
+                    ],
+                    "kwargs": {}
+                }
+            }
+
+            const response = await checkAttendanceLocationApi({ body, navigation });
+            console.log("apiRespose", response?.data);
+            setLoading(false);
+
+            if (response?.data?.result?.message == "True") {
+                setFreeze(true);
+            }
+
+            else if (response?.data?.result?.message == "False") {
+                Alert.alert("Warning", `You are not allowed to Punching at this location.`);
+                setTitle('Punching Not Allowed Here');
+                setFreeze(false);
+            }
+
+            else {
+
+                setFreeze(true);
+                if (response?.data?.error) {
+                    if (response?.data?.error?.message == "Odoo Session Expired") {
+                        navigation.replace("Login")
+                    }
+                    // Alert.alert(response?.data?.error?.message, response?.data?.error?.data?.message)
+                }
+
+                else if (response == 'AxiosError: Request failed with status code 404') {
+                    // Alert.alert("Session Expired", `Please Login Again`);
+                }
+
+                else if (response == "AxiosError: Network Error") {
+                    // Alert.alert("Internet Connection Failed", "Try to connect with Wifi or Mobile Network");
+                }
+                else {
+                    Alert.alert("Error", "Try Again");
+
+                }
+            }
+
+        }
+
+        catch (error) {
+            Alert.alert(error);
+            setLoading(false);
+        }
+    }
+
     useEffect(() => {
-        setCurrentDate(getCurrentDate());
-        // getPermission()
-        //     .then(({ latitude, longitude }) => {
-        //         setLatitude(latitude);
-        //         setLongitude(longitude);
-
-        //     });
-
         getCoordinates()
             .then(({ latitude, longitude }) => {
                 setLatitude(latitude);
                 setLongitude(longitude);
 
-            });
+            })
+            .then(() => {
+                checkAttendance();
+            })
+            .catch((error) => console.log(error))
+
+        // setFreeze(true); //remove zrori
     }, [])
 
     return (
         <SafeAreaView style={Theme.SafeArea}>
-            {/* <GeneralHeader title={'Location'} /> */}
 
-            {/* <View style={{ flex: 1, marginTop: 24, borderWidth: 1, paddingHorizontal: 16, }}> */}
+            <GeneralHeader title={punchStatus} navigation={navigation} />
 
-            <View style={{ flexDirection: 'row' }}>
-                <View style={{ flex: 1, justifyContent: 'center' }}>
-                    <Text style={[FontStyle.Regular12, { color: COLORS.grey5, fontWeight: '500' }]}>{currentDate}</Text>
-                </View>
+            <View style={styles.mapView}>
+
+                <MapView
+                    style={{ flex: 1 }}
+
+                    initialRegion={{
+                        latitude: 32.03983860, // riyad 24.7136,
+                        longitude: 72.71208540,//riyad 46.6753,
+                        latitudeDelta: 0.01,
+                        longitudeDelta: 0.01
+
+                    }}
+
+                    region={{
+                        latitude: latitude ? latitude : 32.03983860,//24.7136,
+                        longitude: longitude ? longitude : 72.71208540,//46.6753,
+                        latitudeDelta: 0.01,
+                        longitudeDelta: 0.01
+
+                    }}
+
+                    // showsUserLocation={true}
+                    zoomControlEnabled={true}
+                    provider={PROVIDER_GOOGLE}
+                >
+                    <Marker
+                        coordinate={{
+                            latitude: latitude,
+                            longitude: longitude
+                        }}
+                        title={'Current Location'}
+                    />
+
+                </MapView>
                 {/* <TouchableOpacity
                     activeOpacity={0.5}
-                    onPress={() => navigation.navigate('AttendaceChangeRequest')}
-                    style={{ padding: 4, }}>
-                    <SvgXml xml={Icons.rightArrow2} />
+                    style={{
+                        position: 'absolute',
+                        top: 20,
+                        left: 20,
+                        height: 45,
+                        width: 45,
+                        borderRadius: 22.5,
+                        borderWidth: 1,
+                        backgroundColor: COLORS.white,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                    }}>
+
+                    <SvgXml xml={`<svg xmlns="http://www.w3.org/2000/svg" width="21" height="19" viewBox="0 0 21 19" fill="none">
+                            <path d="M9.49947 1.64694L1.57867 9.51494L9.44667 17.4357M1.57867 9.51494L19.623 9.57528L1.57867 9.51494Z" stroke="black" stroke-width="2.25556" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>`} />
+
                 </TouchableOpacity> */}
             </View>
 
 
-            <View style={styles.mapView}>
+            <View style={styles.container}>
 
-                <View style={{
-                    width: '100%',
-                    flex: 1,
-                    // height: 400,
-                    // height: '70%',
-                    overflow: 'hidden',
-                    // borderWidth: 1,
-                    borderRadius: 8,
-                }}>
+                {punchStatus == "Punch-In" ?
+                    <Swipe
+                        onSlide={punchIn}
+                        freeze={freeze}
+                        title={title}
+                    />
+                    :
+                    <SwipeReverse onSlide={punchOut}
+                        freeze={freeze}
+                        title={title} />
 
-                    {/* <Text>{latitude}</Text>
-                    <Text>{longitude}</Text> */}
-
-                    <MapView
-                        style={{ flex: 1 }}
-                        // // initialRegion={{
-                        // //     latitude: 37.78825,
-                        // //     longitude: -122.4324,
-                        // //     latitudeDelta: 0.0922,
-                        // //     longitudeDelta: 0.0421,
-                        // // }}
-
-                        region={{
-                            latitude: latitude,
-                            longitude: longitude,
-                            latitudeDelta: 0.01,
-                            longitudeDelta: 0.01
-
-                        }}
-
-                        showsUserLocation={true}
-                        zoomControlEnabled={true}
-                        // showsCompass={true}
-                        // showsTraffic={true}
-                        // style={styles.map}
-                        // initialRegion={{
-                        //     latitude: latitude,
-                        //     longitude: longitude,
-                        //     latitudeDelta: 0.01,
-                        //     longitudeDelta: 0.01
-
-                        // }}
-                        provider={PROVIDER_GOOGLE}
-                    >
-                        <Marker
-                            coordinate={{
-                                latitude: latitude,
-                                longitude: longitude
-                            }}
-                            title={'Current Location'}
-                        />
-
-                    </MapView>
-                </View>
-                {/* <Text style={[FontStyle.Regular12, { color: COLORS.black, fontWeight: '500', marginTop: 12 }]}>Just Vehicles Solutions</Text>
-                    <Text style={[FontStyle.Regular12, { color: COLORS.grey5, marginTop: 8 }]}>Walton 888888888Road, Lahore</Text> */}
-            </View>
-
-            {/* <View style={{ marginBottom: 24, justifyContent: 'flex-end' }}>
-                    <AttendanceCardNew date={false} color={true} punchIn={'8:30 AM'} punchOut={'9:30 PM'} />
-                </View> */}
-
-            <View style={{ marginBottom: 12, alignItems: 'center' }}>
-
-                <SwipeReverse onSlide={punch} />
+                }
 
             </View>
-            {/* </View> */}
+            <Loader loading={loading} title={'Get your location...'} />
         </SafeAreaView>
     )
 }
 
-export default Location
+export default LocationOld

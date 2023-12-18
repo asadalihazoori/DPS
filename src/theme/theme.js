@@ -14,7 +14,7 @@ const Theme = StyleSheet.create({
         backgroundColor: COLORS.white,
         borderRadius: 8,
         borderColor: '#BEBEBE',
-        borderWidth: 0.4,
+        borderWidth: 0.6,
 
         ...Platform.select({
             ios: {

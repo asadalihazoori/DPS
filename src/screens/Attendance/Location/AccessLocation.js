@@ -17,6 +17,7 @@ export async function getPermissionJust() {
       }
     )
       .then(async (granted) => {
+        console.log("grant", granted)
         if (granted === PermissionsAndroid.RESULTS.GRANTED) {
 
 
@@ -56,7 +57,12 @@ export function getCoordinates() {
       (error) => {
         reject(error);
       },
-      { enableHighAccuracy: true, timeout: 30000, maximumAge: 3000 }
+      {
+        enableHighAccuracy: true,
+        //  maximumAge: 3000 
+        // timeout: 15000, 
+        // maximumAge: 10000
+      }
     );
   }).catch((error) => {
     // Handle the promise rejection here

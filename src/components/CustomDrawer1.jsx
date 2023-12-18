@@ -32,22 +32,24 @@ const CustomDrawer1 = (props) => {
                 name: "History",
                 navigate: "Attendance"
             },
-            {
-                id: 3,
-                name: "Location",
-                navigate: "Attendance"
-            },
+            // {
+            //     id: 3,
+            //     name: "Location",
+            //     navigate: "Attendance"
+            // },
         ],
         leaves: [
             {
                 id: 4,
                 name: "Apply Leave",
-                navigate: "Leaves"
+                navigate: "Leaves",
+                route: 0,
             },
             {
                 id: 5,
                 name: "Leave Balance",
-                navigate: "Leaves"
+                navigate: "Leaves",
+                route: 1,
             },
         ],
         loans: [
@@ -63,7 +65,7 @@ const CustomDrawer1 = (props) => {
             },
             {
                 id: 8,
-                name: "Report",
+                name: "Loan Status",
                 navigate: "Loans"
             },
         ],
@@ -79,6 +81,60 @@ const CustomDrawer1 = (props) => {
                 navigate: "MedicalClaim"
             },
 
+        ],
+        reports: [
+            {
+                id: 11,
+                name: "Payslips",
+                navigate: "Reports"
+            },
+            {
+                id: 12,
+                name: "Tax Certificte",
+                navigate: "Reports"
+            },
+            {
+                id: 13,
+                name: "Tardiness Report",
+                navigate: "Reports"
+            },
+
+        ],
+        shifts: [
+            {
+                id: 14,
+                name: "Change Shift",
+                navigate: "Shifts"
+            },
+            {
+                id: 15,
+                name: "Shift Status",
+                navigate: "Shifts"
+            },
+        ],
+        overtimeTracking: [
+            {
+                id: 16,
+                name: "Apply Request",
+                navigate: "OvertimeTracking"
+            },
+            {
+                id: 17,
+                name: "Request Status",
+                navigate: "OvertimeTracking"
+            },
+        ],
+        timesheet: [
+            {
+                id: 18,
+                name: "Add Tasks",
+                navigate: "Timesheet"
+            },
+            {
+                id: 19,
+                name: "Timeheet Status",
+                navigate: "Timesheet"
+            },
         ],
 
     }
@@ -143,6 +199,12 @@ const CustomDrawer1 = (props) => {
                             icon={DrawerIcons.personal}
                         />
 
+                        <CustomDrawerItem
+                            title={'Attendance'}
+                            navigate={() => props.navigation.navigate('Attendance')}
+                            icon={DrawerIcons.attendance}
+                        />
+
                         {/* <CustomDrawerItem
                             title={'Attendance'}
                             navigate={(screen) => props.navigation.navigate(screen)}
@@ -151,15 +213,9 @@ const CustomDrawer1 = (props) => {
                             data={Menus.attendace}
                             onSelect={selectScreen}
                             selectedScreen={selectedScreen}
-                        /> */}
-                        <CustomDrawerItem
-                            title={'Attendance'}
-                            navigate={() => props.navigation.navigate('Attendance')}
-                            icon={DrawerIcons.attendance}
                         />
 
-
-                        {/* <CustomDrawerItem
+                        <CustomDrawerItem
                             title={'Leaves'}
                             navigate={(screen) => props.navigation.navigate(screen)}
                             icon={DrawerIcons.leaves}
@@ -167,10 +223,10 @@ const CustomDrawer1 = (props) => {
                             data={Menus.leaves}
                             onSelect={selectScreen}
                             selectedScreen={selectedScreen}
-                        /> */}
+                        />
 
 
-                        {/* <CustomDrawerItem
+                        <CustomDrawerItem
                             title={'Loans/Advances'}
                             navigate={(screen) => props.navigation.navigate(screen)}
                             icon={DrawerIcons.loans}
@@ -179,10 +235,10 @@ const CustomDrawer1 = (props) => {
                             onSelect={selectScreen}
                             selectedScreen={selectedScreen}
 
-                        /> */}
+                        />
 
 
-                        {/* <CustomDrawerItem
+                        <CustomDrawerItem
                             title={'Medical claims'}
                             navigate={(screen) => props.navigation.navigate(screen)}
                             icon={DrawerIcons.medical}
@@ -196,30 +252,70 @@ const CustomDrawer1 = (props) => {
                             title={'Reports'}
                             navigate={() => props.navigation.navigate('Reports')}
                             icon={DrawerIcons.leaves}
-                        />
+                        /> */}
 
-                        <CustomDrawerItem
+                        {/* <CustomDrawerItem
+                            title={'Reports'}
+                            navigate={(screen) => props.navigation.navigate(screen)}
+                            icon={DrawerIcons.leaves}
+                            extandable={true}
+                            data={Menus.reports}
+                            onSelect={selectScreen}
+                            selectedScreen={selectedScreen}
+                        /> */}
+
+                        {/* <CustomDrawerItem
                             title={'Shifts'}
                             navigate={() => props.navigation.navigate('Shifts')}
                             icon={DrawerIcons.shifts}
                         /> */}
 
-                        <CustomDrawerItem
+                        {/* <CustomDrawerItem
+                            title={'Shifts'}
+                            navigate={(screen) => props.navigation.navigate(screen)}
+                            icon={DrawerIcons.shifts}
+                            extandable={true}
+                            data={Menus.shifts}
+                            onSelect={selectScreen}
+                            selectedScreen={selectedScreen}
+                        /> */}
+
+                        {/* <CustomDrawerItem
                             title={'Payslip'}
-                            navigate={() => props.navigation.navigate('EmployeePayslip')}
+                            navigate={() => props.navigation.navigate('Reports')}
                             icon={DrawerIcons.payslip}
-                        />
+                        /> */}
 
                         {/* <CustomDrawerItem
                             title={'Overtime Tracking'}
-                            navigate={() => props.navigation.navigate('Home')}
+                            navigate={() => props.navigation.navigate('OvertimeTracking')}
                             icon={DrawerIcons.overTime}
-                        />
+                        /> */}
 
-                        <CustomDrawerItem
+                        {/* <CustomDrawerItem
+                            title={'Overtime Tracking'}
+                            navigate={(screen) => props.navigation.navigate(screen)}
+                            icon={DrawerIcons.overTime}
+                            extandable={true}
+                            data={Menus.overtimeTracking}
+                            onSelect={selectScreen}
+                            selectedScreen={selectedScreen}
+                        /> */}
+
+                        {/* <CustomDrawerItem
                             title={'Timesheet Management'}
-                            navigate={() => props.navigation.navigate('Home')}
+                            navigate={() => props.navigation.navigate('Timesheet')}
                             icon={DrawerIcons.timeSheet}
+                        /> */}
+
+                        {/* <CustomDrawerItem
+                            title={'Timesheet Management'}
+                            navigate={(screen) => props.navigation.navigate(screen)}
+                            icon={DrawerIcons.timeSheet}
+                            extandable={true}
+                            data={Menus.timesheet}
+                            onSelect={selectScreen}
+                            selectedScreen={selectedScreen}
                         /> */}
 
                     </View>
@@ -228,7 +324,7 @@ const CustomDrawer1 = (props) => {
             </DrawerContentScrollView>
 
 
-            <View style={styles.bottomDrawerSection}>
+            {/* <View style={styles.bottomDrawerSection}>
 
                 <CustomDrawerItem
                     title={'Logout'}
@@ -242,7 +338,7 @@ const CustomDrawer1 = (props) => {
                     style={{ color: COLORS.logout, fontWeight: '700', }}
                 // marginTop={107}
                 />
-            </View>
+            </View> */}
 
 
 

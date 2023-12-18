@@ -69,6 +69,9 @@ export const createPunchOut = ({ uid, navigation, time, latitude, longitude, set
 
                 else if (response == 'AxiosError: Request failed with status code 404') {
                     // Alert.alert("Session Expired", `Please Login Again`);
+                    if (response?.data?.error?.message == "Odoo Session Expired") {
+                        navigation.replace("Login")
+                    }
                 }
 
                 else if (response == "AxiosError: Network Error") {

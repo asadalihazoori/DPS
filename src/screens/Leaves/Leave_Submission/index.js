@@ -187,7 +187,7 @@ const LeaveSubmission = ({ navigation }) => {
                     onChange={(selectedType) => handleInputChange('holidayType', selectedType)}
                 />
 
-                <YearPicker
+                {/* <YearPicker
                     data={year}
                     label={'Leave Type'}
                     placeholder={'Select Leave Type'}
@@ -198,7 +198,7 @@ const LeaveSubmission = ({ navigation }) => {
                     text={inputs?.holidayType?.name}
                     handleModal={() => setModalVisible(true)}
                     error={inputs?.errors?.holidayType}
-                />
+                /> */}
 
                 <DatePicker
                     date={new Date()}

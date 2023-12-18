@@ -71,6 +71,9 @@ export const createPunchIn = ({ uid, navigation, time, latitude, longitude, setT
 
                 if (response?.data?.error) {
                     // Alert.alert(response?.data?.error?.message, `${response?.data?.error?.data?.message}`);
+                    if (response?.data?.error?.message == "Odoo Session Expired") {
+                        navigation.replace("Login")
+                    }
                 }
 
                 else if (response == 'AxiosError: Request failed with status code 404') {

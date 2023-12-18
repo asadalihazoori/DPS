@@ -4,7 +4,7 @@ import { COLORS } from '../../../theme/colors';
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingHorizontal: 16,
+        // paddingHorizontal: 16,
         // borderWidth: 1
     },
 
@@ -19,7 +19,8 @@ export const styles = StyleSheet.create({
 
     mainView: {
         // borderWidth: 1,
-        marginTop: 50,
+        paddingHorizontal: 16,
+        marginTop: -50,
         flex: 1
     },
 
@@ -50,6 +51,7 @@ export const styles = StyleSheet.create({
     bottomView: {
         justifyContent: 'flex-end',
         marginVertical: 24,
+        paddingHorizontal: 16,
         // backgroundColor: COLORS.background,
         // borderWidth: 1,
     },

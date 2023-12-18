@@ -9,7 +9,7 @@ import { Icons } from '../../assets/SvgIcons/Icons';
 // import { SvgXml } from 'react-native-svg'
 
 
-const DatePicker = ({ value, date, label, placeholder, onChange, showDatePicker, setShowDatePicker, error, marginBottom }) => {
+const DatePicker = ({ value, date, label, placeholder, onChange, showDatePicker, setShowDatePicker, error, marginBottom, mode = 'date' }) => {
 
 
     let borderColor = COLORS.black;
@@ -22,7 +22,7 @@ const DatePicker = ({ value, date, label, placeholder, onChange, showDatePicker,
 
 
     const OnChangeDate = (event, selectedDate) => {
-
+        console.log("datePicker", selectedDate)
         if (event.type == "set") {
             onChange(selectedDate)
         }
@@ -38,19 +38,21 @@ const DatePicker = ({ value, date, label, placeholder, onChange, showDatePicker,
                 <Text style={[FontStyle.Regular14, { color: COLORS.darkBlack }]}>{label}</Text>
             </View>
 
-            <TouchableOpacity onPress={() => setShowDatePicker(true)} style={[styles.inputView, {
-                backgroundColor: COLORS.white,
-                borderColor: error ? COLORS.red : "#BEBEBE"
-            }]}>
+            <TouchableOpacity
+                activeOpacity={0.5}
+                onPress={() => setShowDatePicker(true)} style={[styles.inputView, {
+                    backgroundColor: COLORS.white,
+                    borderColor: error ? COLORS.red : "#BEBEBE"
+                }]}>
 
                 <Text style={[FontStyle.Regular12_400, { color: value ? COLORS.darkBlack : COLORS.grey3, flex: 1 }]}>{value ? value : placeholder}</Text>
-                <SvgXml xml={Icons.calender} style={{ marginRight: 4, alignSelf: 'center' }} />
+                <SvgXml xml={mode == "time" ? Icons.clock : Icons.calender} style={{ marginRight: 4, alignSelf: 'center' }} />
             </TouchableOpacity>
 
             {showDatePicker && (
                 <DateTimePicker
                     value={date}
-                    mode='date'
+                    mode={mode}
                     // is24Hour={true}
                     display="default"
                     // onChange={handleDateChange}

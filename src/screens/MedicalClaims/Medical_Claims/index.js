@@ -10,6 +10,14 @@ import MedicalClaimCard from '../../../components/Cards/MedicalClaimCard';
 
 const MedicalClaims = ({ navigation }) => {
 
+    const dummyData = [
+        // { "claim_type": "spouse", "state": "validate", "name": false, "apporve_amount": 50000.0, "date": "2021-01-01", "tree": [{ "claim_amount": 121656.0, "date_claim": "2021-01-01", "description": "Delivery", "disease_type": false }], "id": 205, "record_claim_amount": 121656.0 },
+        { "claim_type": "self", "state": "validate", "name": "Touqeer Zahid", "apporve_amount": 4995.0, "date": "2021-08-16", "tree": [{ "claim_amount": 4995.0, "date_claim": "2021-08-14", "description": "Chest Infection - fever ", "disease_type": false }], "id": 2389, "record_claim_amount": 4995.0 },
+        { "claim_type": "children", "state": "validate", "name": " Aaraiz Touqeer", "apporve_amount": 5021.0, "date": "2021-09-29", "tree": [{ "claim_amount": 6420.0, "date_claim": "2021-09-29", "description": "Fever ", "disease_type": false }], "id": 3012, "record_claim_amount": 6420.0 },
+        { "claim_type": "self", "state": "validate", "name": "Touqeer Zahid", "apporve_amount": 2000.0, "date": "2021-10-22", "tree": [{ "claim_amount": 2000.0, "date_claim": "2021-10-21", "description": "flu", "disease_type": false }], "id": 3251, "record_claim_amount": 2000.0 },
+        { "claim_type": "spouse", "state": "validate", "name": "Yamna Touqeer", "apporve_amount": 2066.0, "date": "2022-03-25", "tree": [{ "claim_amount": 2755.0, "date_claim": "2022-03-24", "description": "Food poisoning ", "disease_type": "Stomach" }], "id": 4820, "record_claim_amount": 2755.0 },
+    ]
+
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -54,7 +62,7 @@ const MedicalClaims = ({ navigation }) => {
 
     useEffect(() => {
 
-        fetchData();
+        // fetchData();
 
     }, [])
 
@@ -62,7 +70,7 @@ const MedicalClaims = ({ navigation }) => {
         <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
 
             {
-                data?.map((item, index) => {
+                dummyData?.map((item, index) => {
                     return (
                         <MedicalClaimCard key={index} data={item} />
                     )

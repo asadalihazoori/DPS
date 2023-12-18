@@ -24,6 +24,7 @@ const CustomDrawerItem = ({
       setExpanded(!isExpanded);
     }
     else {
+      console.log("itty", item, "ghv");
       navigate()
     }
   };

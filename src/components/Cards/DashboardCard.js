@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Dimensions, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { SvgXml } from 'react-native-svg'
 import { FontStyle } from '../../theme/FontStyle'
@@ -48,9 +48,9 @@ const styles = StyleSheet.create({
     buttonView: {
         // height: 95,
         backgroundColor: COLORS.white,
-        width: 162,
+        width: Dimensions.get('window').width * 0.42,
         borderRadius: 10,
-        borderWidth: 0.4,
+        borderWidth: 0.6,
         borderColor: '#C1C1C1'
     },
 

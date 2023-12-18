@@ -122,11 +122,11 @@ const ApplyShift = ({ navigation }) => {
             <ScrollView showsVerticalScrollIndicator={false}>
 
 
-                <ProfileTextInput
+                {/* <ProfileTextInput
                     label={'Name'}
                     value={inputs.name}
                     editable={false}
-                />
+                /> */}
                 <ProfileTextInput
                     label={'Current Shift'}
                     value={inputs.currentShift}

@@ -56,6 +56,9 @@ export const getEmployeeProfile = ({ uid, navigation, setLoading }) => {
             const response = await getEmployeeProfileWagsApi({ body, navigation });
             // console.log(response.data);
             // setLoading(false);
+            if (setLoading) {
+                setLoading(false)
+            }
 
             if (response?.data?.result) {
 
@@ -86,6 +89,9 @@ export const getEmployeeProfile = ({ uid, navigation, setLoading }) => {
 
             else if (response?.data?.error) {
                 Alert.alert(response?.data?.error?.message, `${response?.data?.error?.data?.message}`);
+                if (response?.data?.error?.message == "Odoo Session Expired") {
+                    navigation.replace("Login")
+                }
             }
 
             else if (response == 'AxiosError: Request failed with status code 404') {
@@ -96,7 +102,7 @@ export const getEmployeeProfile = ({ uid, navigation, setLoading }) => {
                 Alert.alert("Internet Connection Failed", "Try to connect with Wifi or Mobile Network");
             }
             else {
-                Alert.alert("Error", "Try Again");
+                Alert.alert("Error", response.response.data);
 
             }
         }

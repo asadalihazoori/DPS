@@ -8,6 +8,8 @@ import { AuthContext } from '../../../context/AuthContext';
 import Loader from '../../../components/Loader';
 import CustomCheckBox from '../../../components/CheckBox';
 import { Icons } from '../../../assets/SvgIcons/Icons';
+import { SvgXml } from 'react-native-svg';
+import { Frames } from '../../../assets/SvgIcons/Frames';
 
 const Wrapper = ({ navigation }) => {
 
@@ -32,9 +34,22 @@ const Wrapper = ({ navigation }) => {
             contentContainerStyle={{ justifyContent: 'space-between', flexGrow: 1 }} >
 
 
-            <View style={{ alignItems: 'center', marginTop: 50 }}>
-                <Image source={require('../../../assets/logo.png')} />
-                <Text style={[FontStyle.Regular24, { marginTop: 4 }]}>Human Resource</Text>
+            <View style={{
+                alignItems: 'center',
+                // paddingVertical: 60,\
+                justifyContent: 'center',
+                // borderWidth: 1,
+                height: 365,
+
+                backgroundColor: 'rgba(233, 228, 255, 0.55)',
+                borderBottomLeftRadius: 33,
+                borderBottomRightRadius: 33,
+
+
+            }}>
+                {/* <Image source={require('../../../assets/logo.png')} /> */}
+                <SvgXml xml={Frames.logo} />
+                <Text style={[FontStyle.Regular24, { marginTop: 12 }]}>Human Resource</Text>
             </View>
 
             {/* <View style={styles.headerView}>

@@ -1,18 +1,28 @@
-import { StyleSheet } from 'react-native'
-import { COLORS } from '../../../theme/colors';
+import { FontStyle } from "../../../theme/FontStyle";
+import { COLORS } from "../../../theme/colors";
+const { StyleSheet } = require("react-native");
 
-export const styles = StyleSheet.create({
+const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        // justifyContent: 'center',
-        borderWidth: 1,
-        // backgroundColor: COLORS.white
+        marginHorizontal: 16,
+        // borderWidth: 1,
+        flex: 1
+    },
+    dateText: {
+        ...FontStyle.Regular12,
+        fontWeight: '500',
+        color: COLORS.grey5
+        // lineHeight: 18,
+
     },
 
-    innerContainer: {
-        flex: 1,
-        justifyContent: 'center'
-        // borderWidth: 1,
-    }
 
-});
+    detailsView: {
+        backgroundColor: COLORS.white,
+        borderRadius: 8,
+        marginTop: 12,
+        paddingHorizontal: 30, paddingVertical: 8,
+    }
+})
+
+export default styles

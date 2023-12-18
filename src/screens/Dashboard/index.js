@@ -12,9 +12,20 @@ import { useSelector } from 'react-redux'
 import { Icons } from '../../assets/SvgIcons/Icons'
 import DashboardNotifyCard from '../../components/Cards/DashboardNotifyCard'
 import moment from 'moment'
+// import AccessLocation from '../../utilities/AccessLocationN'
 
 
 const Dashboard = ({ navigation }) => {
+
+
+    // function getAttributes() {
+    //     AccessLocation.getPermission()
+    //         .then(({ latitude, longitude }) => {
+    //             console.log(latitude)
+    //             console.log(longitude)
+
+    //         })
+    // }
 
     const [recents, setOpenRecent] = useState(false);
     // const attendanceData = useSelector((state) => state.attendance);
@@ -59,7 +70,7 @@ const Dashboard = ({ navigation }) => {
 
                     </View>
 
-                    
+
 
                     {/* <View style={styles.row}>
 
@@ -130,6 +141,8 @@ const Dashboard = ({ navigation }) => {
 
                 </View>
 
+
+                {/* <Button onPress={getAttributes} /> */}
 
                 {/* <View style={{ marginTop: 24 }}>
 

@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react'
-import { Attendance, Dashboard, EmployeePayslip, EmployeeProfile, Leaves, Notifications, Profile, Punch } from '../screens';
+import { Attendance, Dashboard, Reports } from '../screens';
 import { COLORS } from '../theme/colors';
 import { SvgXml } from 'react-native-svg';
 import { DrawerIcons } from '../assets/SvgIcons/DrawerIcons';
@@ -82,7 +82,7 @@ const BottomTab = () => {
                     ),
                 }}
                 name="EmployeePayslip"
-                component={EmployeePayslip}
+                component={Reports}
             />
         </Tab.Navigator>
     )

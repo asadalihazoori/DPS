@@ -5,18 +5,23 @@ import { siginOut } from "../../redux/users/actions/signOut";
 
 const ApiStatus = async (error, navigation) => {
 
+    console.log("response");
 
-    console.log(error, navigation);
-    console.log("response", error.data);
+    // console.log(error, navigation);
     // let errorCode = error?.response?.status;
     // console.log("errorCode", error?.response?.data?.error?.code);
 
-    if (error?.response?.data?.error?.code == 404) {
+    // if (error?.response?.data?.error?.code == 404) {
 
-        const uid = store.getState().signin.uid;
-        siginOut({ uid, navigation })
+    // const uid = store.getState().signin.uid;
+    // siginOut({ uid, navigation })
 
-    }
+    // }
+    // if (error == 'AxiosError: Request failed with status code 404') {
+    //     navigation.replace("Login")
+    // }
+
+
 
     // if (errorCode >= 400 && errorCode <= 499) {
 
