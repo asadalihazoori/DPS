@@ -137,7 +137,11 @@ export function getCoordinates(age = 0) {
 }
 export function getCoordinatesNew(age = 0) {
   return new Promise((resolve, reject) => {
+    if (Platform.OS === "ios") {
+      // your code using Geolocation and asking for authorisation with
 
+      Geolocation.requestAuthorization()
+    }
     GetLocation.getCurrentPosition({
       enableHighAccuracy: true,
       timeout: 60000,
