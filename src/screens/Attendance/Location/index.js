@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import Theme from '../../../theme/theme'
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps'
 import { styles } from './styles'
-import { getCoordinates } from './AccessLocation'
+import { getCoordinates, getCoordinatesNew, getCoordinatesServices, getCoordinatesTest } from './AccessLocation'
 import { useDispatch, useSelector } from 'react-redux'
 import { createPunchIn } from '../../../redux/attendance/actions/createPunchIn'
 import { createPunchOut } from '../../../redux/attendance/actions/createPunchOut'
@@ -76,7 +76,7 @@ const LocationOld = ({ navigation, route }) => {
     }
 
 
-    const checkAttendance = async () => {
+    const checkAttendance = async (lat, long) => {
 
         try {
             const body = {
@@ -87,8 +87,8 @@ const LocationOld = ({ navigation, route }) => {
                         [
                             {
                                 "user_id": uid,  //uid
-                                "latitude": latitude, //latitude
-                                "longitude": longitude //longitude
+                                "latitude": lat, //latitude
+                                "longitude": long //longitude
                             }
                         ]
                     ],
@@ -136,24 +136,47 @@ const LocationOld = ({ navigation, route }) => {
         }
 
         catch (error) {
-            Alert.alert(error);
+            // Alert.alert(error);
             setLoading(false);
         }
     }
 
     useEffect(() => {
-        getCoordinates()
-            .then(({ latitude, longitude }) => {
-                setLatitude(latitude);
-                setLongitude(longitude);
+        getCoordinatesServices()
+            // .then(({ latitude, longitude }) => {
 
+            //     if (latitude) {
+            //     }
+            // })   
+            // .then((position) => {
+
+            //     // console.log(position)
+            //     setLatitude(position.latitude);
+            //     setLongitude(position.longitude);
+            //     checkAttendance(position.latitude, position.longitude);
+
+            // })  // locationl libarary
+
+            .then((position) => {
+
+                console.log(position)
+                setLatitude(position.coords.latitude);
+                setLongitude(position.coords.longitude);
+                checkAttendance(position.coords.latitude, position.coords.longitude);
+
+            })  // services libarary
+
+
+            .catch((error) => {
+                setLoading(false);
+                console.log("Location Screen UseEffect ", error)
+                Alert.alert("Try Again", `${error.message}`,
+                    [{ text: "OK", onPress: () => { navigation.goBack() } }],
+                    { cancelable: false })
             })
-            .then(() => {
-                checkAttendance();
-            })
-            .catch((error) => console.log(error))
 
         // setFreeze(true); //remove zrori
+
     }, [])
 
     return (

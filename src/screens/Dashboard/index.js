@@ -13,7 +13,10 @@ import { Icons } from '../../assets/SvgIcons/Icons'
 import DashboardNotifyCard from '../../components/Cards/DashboardNotifyCard'
 import moment from 'moment'
 // import AccessLocation from '../../utilities/AccessLocationN'
+// import ReactNativeBiometrics, { BiometryTypes } from 'react-native-biometrics';
 
+// import ReactNativeBiometrics, { BiometryTypes } from 'react-native-biometrics'
+// const rnBiometrics = new ReactNativeBiometrics()
 
 const Dashboard = ({ navigation }) => {
 
@@ -140,6 +143,28 @@ const Dashboard = ({ navigation }) => {
 
 
                 </View>
+
+                {/* <Button title='Press' onPress={() => {
+                    rnBiometrics.isSensorAvailable()
+                        .then((resultObject) => {
+                            console.log(resultObject);
+                            const { available, biometryType } = resultObject
+
+                            if (available && biometryType === BiometryTypes.TouchID) {
+                                console.log('TouchID is supported')
+                            }
+                            if (available && biometryType === BiometryTypes.FaceID) {
+                                console.log('FaceID is supported')
+                            }
+                            if (available && biometryType === BiometryTypes.Biometrics) {
+                                console.log('Biometrics is supported')
+                            } else {
+                                console.log('Biometrics not supported')
+                            }
+                        })
+                }}
+                /> */}
+
 
 
                 {/* <Button onPress={getAttributes} /> */}

@@ -46,6 +46,24 @@ const Theme = StyleSheet.create({
         }),
     },
 
+    BottomTabButtonShadow: {
+        ...Platform.select({
+            ios: {
+                shadowColor: 'rgba(53, 97, 232, 0.84)',
+                shadowOffset: {
+                    width: 0,
+                    height: 2,
+                },
+                shadowOpacity: 0.25,
+                shadowRadius: 3.6,
+            },
+            android: {
+                elevation: 16,
+                shadowColor: 'rgba(53, 97, 232, 0.84)',
+            },
+        }),
+    }
+
 })
 
 

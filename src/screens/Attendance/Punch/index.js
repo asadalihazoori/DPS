@@ -7,7 +7,7 @@ import { Icons } from '../../../assets/SvgIcons/Icons'
 import { NextButton } from '../../../components/Inputs'
 import AttendanceCardNew from '../AttendanceCardNew'
 import { getCurrentDate } from '../../../utilities/CurretDate'
-import { getCoordinates } from '../Location/AccessLocation'
+import { getCoordinates, getCoordinatesServices, getCoordinatesTest } from '../Location/AccessLocation'
 import { useSelector } from 'react-redux'
 import moment, { min } from 'moment';
 import CircularProgress from 'react-native-circular-progress-indicator';
@@ -30,16 +30,35 @@ const Punch = ({ navigation, route }) => {
     // console.log("punchStatus", attendanceRecords)
     // const punchStatus = attendanceData?.punchInStatus ? 'Punch-Out' : 'Punch-In'
 
-    console.log("punch", data)
+    // console.log("punch", data)
 
     useEffect(() => {
         setCurrentDate(getCurrentDate());
 
-        getCoordinates()
-            .then(({ latitude, longitude }) => {
-                setLatitude(latitude);
-                setLongitude(longitude);
+        // getCoordinates()
+        // getCoordinatesTest()
+        //     .then(({ latitude, longitude }) => {
+        //         if (latitude) {
 
+        //             setLatitude(latitude);
+        //             setLongitude(longitude);
+        //         }
+
+        //     }).catch((error) => {
+        //         console.log("PunchScreen UseEffect", error)
+        //     })
+
+
+        getCoordinatesServices()
+            .then((position) => {
+                if (position) {
+
+                    setLatitude(position.coords.latitude);
+                    setLongitude(position.coords.longitude);
+                }
+
+            }).catch((error) => {
+                console.log("PunchScreen UseEffect", error)
             })
 
         // const { rightHours, rightMinutes } = calculateWorkedTime();
@@ -47,7 +66,7 @@ const Punch = ({ navigation, route }) => {
 
     }, [])
     // }, [punchStatus])
-
+ 
     useEffect(() => {
 
         if (punchStatus == "Punch-Out") {
@@ -120,7 +139,7 @@ const Punch = ({ navigation, route }) => {
         setpercentageWorked(percetage);
 
         // console.log(percetage, "perc");
-        console.log("Total Duration:", totalDuration);
+        // console.log("Total Duration:", totalDuration);
     }
 
     // calculateTotalTime(); 

@@ -63,7 +63,7 @@ const Profile = ({ navigation }) => {
                         <ProfileItem
                             icon={ProfileIcons.person}
                             title={'Personal Information'}
-                            caption={'Job Details, Email, Peronal Info. etc.'}
+                            caption={'Job Details, Email, Personal info. etc.'}
                             onPress={() => navigation.navigate('EmployeeProfile')}
                         // onPress={() => navigation.navigate('EmployeeProfile', { route: 0 })}
                         />
