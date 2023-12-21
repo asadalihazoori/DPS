@@ -23,13 +23,6 @@ const DrawerNavigation = ({ navigation }) => {
     useEffect(() => {
         SplashScreen.hide();
         getPermissionJust()
-            .then(() => {
-                console.log("inner then called")
-                // getCoordinates()
-                //     .catch((error) => {
-                //         console.log("DrawerNav UseEffect", error)
-                //     })
-            })
             .catch((error) => {
                 console.log("DrawerNav UseEffect", error)
             })

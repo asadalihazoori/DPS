@@ -96,6 +96,9 @@ const YearPicker = ({
                 // autoScroll={false}
                 // scrollViewProps={false}
 
+                // badgeProps={{
+                //     activeOpacity: 0.5
+                // }}
                 style={[
                     // Theme.Shadow, 
 
@@ -105,6 +108,7 @@ const YearPicker = ({
                         borderColor: 'rgba(0, 0, 0, 0.10)',
                         marginTop: 8,
                         color: COLORS.red,
+                        // activeOpacity: 0.5
                     }]}
 
                 labelStyle={[FontStyle.Regular12_400, {

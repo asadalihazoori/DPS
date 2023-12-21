@@ -7,7 +7,7 @@ import { Icons } from '../../../assets/SvgIcons/Icons'
 import { NextButton } from '../../../components/Inputs'
 import AttendanceCardNew from '../AttendanceCardNew'
 import { getCurrentDate } from '../../../utilities/CurretDate'
-import { getCoordinates, getCoordinatesServices, getCoordinatesTest } from '../Location/AccessLocation'
+import { getCoordinatesServices } from '../Location/AccessLocation'
 import { useSelector } from 'react-redux'
 import moment, { min } from 'moment';
 import CircularProgress from 'react-native-circular-progress-indicator';
@@ -19,35 +19,13 @@ const Punch = ({ navigation, route }) => {
     const [lat, setLatitude] = useState(0);
     const [long, setLongitude] = useState(0);
     const [percentageWorked, setpercentageWorked] = useState(0);
-    const [currentDate, setCurrentDate] = useState('');
+    const [currentDate, setCurrentDate] = useState(getCurrentDate());
     const [hours, sethours] = useState(0);
     const [minutes, setminutes] = useState(0);
-
-
     const data = useSelector((state) => state.attendance);
     const { punchStatus, attendanceRecords } = useSelector((state) => state.attendance);
-    // const attendanceData = useSelector((state) => state.attendance.attendanceRecords[0]);
-    // console.log("punchStatus", attendanceRecords)
-    // const punchStatus = attendanceData?.punchInStatus ? 'Punch-Out' : 'Punch-In'
-
-    // console.log("punch", data)
 
     useEffect(() => {
-        setCurrentDate(getCurrentDate());
-
-        // getCoordinates()
-        // getCoordinatesTest()
-        //     .then(({ latitude, longitude }) => {
-        //         if (latitude) {
-
-        //             setLatitude(latitude);
-        //             setLongitude(longitude);
-        //         }
-
-        //     }).catch((error) => {
-        //         console.log("PunchScreen UseEffect", error)
-        //     })
-
 
         getCoordinatesServices()
             .then((position) => {
@@ -59,14 +37,15 @@ const Punch = ({ navigation, route }) => {
 
             }).catch((error) => {
                 console.log("PunchScreen UseEffect", error)
+                return;
             })
 
-        // const { rightHours, rightMinutes } = calculateWorkedTime();
+        // setCurrentDate(getCurrentDate());
         calculateTotalTime();
 
     }, [])
-    // }, [punchStatus])
- 
+    // }, [punchStatus]) 
+
     useEffect(() => {
 
         if (punchStatus == "Punch-Out") {

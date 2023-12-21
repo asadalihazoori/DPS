@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import Theme from '../../../theme/theme'
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps'
 import { styles } from './styles'
-import { getCoordinates, getCoordinatesNew, getCoordinatesServices, getCoordinatesTest } from './AccessLocation'
+import { getCoordinatesServices } from './AccessLocation'
 import { useDispatch, useSelector } from 'react-redux'
 import { createPunchIn } from '../../../redux/attendance/actions/createPunchIn'
 import { createPunchOut } from '../../../redux/attendance/actions/createPunchOut'
@@ -143,19 +143,6 @@ const LocationOld = ({ navigation, route }) => {
 
     useEffect(() => {
         getCoordinatesServices()
-            // .then(({ latitude, longitude }) => {
-
-            //     if (latitude) {
-            //     }
-            // })   
-            // .then((position) => {
-
-            //     // console.log(position)
-            //     setLatitude(position.latitude);
-            //     setLongitude(position.longitude);
-            //     checkAttendance(position.latitude, position.longitude);
-
-            // })  // locationl libarary
 
             .then((position) => {
 
