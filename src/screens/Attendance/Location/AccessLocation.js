@@ -24,6 +24,7 @@ export function getPermissionJust() {
           }
         );
 
+        console.log("Grant:", granted)
         if (granted === PermissionsAndroid.RESULTS.GRANTED) {
 
           // const checkEnabled = await isLocationEnabled();
@@ -31,23 +32,17 @@ export function getPermissionJust() {
           //   await promptForEnableLocationIfNeeded();
           // }
 
-          resolve("granted");
+          resolve();
         } else {
           reject('Location permission denied');
         }
       } catch (error) {
-        console.error(error.message);
+        console.log(error.message);
         reject('Failed to enable location');
       }
     }
     else if (Platform.OS === "ios") {
-      const iosPermissionResp = await Geolocation.requestAuthorization("whenInUse");
-      console.log(iosPermissionResp, "iosPermissionResp");
-      if (iosPermissionResp == 'granted') {
-        resolve("granted")
-      } else {
-        reject('Location permission denied');
-      }
+      Geolocation.requestAuthorization("whenInUse");
     }
 
   });
@@ -56,7 +51,7 @@ export function getPermissionJust() {
 
 export function getCoordinatesServices() {
   return new Promise((resolve, reject) => {
-    console.log("Geeting Location")
+    console.log("Getting Coordinates")
     Geolocation.getCurrentPosition(
       position => {
         console.log(position);

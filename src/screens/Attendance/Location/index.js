@@ -21,13 +21,9 @@ const LocationOld = ({ navigation, route }) => {
     const { punchStatus } = route?.params;
     const { lat, lng } = useSelector(state => state.location)
 
-    const [loading, setLoading] = useState(false);// true
+    const [loading, setLoading] = useState(true);// true
     const [freeze, setFreeze] = useState(false);
     const [title, setTitle] = useState('Verifying Location...');
-    const [updatedLoc, setUpdatedLoc] = useState({
-        lat: lat ?? 0,
-        lng: lng ?? 0
-    })
 
     const dispatch = useDispatch();
     const uid = useSelector((state) => state.signin.uid);
@@ -45,8 +41,8 @@ const LocationOld = ({ navigation, route }) => {
 
         dispatch(createPunchIn({
             time: result,
-            latitude: updatedLoc?.lat,
-            longitude: updatedLoc?.lng,
+            latitude:lat,
+            longitude:lng,
             uid,
             navigation,
             employeeID,
@@ -66,8 +62,8 @@ const LocationOld = ({ navigation, route }) => {
 
         dispatch(createPunchOut({
             time: result,
-            latitude: updatedLoc?.lat,
-            longitude: updatedLoc?.lng,
+            latitude:lat,
+            longitude:lng,
             uid,
             navigation,
             employeeID,
@@ -144,32 +140,30 @@ const LocationOld = ({ navigation, route }) => {
         }
     }
 
-    const fetchNewLocation = async () => {
+    useEffect(() => {
         setLoading(true)
-        const updatedLocation = await dispatch(requestAndGetLocation())
-
-        if (updatedLocation) {
-            setUpdatedLoc({
-                lat: updatedLocation?.lat,
-                lng: updatedLocation?.lng
-            })
-            checkAttendance(updatedLocation?.lat, updatedLocation?.lng);
-        } else {
-            Alert.alert("Try Again", `Error in getting location`,
-                [{
-                    text: "OK", onPress: () => {
-                        dispatch(requestAndGetLocation())
-                    }
-                }],
-                { cancelable: false })
-        }
-
-        setLoading(false);
-    }
+        dispatch(requestAndGetLocation())
+    },[])
 
     useEffect(() => {
-        fetchNewLocation()
-    }, [])
+
+        if(lat && lng){
+            
+            checkAttendance(lat, lng);
+
+        } else {
+            setLoading(false);
+            navigation.goBack();
+            // Alert.alert("Try Again", `Error in getting location`,
+            //     [{ text: "OK", onPress: () => { 
+            //         dispatch(requestAndGetLocation())
+            //      } }],
+            //     { cancelable: false })
+        }
+
+        // setFreeze(true); //remove zrori
+
+    }, [lat,lng])
 
     return (
         <SafeAreaView style={Theme.SafeArea}>
@@ -182,16 +176,16 @@ const LocationOld = ({ navigation, route }) => {
                     style={{ flex: 1 }}
 
                     initialRegion={{
-                        latitude: updatedLoc?.lat ? updatedLoc?.lat : 24.7136, // sargodha 32.03983860
-                        longitude: updatedLoc?.lng ? updatedLoc?.lng : 46.6753,//sargodha 72.71208540
+                        latitude: lat ? lat : 24.7136, // sargodha 32.03983860
+                        longitude: lng ? lng : 46.6753,//sargodha 72.71208540
                         latitudeDelta: 0.01,
                         longitudeDelta: 0.01
 
                     }}
 
                     region={{
-                        latitude: updatedLoc?.lat ? updatedLoc?.lat : 24.7136,//24.7136,
-                        longitude: updatedLoc?.lng ? updatedLoc?.lng : 46.6753,//46.6753,
+                        latitude: lat ? lat : 24.7136,//24.7136,
+                        longitude: lng ? lng : 46.6753,//46.6753,
                         latitudeDelta: 0.01,
                         longitudeDelta: 0.01
 
@@ -203,8 +197,8 @@ const LocationOld = ({ navigation, route }) => {
                 >
                     <Marker
                         coordinate={{
-                            latitude: updatedLoc?.lat,
-                            longitude: updatedLoc?.lng
+                            latitude: lat,
+                            longitude: lng
                         }}
                         title={'Current Location'}
                     />

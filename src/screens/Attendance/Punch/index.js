@@ -31,6 +31,7 @@ const Punch = ({ navigation, route }) => {
 
         // setCurrentDate(getCurrentDate());
         if (!lat || !lng) {
+            console.log("location from Punch screen")
             dispatch(requestAndGetLocation())
         }
         calculateTotalTime();

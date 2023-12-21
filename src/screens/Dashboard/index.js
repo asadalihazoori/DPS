@@ -21,22 +21,8 @@ import { requestAndGetLocation } from '../../redux/location/location.action'
 const Dashboard = ({ navigation }) => {
 
     const dispatch = useDispatch();
-
-
-    // function getAttributes() {
-    //     AccessLocation.getPermission()
-    //         .then(({ latitude, longitude }) => {
-    //             console.log(latitude)
-    //             console.log(longitude)
-
-    //         })
-    // }
-
+    const name = useSelector((state) => state?.employeeProfile?.data?.name);
     const [recents, setOpenRecent] = useState(false);
-    // const attendanceData = useSelector((state) => state.attendance);
-    // console.log(attendanceData)
-
-
 
     useEffect(() => {
 
@@ -46,7 +32,6 @@ const Dashboard = ({ navigation }) => {
 
     }, [])
 
-    const name = useSelector((state) => state?.employeeProfile?.data?.name);
     return (
         <SafeAreaView style={Theme.SafeArea}>
 
