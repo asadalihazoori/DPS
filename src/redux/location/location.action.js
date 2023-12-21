@@ -11,23 +11,31 @@ export const setUserLocation = ({ lat, lng }) => ({
 })
 
 export const requestAndGetLocation = () => async dispatch => {
-    getPermissionJust()
-        .then(() => {
-            getCoordinatesServices()
-                .then((position) => {
-                    if (position) {
-                        dispatch(setUserLocation({
-                            lat: position.coords.latitude,
-                            lng: position.coords.longitude
-                        }));
-                    }
 
-                }).catch((error) => {
-                    console.log("Error while getting location,", error);
-                })
-        })
-        .catch((error) => {
-            // Make it a confirmation box for getting permission again., on Yes get permission again, otherwise just cancel
-            Alert.alert("Location Permission", "User won't be able to punch in because location permission is not allowed.");
-        })
+    try {
+
+        let userCoordinate = null;
+
+        const permisionResult = await getPermissionJust();
+        if (permisionResult) {
+            try {
+
+                const userCordinate = await getCoordinatesServices();
+                if (userCordinate) {
+                    userCoordinate = {
+                        lat: userCordinate.coords.latitude,
+                        lng: userCordinate.coords.longitude
+                    };
+                    dispatch(setUserLocation(userCordinate));
+                }
+            } catch (error) {
+                console.log(error, "error while getting coordinate");
+            }
+        }
+
+        return userCoordinate;
+    } catch (error) {
+        Alert.alert("Location Permission", "User won't be able to punch in because location permission is not allowed.");
+        return null;
+    }
 }

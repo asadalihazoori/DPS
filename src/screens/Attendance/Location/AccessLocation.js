@@ -31,7 +31,7 @@ export function getPermissionJust() {
           //   await promptForEnableLocationIfNeeded();
           // }
 
-          resolve();
+          resolve("granted");
         } else {
           reject('Location permission denied');
         }
@@ -42,9 +42,9 @@ export function getPermissionJust() {
     }
     else if (Platform.OS === "ios") {
       const iosPermissionResp = await Geolocation.requestAuthorization("whenInUse");
-      console.log(iosPermissionResp,"iosPermissionResp");
+      console.log(iosPermissionResp, "iosPermissionResp");
       if (iosPermissionResp == 'granted') {
-        resolve()
+        resolve("granted")
       } else {
         reject('Location permission denied');
       }
