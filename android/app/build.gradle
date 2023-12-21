@@ -84,9 +84,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.dps"
+    namespace "com.wags.willu"
     defaultConfig {
-        applicationId "com.dps"
+        applicationId "com.wags.willu"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
