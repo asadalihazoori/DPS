@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import Theme from '../../../theme/theme'
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps'
 import { styles } from './styles'
-import { getCoordinatesServices } from './AccessLocation'
 import { useDispatch, useSelector } from 'react-redux'
 import { createPunchIn } from '../../../redux/attendance/actions/createPunchIn'
 import { createPunchOut } from '../../../redux/attendance/actions/createPunchOut'
@@ -15,13 +14,13 @@ import GeneralHeader from '../../../components/Headers/GeneralHeader'
 import { COLORS } from '../../../theme/colors'
 import Swipe from '../../../components/Swipe'
 import SwipeReverse from '../../../components/SwipeReverse'
+import { requestAndGetLocation } from '../../../redux/location/location.action'
 
 const LocationOld = ({ navigation, route }) => {
 
-    const { punchStatus, lat, long } = route?.params;
+    const { punchStatus } = route?.params;
+    const { lat, lng } = useSelector(state => state.location)
 
-    const [latitude, setLatitude] = useState(lat);
-    const [longitude, setLongitude] = useState(long);
     const [loading, setLoading] = useState(true);// true
     const [freeze, setFreeze] = useState(false);
     const [title, setTitle] = useState('Verifying Location...');
@@ -42,8 +41,8 @@ const LocationOld = ({ navigation, route }) => {
 
         dispatch(createPunchIn({
             time: result,
-            latitude,
-            longitude,
+            latitude:lat,
+            longitude:lng,
             uid,
             navigation,
             employeeID,
@@ -63,8 +62,8 @@ const LocationOld = ({ navigation, route }) => {
 
         dispatch(createPunchOut({
             time: result,
-            latitude,
-            longitude,
+            latitude:lat,
+            longitude:lng,
             uid,
             navigation,
             employeeID,
@@ -76,7 +75,7 @@ const LocationOld = ({ navigation, route }) => {
     }
 
 
-    const checkAttendance = async (lat, long) => {
+    const checkAttendance = async (lat, lng) => {
 
         try {
             const body = {
@@ -88,7 +87,7 @@ const LocationOld = ({ navigation, route }) => {
                             {
                                 "user_id": uid,  //uid
                                 "latitude": lat, //latitude
-                                "longitude": long //longitude
+                                "longitude": lng //longitude
                             }
                         ]
                     ],
@@ -142,29 +141,28 @@ const LocationOld = ({ navigation, route }) => {
     }
 
     useEffect(() => {
-        getCoordinatesServices()
+        setLoading(true)
+        dispatch(requestAndGetLocation())
+    },[])
 
-            .then((position) => {
+    useEffect(() => {
 
-                console.log(position)
-                setLatitude(position.coords.latitude);
-                setLongitude(position.coords.longitude);
-                checkAttendance(position.coords.latitude, position.coords.longitude);
+        if(lat && lng){
+            
+            checkAttendance(lat, lng);
 
-            })  // services libarary
-
-
-            .catch((error) => {
-                setLoading(false);
-                console.log("Location Screen UseEffect ", error)
-                Alert.alert("Try Again", `${error.message}`,
-                    [{ text: "OK", onPress: () => { navigation.goBack() } }],
-                    { cancelable: false })
-            })
+        } else {
+            setLoading(false);
+            Alert.alert("Try Again", `Error in getting location`,
+                [{ text: "OK", onPress: () => { 
+                    dispatch(requestAndGetLocation())
+                 } }],
+                { cancelable: false })
+        }
 
         // setFreeze(true); //remove zrori
 
-    }, [])
+    }, [lat,lng])
 
     return (
         <SafeAreaView style={Theme.SafeArea}>
@@ -177,16 +175,16 @@ const LocationOld = ({ navigation, route }) => {
                     style={{ flex: 1 }}
 
                     initialRegion={{
-                        latitude: 32.03983860, // riyad 24.7136,
-                        longitude: 72.71208540,//riyad 46.6753,
+                        latitude: lat ? lat : 24.7136, // sargodha 32.03983860
+                        longitude: lng ? lng : 46.6753,//sargodha 72.71208540
                         latitudeDelta: 0.01,
                         longitudeDelta: 0.01
 
                     }}
 
                     region={{
-                        latitude: latitude ? latitude : 32.03983860,//24.7136,
-                        longitude: longitude ? longitude : 72.71208540,//46.6753,
+                        latitude: lat ? lat : 24.7136,//24.7136,
+                        longitude: lng ? lng : 46.6753,//46.6753,
                         latitudeDelta: 0.01,
                         longitudeDelta: 0.01
 
@@ -198,8 +196,8 @@ const LocationOld = ({ navigation, route }) => {
                 >
                     <Marker
                         coordinate={{
-                            latitude: latitude,
-                            longitude: longitude
+                            latitude: lat,
+                            longitude: lng
                         }}
                         title={'Current Location'}
                     />

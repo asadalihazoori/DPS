@@ -41,7 +41,13 @@ export function getPermissionJust() {
       }
     }
     else if (Platform.OS === "ios") {
-      Geolocation.requestAuthorization("whenInUse");
+      const iosPermissionResp = await Geolocation.requestAuthorization("whenInUse");
+      console.log(iosPermissionResp,"iosPermissionResp");
+      if (iosPermissionResp == 'granted') {
+        resolve()
+      } else {
+        reject('Location permission denied');
+      }
     }
 
   });

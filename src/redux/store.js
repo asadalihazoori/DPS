@@ -8,6 +8,7 @@ import { ProfileReducer } from './profile/profile.reducer';
 import { LeavesReducer } from './leaves/leaves.reducer';
 import { BackgroundImageReducer } from './backgrouund/background.reducer';
 import { AttendanceReducer } from './attendance/attendance.reducer';
+import { locationReducer } from './location/location.reducer';
 
 const allReducers = combineReducers({
     signin: UserReducer,
@@ -15,13 +16,14 @@ const allReducers = combineReducers({
     leaveStatus: LeavesReducer,
     backgroundImage: BackgroundImageReducer,
     attendance: AttendanceReducer,
+    location: locationReducer
 })
 
 const persistConfig = {
     key: 'root',
     storage: AsyncStorage,
     whitelist: ['signin', 'employeeProfile', 'leaveStatus', 'backgroundImage', 'attendance'],
-    blacklist: [''],
+    blacklist: ['location'],
 };
 
 const persistedReducer = persistReducer(persistConfig, allReducers);

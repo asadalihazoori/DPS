@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, Image, ScrollView, TouchableOpacity, Button } from 'react-native'
+import { View, Text, SafeAreaView, Image, ScrollView, TouchableOpacity, Button, Alert } from 'react-native'
 import React, { useEffect, useRef, useState } from 'react'
 import { styles } from './styles'
 import Theme from '../../theme/theme'
@@ -8,10 +8,10 @@ import { SvgXml } from 'react-native-svg'
 import { DashboardIcons } from '../../assets/SvgIcons/DashboardIcons'
 import { FontStyle } from '../../theme/FontStyle'
 import DashboardCard from '../../components/Cards/DashboardCard'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Icons } from '../../assets/SvgIcons/Icons'
 import DashboardNotifyCard from '../../components/Cards/DashboardNotifyCard'
-import moment from 'moment'
+import { requestAndGetLocation } from '../../redux/location/location.action'
 // import AccessLocation from '../../utilities/AccessLocationN'
 // import ReactNativeBiometrics, { BiometryTypes } from 'react-native-biometrics';
 
@@ -19,6 +19,8 @@ import moment from 'moment'
 // const rnBiometrics = new ReactNativeBiometrics()
 
 const Dashboard = ({ navigation }) => {
+
+    const dispatch = useDispatch();
 
 
     // function getAttributes() {
@@ -33,6 +35,16 @@ const Dashboard = ({ navigation }) => {
     const [recents, setOpenRecent] = useState(false);
     // const attendanceData = useSelector((state) => state.attendance);
     // console.log(attendanceData)
+
+
+
+    useEffect(() => {
+
+        setTimeout(() => {
+            dispatch(requestAndGetLocation())
+        }, 1500);
+
+    }, [])
 
     const name = useSelector((state) => state?.employeeProfile?.data?.name);
     return (

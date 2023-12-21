@@ -7,7 +7,6 @@ import Theme from '../../theme/theme'
 import { COLORS } from '../../theme/colors'
 import AttendanceHistory from './AttendaceHistory'
 import Punch from './Punch'
-import { getPermissionJust } from './Location/AccessLocation'
 
 const Attendance = ({ navigation }) => {
     const [index, setIndex] = useState(0);
@@ -52,11 +51,6 @@ const Attendance = ({ navigation }) => {
 
         }
     };
-
-    useEffect(() => {
-        // getPermission();
-        getPermissionJust();
-    }, [])
 
     return (
         <SafeAreaView style={Theme.SafeArea}>

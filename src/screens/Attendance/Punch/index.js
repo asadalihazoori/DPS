@@ -8,16 +8,18 @@ import { NextButton } from '../../../components/Inputs'
 import AttendanceCardNew from '../AttendanceCardNew'
 import { getCurrentDate } from '../../../utilities/CurretDate'
 import { getCoordinatesServices } from '../Location/AccessLocation'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import moment, { min } from 'moment';
 import CircularProgress from 'react-native-circular-progress-indicator';
+import { requestAndGetLocation } from '../../../redux/location/location.action'
 
 const Punch = ({ navigation, route }) => {
 
     // const initalRoute = route.params;
+    const dispatch = useDispatch();
 
-    const [lat, setLatitude] = useState(0);
-    const [long, setLongitude] = useState(0);
+    const { lat, lng } = useSelector(state => state.location)
+
     const [percentageWorked, setpercentageWorked] = useState(0);
     const [currentDate, setCurrentDate] = useState(getCurrentDate());
     const [hours, sethours] = useState(0);
@@ -27,20 +29,10 @@ const Punch = ({ navigation, route }) => {
 
     useEffect(() => {
 
-        getCoordinatesServices()
-            .then((position) => {
-                if (position) {
-
-                    setLatitude(position.coords.latitude);
-                    setLongitude(position.coords.longitude);
-                }
-
-            }).catch((error) => {
-                console.log("PunchScreen UseEffect", error)
-                return;
-            })
-
         // setCurrentDate(getCurrentDate());
+        if (!lat || !lng) {
+            dispatch(requestAndGetLocation())
+        }
         calculateTotalTime();
 
     }, [])
@@ -222,7 +214,7 @@ const Punch = ({ navigation, route }) => {
                 {/* {!attendanceData.todayAttendance && */}
 
                 <NextButton title={punchStatus}
-                    onPress={() => navigation.navigate('LocationOld', { punchStatus: punchStatus, lat: lat, long: long })} />
+                    onPress={() => navigation.navigate('LocationOld', { punchStatus: punchStatus, lat: lat, long: lng })} />
                 {/* } */}
             </View>
 

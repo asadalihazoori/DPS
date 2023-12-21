@@ -22,10 +22,6 @@ const DrawerNavigation = ({ navigation }) => {
 
     useEffect(() => {
         SplashScreen.hide();
-        getPermissionJust()
-            .catch((error) => {
-                console.log("DrawerNav UseEffect", error)
-            })
     }, []);
 
     const dispatch = useDispatch();
