@@ -14,26 +14,26 @@ export const requestAndGetLocation = () => async dispatch => {
 
     try {
 
-        let userCoordinate = null;
+        let userLocation = null;
 
         const permisionResult = await getPermissionJust();
         if (permisionResult) {
             try {
 
-                const userCordinate = await getCoordinatesServices();
-                if (userCordinate) {
-                    userCoordinate = {
-                        lat: userCordinate.coords.latitude,
-                        lng: userCordinate.coords.longitude
+                const newCoordinate = await getCoordinatesServices();
+                if (newCoordinate) {
+                    userLocation = {
+                        lat: newCoordinate.coords.latitude,
+                        lng: newCoordinate.coords.longitude
                     };
-                    dispatch(setUserLocation(userCordinate));
+                    dispatch(setUserLocation(userLocation));
                 }
             } catch (error) {
                 console.log(error, "error while getting coordinate");
             }
         }
 
-        return userCoordinate;
+        return userLocation;
     } catch (error) {
         Alert.alert("Location Permission", "User won't be able to punch in because location permission is not allowed.");
         return null;
