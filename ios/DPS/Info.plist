@@ -25,9 +25,7 @@
 	<key>LSApplicationCategoryType</key>
 	<string>NSAllowsArbitraryLoads</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Allow Gallery access to Upload Profile Image</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Allow location To Punch your attendance</string>
+	<string>Allow location access to punch attendance</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Allow location To Punch your attendance</string>
 	<key>LSRequiresIPhoneOS</key>
