@@ -21,7 +21,7 @@ const LocationOld = ({ navigation, route }) => {
     const { punchStatus } = route?.params;
     const { lat, lng } = useSelector(state => state.location)
 
-    const [loading, setLoading] = useState(true);// true
+    const [loading, setLoading] = useState(false);// true
     const [freeze, setFreeze] = useState(false);
     const [title, setTitle] = useState('Verifying Location...');
     const [updatedLoc, setUpdatedLoc] = useState({
@@ -170,25 +170,6 @@ const LocationOld = ({ navigation, route }) => {
     useEffect(() => {
         fetchNewLocation()
     }, [])
-
-    // useEffect(() => {
-
-    //     if(lat && lng){
-
-    //         checkAttendance(lat, lng);
-
-    //     } else {
-    //         setLoading(false);
-    //         Alert.alert("Try Again", `Error in getting location`,
-    //             [{ text: "OK", onPress: () => { 
-    //                 dispatch(requestAndGetLocation())
-    //              } }],
-    //             { cancelable: false })
-    //     }
-
-    //     // setFreeze(true); //remove zrori
-
-    // }, [lat,lng])
 
     return (
         <SafeAreaView style={Theme.SafeArea}>
