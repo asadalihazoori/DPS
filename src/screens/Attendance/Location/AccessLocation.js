@@ -41,7 +41,7 @@ export function getPermissionJust() {
       }
     }
     else if (Platform.OS === "ios") {
-      Geolocation.requestAuthorization()
+      Geolocation.requestAuthorization("whenInUse");
     }
 
   });
